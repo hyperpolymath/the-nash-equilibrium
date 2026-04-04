@@ -23,7 +23,7 @@ sed -i 's/j.d.a.jewell@open.ac.uk/jane@example.org/g' $(grep -rl 'j.d.a.jewell@o
 sed -i 's/hyperpolymath/my-org/g' $(grep -rl 'hyperpolymath' .)
 sed -i 's/The Nash Equilibrium/my-project/g' $(grep -rl 'The Nash Equilibrium' .)
 sed -i 's/{{PROJECT}}/MY_PROJECT/g' $(grep -rl '{{PROJECT}}' .)
-sed -i 's/{{project}}/my_project/g' $(grep -rl '{{project}}' .)
+sed -i 's/the-nash-equilibrium/my_project/g' $(grep -rl 'the-nash-equilibrium' .)
 sed -i 's/the-nash-equilibrium/my-project/g' $(grep -rl 'the-nash-equilibrium' .)
 sed -i 's/github.com/github.com/g' $(grep -rl 'github.com' .)
 sed -i "s/2026/$(date +%Y)/g" $(grep -rl '2026' .)
@@ -49,9 +49,9 @@ sed -i "s/{{CURRENT_DATE}}/$(date +%Y-%m-%d)/g" $(grep -rl '{{CURRENT_DATE}}' .)
 | Placeholder | Description | Example | Files |
 |---|---|---|---|
 | `The Nash Equilibrium` | Human-readable project name | `My Project` | SECURITY.md, CODE_OF_CONDUCT.md, TOPOLOGY.md, STATE.a2ml, Justfile, GOVERNANCE.md, MAINTAINERS.md, flake.nix, devcontainer.json |
-| `{{PROJECT_DESCRIPTION}}` | One-line description | `A tool for X` | flake.nix |
+| `6X strategy board game exploring economic systems, planetary boundaries, and post-scarcity futures` | One-line description | `A tool for X` | flake.nix |
 | `{{PROJECT}}` | Uppercase identifier (for Idris2 modules, C macros) | `MY_PROJECT` | ABI-FFI-README.md, src/interface/abi/*.idr, src/interface/ffi/*.zig |
-| `{{project}}` | Lowercase identifier (for C symbols, filenames) | `my_project` | ABI-FFI-README.md, src/interface/ffi/*.zig |
+| `the-nash-equilibrium` | Lowercase identifier (for C symbols, filenames) | `my_project` | ABI-FFI-README.md, src/interface/ffi/*.zig |
 | `the-nash-equilibrium` | Repository name (slug) | `my-project` | CONTRIBUTING.md, SECURITY.md, CODE_OF_CONDUCT.md, cliff.toml |
 | `hyperpolymath` | GitHub/GitLab org or username | `my-org` | SPDX headers, CONTRIBUTING.md, SECURITY.md, GOVERNANCE.md, MAINTAINERS.md, CODEOWNERS, mirror.yml, cliff.toml |
 | `github.com` | Git forge domain | `github.com` | CONTRIBUTING.md |
@@ -87,7 +87,7 @@ sed -i "s/{{CURRENT_DATE}}/$(date +%Y-%m-%d)/g" $(grep -rl '{{CURRENT_DATE}}' .)
 | Placeholder | Description | Example | Files |
 |---|---|---|---|
 | `{{LICENSE}}` | License name | `AGPL-3.0-or-later` | ABI-FFI-README.md |
-| `{{PROJECT_PURPOSE}}` | One-line project description | `FFI bridges between languages` | STATE.a2ml |
+| `6X strategy board game` | One-line project description | `FFI bridges between languages` | STATE.a2ml |
 
 ### AI Manifest
 

@@ -1,5 +1,5 @@
 K9!
-# SPDX-License-Identifier: PMPL-1.0-or-later
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # Example Yard-level K9 component: CI/CD configuration with validation
 # Security Level: Yard (Nickel evaluation, contract validation)
 # Signature recommended but not required
@@ -19,7 +19,7 @@ K9!
       name = "ci-config",
       version = "1.0.0",
       description = "CI/CD configuration with runtime validation",
-      author = "{{AUTHOR}} <{{AUTHOR_EMAIL}}>",
+      author = "Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>",
     },
   },
 

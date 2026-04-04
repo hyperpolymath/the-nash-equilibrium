@@ -1,5 +1,5 @@
-;; SPDX-License-Identifier: PMPL-1.0-or-later
-;; Copyright (c) {{CURRENT_YEAR}} Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk>
+;; SPDX-License-Identifier: AGPL-3.0-or-later
+;; Copyright (c) 2026 Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk>
 ;;
 ;; Guix package definition for The Nash Equilibrium
 ;;
@@ -64,8 +64,8 @@
     ;; TODO: Add runtime dependencies
     ))
   (home-page "https://github.com/hyperpolymath/The Nash Equilibrium")
-  (synopsis "{{PROJECT_PURPOSE}}")
+  (synopsis "6X strategy board game")
   (description "RSR-compliant project. See README.adoc for details.")
   (license (list
-            ;; PMPL-1.0-or-later extends MPL-2.0
+            ;; AGPL-3.0-or-later extends MPL-2.0
             mpl2.0)))

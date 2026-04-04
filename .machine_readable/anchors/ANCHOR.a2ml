@@ -5,7 +5,7 @@
 
 [metadata]
 version = "1.0.0"
-last-updated = "{{CURRENT_DATE}}"
+last-updated = "2026-04-04"
 
 [anchor]
 schema = "hyperpolymath.anchor/1"
@@ -20,9 +20,9 @@ purpose = [
 
 [identity]
 project = "The Nash Equilibrium"
-kind = "{{PROJECT_KIND}}"                # language | library | service | tool
-one-sentence = "{{PROJECT_PURPOSE}}"
-domain = "{{PROJECT_DOMAIN}}"
+kind = "game"                # language | library | service | tool
+one-sentence = "6X strategy board game"
+domain = "board-games"
 
 [semantic-authority]
 policy = "canonical"

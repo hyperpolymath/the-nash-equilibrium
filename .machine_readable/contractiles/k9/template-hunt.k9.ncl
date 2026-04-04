@@ -1,5 +1,5 @@
 K9!
-# SPDX-License-Identifier: PMPL-1.0-or-later
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # K9 Hunt-level template: Full execution with Just recipes
 # Security Level: Hunt (full system access)
 # ⚠️ SIGNATURE REQUIRED - Review carefully before use
@@ -20,7 +20,7 @@ K9!
       name = "TODO: component-name",
       version = "1.0.0",
       description = "TODO: Detailed description of what this component does",
-      author = "{{AUTHOR}} <{{AUTHOR_EMAIL}}>",
+      author = "Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>",
     },
     warnings = [
       "This component has full system access",

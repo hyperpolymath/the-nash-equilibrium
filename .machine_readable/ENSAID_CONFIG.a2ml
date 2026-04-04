@@ -89,7 +89,7 @@ version = "1.0.0"
 
 # Example: a custom portfolio for this project
 # [[portfolios.custom]]
-# id = "{{project}}-dev"
+# id = "the-nash-equilibrium-dev"
 # name = "The Nash Equilibrium Development"
 # description = "Panels for The Nash Equilibrium development"
 # panels = ["valence-shell", "editor-bridge", "build-dashboard"]

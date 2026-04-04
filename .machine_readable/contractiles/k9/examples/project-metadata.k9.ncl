@@ -1,5 +1,5 @@
 K9!
-# SPDX-License-Identifier: PMPL-1.0-or-later
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # Example Kennel-level K9 component: Project metadata
 # Security Level: Kennel (pure data, no execution)
 # No signature required
@@ -19,7 +19,7 @@ K9!
       name = "project-metadata",
       version = "1.0.0",
       description = "Pure data configuration for project metadata",
-      author = "{{AUTHOR}} <{{AUTHOR_EMAIL}}>",
+      author = "Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>",
     },
   },
 
@@ -30,22 +30,22 @@ K9!
     description = "A project following Rhodium Standard Repositories",
 
     repository = {
-      url = "https://github.com/{{OWNER}}/my-project",
+      url = "https://github.com/hyperpolymath/my-project",
       type = "git",
     },
 
     author = {
-      name = "{{AUTHOR}}",
-      email = "{{AUTHOR_EMAIL}}",
-      organization = "{{AUTHOR_ORG}}",
+      name = "Jonathan D.A. Jewell",
+      email = "j.d.a.jewell@open.ac.uk",
+      organization = "hyperpolymath",
     },
 
-    license = "PMPL-1.0-or-later",
+    license = "AGPL-3.0-or-later",
 
     keywords = [
       "rhodium-standard",
       "rsr",
-      "{{OWNER}}",
+      "hyperpolymath",
     ],
   },
 

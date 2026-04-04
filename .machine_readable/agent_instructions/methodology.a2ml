@@ -9,7 +9,7 @@
 
 [metadata]
 version = "1.0.0"
-last-updated = "{{CURRENT_DATE}}"
+last-updated = "2026-04-04"
 spec = "https://github.com/hyperpolymath/standards/blob/main/agentic-a2ml/docs/ADR-002-methodology-layer.adoc"
 
 # ============================================================================
@@ -55,7 +55,7 @@ perfective = 10   # % for SPDX headers, doc updates, formatting, style
 # Customise this per project — the template default is generic.
 
 [methodology.unique-strength]
-description = "{{PROJECT_UNIQUE_STRENGTH}}"
+description = "First 6X board game integrating game theory with planetary boundaries"
 deepen-not-broaden = true
 
 # ============================================================================
@@ -101,7 +101,7 @@ constraints = [
 # These rules detect corrupt/template/stale state files.
 
 [methodology.state-validation]
-reject-if-contains = ["{{PLACEHOLDER}}", "{{PROJECT}}", "rsr-template-repo"]
+reject-if-contains = ["{{PLACEHOLDER}}", "the-nash-equilibrium", "rsr-template-repo"]
 reject-if-project-name-mismatch = true
 staleness-threshold-days = 90
 fallback-files = ["TODO.md", "TODO.adoc", "ROADMAP.adoc", "README.adoc"]

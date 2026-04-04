@@ -10,7 +10,7 @@
 |---------------|--------------------------------|
 | Project       | The Nash Equilibrium               |
 | Version       | 1.0                            |
-| Last Reviewed | {{DATE}}                       |
+| Last Reviewed | 2026-04-04                       |
 | Author        | Jonathan D.A. Jewell                     |
 | Methodology   | STRIDE                         |
 

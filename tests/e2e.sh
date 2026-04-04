@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# SPDX-License-Identifier: PMPL-1.0-or-later
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # Copyright (c) 2026 Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk>
 #
 # RSR Standard E2E Test Template
@@ -62,7 +62,7 @@ skip_test() {
 }
 
 echo "═══════════════════════════════════════════════════════════════"
-echo "  {{PROJECT}} — End-to-End Tests"
+echo "  the-nash-equilibrium — End-to-End Tests"
 echo "═══════════════════════════════════════════════════════════════"
 echo ""
 
@@ -122,7 +122,7 @@ echo ""
 # else
 #     STATUS=$(curl -s -o /dev/null -w "%{http_code}" -X POST "$VERISIM_URL/api/v1/hexads" \
 #         -H "Content-Type: application/json" \
-#         -d '{"tool":"{{PROJECT}}","modality":"document","content":"e2e test"}')
+#         -d '{"tool":"the-nash-equilibrium","modality":"document","content":"e2e test"}')
 #     check_status "hexad POST" "201" "$STATUS"
 # fi
 

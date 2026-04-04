@@ -1,11 +1,11 @@
-# SPDX-License-Identifier: PMPL-1.0-or-later
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # RFC 9116 - security.txt
 # https://securitytxt.org/
 
-Contact: mailto:{{SECURITY_EMAIL}}
-Expires: {{CURRENT_YEAR}}-12-31T23:59:59.000Z
-Encryption: {{PGP_KEY_URL}}
+Contact: mailto:j.d.a.jewell@open.ac.uk
+Expires: 2026-12-31T23:59:59.000Z
+Encryption: TODO
 Preferred-Languages: en
-Canonical: https://{{FORGE}}/{{OWNER}}/{{REPO}}/.well-known/security.txt
-Policy: https://{{FORGE}}/{{OWNER}}/{{REPO}}/blob/main/SECURITY.md
-Hiring: https://{{WEBSITE}}/careers
+Canonical: https://github.com/hyperpolymath/the-nash-equilibrium/.well-known/security.txt
+Policy: https://github.com/hyperpolymath/the-nash-equilibrium/blob/main/SECURITY.md
+Hiring: https://github.com/hyperpolymath/the-nash-equilibrium

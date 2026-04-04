@@ -1,5 +1,5 @@
 K9!
-# SPDX-License-Identifier: PMPL-1.0-or-later
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # K9 Yard-level template: Configuration with validation
 # Security Level: Yard (Nickel evaluation with contracts)
 # Signature recommended but not required
@@ -19,7 +19,7 @@ K9!
       name = "TODO: component-name",
       version = "1.0.0",
       description = "TODO: Brief description with validation details",
-      author = "{{AUTHOR}} <{{AUTHOR_EMAIL}}>",
+      author = "Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>",
     },
   },
 

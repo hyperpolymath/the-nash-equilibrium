@@ -5,7 +5,7 @@
 
 | Component | Language | Purpose |
 |-----------|----------|---------|
-| {{COMPONENT}} | {{LANGUAGE}} | {{PURPOSE}} |
+| game | Idris2 | 6X strategy board game |
 
 ## Data Flow
 
@@ -15,8 +15,8 @@
 
 ## Integration Points
 
-- **Upstream**: {{UPSTREAM_DEPS}}
-- **Downstream**: {{DOWNSTREAM_CONSUMERS}}
+- **Upstream**: rsr-template-repo
+- **Downstream**: none
 
 ## Deployment
 

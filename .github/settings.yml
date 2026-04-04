@@ -7,13 +7,13 @@
 # applied by the probot/settings app when changes are pushed to the default
 # branch. Install the app at: https://github.com/apps/settings
 #
-# Template file — replace the-nash-equilibrium and {{DESCRIPTION}} with actual values.
+# Template file — replace the-nash-equilibrium and 6X strategy board game exploring economic systems, planetary boundaries, and post-scarcity futures with actual values.
 
 # ─── Repository Settings ───────────────────────────────────────────────────────
 
 repository:
   name: "the-nash-equilibrium"
-  description: "{{DESCRIPTION}}"
+  description: "6X strategy board game exploring economic systems, planetary boundaries, and post-scarcity futures"
   homepage: "https://github.com/hyperpolymath/the-nash-equilibrium"
   private: false
   has_issues: true

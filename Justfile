@@ -48,7 +48,7 @@ help recipe="":
 
 # Show this project's info
 info:
-    @echo "Project: {{project}}"
+    @echo "Project: the-nash-equilibrium"
     @echo "Version: {{version}}"
     @echo "RSR Tier: {{tier}}"
     @echo "Recipes: $(just --summary | wc -w)"
@@ -670,7 +670,7 @@ verify:
 
 # Build the project (debug mode)
 build *args:
-    @echo "Building {{project}} (debug)..."
+    @echo "Building the-nash-equilibrium (debug)..."
     # TODO: Replace with your build command
     # Examples:
     #   cargo build {{args}}                    # Rust
@@ -681,7 +681,7 @@ build *args:
 
 # Build in release mode with optimizations
 build-release *args:
-    @echo "Building {{project}} (release)..."
+    @echo "Building the-nash-equilibrium (release)..."
     # TODO: Replace with your release build command
     # Examples:
     #   cargo build --release {{args}}
@@ -834,7 +834,7 @@ run-verbose *args: build
 
 # Install to user path
 install: build-release
-    @echo "Installing {{project}}..."
+    @echo "Installing the-nash-equilibrium..."
     # TODO: Replace with your install command
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -878,7 +878,7 @@ cookbook:
     #!/usr/bin/env bash
     mkdir -p docs
     OUTPUT="docs/just-cookbook.adoc"
-    echo "= {{project}} Justfile Cookbook" > "$OUTPUT"
+    echo "= the-nash-equilibrium Justfile Cookbook" > "$OUTPUT"
     echo ":toc: left" >> "$OUTPUT"
     echo ":toclevels: 3" >> "$OUTPUT"
     echo "" >> "$OUTPUT"
@@ -904,10 +904,10 @@ cookbook:
 man:
     #!/usr/bin/env bash
     mkdir -p docs/man
-    cat > docs/man/{{project}}.1 << EOF
-    .TH {{project}} 1 "$(date +%Y-%m-%d)" "{{version}}" "{{project}} Manual"
+    cat > docs/man/the-nash-equilibrium.1 << EOF
+    .TH the-nash-equilibrium 1 "$(date +%Y-%m-%d)" "{{version}}" "the-nash-equilibrium Manual"
     .SH NAME
-    {{project}} \- RSR-compliant project
+    the-nash-equilibrium \- RSR-compliant project
     .SH SYNOPSIS
     .B just
     [recipe] [args...]
@@ -916,7 +916,7 @@ man:
     .SH AUTHOR
     $(git config user.name 2>/dev/null || echo "Author") <$(git config user.email 2>/dev/null || echo "email")>
     EOF
-    echo "Generated: docs/man/{{project}}.1"
+    echo "Generated: docs/man/the-nash-equilibrium.1"
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # CONTAINERS (stapeln ecosystem — Podman + Chainguard Wolfi)
@@ -946,8 +946,8 @@ container-init:
     fi
 
     # Prompt for container-specific values
-    read -rp "Service name (e.g. my-api) [{{project}}]: " _SERVICE_NAME
-    SERVICE_NAME="${_SERVICE_NAME:-{{project}}}"
+    read -rp "Service name (e.g. my-api) [the-nash-equilibrium]: " _SERVICE_NAME
+    SERVICE_NAME="${_SERVICE_NAME:-the-nash-equilibrium}"
 
     read -rp "Primary port [8080]: " _PORT
     PORT="${_PORT:-8080}"
@@ -996,9 +996,9 @@ container-build *args:
     if [ -f "container/ct-build.sh" ]; then
         cd container && ./ct-build.sh {{args}}
     elif [ -f "container/Containerfile" ]; then
-        podman build -t {{project}}:latest -f container/Containerfile .
+        podman build -t the-nash-equilibrium:latest -f container/Containerfile .
     elif [ -f "Containerfile" ]; then
-        podman build -t {{project}}:latest -f Containerfile .
+        podman build -t the-nash-equilibrium:latest -f Containerfile .
     else
         echo "No Containerfile found in container/ or project root"
         exit 1
@@ -1060,12 +1060,12 @@ container-push:
         cd container && ./ct-build.sh --push
     else
         echo "No container/ct-build.sh found — falling back to podman push"
-        podman push {{project}}:latest
+        podman push the-nash-equilibrium:latest
     fi
 
 # Run container interactively (for debugging)
 container-run *args:
-    podman run --rm -it {{project}}:latest {{args}}
+    podman run --rm -it the-nash-equilibrium:latest {{args}}
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # CI & AUTOMATION

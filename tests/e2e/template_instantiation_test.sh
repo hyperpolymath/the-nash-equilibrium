@@ -1,5 +1,5 @@
 #!/bin/bash
-# SPDX-License-Identifier: PMPL-1.0-or-later
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # Copyright (c) 2026 Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk>
 #
 # E2E Test: Template Instantiation
@@ -119,15 +119,15 @@ find "$TEST_REPO_PATH" -type f \
     -exec bash -c '
         file="$1"
         placeholder_pairs=(
-            "{{REPO}}|$TEST_REPO_NAME"
-            "{{OWNER}}|$TEST_OWNER"
-            "{{FORGE}}|$TEST_FORGE"
+            "the-nash-equilibrium|$TEST_REPO_NAME"
+            "hyperpolymath|$TEST_OWNER"
+            "github.com|$TEST_FORGE"
             "{{PROJECT}}|$TEST_PROJECT_NAME"
-            "{{project}}|'"${TEST_REPO_NAME//-/_}"'"
+            "the-nash-equilibrium|'"${TEST_REPO_NAME//-/_}"'"
             "{{REPO_DESCRIPTION}}|$TEST_DESCRIPTION"
             "{{PRIMARY_LANGUAGE}}|$TEST_PRIMARY_LANGUAGE"
-            "{{AUTHOR}}|$TEST_AUTHOR"
-            "{{AUTHOR_EMAIL}}|$TEST_AUTHOR_EMAIL"
+            "Jonathan D.A. Jewell|$TEST_AUTHOR"
+            "j.d.a.jewell@open.ac.uk|$TEST_AUTHOR_EMAIL"
             "{{CURRENT_DATE}}|2026-04-04"
         )
 

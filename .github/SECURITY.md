@@ -1,22 +1,6 @@
 # Security Policy
 
-<!-- 
-============================================================================
-TEMPLATE INSTRUCTIONS (delete this block before publishing)
-============================================================================
-Replace all {{PLACEHOLDER}} values with your information:
-  The Nash Equilibrium     - Your project name
-  hyperpolymath            - GitHub username or org (e.g., hyperpolymath)
-  the-nash-equilibrium             - Repository name
-  j.d.a.jewell@open.ac.uk   - Security contact email
-  TODO  - Your PGP key fingerprint (40 chars, no spaces)
-  TODO      - URL to your public PGP key
-  {{WEBSITE}}          - Your website/domain
-  2026     - Current year for copyright
-
-Optional: Remove sections that don't apply (e.g., PGP if you don't use it)
-============================================================================
--->
+<!-- SPDX-License-Identifier: AGPL-3.0-or-later -->
 
 We take security seriously. We appreciate your efforts to responsibly disclose vulnerabilities and will make every effort to acknowledge your contributions.
 

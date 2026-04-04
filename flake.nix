@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-# Copyright (c) {{CURRENT_YEAR}} Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk>
+# Copyright (c) 2026 Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk>
 #
 # Nix flake for The Nash Equilibrium
 #
@@ -16,7 +16,7 @@
 # With direnv (.envrc already configured):
 #   direnv allow         # Auto-enters shell on cd
 #
-# TODO: Replace The Nash Equilibrium and {{PROJECT_DESCRIPTION}} with actual values.
+# TODO: Replace The Nash Equilibrium and 6X strategy board game exploring economic systems, planetary boundaries, and post-scarcity futures with actual values.
 
 {
   description = "The Nash Equilibrium — RSR-compliant project";
@@ -158,7 +158,7 @@
           '';
 
           meta = with pkgs.lib; {
-            description = "{{PROJECT_DESCRIPTION}}";
+            description = "6X strategy board game exploring economic systems, planetary boundaries, and post-scarcity futures";
             homepage = "https://github.com/hyperpolymath/The Nash Equilibrium";
             license = licenses.mpl20; # AGPL-3.0-or-later extends MPL-2.0
             maintainers = [];
