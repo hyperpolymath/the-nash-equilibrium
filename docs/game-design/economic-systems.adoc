@@ -1,0 +1,175 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (c) 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+= Economic Systems and Pathways
+:toc:
+:icons: font
+
+== Overview
+
+The Nash Equilibrium models four principal economic systems as victory pathways.
+Each has distinct historical contexts, real-world examples, mechanical
+implications, and relationships to planetary boundaries.
+
+== The Four Pathways
+
+=== 1. Capitalism
+
+*Core Principles:* Private ownership, market competition, profit motive
+
+*Historical Context:*
+
+* Mercantilism and colonial expansion (15th-18th century)
+* Industrial Revolution (18th-19th century)
+* Modern global markets, financialisation, neoliberalism
+
+*Real-World Examples:*
+
+* British Industrial Revolution — rapid growth, massive pollution, inequality
+* Post-WWII American consumer capitalism
+* Modern tech industry — innovation paired with platform monopoly
+
+*Game Mechanics:*
+
+* Highest Capital generation rate
+* +2 Gold/turn from trade routes
+* Pollution generated per factory (Climate Change stress +1)
+* Inequality mechanic: Labour unrest at high Capital/low Labour ratio
+* Victory path: Industrialise -> Globalise -> Adapt (or collapse)
+
+*Planetary Boundary Risk:* HIGH — accelerates Climate Change, Land System Change,
+Novel Entities, Biogeochemical Flows
+
+=== 2. Socialism
+
+*Core Principles:* Collective ownership, planned economy, social welfare
+
+*Historical Context:*
+
+* Utopian socialism (Owen, Fourier, Saint-Simon)
+* Marxist theory and Soviet implementation
+* Social democracy (Scandinavian model)
+* Cuban revolution and planned economy
+
+*Real-World Examples:*
+
+* Soviet Union — rapid industrialisation, space programme, environmental neglect
+* Cuba — healthcare and education achievements, economic constraints
+* Scandinavian social democracies — high welfare, market elements
+
+*Game Mechanics:*
+
+* +1 Stability/turn (social cohesion)
+* Reduced inequality penalties
+* Slower Capital generation
+* Planned economy: choose resource allocation each era
+* No market-driven innovation bonus (Knowledge generation slower)
+* Victory path: Equality -> Stability -> Collective advancement
+
+*Planetary Boundary Risk:* MODERATE — can either protect or neglect boundaries
+depending on planning priorities (Soviet model: heavy industry, high pollution;
+Scandinavian model: strong environmental protection)
+
+=== 3. Green Economics
+
+*Core Principles:* Sustainability, circular economy, well-being over GDP
+
+*Historical Context:*
+
+* Environmental movement (1960s-present)
+* Doughnut Economics (Kate Raworth, 2017)
+* Degrowth movement
+* Sustainable Development Goals (UN, 2015)
+
+*Real-World Examples:*
+
+* Germany's Energiewende — energy transition to renewables
+* Costa Rica — 99% renewable electricity, reforestation
+* Bhutan's Gross National Happiness index
+* Amsterdam's adoption of Doughnut Economics
+
+*Game Mechanics:*
+
+* +1 Nature/turn (conservation bonus)
+* Planetary boundary stress reduction: -1 per turn on one chosen boundary
+* Low Capital start; slower growth curve
+* Circular economy: waste from one process feeds another (resource efficiency)
+* Vulnerable to exploitation by Capitalist players in early eras
+* Victory path: Balance -> Resilience -> Post-Scarcity (sustainable)
+
+*Planetary Boundary Risk:* LOW — actively reduces boundary stress, but
+vulnerable to being outpaced by aggressive players
+
+=== 4. Techno-Utopian Economics
+
+*Core Principles:* Technology solves scarcity, automation liberates, abundance
+through innovation
+
+*Historical Context:*
+
+* Soviet utopian visions (Bogdanov's _Red Star_)
+* Post-war techno-optimism (nuclear power, space age)
+* Silicon Valley ideology (disruption, exponential growth)
+* Fully Automated Luxury Communism (Bastani, 2019)
+
+*Real-World Examples:*
+
+* Apollo programme — state-directed technological achievement
+* Internet revolution — information abundance (partial post-scarcity)
+* Renewable energy cost curves — solar/wind approaching zero marginal cost
+* Speculative: fusion power, space mining, strong AI
+
+*Game Mechanics:*
+
+* +1 Knowledge/turn (innovation bonus)
+* High Knowledge cost for breakthroughs
+* Unstable Labour (automation displaces workers)
+* Breakthrough cards: powerful one-time effects (fusion, space elevator, etc.)
+* Risk of AI revolt if Knowledge >> Labour
+* Victory path: Automate -> Breakthrough -> Space (Dyson Sphere)
+
+*Planetary Boundary Risk:* VARIABLE — can either solve boundaries through
+technology or create new ones (Novel Entities, Energy demands)
+
+== Pathway Interactions
+
+Players on different pathways interact through the *eXchange* pillar:
+
+* Capitalist/Green tension: trade vs. regulation
+* Socialist/Techno-Utopian alliance: collective investment in breakthrough tech
+* Capitalist/Techno-Utopian: innovation race with inequality risk
+* Green/Socialist: social welfare + environmental protection coalition
+
+These interactions create the *Nash Equilibrium* dynamic — players must find
+optimal strategies given what others are doing. Pure domination rarely wins;
+cooperation and strategic adaptation are essential.
+
+== Era-Pathway Matrix
+
+[cols="1,1,1,1,1"]
+|===
+| Era | Capitalist | Socialist | Green | Techno-Utopian
+
+| *Agrarian*
+| Merchant guilds
+| Communal farming
+| Subsistence harmony
+| Early astronomy
+
+| *Industrial*
+| Factories, railways
+| Workers' cooperatives
+| Conservation movement
+| Steam power, telegraphs
+
+| *Digital*
+| Platform monopolies
+| Digital commons
+| Circular economy
+| AI, automation
+
+| *Post-Scarcity*
+| Luxury capitalism
+| Universal basic services
+| Steady-state economy
+| Dyson Sphere, abundance
+|===

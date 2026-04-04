@@ -1,0 +1,151 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (c) 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+= Playtesting Plan
+:toc:
+:icons: font
+
+== Overview
+
+Structured playtesting to validate core mechanics, balance, educational value,
+and fun factor before Kickstarter launch.
+
+== Phase 1: Paper Prototype (Weeks 1-2)
+
+=== Setup
+
+* Index cards for crisis/event cards
+* Tokens (coins, cubes, or counters) for resources
+* Hand-drawn hex map on large paper/whiteboard
+* Printed planetary boundaries dashboard (A3)
+* Printed player boards and role cards
+
+=== Focus Areas
+
+* Does the resource flow make sense?
+* Is the planetary boundaries dashboard readable and impactful?
+* Are era transitions meaningful?
+* Is the turn structure smooth (7 phases not too many)?
+* Do crisis cards create interesting decisions?
+
+=== Test Scenarios
+
+[cols="1,3,2"]
+|===
+| Scenario | Setup | Tests
+
+| *Capitalist Runaway*
+| All players choose Capitalist pathway
+| Does boundary collapse happen too fast/slow? Is there meaningful choice?
+
+| *Green vs. Capitalist*
+| 2 Green, 2 Capitalist
+| Is the Green pathway viable? Does eXchange create interesting tension?
+
+| *Cooperation Test*
+| All players attempt cooperative victory (Dyson Sphere)
+| Is cooperative path achievable? Is it fun? Do free-riders get punished?
+
+| *Speed Run*
+| Techno-Utopian rush to Post-Scarcity
+| Is the tech rush balanced? Can it be stopped? Is it fun to play against?
+
+| *Full Asymmetric*
+| One of each role (Isabella, Gandhi, Musk, Green Activist)
+| Do all roles feel viable? Do they create interesting interactions?
+|===
+
+=== Participants
+
+* 5-10 people per session
+* Mix of board game hobbyists and non-gamers
+* At least one session with economics students
+* At least one session with younger players (12-16)
+
+=== Feedback Collection
+
+* Post-session questionnaire (5-point Likert + free text)
+* In-game observation notes (decision points, confusion, engagement)
+* Record game length and boundary stress trajectories
+* Track which victory conditions are achieved/attempted
+
+== Phase 2: Digital Prototype — Tabletop Simulator (Weeks 3-6)
+
+=== Implementation
+
+* Custom card decks with proper layout
+* Scripted planetary boundaries dashboard
+* Automated turn phase progression
+* Resource counter objects
+* Hex map with snap-to-grid
+
+=== Focus Areas
+
+* Does the game work remotely?
+* Are rules clear enough for self-directed play?
+* Balance tuning with larger sample size
+* Edge case discovery (rules interactions, degenerate strategies)
+
+=== Distribution
+
+* Share on BoardGameGeek (design diary + playtest invitation)
+* Reddit: r/tabletopgamedesign, r/boardgames
+* Direct invitations to experienced playtesters
+* Target: 20-50 external playtesters
+
+=== Metrics
+
+* Game length (target: 90-120 minutes for full 4-era game)
+* Boundary stress trajectories (should accelerate through eras)
+* Victory distribution (no single pathway should dominate)
+* Player engagement (which eras feel slow/exciting?)
+* Dropout rate (do players want to finish?)
+
+== Phase 3: Balance Iteration (Weeks 7-10)
+
+=== Key Balance Questions
+
+. Is the Capitalist pathway too strong in early eras?
+. Does the Green pathway have enough agency before Post-Scarcity?
+. Are crisis cards too random / too deterministic?
+. Is the cascade mechanic (boundary stress spillover) tuned correctly?
+. Is 32 turns the right game length?
+. Is the cooperative victory achievable but not trivial?
+
+=== Tuning Levers
+
+* Resource generation rates per pathway
+* Boundary stress accumulation rates
+* Crisis card distribution across eras
+* Cascade thresholds and rates
+* Victory condition thresholds
+* Action count per turn (2 vs. 3)
+* Era length (8 turns each, or variable?)
+
+== Phase 4: Educational Validation (Weeks 9-12)
+
+=== Classroom Testing
+
+* Partner with 2-3 economics/environmental science teachers
+* Test with actual student groups (secondary and university)
+* Measure learning outcomes before and after play
+* Assess whether game creates discussion and engagement
+
+=== Questions
+
+* Do students understand planetary boundaries after playing?
+* Can they explain the Prisoner's Dilemma / Nash Equilibrium?
+* Does the game prompt discussion about real-world parallels?
+* Is the complexity appropriate for the target age range?
+* Do educators see value in integrating it into curriculum?
+
+== Success Criteria
+
+Before proceeding to Kickstarter:
+
+* [ ] Average game length within 90-150 minutes
+* [ ] All four pathways achieve victory in at least 20% of games
+* [ ] Planetary collapse occurs in 10-30% of games (not too rare, not too common)
+* [ ] Player satisfaction rating >= 4/5
+* [ ] At least 2 educators endorse for classroom use
+* [ ] No degenerate strategies discovered (or patched)
+* [ ] Rulebook is self-sufficient for unsupervised play

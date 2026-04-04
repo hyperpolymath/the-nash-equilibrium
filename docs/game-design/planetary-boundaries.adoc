@@ -1,0 +1,127 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (c) 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+= Planetary Boundaries Framework Integration
+:toc:
+:icons: font
+
+== Overview
+
+The planetary boundaries framework (Stockholm Resilience Centre, Rockstrom et al.
+2009, updated 2023) identifies nine Earth system processes that regulate planetary
+stability. These boundaries define a "safe operating space" for humanity; crossing
+them risks destabilising Earth's systems, potentially leading to irreversible
+environmental damage.
+
+As of 2023, *seven* of these boundaries have been crossed.
+
+== The Nine Boundaries
+
+[cols="2,1,3,2,3"]
+|===
+| Boundary | Status (2023) | Definition | Threshold | Game Impact
+
+| *Climate Change*
+| CROSSED
+| Atmospheric CO2 concentration and radiative forcing
+| 350 ppm CO2 (current: 423 ppm)
+| +1 CO2 per factory built; crisis triggered at stress level 10
+
+| *Biosphere Integrity (Genetic)*
+| CROSSED
+| Rate of species extinction
+| <10 extinctions per million species-years (current: 100-1000x)
+| -1 Food per 2 deforestations; biodiversity collapse cascade
+
+| *Biosphere Integrity (Functional)*
+| CROSSED
+| Loss of ecosystem functional integrity
+| >80% remaining (many biomes below)
+| Ecosystem service degradation; Nature resource penalty
+
+| *Biogeochemical Flows (Nitrogen)*
+| CROSSED
+| Industrial and agricultural fixation of N2
+| 62 Tg N/yr (current: ~150 Tg N/yr)
+| Agricultural runoff events; freshwater contamination cascade
+
+| *Biogeochemical Flows (Phosphorus)*
+| CROSSED
+| P flow from fertilisers to erodible soils
+| 6.2 Tg P/yr (current: ~22 Tg P/yr)
+| Eutrophication events; dead zone penalties
+
+| *Land System Change*
+| CROSSED
+| Area of forested land as % of original
+| 75% forest remaining (current: ~60%)
+| Territory expansion costs increase; habitat fragmentation
+
+| *Freshwater Change*
+| CROSSED
+| Blue and green water cycle disruption
+| Flow deviation from pre-industrial
+| Water scarcity events; agricultural yield penalties
+
+| *Novel Entities*
+| CROSSED (2022)
+| Chemical pollution, plastics, endocrine disruptors
+| No single metric; systemic overload
+| Health crises; cleanup costs; tech-dependent mitigation
+
+| *Stratospheric Ozone Depletion*
+| SAFE
+| O3 concentration in stratosphere
+| 275 DU (current: recovering)
+| Historical event card only (Montreal Protocol success story)
+
+| *Ocean Acidification*
+| AT RISK
+| Aragonite saturation state of surface ocean
+| >80% pre-industrial (current: ~84%)
+| Marine food chain disruption; fishing yield penalties
+
+| *Atmospheric Aerosol Loading*
+| REGIONAL
+| Aerosol optical depth; regional variation
+| No single global threshold
+| Regional health events; visibility/agriculture penalties
+|===
+
+== Interdependence and Cascading Risk
+
+Crossing one boundary shifts others. The game models these cascades:
+
+* *Climate -> Freshwater*: Warming disrupts precipitation patterns
+* *Land Change -> Biosphere*: Deforestation drives extinction
+* *Biogeochemical -> Freshwater*: Nitrogen/phosphorus runoff contaminates water
+* *Novel Entities -> Biosphere*: Chemical pollution harms biodiversity
+* *Climate -> Ocean Acidification*: CO2 absorption lowers ocean pH
+
+=== Cascade Mechanic
+
+When a boundary reaches stress level 8+, linked boundaries gain +1 stress per
+turn automatically. This creates positive feedback loops that can spiral into
+collapse if left unaddressed.
+
+== Planetary Boundaries Dashboard
+
+The dashboard is a central game component visible to all players.
+
+=== Dashboard Layout
+
+* Nine boundary tracks (0-10 stress scale each)
+* Colour zones: *Green* (0-3 safe), *Amber* (4-6 increasing risk), *Red* (7-9 danger), *Black* (10 — crossed, irreversible)
+* Cascade arrows showing linked boundaries
+* Global stress indicator (sum of all boundary stresses)
+
+=== Loss Condition
+
+If *four or more* boundaries reach Black (10), the game ends in *planetary collapse*
+— all players lose regardless of individual progress.
+
+=== Recovery Mechanics
+
+* Green economic policies reduce stress by 1 per turn on targeted boundaries
+* Techno-utopian breakthroughs can reset a single boundary by 3 (once per game)
+* Cooperative agreements (eXchange pillar) allow joint stress reduction
+* Some boundaries have hysteresis — recovery is slower than degradation

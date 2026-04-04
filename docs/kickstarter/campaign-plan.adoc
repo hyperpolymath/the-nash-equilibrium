@@ -1,0 +1,176 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (c) 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+= Kickstarter Campaign Plan
+:toc:
+:icons: font
+
+== Campaign Overview
+
+*Project:* The Nash Equilibrium — A 6X Board Game
+*Platform:* Kickstarter
+*Funding Goal:* GBP 10,000-20,000 (500-1,000 copies initial run)
+*Campaign Duration:* 30 days
+
+== Pitch
+
+_"What if you could play through human history — and change the ending?"_
+
+The Nash Equilibrium is a 6X strategy board game where you guide a civilisation
+from agrarian roots to post-scarcity futures. But there's a catch: Earth has
+limits. Nine planetary boundaries define the safe operating space for humanity,
+and every factory you build, every forest you clear, every technology you pursue
+pushes those boundaries closer to collapse.
+
+Will you exploit your way to dominance? Cooperate for collective survival? Bet
+everything on a technological breakthrough? The winning strategy depends on what
+everyone else is doing — that's the Nash Equilibrium.
+
+== Reward Tiers
+
+[cols="1,2,2"]
+|===
+| Tier | Price (GBP) | Contents
+
+| *Early Bird*
+| 35
+| Base game (board, 78 crisis cards, 4 role cards, 200 tokens, rulebook)
+
+| *Standard*
+| 45
+| Base game + educational supplement + quick-start guide
+
+| *Deluxe*
+| 75
+| Standard + premium tokens (wooden -> metal), art prints, Tabletop Simulator key
+
+| *Educator Pack*
+| 150
+| 3x Standard games + classroom guide + lesson plans + discussion prompts
+
+| *Founding Patron*
+| 250
+| Deluxe + name in rulebook + exclusive expansion prototype access
+|===
+
+== Stretch Goals
+
+[cols="1,2,2"]
+|===
+| Threshold (GBP) | Goal | Description
+
+| 15,000
+| 5th Player Expansion
+| New role card (Indigenous Elder) + expanded hex map + rebalanced cards
+
+| 20,000
+| Digital Edition
+| Full Tabletop Simulator mod with scripted automation
+
+| 25,000
+| Art Upgrade
+| Professional illustration for all 78+ crisis cards
+
+| 30,000
+| Educator Toolkit
+| Downloadable lesson plans, worksheets, assessment rubrics (free for all backers)
+
+| 40,000
+| Expansion: Space Race
+| Post-Scarcity era expansion with orbital mechanics, asteroid mining, and Dyson Sphere construction
+|===
+
+== Marketing Strategy
+
+=== Target Audiences
+
+. *Board game enthusiasts* — fans of Terraforming Mars, Civilization, Spirit Island
+. *Educators* — economics, environmental science, politics teachers
+. *Futurists and sustainability advocates* — systems thinkers, degrowth community
+. *Game theory enthusiasts* — maths/econ students, strategy game fans
+
+=== Channels
+
+[cols="1,3"]
+|===
+| Channel | Approach
+
+| *BoardGameGeek*
+| Forum posts, designer diary series, play-by-forum demo
+
+| *Reddit*
+| r/boardgames, r/tabletopgamedesign, r/economics, r/sustainability
+
+| *YouTube/TikTok*
+| Playthrough videos, "how it works" explainers, educational angle
+
+| *Academic networks*
+| Economics/environmental science departments, conference booths
+
+| *Podcasts*
+| Board game podcasts (Dice Tower, SUSD), sustainability podcasts
+
+| *Social media*
+| Instagram (component photos), Twitter/Bluesky (design diary)
+
+| *Educational partnerships*
+| Schools, universities, environmental NGOs (bulk pricing)
+|===
+
+=== Pre-Launch
+
+* Build mailing list via landing page (target: 500+ before launch)
+* Designer diary on BoardGameGeek (6-8 entries)
+* Tabletop Simulator demo available pre-launch for reviewers
+* Press kit with high-quality component photos and rule summaries
+
+== Budget Estimate
+
+[cols="1,2,2"]
+|===
+| Item | Cost (GBP) | Notes
+
+| Art and graphic design | 2,000-5,000 | Freelancer for board, cards, tokens
+| Prototyping | 500 | Paper prototypes + Tabletop Simulator development
+| Manufacturing | 8,000-15,000 | 500-1,000 copies (quotes from reputable printers)
+| Kickstarter + payment fees | 1,000 | ~8% platform + processing
+| Shipping and fulfilment | 3,000 | UK/EU primary; US via fulfilment partner
+| Marketing | 1,000 | Social media ads, review copies, podcast sponsorship
+| *Total* | *15,500-25,500* |
+|===
+
+== Risks and Mitigation
+
+[cols="1,3"]
+|===
+| Risk | Mitigation
+
+| *Complexity barrier*
+| Start with 1-era tutorial scenario; layered rulebook; quick-start guide
+
+| *Low Kickstarter interest*
+| Partner with educators; pre-build mailing list; strong prototype demo
+
+| *Manufacturing delays*
+| Use reputable printers with track record; build 2-month buffer into timeline
+
+| *Gameplay balance issues*
+| Extensive playtesting before launch; commit to post-launch errata/FAQ
+
+| *Scope creep*
+| Lock base game scope before campaign; expansions as stretch goals only
+|===
+
+== Timeline
+
+[cols="1,3"]
+|===
+| Phase | Duration
+
+| Paper prototype + playtesting | 2-4 weeks
+| Digital prototype (Tabletop Simulator) | 2-4 weeks
+| Playtesting and iteration | 4-8 weeks
+| Kickstarter preparation (page, video, marketing) | 4 weeks
+| Kickstarter campaign | 30 days
+| Manufacturing | 3-4 months
+| Fulfilment and shipping | 1-2 months
+|===

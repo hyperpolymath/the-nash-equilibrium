@@ -1,0 +1,136 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (c) 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+= Player Roles and Asymmetric Gameplay
+:toc:
+:icons: font
+
+== Overview
+
+Players assume asymmetric roles with unique starting bonuses, constraints, and
+victory paths. This encourages diverse strategies and highlights tensions between
+different economic philosophies.
+
+== Role Cards
+
+=== Queen Isabella
+
+*Archetype:* Colonial Capitalist
+
+[cols="1,3"]
+|===
+| Starting Bonuses | +2 Gold/turn (colonial trade routes)
+| Constraints | Cannot use barter economy; high base pollution rate
+| Starting Era Bonus | Strong in Industrial era (colonial wealth)
+| Weakness | Vulnerable to independence movements and climate crises
+| Path to Victory | Exploit -> Industrialise -> Adapt (or face revolution)
+|===
+
+*Flavour:* Represents the colonial-capitalist model — rapid wealth extraction
+from new territories at the cost of indigenous populations and environmental
+degradation. Must transition to sustainable practices before boundaries collapse.
+
+*Historical parallel:* Spanish Empire, British East India Company, extraction
+economies.
+
+=== Gandhi
+
+*Archetype:* Cooperative Socialist
+
+[cols="1,3"]
+|===
+| Starting Bonuses | +1 Stability/turn (nonviolent resistance, social cohesion)
+| Constraints | Cannot build military units; growth rate halved
+| Starting Era Bonus | Strong in Agrarian era (community-based)
+| Weakness | Slow expansion; vulnerable to military-capable players
+| Path to Victory | Sustainability -> Equality -> Collective advancement
+|===
+
+*Flavour:* Represents non-violent, community-centred development. Strong social
+fabric but slow economic growth. Wins through collective well-being rather than
+individual dominance.
+
+*Historical parallel:* Indian independence movement, cooperative movements,
+Scandinavian social democracy.
+
+=== Elon Musk
+
+*Archetype:* Techno-Utopian Innovator
+
+[cols="1,3"]
+|===
+| Starting Bonuses | +1 Knowledge/turn (innovation engine)
+| Constraints | High Knowledge cost for breakthroughs; Labour instability
+| Starting Era Bonus | Strong in Digital era (tech disruption)
+| Weakness | Social instability from automation; expensive research
+| Path to Victory | Automate -> Breakthrough -> Space (Dyson Sphere)
+|===
+
+*Flavour:* Represents the Silicon Valley vision — technology as the solution to
+all problems. Powerful innovation engine but creates social disruption through
+automation and can neglect environmental boundaries in pursuit of breakthroughs.
+
+*Historical parallel:* Tech industry, space programmes, nuclear power optimism.
+
+=== Green Activist
+
+*Archetype:* Environmental Steward
+
+[cols="1,3"]
+|===
+| Starting Bonuses | +1 Nature/turn (conservation, ecosystem restoration)
+| Constraints | Low starting Capital; vulnerable to economic exploitation
+| Starting Era Bonus | Weak early, strong in Post-Scarcity era
+| Weakness | Economic disadvantage in Industrial/Digital eras
+| Path to Victory | Balance -> Resilience -> Post-Scarcity (sustainable)
+|===
+
+*Flavour:* Represents the environmental movement and Green economics. Protects
+planetary boundaries but starts economically weak. Becomes powerful in later eras
+as boundary stress makes sustainability essential.
+
+*Historical parallel:* Greenpeace, Costa Rica, doughnut economics, degrowth.
+
+== Role Summary Table
+
+[cols="1,2,2,2"]
+|===
+| Role | Starting Bonuses | Constraints | Path to Victory
+
+| Queen Isabella
+| +2 Gold/turn (colonies)
+| No barter; high pollution
+| Exploit -> Industrialise -> Adapt
+
+| Gandhi
+| +1 Stability (nonviolence)
+| No military; slow growth
+| Sustainability -> Equality
+
+| Elon Musk
+| +1 Tech/turn (innovation)
+| High Knowledge cost; unstable Labour
+| Automate -> Space
+
+| Green Activist
+| +1 Nature/turn (conservation)
+| Low Capital; vulnerable to exploitation
+| Balance -> Post-Scarcity
+|===
+
+== Expansion Roles (Future)
+
+Potential additional roles for expansion packs:
+
+* *Pharaoh* — Agrarian era specialist, monumental construction
+* *Marx* — Revolutionary Socialist, can trigger regime change in other players
+* *Pirate Queen* — Disrupts trade routes, asymmetric warfare
+* *Indigenous Elder* — Deep Nature connection, unique boundary recovery abilities
+* *AI Singleton* — Digital era specialist, post-human victory path
+
+== Role Balance Notes
+
+* Roles are intentionally *not* balanced for raw power — they are balanced for
+  *interesting decisions*
+* Each role has a window of strength and vulnerability
+* The Nash Equilibrium dynamic means no single role can win alone in most games
+* Playtesting should focus on ensuring each role has meaningful agency in every era

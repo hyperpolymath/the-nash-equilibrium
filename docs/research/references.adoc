@@ -1,0 +1,69 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (c) 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+= Research References and Sources
+:toc:
+:icons: font
+
+== Planetary Boundaries
+
+* Rockstrom, J., Steffen, W., Noone, K. et al. (2009). "A safe operating space
+  for humanity." _Nature_, 461, 472-475.
+* Steffen, W. et al. (2015). "Planetary boundaries: Guiding human development on
+  a changing planet." _Science_, 347(6223).
+* Richardson, K. et al. (2023). "Earth beyond six of nine planetary boundaries."
+  _Science Advances_, 9(37), eadh2458.
+* Wang-Erlandsson, L. et al. (2022). "A planetary boundary for green water."
+  _Nature Reviews Earth & Environment_, 3, 380-392.
+* Persson, L. et al. (2022). "Outside the safe operating space of the planetary
+  boundary for novel entities." _Environmental Science & Technology_, 56(3), 1510-1521.
+
+== Economics and Economic Systems
+
+* Piketty, T. (2014). _Capital in the Twenty-First Century_. Harvard University Press.
+* Raworth, K. (2017). _Doughnut Economics: Seven Ways to Think Like a
+  21st-Century Economist_. Chelsea Green Publishing.
+* Bastani, A. (2019). _Fully Automated Luxury Communism_. Verso Books.
+* Schumpeter, J. (1942). _Capitalism, Socialism and Democracy_. Harper & Brothers.
+* Marx, K. (1867). _Das Kapital_. Verlag von Otto Meissner.
+* Keynes, J.M. (1936). _The General Theory of Employment, Interest and Money_.
+  Macmillan.
+* Hickel, J. (2020). _Less is More: How Degrowth Will Save the World_. Penguin.
+
+== Game Theory
+
+* Nash, J. (1950). "Equilibrium Points in N-Person Games." _Proceedings of the
+  National Academy of Sciences_, 36(1), 48-49.
+* Nash, J. (1951). "Non-Cooperative Games." _Annals of Mathematics_, 54(2), 286-295.
+* Hardin, G. (1968). "The Tragedy of the Commons." _Science_, 162(3859), 1243-1248.
+* Ostrom, E. (1990). _Governing the Commons: The Evolution of Institutions for
+  Collective Action_. Cambridge University Press.
+* Axelrod, R. (1984). _The Evolution of Cooperation_. Basic Books.
+* Von Neumann, J. & Morgenstern, O. (1944). _Theory of Games and Economic
+  Behavior_. Princeton University Press.
+
+== Climate and Environmental Science
+
+* IPCC (2023). _Sixth Assessment Report: Synthesis Report_.
+* Lenton, T.M. et al. (2008). "Tipping elements in the Earth's climate system."
+  _Proceedings of the National Academy of Sciences_, 105(6), 1786-1793.
+* Lenton, T.M. et al. (2019). "Climate tipping points — too risky to bet against."
+  _Nature_, 575, 592-595.
+* Steffen, W. et al. (2018). "Trajectories of the Earth System in the
+  Anthropocene." _Proceedings of the National Academy of Sciences_, 115(33), 8252-8259.
+
+== Board Game Design
+
+* Schell, J. (2008). _The Art of Game Design: A Book of Lenses_. CRC Press.
+* Engelstein, G. & Shalev, I. (2019). _Building Blocks of Tabletop Game Design_.
+  CRC Press.
+* Koster, R. (2004). _A Theory of Fun for Game Design_. Paraglyph Press.
+
+== Comparable Games (Market Research)
+
+* _Terraforming Mars_ (Fryxelius, 2016) — planetary engineering, resource management
+* _Spirit Island_ (Reuss, 2017) — cooperative, asymmetric roles, colonialism theme
+* _Civilization_ (Tresham, 1980; Meier, 1991) — era progression, technology trees
+* _Pandemic_ (Leacock, 2008) — cooperative crisis management
+* _Daybreak_ (Leacock & Engelstein, 2023) — climate change cooperative game
+* _CO2: Second Chance_ (Lacerda, 2018) — environmental economics
+* _Wingspan_ (Hargrave, 2019) — educational + accessible + beautiful production

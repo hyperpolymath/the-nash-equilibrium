@@ -1,0 +1,216 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (c) 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+= Event and Crisis Cards
+:toc:
+:icons: font
+
+== Overview
+
+Crisis and event cards introduce dynamic disruptions each turn. Cards are drawn
+from era-specific decks, creating escalating complexity as the game progresses.
+
+== Card Anatomy
+
+Each card has:
+
+* *Title* — evocative name
+* *Era* — which deck it belongs to (or "Any")
+* *Type* — Environmental, Social, Technological, Economic, Geopolitical, or Positive
+* *Effect* — immediate mechanical impact
+* *Choice* — player decision (where applicable)
+* *Cascade* — secondary boundary effects
+* *Historical Note* — real-world parallel for educational value
+
+== Agrarian Era Cards
+
+=== The Great Flood
+[source]
+----
+Type: Environmental
+Effect: All coastal settlements lose 1 Food for 2 turns
+Choice: Relocate inland (-1 Territory) OR build levees (-2 Capital)
+Cascade: +1 Freshwater Change stress
+Historical Note: Mesopotamian floods, Nile delta management
+----
+
+=== Plague
+[source]
+----
+Type: Social
+Effect: -2 Labour for 3 turns
+Choice: Quarantine (-1 Trade) OR pray (50% chance of +1 turn duration)
+Cascade: None
+Historical Note: Black Death, Justinian Plague
+----
+
+=== Bountiful Harvest (Positive)
+[source]
+----
+Type: Environmental (Positive)
+Effect: +2 Food, +1 Nature for all players
+Choice: Store surplus (+1 Capital next turn) OR share (+1 Stability for all)
+Historical Note: Medieval warm period, agricultural surpluses
+----
+
+== Industrial Era Cards
+
+=== Industrial Revolution
+[source]
+----
+Type: Economic
+Effect: +2 Capital, +2 Climate Change stress
+Choice: Ignore (keep Capital) OR invest in green tech (-1 Capital, -1 stress)
+Cascade: +1 Atmospheric Aerosol Loading
+Historical Note: British Industrial Revolution, Luddite movement
+----
+
+=== Workers' Revolt
+[source]
+----
+Type: Social
+Effect: All factories shut down for 1 turn unless Labour >= 5
+Choice: Negotiate (+1 Labour cost permanently) OR suppress (-2 Stability)
+Cascade: None
+Historical Note: Chartist movement, Paris Commune, labour unions
+----
+
+=== Colonial Independence
+[source]
+----
+Type: Geopolitical
+Effect: Player with most colonies loses 1 colony
+Choice: Grant independence (+2 Stability) OR resist (-1 Labour, -1 Stability)
+Cascade: None
+Historical Note: American Revolution, Indian independence, decolonisation
+----
+
+=== Smog Crisis
+[source]
+----
+Type: Environmental
+Effect: -1 Labour (health), +2 Atmospheric Aerosol stress
+Choice: Clean Air Act (-1 Capital, -2 Aerosol stress) OR ignore
+Cascade: +1 Climate Change stress
+Historical Note: London Great Smog 1952, Clean Air Acts
+----
+
+== Digital Era Cards
+
+=== AI Uprising
+[source]
+----
+Type: Technological
+Effect: All automated production halts for 2 turns
+Resolution: Negotiate (spend 3 Knowledge) OR suppress (spend 2 Labour + 2 Capital)
+Cascade: -1 Stability for all players with automation > 3
+Historical Note: Speculative — AI alignment problem, automation anxiety
+----
+
+=== Cybersecurity Breach
+[source]
+----
+Type: Technological
+Effect: Target player loses 2 Capital (data theft)
+Choice: Invest in security (-1 Capital, immunity for 3 turns) OR risk it
+Cascade: None
+Historical Note: Equifax breach, SolarWinds, state-sponsored hacking
+----
+
+=== Social Media Disinformation
+[source]
+----
+Type: Social
+Effect: -1 Stability for all players; +1 to any boundary stress (chosen by instigator)
+Choice: Regulate platforms (-1 Knowledge) OR ride the wave (+1 Capital, -1 Stability)
+Cascade: Chosen boundary +1
+Historical Note: 2016 elections, anti-vax movements, climate denial
+----
+
+=== Renewable Energy Breakthrough (Positive)
+[source]
+----
+Type: Technological (Positive)
+Effect: -2 Climate Change stress for player who invested in green tech
+Choice: Share technology (+1 Stability for all, -1 Climate for all) OR patent (+2 Capital)
+Cascade: If shared, -1 Atmospheric Aerosol for all
+Historical Note: Solar cost curve, wind power expansion
+----
+
+== Post-Scarcity Era Cards
+
+=== Fusion Ignition
+[source]
+----
+Type: Technological (Positive)
+Effect: Energy becomes unlimited for one player; -3 Climate Change stress
+Choice: Open-source (-2 Climate for all) OR monopolise (+3 Capital, +1 Novel Entities)
+Cascade: If open-sourced, accelerates Dyson Sphere construction
+Historical Note: ITER, NIF, fusion research
+----
+
+=== Space Debris Crisis
+[source]
+----
+Type: Environmental
+Effect: All space infrastructure offline for 1 turn; +2 Novel Entities stress
+Choice: Clean up (-2 Capital) OR wait (10% chance of cascade each turn)
+Cascade: Risk of Kessler Syndrome (permanent space access penalty)
+Historical Note: Growing orbital debris problem, Kessler syndrome theory
+----
+
+=== Post-Human Split
+[source]
+----
+Type: Social
+Effect: Players must choose: augment (+2 Knowledge, -1 Stability) or remain (-1 Knowledge, +1 Stability)
+Choice: Defines late-game strategy
+Cascade: Social division between augmented and unaugmented factions
+Historical Note: Transhumanism debates, genetic engineering ethics
+----
+
+=== Climate Tipping Point
+[source]
+----
+Type: Environmental
+Effect: ALL players lose 1 Food/turn until collective CO2 reduced below threshold
+Choice: Emergency geoengineering (-3 Capital, -2 Climate stress, +2 Novel Entities) OR cooperate on reduction
+Cascade: +1 Freshwater stress, +1 Ocean Acidification stress
+Historical Note: IPCC tipping point warnings, Arctic methane, AMOC collapse risk
+----
+
+== Any-Era Cards
+
+=== Montreal Protocol (Positive)
+[source]
+----
+Type: Geopolitical (Positive)
+Effect: Ozone boundary stress reduced to 0
+Condition: Only if 3+ players agree to ban CFCs
+Lesson: International cooperation works — bonus to all contributing players
+Historical Note: Montreal Protocol 1987 — most successful environmental treaty
+----
+
+=== Tragedy of the Commons
+[source]
+----
+Type: Environmental
+Effect: Shared resource (fishery, forest) depleted; -1 Nature for all
+Choice: Each player secretly decides: conserve or exploit (Prisoner's Dilemma)
+Cascade: If majority exploit, -2 Nature and +1 Biosphere stress
+Historical Note: Hardin (1968), overfishing, deforestation
+----
+
+== Card Distribution
+
+[cols="1,1,1,1,1"]
+|===
+| Type | Agrarian | Industrial | Digital | Post-Scarcity
+
+| Environmental | 4 | 5 | 6 | 6
+| Social | 2 | 4 | 4 | 3
+| Technological | 0 | 2 | 5 | 5
+| Economic | 1 | 4 | 3 | 2
+| Geopolitical | 2 | 3 | 3 | 2
+| Positive | 3 | 2 | 3 | 4
+| *Total* | *12* | *20* | *24* | *22*
+|===

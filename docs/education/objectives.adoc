@@ -1,0 +1,155 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (c) 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+= Educational Objectives and Real-World Parallels
+:toc:
+:icons: font
+
+== Overview
+
+The Nash Equilibrium is designed as both entertainment and educational tool.
+This document maps game mechanics to learning outcomes and real-world parallels.
+
+== Learning Objectives
+
+=== Primary Objectives
+
+. *Systems thinking* — understand how interconnected systems (economic,
+  environmental, social) interact and create emergent behaviour
+. *Sustainability science* — learn the planetary boundaries framework and
+  why staying within safe operating spaces matters
+. *Economic literacy* — compare capitalism, socialism, green economics, and
+  techno-utopian models through direct experience
+. *Game theory* — internalise concepts like Nash Equilibrium, Prisoner's
+  Dilemma, and Tragedy of the Commons through gameplay
+
+=== Secondary Objectives
+
+. *Historical awareness* — connect game eras to real historical transitions
+. *Strategic planning* — develop long-term thinking under uncertainty
+. *Negotiation skills* — practice trade, diplomacy, and coalition-building
+. *Ethical reasoning* — confront trade-offs between growth and sustainability
+
+== Real-World Parallels
+
+=== Tragedy of the Commons (Hardin, 1968)
+
+*Game mechanic:* Shared resource hexes that any player can exploit. Over-
+exploitation depletes the resource for everyone.
+
+*Real-world parallel:* Overfishing, deforestation, atmospheric CO2 as a shared
+sink, antibiotic resistance.
+
+*Learning outcome:* Individual rational behaviour can lead to collective
+irrational outcomes. Cooperation and governance structures are needed to
+manage shared resources.
+
+=== Prisoner's Dilemma
+
+*Game mechanic:* Crisis cards where players secretly choose to cooperate or
+defect. Mutual cooperation yields the best collective outcome, but defection
+tempts with short-term advantage.
+
+*Real-world parallel:* International climate negotiations, arms races, trade
+wars, vaccine distribution.
+
+*Learning outcome:* Trust and repeated interaction change optimal strategies.
+One-shot defection may win short-term but destroys long-term cooperation.
+
+=== Nash Equilibrium
+
+*Game mechanic:* The meta-strategic dynamic where players seek optimal
+strategies given what others are doing. No player can improve by unilaterally
+changing strategy at equilibrium.
+
+*Real-world parallel:* Market competition, international diplomacy, evolutionary
+stable strategies, OPEC production decisions.
+
+*Learning outcome:* Optimal individual strategy depends on the strategies of
+others. Pure domination is rarely stable; finding equilibrium is key.
+
+=== Externalities
+
+*Game mechanic:* Pollution tokens from factories affect all players through
+planetary boundary stress, not just the polluter.
+
+*Real-world parallel:* Industrial pollution, carbon emissions, plastic waste,
+agricultural runoff.
+
+*Learning outcome:* Costs of production are often borne by society, not the
+producer. Regulation and pricing mechanisms can internalise these costs.
+
+=== Tipping Points and Cascade Failure
+
+*Game mechanic:* Boundary stress above 8 triggers automatic cascade to linked
+boundaries. Once a boundary reaches 10 (Black), it is irreversible.
+
+*Real-world parallel:* Arctic ice loss -> albedo feedback, Amazon dieback ->
+carbon release, coral reef collapse -> marine food chain disruption.
+
+*Learning outcome:* Earth systems have nonlinear dynamics — gradual pressure
+can lead to sudden, irreversible change. Prevention is easier than cure.
+
+=== Creative Destruction (Schumpeter)
+
+*Game mechanic:* Era transitions obsolete previous infrastructure. Industrial
+factories replace agrarian farms; digital automation replaces industrial labour.
+
+*Real-world parallel:* Horse-drawn carriage -> automobile, typewriter -> computer,
+fossil fuels -> renewables (in progress).
+
+*Learning outcome:* Economic progress destroys old industries while creating new
+ones. Managing this transition is a core political and social challenge.
+
+=== Doughnut Economics (Raworth, 2017)
+
+*Game mechanic:* The entire planetary boundary + social foundation structure
+mirrors Raworth's doughnut model — a safe and just space between ecological
+ceiling and social foundation.
+
+*Real-world parallel:* Amsterdam's adoption of doughnut economics as city policy,
+UN Sustainable Development Goals.
+
+*Learning outcome:* A thriving economy operates between the social foundation
+(minimum human needs) and the ecological ceiling (planetary boundaries).
+
+== Curriculum Integration
+
+=== Economics (A-Level / AP / University Intro)
+
+* Market failure and externalities
+* Public goods and common pool resources
+* Economic systems comparison
+* Development economics
+
+=== Environmental Science
+
+* Earth system science
+* Planetary boundaries framework
+* Climate change feedback loops
+* Biodiversity and ecosystem services
+
+=== Politics / Government
+
+* Collective action problems
+* International cooperation
+* Governance of global commons
+* Political economy of environmental policy
+
+=== Mathematics / Game Theory
+
+* Nash Equilibrium calculation
+* Prisoner's Dilemma iterated strategies
+* Probability and risk assessment
+* Systems modelling
+
+== References
+
+* Rockstrom, J. et al. (2009). "A safe operating space for humanity." _Nature_, 461, 472-475.
+* Richardson, K. et al. (2023). "Earth beyond six of nine planetary boundaries." _Science Advances_, 9(37).
+* Raworth, K. (2017). _Doughnut Economics: Seven Ways to Think Like a 21st-Century Economist_.
+* Bastani, A. (2019). _Fully Automated Luxury Communism_.
+* Piketty, T. (2014). _Capital in the Twenty-First Century_.
+* Hardin, G. (1968). "The Tragedy of the Commons." _Science_, 162(3859), 1243-1248.
+* Nash, J. (1950). "Equilibrium Points in N-Person Games." _Proceedings of the National Academy of Sciences_, 36(1), 48-49.
+* Schumpeter, J. (1942). _Capitalism, Socialism and Democracy_.
+* IPCC (2023). _Sixth Assessment Report: Synthesis Report_.

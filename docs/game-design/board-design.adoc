@@ -1,0 +1,124 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (c) 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+= Board and Component Design
+:toc:
+:icons: font
+
+== Overview
+
+Physical and digital component specifications for The Nash Equilibrium.
+
+== Board Layout
+
+=== Main Board
+
+The main board has three zones:
+
+. *Territory Map* (centre) — hex-based map for eXplore and eXpand
+. *Planetary Boundaries Dashboard* (top) — nine boundary tracks visible to all
+. *Era Track* (bottom) — four-era progression with turn counter
+
+=== Territory Map
+
+* Hex grid (7x9 recommended for 4 players)
+* Terrain types: Ocean, Forest, Plains, Mountains, Desert, Tundra
+* Resource nodes on hexes (Labour, Capital, Nature, Energy)
+* Trade route paths between player territories
+* Settlement sites marked at hex intersections
+
+=== Planetary Boundaries Dashboard
+
+* Nine horizontal tracks (0-10 scale)
+* Colour-coded zones: Green (0-3), Amber (4-6), Red (7-9), Black (10)
+* Cascade arrows connecting linked boundaries
+* Sliding markers for current stress levels
+* Global stress indicator (sum display)
+
+=== Era Track
+
+* Four era zones with turn markers (8 turns per era, 32 total)
+* Era transition triggers displayed
+* Key milestones marked
+
+== Player Boards
+
+Each player has an individual board with:
+
+* Resource pools (Labour, Capital, Nature, Knowledge, Energy)
+* Infrastructure slots (factories, farms, labs, trade posts)
+* Pathway indicator (Capitalist/Socialist/Green/Techno-Utopian)
+* Role card slot with unique bonuses/constraints
+* Action tracker (2-3 actions per turn)
+
+== Components List
+
+=== Tokens and Markers
+
+[cols="1,2,1"]
+|===
+| Component | Description | Quantity
+
+| Resource tokens (Labour) | Blue wooden cubes | 40
+| Resource tokens (Capital) | Gold wooden cubes | 40
+| Resource tokens (Nature) | Green wooden cubes | 40
+| Resource tokens (Knowledge) | White wooden cubes | 40
+| Resource tokens (Energy) | Red wooden cubes | 40
+| Pollution markers | Grey discs | 30
+| Settlement pieces | Player-coloured buildings | 20 (5 per player)
+| Trade route markers | Player-coloured roads | 24 (6 per player)
+| Boundary stress markers | Black sliding clips | 9
+| Era marker | Large wooden disc | 1
+| Turn marker | Small wooden disc | 1
+|===
+
+=== Cards
+
+[cols="1,2,1"]
+|===
+| Deck | Description | Count
+
+| Role cards | Asymmetric player roles | 4 (base game)
+| Crisis cards (Agrarian) | Era-specific events | 12
+| Crisis cards (Industrial) | Era-specific events | 20
+| Crisis cards (Digital) | Era-specific events | 24
+| Crisis cards (Post-Scarcity) | Era-specific events | 22
+| Breakthrough cards | Techno-Utopian special abilities | 10
+| Trade agreement cards | eXchange mechanic | 16
+| Research cards | eXperiment mechanic (branching) | 20
+| Reference cards | Player aids and summaries | 4
+|===
+
+=== Other Components
+
+* Rulebook (40-60 pages)
+* Quick-start guide (4 pages)
+* Educational supplement (historical context, further reading)
+* 2 six-sided dice (for crisis resolution)
+* 1 custom eight-sided die (for eXperiment outcomes)
+
+== Digital Prototype (Tabletop Simulator)
+
+=== Implementation Priority
+
+. Planetary boundaries dashboard (scripted stress tracking)
+. Territory hex map (snap-to-grid placement)
+. Card decks (shuffled, era-separated)
+. Resource token pools (counter objects)
+. Turn structure automation (phase prompts)
+. Player boards (individual zones)
+
+=== Scripting Requirements
+
+* Automatic boundary cascade calculations
+* Turn phase progression
+* Victory/loss condition checking
+* Resource generation per turn (based on infrastructure)
+* Crisis card resolution prompts
+
+== Art Direction
+
+* *Style:* Clean, information-rich, educational — inspired by Terraforming Mars
+  and Wingspan aesthetic
+* *Colour palette:* Earth tones with vivid boundary indicators
+* *Iconography:* Consistent resource and boundary icons throughout
+* *Accessibility:* Colour-blind-safe palettes; text labels on all colour-coded elements

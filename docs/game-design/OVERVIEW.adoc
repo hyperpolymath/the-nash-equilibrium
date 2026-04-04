@@ -1,0 +1,59 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (c) 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+= Econosphere: Game Design Overview
+:toc:
+:icons: font
+
+== Executive Summary
+
+Econosphere (working title: *The Nash Equilibrium*) is a 6X strategy board game
+where players guide civilizations from barter economies to post-scarcity futures,
+while navigating planetary boundaries that limit unsustainable growth. The game
+balances educational depth with strategic gameplay, making it ideal for classrooms
+and board game enthusiasts.
+
+== Key Features
+
+* *Era-based progression* — Agrarian -> Industrial -> Digital -> Post-Scarcity
+* *Planetary boundaries mechanic* — climate change, biosphere integrity, etc.
+* *Multiple victory paths* — Capitalist, Socialist, Green, Techno-Utopian
+* *Asymmetric roles* — unique constraints per player
+* *Crisis events* — revolts, climate disasters, AI uprisings
+* *6X pillars* — eXplore, eXpand, eXploit, eXterminate, eXchange, eXperiment
+
+== Target Audience
+
+* Economics students (secondary/university)
+* Board game hobbyists (fans of Civilization, Terraforming Mars)
+* Educators and futurists
+
+== The 6X Connection
+
+The game extends the classic 4X formula with two pillars that are central to the
+Nash Equilibrium theme:
+
+* *eXchange* — trade, diplomacy, game-theoretic negotiation where cooperation
+  and betrayal coexist. Trade agreements and diplomatic pacts are modelled as
+  repeated games with real mechanical consequences.
+* *eXperiment* — speculative research with branching non-deterministic outcomes
+  and asymmetric payoffs, creating information asymmetry that feeds into eXchange.
+
+See link:6X-pillars.adoc[6X Pillars] for the full design rationale.
+
+== Document Map
+
+[cols="1,3"]
+|===
+| Document | Contents
+
+| link:6X-pillars.adoc[6X Pillars] | The six strategic dimensions
+| link:core-mechanics.adoc[Core Mechanics] | Resources, eras, crisis events, win/loss conditions
+| link:player-roles.adoc[Player Roles] | Asymmetric roles and pathways
+| link:planetary-boundaries.adoc[Planetary Boundaries] | Framework integration and dashboard design
+| link:economic-systems.adoc[Economic Systems] | Four economic pathways
+| link:event-cards.adoc[Event Cards] | Crisis and event card designs
+| link:board-design.adoc[Board Design] | Board layout and component spec
+| link:../research/references.adoc[References] | Academic and scientific sources
+| link:../education/objectives.adoc[Educational Objectives] | Learning outcomes and real-world parallels
+| link:../kickstarter/campaign-plan.adoc[Kickstarter Plan] | Crowdfunding strategy
+|===
