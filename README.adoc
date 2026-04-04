@@ -1,0 +1,47 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (c) 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+= The Nash Equilibrium
+:toc: preamble
+:icons: font
+
+image:https://api.securityscorecards.dev/projects/github.com/hyperpolymath/the-nash-equilibrium/badge[OpenSSF Scorecard, link="https://securityscorecards.dev/viewer/?uri=github.com/hyperpolymath/the-nash-equilibrium"]
+
+== Overview
+
+**The Nash Equilibrium** is a **6X strategy game** — extending the classic 4X genre
+(eXplore, eXpand, eXploit, eXterminate) with two additional strategic dimensions.
+
+Co-developed by Jonathan D.A. Jewell and son.
+
+== License
+
+This project is licensed under the **GNU Affero General Public License v3.0 or later** (AGPL-3.0-or-later).
+
+See link:LICENSE[LICENSE] for the full text.
+
+== Repository Structure
+
+[cols="1,3"]
+|===
+| Path | Description
+
+| `src/` | Game source code
+| `src/interface/abi/` | Idris2 ABI definitions
+| `src/interface/ffi/` | Zig FFI implementation
+| `docs/` | Design documents and game design documentation
+| `tests/` | Test suites
+| `.machine_readable/` | A2ML metadata (STATE, META, ECOSYSTEM)
+| `.github/workflows/` | CI/CD pipelines
+|===
+
+== AI Gatekeeper Protocol
+
+All AI agents MUST read `0-AI-MANIFEST.a2ml` before any work.
+
+== Getting Started
+
+[source,bash]
+----
+just build
+just test
+----

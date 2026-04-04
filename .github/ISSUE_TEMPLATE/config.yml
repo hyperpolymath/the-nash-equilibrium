@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Issue template chooser configuration for hyperpolymath/the-nash-equilibrium
+blank_issues_enabled: true
+contact_links:
+  - name: Discussions
+    url: https://github.com/hyperpolymath/the-nash-equilibrium/discussions
+    about: Ask questions, share ideas, or start a conversation in Discussions.
+  - name: Security Vulnerabilities
+    url: https://github.com/hyperpolymath/the-nash-equilibrium/security/advisories/new
+    about: Report security vulnerabilities privately via GitHub Security Advisories.

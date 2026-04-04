@@ -1,0 +1,35 @@
+= The Nash Equilibrium - Citation Guide
+:toc:
+
+== BibTeX
+
+[source,bibtex]
+----
+@software{The Nash Equilibrium_2026,
+  author = {{{AUTHOR_LAST}}, {{AUTHOR_FIRST}}},
+  title = {The Nash Equilibrium},
+  year = {2026},
+  url = {https://github.com/hyperpolymath/The Nash Equilibrium},
+  license = {AGPL-3.0-or-later}
+}
+----
+
+== Harvard Style
+
+{{AUTHOR_LAST}}, {{AUTHOR_INITIALS}} (2026) _The Nash Equilibrium_ [Computer software]. Available at: https://github.com/hyperpolymath/The Nash Equilibrium
+
+== OSCOLA
+
+Jonathan D.A. Jewell, 'The Nash Equilibrium' (2026) <https://github.com/hyperpolymath/The Nash Equilibrium>
+
+== MLA
+
+{{AUTHOR_LAST}}, {{AUTHOR_FIRST}} "The Nash Equilibrium." 2026, github.com/hyperpolymath/The Nash Equilibrium.
+
+== APA 7
+
+{{AUTHOR_LAST}}, {{AUTHOR_INITIALS}} (2026). _The Nash Equilibrium_ [Computer software]. GitHub. https://github.com/hyperpolymath/The Nash Equilibrium
+
+== See Also
+
+* link:CITATION.cff[CITATION.cff]

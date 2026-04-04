@@ -1,0 +1,29 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (c) 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+= The Nash Equilibrium — Show Me The Receipts
+:toc:
+:icons: font
+
+The README makes claims. This file backs them up.
+
+== 6X Strategy Game
+
+[quote, README]
+____
+The Nash Equilibrium is a 6X strategy game — extending the classic 4X genre with two additional strategic dimensions.
+____
+
+A 6X game adds two new eX- pillars to the established 4X formula (eXplore, eXpand,
+eXploit, eXterminate). The specific additional dimensions are documented in
+`docs/game-design/`.
+
+**Caveat:** Early development — game design document in progress.
+
+== Nash Equilibrium Theme
+
+The game's core mechanic draws on game-theoretic concepts — players must find
+and exploit equilibrium states in multi-agent strategic interactions. The name
+references John Nash's equilibrium concept from non-cooperative game theory.
+
+**Caveat:** Mechanical integration of game theory concepts is a design goal,
+not yet implemented.
