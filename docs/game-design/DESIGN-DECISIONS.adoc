@@ -1,0 +1,355 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (c) 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+= Design Decisions Log
+:toc:
+:icons: font
+
+== Purpose
+
+This document records every significant design decision as dialogue and FAQ,
+preserving the reasoning chain so we can trace the path through development
+and learn from it. Each entry captures *what* was decided, *why*, *who* raised
+it, *what alternatives existed*, and *what we'd revisit if assumptions change*.
+
+Updated continuously as the project evolves.
+
+'''
+
+== Session 1: Project Genesis (2026-04-04)
+
+=== DD-001: Game Name — "The Nash Equilibrium"
+
+*Raised by:* Jonathan
+
+*Decision:* Working title is *The Nash Equilibrium*.
+
+*Reasoning:* The name directly references John Nash's equilibrium concept from
+non-cooperative game theory, which is also the core meta-strategic mechanic — the
+winning position is the one where no player can improve by unilaterally changing
+strategy. The name signals the game's intellectual depth and educational angle.
+
+*Alternatives considered:* "Econosphere" was the subtitle in the initial design
+document but serves better as a descriptor than a title.
+
+*Status:* ACTIVE (working title, may change before Kickstarter)
+
+*FAQ:*
+
+* _Q: Won't people confuse it with a maths textbook?_
+  A: The game theory angle is a differentiator in the board game market, not a
+  liability. Terraforming Mars doesn't shy from its science. The hook is
+  "What if you could play through human history — and change the ending?"
+  The Nash Equilibrium is the *why*, not the *what*.
+
+* _Q: Any trademark concerns with "Nash Equilibrium"?_
+  A: The term is a widely-used mathematical concept, not a trademark. John Nash
+  is deceased (2015). The phrase is in the public domain as a scientific term.
+  No issues expected.
+
+=== DD-002: Genre — 6X (not 4X)
+
+*Raised by:* Jonathan
+
+*Decision:* The game is a *6X* strategy game, extending the classic 4X
+(eXplore, eXpand, eXploit, eXterminate) with eXchange and eXperiment.
+
+*Reasoning:*
+
+* *eXchange* — trade, diplomacy, and game-theoretic negotiation are first-class
+  strategic pillars, not afterthoughts. In most 4X games, diplomacy is a thin
+  veneer over military dominance. Here, trade agreements and alliances are modelled
+  as repeated games where cooperation and betrayal have real mechanical consequences.
+  This is what makes the "Nash Equilibrium" name load-bearing.
+* *eXperiment* — speculative research with branching non-deterministic outcomes
+  and asymmetric payoffs. Creates information asymmetry that feeds back into
+  eXchange. Traditional tech trees are linear and deterministic — boring.
+
+*Alternatives considered:* Staying with 4X and making trade/research sub-mechanics.
+Rejected because the whole point is elevating these to first-class pillars.
+
+*Status:* RESOLVED
+
+*FAQ:*
+
+* _Q: Is "6X" a recognised genre term?_
+  A: Not yet — this game would coin it. That's a marketing advantage ("the
+  world's first 6X board game") and a minor risk (explaining a new term).
+
+* _Q: Does adding two pillars make the game too complex?_
+  A: The pillars aren't additional complexity — they're additional *structure*.
+  Trade and research exist in every strategy game; calling them X's means we
+  design them as deeply as combat and exploration. The complexity risk is
+  real but separate (see DD-008).
+
+=== DD-003: License — AGPL-3.0-or-later
+
+*Raised by:* Jonathan
+
+*Decision:* Licensed under AGPL-3.0-or-later.
+
+*Reasoning:* This is a father-son co-development project, same pattern as
+IDApTIK and Airborne Submarine Squadron. AGPL is the standing policy for
+projects co-developed with Joshua. PMPL-licensed tools (Hypatia, panic-attack,
+a2ml, etc.) are used as dependencies under their own license — standard
+third-party license respect.
+
+*Alternatives considered:* PMPL-1.0-or-later (standard for solo hyperpolymath
+work). Rejected — co-development with Joshua follows the AGPL precedent.
+
+*Status:* RESOLVED
+
+*FAQ:*
+
+* _Q: Does AGPL affect the physical board game?_
+  A: AGPL covers the software components (Tabletop Simulator mod, any digital
+  tools, game logic code). The physical board game rules, art, and text are
+  covered by the AGPL as creative works distributed with the software. If
+  a purely physical edition is released without software, a separate license
+  for art/rules could be considered, but AGPL is fine for now.
+
+* _Q: Can PMPL tools be used in an AGPL project?_
+  A: Yes. PMPL tools are dependencies, not part of this project's codebase.
+  They retain their own license. Standard practice.
+
+=== DD-004: Repository Setup — RSR Template
+
+*Raised by:* Claude (standard process)
+
+*Decision:* Repository scaffolded from `rsr-template-repo` with full RSR
+workflow suite (23 workflows).
+
+*Reasoning:* All hyperpolymath repos use the RSR template. This gives us
+Hypatia scanning, CodeQL, mirroring, quality gates, and secret scanning from
+day one. Non-negotiable.
+
+*Status:* RESOLVED
+
+=== DD-005: Collaborator Access — JoshuaJewell as Admin
+
+*Raised by:* Jonathan
+
+*Decision:* Joshua (GitHub: JoshuaJewell) added as admin collaborator.
+
+*Reasoning:* Co-developer. Admin rights needed for full agency — branch
+protection changes, workflow management, collaborator management. This is
+a partnership, not a contribution.
+
+*Status:* RESOLVED (invitation sent 2026-04-04, pending acceptance)
+
+=== DD-006: Player Roles — Named Characters vs. Archetypes
+
+*Raised by:* Claude
+
+*Decision:* OPEN — needs discussion between Jonathan and Joshua.
+
+*The question:* The initial design uses named historical/contemporary figures
+(Queen Isabella, Gandhi, Elon Musk, Green Activist). Should these be replaced
+with archetypes (The Colonist, The Pacifist, The Innovator, The Steward)?
+
+*Arguments for named characters:*
+
+* Immediate recognition and engagement
+* Historical connection reinforces educational value
+* Flavourful and memorable
+
+*Arguments for archetypes:*
+
+* Avoids likeness/trademark concerns (especially living people like Musk)
+* Ages better — public perception of named individuals shifts over time
+* More inclusive — archetypes can represent broader movements, not individuals
+* Gandhi as a game character is culturally sensitive territory
+* Musk is polarising — could alienate part of the audience
+
+*Potential compromise:* Archetypes as the mechanical identity, with named
+figures as flavour text examples ("plays like a Gandhi — nonviolent, community-
+centred, slow growth"). Best of both worlds.
+
+*Status:* OPEN
+
+*FAQ:*
+
+* _Q: Are there legal issues with using Elon Musk's name?_
+  A: Potentially. Living public figures have publicity rights. Using the name
+  in a game without permission is legally grey. Archetypes are safer.
+
+* _Q: What about Gandhi?_
+  A: Gandhi's estate doesn't typically pursue game usage, but the cultural
+  sensitivity of reducing a complex historical figure to game mechanics is
+  worth considering. The archetype approach respects the legacy while
+  keeping the mechanical design intact.
+
+=== DD-007: Planetary Boundaries — Dashboard as Shared Constraint
+
+*Raised by:* Design document
+
+*Decision:* The planetary boundaries dashboard is a *shared, visible* constraint
+that all players can see and affect. Loss condition: 4+ boundaries at Black (10).
+
+*Reasoning:* The dashboard is the game's central innovation — it makes the
+environmental cost of economic activity *visible and mechanical*. Hiding it
+would undermine the educational purpose. Making it shared creates the Tragedy
+of the Commons dynamic: every player contributes to boundary stress, but no
+single player bears the full cost.
+
+*Alternatives considered:*
+
+* Per-player boundary tracking — rejected, loses the shared commons dynamic
+* Hidden boundary levels — rejected, loses educational value and creates
+  unfair information asymmetry
+* Fewer boundaries (e.g., 4-5 instead of 9) — still open for "beginner mode"
+
+*Status:* RESOLVED
+
+=== DD-008: Complexity Management
+
+*Raised by:* Claude
+
+*Decision:* OPEN — needs playtesting data.
+
+*The concern:* The game has 9 boundaries, 5 resources, 4 pathways, 7 turn
+phases, 4 eras, 78+ crisis cards, and asymmetric roles. This is *heavy* —
+comparable to Terraforming Mars (BGG weight 3.2/5) or heavier.
+
+*Proposed mitigations:*
+
+* *Beginner mode:* 4 boundaries, 3 resources, 1 era (Industrial only), symmetric roles
+* *Layered rulebook:* Teach mechanics incrementally across eras
+* *Quick-start scenario:* 30-minute single-era game
+* *Reference cards:* Per-player aids with phase sequence and resource summary
+* *Turn count:* Consider 20-24 turns instead of 32 (see DD-009)
+
+*Status:* OPEN (design question for playtesting)
+
+*FAQ:*
+
+* _Q: Is complexity a dealbreaker?_
+  A: Not inherently. Terraforming Mars, Spirit Island, and Twilight Imperium
+  are all complex and commercially successful. The key is *approachability* —
+  can a new player learn by playing, or must they read 60 pages first?
+
+* _Q: What's the target BGG weight?_
+  A: 3.0-3.5 (medium-heavy). Above Catan (2.3), comparable to Terraforming Mars
+  (3.2), below Twilight Imperium (4.4).
+
+=== DD-009: Game Length — 32 Turns
+
+*Raised by:* Claude
+
+*Decision:* OPEN — needs playtesting.
+
+*The concern:* 32 turns (8 per era) targeting 90-120 minutes is ambitious. At
+3-4 minutes per turn (with trading and crisis resolution), that's 96-128 minutes
+in ideal conditions. Real games will run longer with analysis paralysis and
+negotiation.
+
+*Options:*
+
+* 32 turns, accept 2-3 hour games (Twilight Imperium audience)
+* 24 turns (6 per era), tighter 90-minute target
+* Variable era length based on player count and progression triggers
+* "Short game" variant with 2 eras instead of 4
+
+*Status:* OPEN (playtesting will determine)
+
+=== DD-010: Cascade Mechanic Threshold
+
+*Raised by:* Design document
+
+*Decision:* When a boundary reaches stress 8+, linked boundaries gain +1 stress
+per turn automatically.
+
+*Reasoning:* Models real-world tipping point cascades (Arctic ice -> albedo
+feedback, Amazon dieback -> carbon release). Creates urgency and nonlinear
+dynamics — the game accelerates toward crisis if boundaries are neglected.
+
+*Risk:* If the threshold is too low, cascades dominate and the game feels
+unfair. If too high, cascades never trigger and the mechanic is irrelevant.
+
+*Status:* PROVISIONAL (threshold of 8 needs playtesting validation; may adjust
+to 7 or 9)
+
+=== DD-011: The eXchange Pillar — Repeated Game Mechanics
+
+*Raised by:* Design document
+
+*Decision:* Trade and diplomacy modelled as repeated games with mechanical
+consequences for cooperation and defection.
+
+*Reasoning:* This is where the Nash Equilibrium name becomes load-bearing.
+Traditional board game trading is ad-hoc negotiation. Here, agreements are
+*binding* for a number of turns, and breaking them has explicit penalties
+(Stability loss, trade route destruction). This creates the iterated Prisoner's
+Dilemma dynamic — cooperation builds trust and mutual benefit, defection yields
+short-term gain but long-term isolation.
+
+*Open questions:*
+
+* How binding are trade agreements? (1 turn? 3 turns? Until broken?)
+* What's the penalty for defection? (Stability loss? Resource penalty? Both?)
+* Can agreements be renegotiated without penalty?
+* Are agreements public or private?
+
+*Status:* OPEN (core mechanic design needed)
+
+=== DD-012: The eXperiment Pillar — Non-Deterministic Research
+
+*Raised by:* Design document
+
+*Decision:* Research paths branch non-deterministically. Players invest in
+speculative technologies with unknown payoffs.
+
+*Reasoning:* Traditional tech trees are deterministic and linear — once you
+know the optimal path, research becomes administrative. Non-deterministic
+research creates genuine uncertainty and information asymmetry. Players don't
+know exactly what they'll get, which feeds into the eXchange pillar (trading
+research results, bluffing about capabilities).
+
+*Open questions:*
+
+* How random is "non-deterministic"? (Draw from a deck? Roll dice? Hidden
+  research cards revealed on completion?)
+* Can players influence outcomes (spend extra Knowledge for better odds)?
+* Is research public (everyone sees what you're working on) or private
+  (information advantage)?
+
+*Status:* OPEN (core mechanic design needed)
+
+'''
+
+== Open Questions Tracker
+
+[cols="1,3,1"]
+|===
+| ID | Question | Status
+
+| DD-006 | Named characters vs. archetypes? | OPEN — Jonathan + Joshua to discuss
+| DD-008 | Complexity management approach? | OPEN — playtesting needed
+| DD-009 | Game length (32 turns vs. shorter)? | OPEN — playtesting needed
+| DD-010 | Cascade threshold (8 correct?) | PROVISIONAL — playtesting needed
+| DD-011 | eXchange binding mechanics? | OPEN — core design needed
+| DD-012 | eXperiment randomness level? | OPEN — core design needed
+|===
+
+== Decision Template
+
+Use this template for future entries:
+
+[source,asciidoc]
+----
+=== DD-NNN: [Title]
+
+*Raised by:* [who]
+
+*Decision:* [what was decided, or OPEN if undecided]
+
+*Reasoning:* [why]
+
+*Alternatives considered:* [what else was on the table]
+
+*Status:* RESOLVED | OPEN | PROVISIONAL | SUPERSEDED (by DD-NNN)
+
+*FAQ:*
+
+* _Q: [anticipated question]_
+  A: [answer]
+----
