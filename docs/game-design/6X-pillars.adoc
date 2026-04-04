@@ -1,0 +1,45 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (c) 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+= The 6X Pillars
+:toc:
+
+== Overview
+
+The Nash Equilibrium extends the classic 4X formula with two additional strategic
+dimensions, creating a **6X** strategy game.
+
+== The Six X's
+
+[cols="1,2,4"]
+|===
+| # | Pillar | Description
+
+| 1 | **eXplore** | Discover the map, uncover resources, find other civilizations
+| 2 | **eXpand** | Grow territory, found new settlements, extend influence
+| 3 | **eXploit** | Develop resources, build infrastructure, leverage advantages
+| 4 | **eXterminate** | Military conflict, elimination of rivals
+| 5 | **eXchange** | Trade, diplomacy, alliances, economic interdependence — game-theoretic negotiation where mutual benefit and betrayal coexist
+| 6 | **eXperiment** | Research, technology trees, speculative science — invest in uncertain outcomes with asymmetric payoffs
+|===
+
+== Why eXchange and eXperiment?
+
+Traditional 4X games treat diplomacy as a thin veneer over military dominance, and
+research as a linear tech tree. In The Nash Equilibrium:
+
+**eXchange** is a first-class strategic dimension. Trade agreements, resource
+exchanges, and diplomatic pacts are modelled as repeated games where cooperation
+and defection have real mechanical consequences. Players must find Nash equilibria
+in multi-agent negotiations — or exploit opponents who assume cooperation.
+
+**eXperiment** introduces genuine uncertainty into strategic planning. Research
+paths branch non-deterministically. Players invest in speculative technologies
+with unknown payoffs, creating information asymmetry that feeds back into the
+eXchange pillar.
+
+== The Nash Equilibrium Connection
+
+The game's title reflects its core design principle: every strategic interaction
+between players (and AI opponents) can be analysed through the lens of game theory.
+The "winning" strategy is rarely pure domination — it's finding the equilibrium
+point where your strategy is optimal given what everyone else is doing.

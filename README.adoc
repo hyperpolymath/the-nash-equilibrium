@@ -9,9 +9,16 @@ image:https://api.securityscorecards.dev/projects/github.com/hyperpolymath/the-n
 == Overview
 
 **The Nash Equilibrium** is a **6X strategy game** — extending the classic 4X genre
-(eXplore, eXpand, eXploit, eXterminate) with two additional strategic dimensions.
+(eXplore, eXpand, eXploit, eXterminate) with two additional strategic dimensions:
+**eXchange** (trade, diplomacy, game-theoretic negotiation) and **eXperiment**
+(speculative research with asymmetric payoffs).
+
+Every strategic interaction is modelled through the lens of game theory — the
+winning strategy is finding the equilibrium, not just military dominance.
 
 Co-developed by Jonathan D.A. Jewell and son.
+
+See link:docs/game-design/6X-pillars.adoc[6X Pillars] for the full design rationale.
 
 == License
 
