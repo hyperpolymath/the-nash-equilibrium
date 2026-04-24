@@ -1,49 +1,46 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 # Copyright (c) 2026 Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk>
 #
-# STATE.a2ml — Project state checkpoint (META-TEMPLATE)
-#
-# This is the STATE file for rsr-template-repo itself.
-# When consumed by a new project, replace {{PLACEHOLDER}} tokens
-# and customize sections below for the target project.
+# STATE.a2ml — Project state checkpoint
+# The Nash Equilibrium — 6X strategy game
 
 [metadata]
-project = "rsr-template-repo"
-version = "0.2.0"
-last-updated = "2026-02-28"
+project = "the-nash-equilibrium"
+version = "0.1.0"
+last-updated = "2026-04-24"
 status = "active"  # active | paused | archived
 
 [project-context]
-name = "rsr-template-repo"
-purpose = "Canonical RSR-compliant repository template providing scaffolding for all hyperpolymath projects — including CI/CD, AI manifests, ABI/FFI standards, container ecosystem, and governance infrastructure."
-completion-percentage = 95
+name = "The Nash Equilibrium"
+purpose = "6X strategy board game co-developed by Jonathan D.A. Jewell and son. Extends the 4X genre (eXplore, eXpand, eXploit, eXterminate) with eXchange (game-theoretic negotiation/trade) and eXperiment (speculative research with asymmetric payoffs). All strategic interactions are modelled through Nash equilibrium mechanics. Licensed AGPL-3.0-or-later."
+completion-percentage = 15
 
 [position]
-phase = "maintenance"      # design | implementation | testing | maintenance | archived
-maturity = "production"    # experimental | alpha | beta | production | lts
+phase = "design"       # design | implementation | testing | maintenance | archived
+maturity = "experimental"  # experimental | alpha | beta | production | lts
 
 [route-to-mvp]
 milestones = [
-  { name = "Phase 0: Core scaffolding (justfile, CI/CD, .machine_readable)", completion = 100 },
-  { name = "Phase 1: ABI/FFI standard (Idris2/Zig templates)", completion = 100 },
-  { name = "Phase 1b: AI Gatekeeper Protocol (0-AI-MANIFEST.a2ml)", completion = 100 },
-  { name = "Phase 1c: TOPOLOGY.md standard and guide", completion = 100 },
-  { name = "Phase 1d: Maintenance gate (axes, checklist, approach)", completion = 100 },
-  { name = "Phase 1e: Trustfile / contractiles", completion = 100 },
-  { name = "Phase 2: Container ecosystem templates (stapeln)", completion = 100 },
-  { name = "Phase 3: Multi-forge sync hardening", completion = 0 },
-  { name = "Phase 4: Nix/Guix reproducible shells", completion = 50 },
+  { name = "Phase 0: RSR scaffolding (CI/CD, .machine_readable, contractiles)", completion = 90 },
+  { name = "Phase 0b: ABI/FFI interface stubs (Idris2 ABI + Zig FFI)", completion = 50 },
+  { name = "Phase 1: Game design documentation (6X pillars, core mechanics, player roles, board design)", completion = 60 },
+  { name = "Phase 1b: Playtesting protocol + event cards + economic systems", completion = 30 },
+  { name = "Phase 2: Nash equilibrium solver / payoff-matrix engine", completion = 0 },
+  { name = "Phase 3: Core game loop implementation", completion = 0 },
+  { name = "Phase 4: Family playtesting (v0 physical prototype)", completion = 0 },
+  { name = "Phase 5: Digital companion (optional, post-physical)", completion = 0 },
 ]
 
 [blockers-and-issues]
-# No active blockers
+# No external blockers — design phase, internal only.
 
 [critical-next-actions]
 actions = [
-  "Container templates complete — test with `just container-init`",
-  "Validate container templates across wolfi-base and static Chainguard images",
-  "Harden multi-forge sync for GitLab/Bitbucket mirroring edge cases",
-  "Expand Nix/Guix development shell templates",
+  "Complete playtesting-plan.adoc with concrete first-session checklist",
+  "Finish event-cards.adoc catalogue (currently skeleton)",
+  "Decide on implementation language for game engine (Gleam/BEAM or Rust/SPARK)",
+  "Draft Nash equilibrium solver spec for payoff-matrix integration",
+  "Run first family playtest of physical prototype (tabletop, paper rules)",
 ]
 
 [maintenance-status]
@@ -54,11 +51,20 @@ open-warnings = 0
 open-failures = 0
 
 [ecosystem]
-part-of = ["RSR Framework", "stapeln ecosystem"]
-depends-on = ["stapeln", "selur-compose", "cerro-torre", "svalinn", "vordr", "k9-svc"]
+part-of = ["games-ecosystem", "hyperpolymath personal projects"]
+depends-on = ["RSR Framework", "stapeln"]
+co-authors = ["Jonathan D.A. Jewell", "son (AGPL co-author)"]
+license-rationale = "AGPL-3.0-or-later chosen because this is a co-developed project with son (hyperpolymath AGPL exception)"
 
-# ---------------------------------------------------------------------------
-# NOTE FOR CONSUMERS: When using this template to create a new repo, reset
-# the fields above to your project's values and replace all {{PLACEHOLDER}}
-# tokens. The milestones above describe the TEMPLATE's evolution, not yours.
-# ---------------------------------------------------------------------------
+[dogfooding-status]
+# Populated when C-grade dogfooding evidence window opens (4+ weeks, daily use).
+# Currently: Phase 0 (design) — no dogfood log yet.
+
+[external-targets]
+# Populated at Grade B promotion. Six genuinely diverse external targets required.
+
+[issues-fed-back]
+# Populated at Grade B promotion.
+
+[field-signal]
+# Populated at Grade A promotion.

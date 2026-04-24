@@ -1,0 +1,105 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Copyright (c) 2026 Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk>
+#
+# Intentfile.a2ml — north-star contractile
+# Paired runner: intend.ncl
+# Verb:          intend
+# Semantics:     North-star contractile. Declares BOTH concrete committed
+#                next-actions ([[intents]]) AND horizon aspirations ([[wishes]]).
+#                Non-gating — this is a report, not a gate.
+#
+# History:       lust/ contractile deprecated 2026-04-18; its [[wishes]]
+#                semantics were absorbed here.
+#
+# CLI:
+#   contractile intend run       → print status table (both sections)
+#   contractile intend progress  → diff declared-vs-observed for intents
+#   contractile intend horizon   → group wishes by near/mid/far
+
+@abstract:
+North-star intentions and horizon aspirations for The Nash Equilibrium.
+Tracks committed design and implementation goals alongside broader aspirations
+for the 6X game co-developed by Jonathan D.A. Jewell and son.
+@end
+
+## Purpose
+
+The Nash Equilibrium commits to the intents declared below and points at the
+wishes on the horizon. The immediate priority is completing game design
+documentation and running the first family playtest.
+
+## Anti-Purpose
+
+This Intentfile is NOT:
+- A hard gate (intend never blocks; see the `must` contractile for gates)
+- A substitute for the ROADMAP.adoc (which holds the full feature roadmap)
+
+## If In Doubt
+
+If you are unsure whether a change is in scope, check docs/game-design/DESIGN-DECISIONS.adoc.
+
+## Committed Next-Actions
+
+[[intents]]
+id = "rsr-scaffolding-complete"
+description = "RSR scaffolding complete: 6A2 files, contractiles (6 verbs), CI/CD, READINESS.md"
+probe = "test -f .machine_readable/contractiles/intend/Intentfile.a2ml && test -f READINESS.md && test -f .machine_readable/6a2/STATE.a2ml"
+status = "done"
+notes = "Completed 2026-04-24 (this session)"
+
+[[intents]]
+id = "game-design-docs-complete"
+description = "All game design documents complete: event-cards.adoc, playtesting-plan.adoc, economic-systems.adoc finished (no stubs)"
+probe = "grep -rL 'TODO\\|STUB\\|TBD' docs/game-design/ | wc -l | xargs test 0 -lt"
+status = "in_progress"
+notes = "6X-pillars, core-mechanics, player-roles, board-design done; event-cards + playtesting-plan are stubs"
+
+[[intents]]
+id = "game-engine-language-decision"
+description = "ADR-002 accepted: implementation language for game engine chosen (Gleam/BEAM or Rust/SPARK)"
+probe = "grep 'status = .accepted.' .machine_readable/6a2/META.a2ml | grep ADR-002"
+status = "declared"
+
+[[intents]]
+id = "nash-equilibrium-solver-spec"
+description = "Formal spec for Nash equilibrium payoff-matrix solver written (docs/architecture/SOLVER-SPEC.adoc)"
+probe = "test -f docs/architecture/SOLVER-SPEC.adoc"
+status = "declared"
+
+[[intents]]
+id = "first-family-playtest"
+description = "First family playtest session completed, notes recorded in docs/practice/DOGFOOD-LOG.adoc"
+probe = "test -f docs/practice/DOGFOOD-LOG.adoc && grep -q 'Session 1' docs/practice/DOGFOOD-LOG.adoc"
+status = "declared"
+
+[[intents]]
+id = "core-game-loop-implemented"
+description = "Core game loop implemented (minimum: text-mode prototype two players can step through)"
+probe = "test -d src/core && find src/core -name '*.gleam' -o -name '*.rs' | grep -q ."
+status = "declared"
+
+## Horizon Aspirations
+
+[[wishes]]
+id = "physical-prototype-release"
+description = "Print-and-play physical prototype released publicly under AGPL-3.0"
+horizon = "near"
+why = "Let others try the game early; gather feedback to reach CRG grade C"
+
+[[wishes]]
+id = "game-theory-educational-layer"
+description = "Educational companion explaining Nash equilibrium concepts embedded in game materials"
+horizon = "mid"
+why = "The game's educational value is only realised when players understand the theory"
+
+[[wishes]]
+id = "digital-companion-app"
+description = "Digital companion app (Tauri 2.0+) for equilibrium calculation and score tracking"
+horizon = "mid"
+why = "Physical game benefits from a digital helper for complex payoff calculations"
+
+[[wishes]]
+id = "open-source-community"
+description = "External game designers and game-theory educators contributing improvements"
+horizon = "far"
+why = "Broader impact: game theory literacy through play"

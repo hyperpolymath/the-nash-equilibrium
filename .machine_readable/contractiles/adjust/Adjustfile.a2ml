@@ -1,0 +1,99 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Copyright (c) 2026 Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk>
+#
+# Adjustfile.a2ml — accessibility contractile
+# Paired runner: adjust.ncl
+# Verb:          adjust
+# Semantics:     Accessibility requirements and compliance for The Nash Equilibrium.
+#                Covers both the physical board-game materials and any digital
+#                companion components.
+#
+# CLI:
+#   contractile adjust check  → list violations
+#   contractile adjust fix    → apply deterministic fixes where defined
+
+@abstract:
+Accessibility requirements for The Nash Equilibrium — a 6X strategy board game.
+Accessibility is considered for: print-and-play physical materials, rulebook,
+and the planned digital companion app (Tauri 2.0+). Physical game comes first.
+@end
+
+## Purpose
+
+Ensure The Nash Equilibrium is playable by the broadest range of people,
+including those with colour-blindness, low vision, motor difficulties, or
+cognitive differences. Game theory is for everyone.
+
+## Anti-Purpose
+
+This file does NOT track game balance or difficulty — those belong in
+docs/game-design/playtesting-plan.adoc.
+
+## Physical Game Materials
+
+### colourblind-safe-palette
+- description: All game components use a colourblind-safe colour palette (Okabe-Ito or equivalent)
+- status: declared
+- probe: grep -r "colourblind\|color-blind\|Okabe" docs/game-design/board-design.adoc
+- compliance: WCAG 2.1 (colour contrast principle, adapted for print)
+- notes: Board design currently uses unnamed colours. Needs explicit palette decision.
+
+### pattern-not-colour-only
+- description: Player/faction distinctions use pattern OR icon in addition to colour (never colour alone)
+- status: declared
+- probe: grep -q "pattern\|icon\|symbol" docs/game-design/board-design.adoc
+- compliance: WCAG 2.1 §1.4.1 (Use of Color)
+- notes: Addresses red-green colourblindness for player token differentiation.
+
+### large-print-rulebook
+- description: Rulebook available in large-print format (minimum 14pt equivalent)
+- status: declared
+- probe: test -f docs/print/RULEBOOK-LARGE-PRINT.adoc || test -f docs/print/RULEBOOK-LARGE-PRINT.pdf
+- notes: Priority for players with low vision. Can be print-on-demand.
+
+### tactile-component-differentiation
+- description: Player tokens have distinct tactile profiles (shape/texture) in addition to colour
+- status: declared
+- probe: grep -q "tactile\|texture\|shape" docs/game-design/board-design.adoc
+- notes: For players with low/no vision. Distinct shapes per player faction.
+
+## Rulebook / Documentation
+
+### plain-language-rules
+- description: Rulebook uses plain language (Flesch-Kincaid grade ≤ 10 for core rules)
+- status: declared
+- probe: echo "manual check required"
+- compliance: Plain English standard
+- notes: Game theory concepts explained accessibly; technical terms defined on first use.
+
+### game-theory-glossary
+- description: Glossary of game theory terms included in rulebook (Nash equilibrium, dominant strategy, payoff matrix, etc.)
+- status: declared
+- probe: grep -q "glossary\|Glossary" docs/game-design/OVERVIEW.adoc
+- notes: Critical for players unfamiliar with game theory.
+
+### alternative-formats
+- description: Core game materials available in both print (PDF) and screen-reader-compatible text format
+- status: declared
+- probe: test -f docs/print/RULEBOOK.pdf || test -f docs/print/RULEBOOK.adoc
+- notes: AsciiDoc source is screen-reader-friendly; PDF export is a bonus.
+
+## Digital Companion (Future)
+
+### keyboard-only-play
+- description: Digital companion fully operable via keyboard (no mouse required)
+- status: declared
+- compliance: WCAG 2.1 §2.1 (Keyboard Accessible)
+- notes: Relevant when Tauri 2.0+ companion is built. Track here now, implement then.
+
+### screen-reader-compatible
+- description: Digital companion compatible with common screen readers (NVDA, VoiceOver)
+- status: declared
+- compliance: WCAG 2.1 §4.1.2 (Name, Role, Value)
+- notes: Depends on Tauri/ReScript UI layer.
+
+### high-contrast-mode
+- description: Digital companion supports high-contrast mode (OS-level and in-app toggle)
+- status: declared
+- compliance: WCAG 2.1 §1.4.3 (Contrast Minimum)
+- notes: Implement via CSS/Tauri theme system.

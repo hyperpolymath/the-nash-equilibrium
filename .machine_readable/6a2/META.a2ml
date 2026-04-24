@@ -6,17 +6,20 @@
 
 [metadata]
 version = "0.1.0"
-last-updated = "2026-04-04"
+last-updated = "2026-04-24"
 
 [project-info]
 type = "game"  # library | binary | monorepo | service | website
-languages = []             # e.g. ["rust", "zig", "idris2"]
+languages = ["idris2", "zig"]  # ABI stubs in Idris2; FFI in Zig; game engine language TBD
 license = "AGPL-3.0-or-later"
 author = "Jonathan D.A. Jewell (hyperpolymath)"
+co-author = "son"
+license-rationale = "AGPL-3.0-or-later: co-developed project (Jonathan + son), per AGPL exception in hyperpolymath license policy"
 
 [architecture-decisions]
 # ADR format: status = proposed | accepted | deprecated | superseded | rejected
-# - { id = "ADR-001", title = "Use Zig for FFI", status = "accepted", date = "2026-02-14" }
+- { id = "ADR-001", title = "Idris2 ABI + Zig FFI for interface layer", status = "accepted", date = "2026-04-04" }
+- { id = "ADR-002", title = "Game engine implementation language (Gleam/BEAM or Rust/SPARK)", status = "proposed", date = "2026-04-24" }
 
 [development-practices]
 build-tool = "just"

@@ -1,0 +1,81 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Copyright (c) 2026 Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk>
+#
+# INDEX.a2ml — Contractile Registry
+# Machine-readable catalogue of all contractile verbs in this repo.
+# Consumers (CI scripts, contractile CLI, Hypatia) read this to discover
+# available verbs rather than hard-coding the list.
+
+---
+id = "contractiles-registry"
+version = "1.0.0"
+last_updated = "2026-04-24"
+base_schema = ".machine_readable/contractiles/_base.ncl"
+
+## Active Verbs
+
+[[verbs]]
+name = "adjust"
+semantics = "accessibility compliance"
+file_pair = [
+  "adjust/Adjustfile.a2ml",
+  "adjust/adjust.ncl",
+]
+status = "active"
+authority = "advisory"
+gating = "advisory (continue-with-warnings)"
+
+[[verbs]]
+name = "bust"
+semantics = "error handling + failure recovery"
+file_pair = [
+  "bust/Bustfile.a2ml",
+  "bust/bust.ncl",
+]
+status = "active"
+authority = "blocking"
+gating = "hard (exit-nonzero)"
+
+[[verbs]]
+name = "dust"
+semantics = "exnovation / removal"
+file_pair = [
+  "dust/Dustfile.a2ml",
+  "dust/dust.ncl",
+]
+status = "active"
+authority = "advisory"
+gating = "advisory (continue-with-warnings)"
+
+[[verbs]]
+name = "intend"
+semantics = "north-star (commitments + aspirations)"
+file_pair = [
+  "intend/Intentfile.a2ml",
+  "intend/intend.ncl",
+]
+status = "active"
+authority = "reporting"
+gating = "non-gating (continue)"
+
+[[verbs]]
+name = "must"
+semantics = "invariant assertion — release-blocking"
+file_pair = [
+  "must/Mustfile.a2ml",
+  "must/must.ncl",
+]
+status = "active"
+authority = "blocking"
+gating = "hard (exit-nonzero)"
+
+[[verbs]]
+name = "trust"
+semantics = "security + provenance + safe-hacking"
+file_pair = [
+  "trust/Trustfile.a2ml",
+  "trust/trust.ncl",
+]
+status = "active"
+authority = "blocking"
+gating = "hard (exit-nonzero)"

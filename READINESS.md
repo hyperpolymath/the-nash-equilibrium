@@ -1,0 +1,132 @@
+<!-- SPDX-License-Identifier: AGPL-3.0-or-later -->
+<!-- Copyright (c) 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk> -->
+
+# The Nash Equilibrium — Component Readiness Assessment
+
+**Standard:** [Component Readiness Grades (CRG) v2.0 STRICT](https://github.com/hyperpolymath/standards/tree/main/component-readiness-grades)
+**Assessed:** 2026-04-24
+**Assessor:** Jonathan D.A. Jewell
+**Previous assessment:** _none_
+
+**Current Grade:** D
+
+This line is parsed by `just crg-grade` / `just crg-badge`. The grade above is
+the worst-graded in-scope component — **the project's weakest link sets its
+grade**. See the per-component table in §3.
+
+> **Honest grading.** Per CRG v2.0 Principle 4: grade as-is today, not
+> aspirationally. The game engine does not yet exist — D is the honest grade.
+
+---
+
+## 1. CRG v2.0 Grade Reference
+
+| Grade | Name                  | Release Stage | Stability Posture      | Shorthand        |
+|-------|-----------------------|---------------|------------------------|------------------|
+| X     | Untested              | —             | —                      | —                |
+| F     | Harmful / Wasteful    | —             | —                      | reject/delegate  |
+| E     | Minimal / Salvageable | Pre-alpha     | Unstable               | `pre-alpha`      |
+| **D** | **Partial / Inconsistent** | **Alpha** | **Unstable**       | **`alpha-unstable`** |
+| C     | Self-Validated        | Alpha         | Stable in home context | `alpha-stable`   |
+| B     | Broadly Validated     | Beta          | Stable for broad trial | `beta-stable`    |
+| A     | Field-Proven          | Stable        | Stable                 | `stable`         |
+
+---
+
+## 2. Headline Evidence (as of 2026-04-24)
+
+| Metric | Value | Source |
+|--------|-------|--------|
+| Test count | 0 (no game logic yet) | n/a — design phase |
+| Formal-verification posture | 0 `believe_me` / `sorry` / `Admitted` | ABI stubs only |
+| Dangerous patterns | 0 | grep 2026-04-24 |
+| Per-unit README coverage | src/ has README.adoc; sub-dirs sparse | filesystem scan |
+| CI status | 24 workflows present; Rust CI expected to fail (no cargo project yet) | `.github/workflows/` |
+| RSR mandatory workflows | ~17/17 present (see audit) | `.github/workflows/` |
+| OpenSSF Scorecard badge | Present in README.adoc | external |
+| LIVE deployment | N/A — design phase | — |
+
+---
+
+## 3. Component Assessment
+
+| Component | Grade | Posture | Evidence Summary | Promotion blocker | Last Assessed |
+|---|---|---|---|---|---|
+| RSR scaffolding & governance | C | `alpha-stable` | 24 CI workflows, 6A2 files, contractiles, .well-known, AUDIT gate | Complete contractile runners (intend, adjust runners added 2026-04-24) | 2026-04-24 |
+| ABI/FFI interface stubs | D | `alpha-unstable` | Idris2 Types/Layout/Foreign.idr + Zig FFI stubs present; no validation | Validate ABI against actual game types when engine is designed | 2026-04-24 |
+| Game design documentation | D | `alpha-unstable` | 6X-pillars, core-mechanics, player-roles, board-design, OVERVIEW present; event-cards + playtesting-plan stubs | Complete event-cards catalogue; run first playtest | 2026-04-24 |
+| Game engine (core loop) | X | — | Not started | Design and implement Nash equilibrium payoff-matrix engine | 2026-04-24 |
+| Nash equilibrium solver | X | — | Not started | Spec payoff matrix; implement solver | 2026-04-24 |
+
+**Weakest link sets project grade: X components exist → but since D is the lowest
+evidence-backed grade, project is D (the X components are simply not-yet-started,
+not harmful).**
+
+---
+
+## 4. What's Needed for D → C
+
+CRG v2.0 requires:
+
+1. **Core game loop implemented** (even a paper-rules simulator counts at this stage).
+   - Implement turn structure, player actions, equilibrium check.
+   - At minimum: text-mode prototype that two players can step through.
+
+2. **Active dogfooding** — family playtesting sessions with no known
+   home-context failures.
+   - Start date: _not yet started_.
+   - Home context: family game nights, Jonathan + son.
+   - Evidence window: 4 weeks, at least 4 sessions.
+   - Populate `STATE.a2ml [dogfooding-status]` after each session.
+
+3. **Deep code and folder annotation.**
+   - Per-directory orientation READMEs in `src/core/`, `src/contracts/`,
+     `src/definitions/`, `src/errors/`, `src/bridges/`.
+   - Per-file headers: purpose, invariants, proof surface.
+
+**Minimum first-ring targets for C promotion:**
+- `src/core/` — core game mechanics
+- `src/contracts/` — player agreements / equilibrium constraints
+- Game design documentation complete (all stubs filled)
+
+---
+
+## 5. What's Needed for C → B
+
+Six diverse external playtesting targets with feedback:
+
+- Different household (not Jonathan's family).
+- Different age range.
+- Different game-theory familiarity level.
+- Mix of casual and strategy game players.
+- At least one session with 5-6 players (max game size).
+- At least one session with 2 players (minimum).
+
+Populate `STATE.a2ml [external-targets]` and `[issues-fed-back]`.
+
+---
+
+## 6. What's Needed for B → A
+
+External community adoption: game clubs, schools, online game-theory
+educators. Populate `STATE.a2ml [field-signal]`.
+
+---
+
+## 7. Summary (2026-04-24)
+
+- Project grade: **D**. Why: RSR scaffolding is solid, game design docs
+  partially complete, but no game logic exists yet. Honest early-design grade.
+- Delta since last assessment: first assessment.
+- Next milestone: complete game design docs + run first family playtest session.
+
+---
+
+## 8. Companion Artefacts
+
+- `docs/governance/CRG-CRITERIA.adoc` — grade definitions.
+- `.machine_readable/6a2/STATE.a2ml` — authoritative state with
+  `[dogfooding-status]`, `[external-targets]`, `[issues-fed-back]`, `[field-signal]`.
+- `docs/practice/` — practice log and conventions.
+
+_Run `just crg-badge` to generate the shields.io badge for your README._
