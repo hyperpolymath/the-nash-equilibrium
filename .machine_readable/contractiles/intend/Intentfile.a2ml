@@ -42,10 +42,10 @@ If you are unsure whether a change is in scope, check docs/game-design/DESIGN-DE
 
 [[intents]]
 id = "rsr-scaffolding-complete"
-description = "RSR scaffolding complete: 6A2 files, contractiles (6 verbs), CI/CD, READINESS.md"
-probe = "test -f .machine_readable/contractiles/intend/Intentfile.a2ml && test -f READINESS.md && test -f .machine_readable/6a2/STATE.a2ml"
+description = "RSR scaffolding complete: all 6 contractile verbs with NCL runners + _base.ncl + INDEX.a2ml, 6A2 files, READINESS.md, EXPLAINME.adoc, AUDIT.adoc, launcher config"
+probe = "test -f .machine_readable/contractiles/INDEX.a2ml && test -f .machine_readable/contractiles/_base.ncl && test -f READINESS.md && test -f .machine_readable/6a2/STATE.a2ml && test -f .machine_readable/launcher/the-nash-equilibrium.launcher.a2ml && ! grep -q 'project = .rsr-template-repo.' .machine_readable/6a2/STATE.a2ml"
 status = "done"
-notes = "Completed 2026-04-24 (this session)"
+notes = "Completed 2026-04-24: launcher config, full 6-verb contractile set, READINESS.md, template residue cleared"
 
 [[intents]]
 id = "game-design-docs-complete"
@@ -78,6 +78,20 @@ description = "Core game loop implemented (minimum: text-mode prototype two play
 probe = "test -d src/core && find src/core -name '*.gleam' -o -name '*.rs' | grep -q ."
 status = "declared"
 
+[[intents]]
+id = "create-dogfood-log"
+description = "docs/practice/DOGFOOD-LOG.adoc created with first session entry — required for CRG grade C promotion"
+probe = "test -f docs/practice/DOGFOOD-LOG.adoc && grep -q 'Session' docs/practice/DOGFOOD-LOG.adoc"
+status = "declared"
+notes = "Grade C requires 4+ weeks of active dogfooding with no home-context failures. Start the log as soon as first playtest happens."
+
+[[intents]]
+id = "abi-validation-complete"
+description = "ABI types in src/interface/abi/ validated against actual game entities once game engine design is settled"
+probe = "grep -q 'ADR-001.*validated\\|ABI.*validated' .machine_readable/6a2/META.a2ml 2>/dev/null"
+status = "declared"
+notes = "Current ABI stubs (Types.idr, Layout.idr, Foreign.idr) are scaffolding only. Must be validated against real game data model."
+
 ## Horizon Aspirations
 
 [[wishes]]
@@ -103,3 +117,9 @@ id = "open-source-community"
 description = "External game designers and game-theory educators contributing improvements"
 horizon = "far"
 why = "Broader impact: game theory literacy through play"
+
+[[wishes]]
+id = "formal-game-mechanics-proofs"
+description = "Core game invariants formally proven in Idris2 — e.g. Nash equilibrium existence, strategy-space completeness, no-infinite-loop termination"
+horizon = "far"
+why = "The ABI is already in Idris2; formal proofs of game properties would be a compelling demonstration of the Idris2/Zig/SPARK stack applied to game design. Dependent types can model equilibrium properties that are impossible to express in standard type systems."

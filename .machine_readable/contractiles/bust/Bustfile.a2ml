@@ -1,28 +1,72 @@
-// Bustfile.a2ml — meta-repo bust contractile (breakage / rollback)
-// SPDX-License-Identifier: PMPL-1.0-or-later
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Bustfile — Error-handling / failure-recovery contract
+# Author: Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+#
+# Rewritten 2026-04-24: old `Bust { }` domain-specific format → standard A2ML
+# @abstract/@end format. Scenarios updated from generic submodule scenarios to
+# Nash-specific ones.
 
-Bust {
-    name: "the-nash-equilibrium"
-    version: "1.0.0"
-    description: "Rollback procedures when something breaks in the meta-repo"
+@abstract:
+Declared failure modes for The Nash Equilibrium. Every failure mode must
+have a recovery path. Hard gate on any failure mode with missing or broken
+recovery.
+@end
 
-    scenarios: {
-        "bad-pointer-bump": "git revert <bump-commit> in meta-repo; child repo itself untouched"
-        "submodule-pointer-points-at-missing-sha": "git submodule update --init --checkout <path> resets child to parent-recorded SHA; OR revert the stale bump commit"
-        "submodule-orphan-after-local-only-commit": "roll back locally with git reset to before the stranded commit; fix remote situation before re-attempting"
-        "accidental-private-repo-content-leaked-to-public-submodule": "hard-rotate the leaked secret immediately; git-filter-repo or BFG on the submodule's own history; public re-publication only after rotation complete"
-    }
+## License Integrity
 
-    escalation-ladder: [
-        "1. revert the meta-repo commit (reversible, low blast radius)",
-        "2. reset the local submodule clone (affects only local workspace)",
-        "3. force-push to main — PROHIBITED without explicit user confirmation (violates branch protection)",
-        "4. registry-level (delete/archive the GitHub repo) — human-only action, never by AI"
-    ]
+### wrong-spdx-header
+- description: AGPL-3.0-or-later header accidentally replaced by PMPL-1.0-or-later in source files
+- class: rollback
+- injection-probe: "grep -rl 'SPDX-License-Identifier: PMPL-1.0-or-later' src/ .machine_readable/ 2>/dev/null | head -1 | grep -q ."
+- recovery-probe: "! grep -rl 'SPDX-License-Identifier: PMPL-1.0-or-later' src/ .machine_readable/ 2>/dev/null | head -1 | grep -q ."
+- expected-recovery-time-seconds: 60
+- status: declared
+- notes: This project is AGPL-3.0-or-later. PMPL is the template default and can drift in when files are copied from rsr-template-repo. Recovery — sed replace + commit.
 
-    backup-points: [
-        "GitHub serves as the durable backup for every submodule's own history",
-        "Meta-repo history on origin/main is the durable backup for pointer state",
-        "Local backup tags (backup/pre-<operation>-<date>) retained on risky rewrites"
-    ]
-}
+## Game Design Integrity
+
+### game-design-doc-overwritten
+- description: docs/game-design/OVERVIEW.adoc accidentally replaced with stub or empty file
+- class: rollback
+- injection-probe: "! grep -q '6X\\|eXchange\\|Nash' docs/game-design/OVERVIEW.adoc 2>/dev/null"
+- recovery-probe: "grep -q '6X\\|eXchange\\|Nash' docs/game-design/OVERVIEW.adoc 2>/dev/null"
+- expected-recovery-time-seconds: 120
+- status: declared
+- notes: Recovery — git checkout HEAD -- docs/game-design/OVERVIEW.adoc
+
+### state-a2ml-template-residue
+- description: STATE.a2ml reverts to rsr-template-repo content after a bad merge
+- class: rollback
+- injection-probe: "grep -q 'project = .rsr-template-repo.' .machine_readable/6a2/STATE.a2ml 2>/dev/null"
+- recovery-probe: "! grep -q 'project = .rsr-template-repo.' .machine_readable/6a2/STATE.a2ml 2>/dev/null"
+- expected-recovery-time-seconds: 120
+- status: declared
+- notes: Recovery — restore from last good commit.
+
+## ABI Integrity
+
+### abi-breaking-change-without-version-bump
+- description: Idris2 ABI types changed without version bump recorded in META.a2ml
+- class: rollback
+- injection-probe: "git diff HEAD~1 -- src/interface/abi/ 2>/dev/null | grep -q '^-'"
+- recovery-probe: "git diff HEAD~1 -- .machine_readable/6a2/META.a2ml 2>/dev/null | grep -q 'version\\|ADR'"
+- expected-recovery-time-seconds: 300
+- status: declared
+- notes: Recovery — revert ABI change or add ADR entry + version bump in META.a2ml before merging.
+
+## Secrets and Privacy
+
+### accidental-private-leak
+- description: Private key, credential, or personal data accidentally committed
+- class: rollback
+- injection-probe: "git log --all --oneline -- '*.pem' '*.key' '.env' 'credentials.json' 2>/dev/null | head -1 | grep -q ."
+- recovery-probe: "! git log --all --oneline -- '*.pem' '*.key' '.env' 'credentials.json' 2>/dev/null | head -1 | grep -q ."
+- expected-recovery-time-seconds: 3600
+- status: declared
+- notes: |
+    Escalation ladder (in order):
+    1. Rotate the leaked secret IMMEDIATELY before anything else.
+    2. git-filter-repo or BFG to purge from all history.
+    3. Force-push to main only with explicit user confirmation.
+    4. If a GitHub token: contact GitHub support.
+    Public re-publication only after rotation confirmed complete.

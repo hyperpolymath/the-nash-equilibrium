@@ -78,13 +78,48 @@ docs/game-design/playtesting-plan.adoc.
 - probe: test -f docs/print/RULEBOOK.pdf || test -f docs/print/RULEBOOK.adoc
 - notes: AsciiDoc source is screen-reader-friendly; PDF export is a bonus.
 
-## Digital Companion (Future)
+## Physical Game — Motor Accessibility
+
+### motor-friendly-tokens
+- description: Player tokens sized and shaped for easy grip (≥ 30mm diameter, raised edges)
+- status: declared
+- probe: grep -q 'motor\|grip\|size' docs/game-design/board-design.adoc
+- notes: Relevant for players with reduced hand strength or dexterity. Record in board design doc.
+
+### no-fiddly-small-parts
+- description: No game component smaller than 15mm in any dimension (choking-hazard and dexterity concern)
+- status: declared
+- probe: grep -q 'minimum.*size\|component.*size' docs/game-design/board-design.adoc
+- notes: Applies to all physical components: tokens, cards, markers.
+
+## Cognitive Accessibility
+
+### complexity-level-documented
+- description: Game complexity level documented in OVERVIEW.adoc (e.g. BGG weight estimate)
+- status: declared
+- probe: grep -qi 'complexity\|weight\|difficulty' docs/game-design/OVERVIEW.adoc
+- compliance: WCAG Cognitive accessibility principles
+- notes: Lets players know what they're signing up for. A 6X game with game theory is likely high complexity (BGG weight 3.5+).
+
+### game-theory-glossary
+- description: Glossary of game theory terms included (Nash equilibrium, dominant strategy, payoff matrix, etc.)
+- status: declared
+- probe: grep -qi 'glossary\|Glossary' docs/game-design/OVERVIEW.adoc
+- notes: Critical for players unfamiliar with game theory. Lowers cognitive barrier to entry.
+
+### rule-complexity-bounded
+- description: Core rules summarised on a single reference card (not more than 2 sides of A5)
+- status: declared
+- probe: test -f docs/game-design/QUICK-REF.adoc || grep -qi 'reference card\|quick ref' docs/game-design/OVERVIEW.adoc
+- notes: Complex game mechanics require an accessible at-a-glance summary. Teach the full game separately.
+
+## Digital Companion (Future — Tauri 2.0+)
 
 ### keyboard-only-play
 - description: Digital companion fully operable via keyboard (no mouse required)
 - status: declared
 - compliance: WCAG 2.1 §2.1 (Keyboard Accessible)
-- notes: Relevant when Tauri 2.0+ companion is built. Track here now, implement then.
+- notes: Track now; implement when Tauri companion is built.
 
 ### screen-reader-compatible
 - description: Digital companion compatible with common screen readers (NVDA, VoiceOver)

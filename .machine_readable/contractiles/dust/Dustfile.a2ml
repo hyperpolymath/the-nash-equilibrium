@@ -4,7 +4,7 @@
 
 @abstract:
 What should be cleaned up or removed from this repository.
-These are housekeeping items, not blockers.
+These are housekeeping items, not hard blockers.
 @end
 
 ## Stale Files
@@ -20,25 +20,43 @@ These are housekeeping items, not blockers.
 - severity: warning
 
 ### no-next-steps
-- description: NEXT_STEPS.md superseded by ROADMAP
+- description: NEXT_STEPS.md superseded by ROADMAP.adoc
 - run: test ! -f NEXT_STEPS.md
 - severity: info
+
+### no-stale-scm-files
+- description: No legacy .scm files in .machine_readable/ (migration to A2ML complete 2026-04-12)
+- run: "! find .machine_readable/ -name '*.scm' 2>/dev/null | head -1 | grep -q ."
+- severity: warning
+
+### no-template-placeholder-tokens
+- description: No {{PLACEHOLDER}} tokens left in A2ML or AsciiDoc files (template residue)
+- run: "! grep -rl '{{[A-Z_]*}}' --include='*.a2ml' --include='*.adoc' --exclude-dir='.git' . 2>/dev/null | head -1 | grep -q ."
+- severity: critical
 
 ## Build Artifacts
 
 ### no-tracked-artifacts
 - description: No build artifacts tracked in git
-- run: "! git ls-files lib/bs/ lib/ocaml/ target/release/ _build/ 2>/dev/null | head -1 | grep -q ."
+- run: "! git ls-files lib/bs/ lib/ocaml/ target/release/ _build/ zig-cache/ zig-out/ 2>/dev/null | head -1 | grep -q ."
 - severity: warning
 
 ## Format Duplicates
 
 ### no-duplicate-contributing
-- description: Only one CONTRIBUTING format (keep .md)
+- description: Only one CONTRIBUTING format (keep .md for GitHub health)
 - run: "! (test -f CONTRIBUTING.md && test -f CONTRIBUTING.adoc)"
 - severity: warning
 
 ### no-duplicate-readme
-- description: Only one README format
+- description: Only one README format (keep .adoc)
 - run: "! (test -f README.md && test -f README.adoc && [ $(wc -l < README.md) -gt 5 ])"
 - severity: warning
+
+## AGPL Drift
+
+### no-pmpl-in-source
+- description: No PMPL-1.0-or-later headers in source or machine-readable files (AGPL project — PMPL is drift)
+- run: "! grep -rl 'SPDX-License-Identifier: PMPL-1.0-or-later' src/ .machine_readable/ 2>/dev/null | head -1 | grep -q ."
+- severity: warning
+- notes: Reported in Bustfile as a rollback scenario; tracked here for advisory cleanup sweep.

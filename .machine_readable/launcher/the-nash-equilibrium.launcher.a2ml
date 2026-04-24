@@ -1,0 +1,119 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Copyright (c) 2026 Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk>
+#
+# the-nash-equilibrium.launcher.a2ml — declarative launcher config
+#
+# Input to: `launch-scaffolder mint .machine_readable/launcher/the-nash-equilibrium.launcher.a2ml`
+# Output:   scripts/the-nash-equilibrium-launcher.sh
+# Standard: launcher-standard.a2ml v0.2.0
+#           (developer-ecosystem/standards/launcher/launcher-standard.a2ml)
+#
+# Lifecycle:
+#   Design phase (current): serves local game-design documentation at localhost:4242.
+#   Implementation phase:   will run the core game engine process.
+#   Digital companion:      will launch the Tauri 2.0+ companion app.
+#
+# To regenerate the launcher script after editing this file:
+#   launch-scaffolder mint .machine_readable/launcher/the-nash-equilibrium.launcher.a2ml
+#
+# To install desktop integration:
+#   ./scripts/the-nash-equilibrium-launcher.sh --integ
+#
+# To remove desktop integration:
+#   ./scripts/the-nash-equilibrium-launcher.sh --disinteg
+
+# ---------------------------------------------------------------------------
+# A2ML metadata block (required by launcher-standard §a2ml-metadata-block)
+# ---------------------------------------------------------------------------
+
+id                       = "the-nash-equilibrium-launcher"
+type                     = "game-companion-dev"
+version                  = "0.1.0"
+app-name                 = "the-nash-equilibrium"
+app-display              = "The Nash Equilibrium"
+app-url                  = "http://localhost:4242"
+standards-compliance     = ["launcher-standard.adoc v0.2.0"]
+modes                    = ["--start", "--stop", "--status", "--auto", "--browser",
+                            "--integ", "--disinteg", "--help"]
+platforms                = ["linux"]
+lifecycle-phases-covered = ["design-phase-docs"]
+lifecycle-phases-deferred = ["game-engine", "digital-companion-tauri"]
+
+# ---------------------------------------------------------------------------
+# Project
+# ---------------------------------------------------------------------------
+
+[project]
+name        = "the-nash-equilibrium"
+display     = "The Nash Equilibrium"
+description = "6X strategy board game — eXplore, eXpand, eXploit, eXterminate, eXchange, eXperiment. Every strategic interaction modelled through Nash equilibrium. Co-developed by Jonathan D.A. Jewell and son."
+categories  = ["Game", "Education", "BoardGame"]
+version     = "0.1.0"
+license     = "AGPL-3.0-or-later"
+
+# ---------------------------------------------------------------------------
+# Repo
+# ---------------------------------------------------------------------------
+
+[repo]
+path = "/var/mnt/eclipse/repos/the-nash-equilibrium"
+
+# ---------------------------------------------------------------------------
+# Runtime
+# ---------------------------------------------------------------------------
+
+[runtime]
+# Design phase: scripts/run.sh serves game-design documentation.
+# When the game engine is implemented, update startup-command-search to point
+# at the game binary or `just run`.
+port         = 4242
+url          = "http://localhost:4242"
+startup-command-search = [
+    "{repo-dir}/scripts/run.sh",
+    "{repo-dir}/dev.sh",
+]
+pid-file     = "/tmp/the-nash-equilibrium-server.pid"
+log-file     = "/tmp/the-nash-equilibrium-server.log"
+wait-for-url-timeout-seconds = 10
+
+# ---------------------------------------------------------------------------
+# Icon
+# ---------------------------------------------------------------------------
+
+[icon]
+# Source path (does not yet exist — falls back to icon-fallback at --integ time).
+# Add assets/icon-256.png when game branding is decided.
+source = "{repo-dir}/assets/icon-256.png"
+
+# ---------------------------------------------------------------------------
+# Integration
+# ---------------------------------------------------------------------------
+
+[integration]
+# Use standard defaults from launcher-standard.a2ml §integration.linux.
+# Override here when game-specific paths are needed.
+
+# ---------------------------------------------------------------------------
+# Soft-attach
+# ---------------------------------------------------------------------------
+
+[soft-attach]
+tools = [
+    "feedback-o-tron",
+    "hypatia",
+    "panic-attack",
+]
+
+# ---------------------------------------------------------------------------
+# Exceptions
+# ---------------------------------------------------------------------------
+
+[exceptions]
+# Design-phase exception: docs server, not a real application server.
+# Remove when the game engine is running.
+[[exceptions.override]]
+path      = "runtime.wait-for-url-timeout-seconds"
+value     = 10
+rationale = "Docs server (Ruby/Deno) starts in ~1 s; 10 s is generous and avoids false negatives during boot."
+added-by  = "Jonathan D.A. Jewell"
+added-on  = "2026-04-24"
