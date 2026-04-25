@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: AGPL-3.0-or-later -->
+<!-- Copyright (c) 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk> -->
+<!--
+  Board mockup: The Nash Equilibrium — Econosphere
+  Layers (bottom → top):
+    0. Ocean base (topography)
+    1. Continent regions (heat-map thermal overlay: green→amber→orange→red)
+    2. Topological network (trade nodes + route arcs)
+    3. Planetary Boundaries wheel (Stockholm diagram, floating at centre)
+    4. UI chrome (era track, legend, turn phases)
+
+  The heat-map colours represent regional stress at Turn 9 (Industrial Era, sample state).
+  The central wheel is the sustainability tracker — its 9-boundary spider polygon
+  shows how far each boundary has been pushed into the danger zone.
+-->
+<svg viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg" width="1400" height="900">
+
+  <defs>
+    <!-- Soft glow for trade nodes -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <!-- Frosted-glass backing for the wheel -->
+    <radialGradient id="wheelBg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#050e05" stop-opacity="0.96"/>
+      <stop offset="85%"  stop-color="#071207" stop-opacity="0.90"/>
+      <stop offset="100%" stop-color="#071207" stop-opacity="0.70"/>
+    </radialGradient>
+    <!-- Subtle ocean grid pattern -->
+    <pattern id="oceanGrid" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#17305a" stroke-width="0.4" opacity="0.5"/>
+    </pattern>
+  </defs>
+
+  <!-- ================================================================ -->
+  <!-- BOARD FRAME                                                       -->
+  <!-- ================================================================ -->
+  <rect width="1400" height="900" fill="#0a120a" rx="18"/>
+  <rect x="6" y="6" width="1388" height="888" fill="none" stroke="#233823" stroke-width="2" rx="14"/>
+
+  <!-- ================================================================ -->
+  <!-- LAYER 0 — OCEAN TOPOGRAPHY BASE                                  -->
+  <!-- ================================================================ -->
+  <rect x="8" y="8" width="1384" height="884" fill="#0d1e40" rx="12"/>
+  <rect x="8" y="8" width="1384" height="884" fill="url(#oceanGrid)" rx="12"/>
+
+  <!-- Ocean depth shading: deeper blue toward center (the wheel zone) -->
+  <radialGradient id="oceanDepth" cx="50%" cy="50%" r="50%">
+    <stop offset="0%"   stop-color="#081828" stop-opacity="0.6"/>
+    <stop offset="100%" stop-color="#0d1e40" stop-opacity="0"/>
+  </radialGradient>
+  <rect x="8" y="8" width="1384" height="884" fill="url(#oceanDepth)" rx="12"/>
+
+  <!-- ================================================================ -->
+  <!-- LAYER 1 — CONTINENT REGIONS (heat-map thermal overlay)          -->
+  <!-- Colour key: green=low stress, amber=moderate, orange=high, red=critical -->
+  <!-- Turn 9 sample state: Industrial Era begins, rapid boundary stress -->
+  <!-- ================================================================ -->
+
+  <!-- North America — amber (Capitalist path, CO2 rising fast) -->
+  <polygon
+    points="48,88 200,72 355,80 420,122 455,205 468,330 435,435 368,492 258,508 148,490 72,415 48,295"
+    fill="#CC8820" fill-opacity="0.38" stroke="#CC8820" stroke-width="1.2" stroke-opacity="0.55"/>
+  <text x="205" y="295" font-family="Georgia,serif" font-size="13" fill="#EEB840" fill-opacity="0.65" transform="rotate(-4,205,295)">NORTH AMERICA</text>
+
+  <!-- South America — yellow-green (Green path, lower industrial pressure) -->
+  <polygon
+    points="168,545 308,528 412,558 452,645 462,735 420,825 325,870 210,858 142,790 126,698 138,618"
+    fill="#80B030" fill-opacity="0.42" stroke="#80B030" stroke-width="1.2" stroke-opacity="0.55"/>
+  <text x="248" y="705" font-family="Georgia,serif" font-size="12" fill="#A0D050" fill-opacity="0.65" transform="rotate(4,248,705)">SOUTH AMERICA</text>
+
+  <!-- Europe — amber (Socialist path, industrialising but regulated) -->
+  <polygon
+    points="488,68 618,62 700,82 718,152 698,232 658,282 598,292 538,272 498,212 480,152"
+    fill="#CC8820" fill-opacity="0.38" stroke="#CC8820" stroke-width="1.2" stroke-opacity="0.55"/>
+  <text x="572" y="182" font-family="Georgia,serif" font-size="11" fill="#EEB840" fill-opacity="0.65">EUROPE</text>
+
+  <!-- Africa — red-orange (high exploitation, rapid land-system change) -->
+  <!-- Polygon extends under the wheel backing — the visible rim provides context -->
+  <polygon
+    points="538,322 638,298 728,312 788,382 818,482 808,622 768,752 698,842 608,862 528,812 498,712 488,572 508,442"
+    fill="#D04020" fill-opacity="0.42" stroke="#D04020" stroke-width="1.2" stroke-opacity="0.55"/>
+  <text x="628" y="615" font-family="Georgia,serif" font-size="13" fill="#E86040" fill-opacity="0.60" transform="rotate(4,628,615)">AFRICA</text>
+
+  <!-- Asia — orange (Techno-Utopian + industrialising, high energy demand) -->
+  <polygon
+    points="718,68 998,58 1198,68 1362,102 1378,322 1338,482 1248,552 1098,552 978,502 898,462 838,392 798,302 758,202 728,132"
+    fill="#D07020" fill-opacity="0.38" stroke="#D07020" stroke-width="1.2" stroke-opacity="0.55"/>
+  <text x="1025" y="278" font-family="Georgia,serif" font-size="14" fill="#F09040" fill-opacity="0.62">ASIA</text>
+
+  <!-- Oceania — green (isolated, Green path, boundaries intact) -->
+  <polygon
+    points="1008,612 1188,592 1362,632 1378,782 1282,862 1088,862 998,792 988,702"
+    fill="#40A840" fill-opacity="0.42" stroke="#40A840" stroke-width="1.2" stroke-opacity="0.55"/>
+  <text x="1148" y="732" font-family="Georgia,serif" font-size="12" fill="#60C860" fill-opacity="0.65">OCEANIA</text>
+
+  <!-- ================================================================ -->
+  <!-- LAYER 2 — TOPOLOGICAL NETWORK                                    -->
+  <!-- Arcs = trade/migration routes. Nodes = civilisation hubs.        -->
+  <!-- Dashed = active routes. Faint dashed = long-haul / rare routes.  -->
+  <!-- ================================================================ -->
+
+  <!-- Trade route arcs (cubic bezier curves) -->
+  <!-- East Coast NA → London (North Atlantic) -->
+  <path d="M 218,318 Q 388,98 578,222"
+    fill="none" stroke="#FFD080" stroke-width="1.8" stroke-opacity="0.52" stroke-dasharray="7,5"/>
+  <!-- East Coast NA → São Paulo (South Atlantic) -->
+  <path d="M 218,318 Q 158,495 298,648"
+    fill="none" stroke="#FFD080" stroke-width="1.8" stroke-opacity="0.52" stroke-dasharray="7,5"/>
+  <!-- London → Lagos (West Africa) -->
+  <path d="M 578,222 Q 588,398 582,612"
+    fill="none" stroke="#FFD080" stroke-width="1.8" stroke-opacity="0.52" stroke-dasharray="7,5"/>
+  <!-- London → Mumbai (imperial route) -->
+  <path d="M 578,222 Q 728,202 888,372"
+    fill="none" stroke="#FFD080" stroke-width="1.8" stroke-opacity="0.52" stroke-dasharray="7,5"/>
+  <!-- Moscow → Mumbai (overland silk road variant) -->
+  <path d="M 792,188 Q 858,272 888,372"
+    fill="none" stroke="#FFD080" stroke-width="1.5" stroke-opacity="0.48" stroke-dasharray="7,5"/>
+  <!-- Mumbai → Shanghai -->
+  <path d="M 888,372 Q 975,338 1068,308"
+    fill="none" stroke="#FFD080" stroke-width="1.8" stroke-opacity="0.52" stroke-dasharray="7,5"/>
+  <!-- Shanghai → Tokyo -->
+  <path d="M 1068,308 Q 1102,282 1148,272"
+    fill="none" stroke="#FFD080" stroke-width="1.5" stroke-opacity="0.52" stroke-dasharray="5,4"/>
+  <!-- Tokyo → West Coast NA (transpacific — long-haul, faint) -->
+  <path d="M 1148,272 Q 748,148 138,392"
+    fill="none" stroke="#FFD080" stroke-width="1.0" stroke-opacity="0.28" stroke-dasharray="4,7"/>
+  <!-- Shanghai → Sydney -->
+  <path d="M 1068,308 Q 1122,492 1172,698"
+    fill="none" stroke="#FFD080" stroke-width="1.8" stroke-opacity="0.52" stroke-dasharray="7,5"/>
+  <!-- Lagos → Johannesburg (East Africa corridor) -->
+  <path d="M 582,612 Q 638,685 652,742"
+    fill="none" stroke="#FFD080" stroke-width="1.5" stroke-opacity="0.48" stroke-dasharray="7,5"/>
+  <!-- Johannesburg → Mumbai (Indian Ocean, faint) -->
+  <path d="M 652,742 Q 802,705 888,372"
+    fill="none" stroke="#FFD080" stroke-width="1.0" stroke-opacity="0.28" stroke-dasharray="4,7"/>
+  <!-- São Paulo → London (mid-Atlantic, faint) -->
+  <path d="M 298,648 Q 432,448 578,222"
+    fill="none" stroke="#FFD080" stroke-width="1.0" stroke-opacity="0.28" stroke-dasharray="4,7"/>
+
+  <!-- Trade nodes -->
+  <!-- Each node: outer glow circle, filled dot, inner highlight -->
+  <!-- East Coast NA (New York) -->
+  <circle cx="218" cy="318" r="9" fill="#FFD080" stroke="#FFEDAA" stroke-width="2" filter="url(#glow)"/>
+  <circle cx="218" cy="318" r="3" fill="#FFF8E0"/>
+  <!-- West Coast NA (Los Angeles) -->
+  <circle cx="138" cy="392" r="9" fill="#FFD080" stroke="#FFEDAA" stroke-width="2" filter="url(#glow)"/>
+  <circle cx="138" cy="392" r="3" fill="#FFF8E0"/>
+  <!-- London -->
+  <circle cx="578" cy="222" r="9" fill="#FFD080" stroke="#FFEDAA" stroke-width="2" filter="url(#glow)"/>
+  <circle cx="578" cy="222" r="3" fill="#FFF8E0"/>
+  <!-- Moscow -->
+  <circle cx="792" cy="188" r="9" fill="#FFD080" stroke="#FFEDAA" stroke-width="2" filter="url(#glow)"/>
+  <circle cx="792" cy="188" r="3" fill="#FFF8E0"/>
+  <!-- Mumbai (just outside wheel backing r=185) -->
+  <circle cx="888" cy="372" r="9" fill="#FFD080" stroke="#FFEDAA" stroke-width="2" filter="url(#glow)"/>
+  <circle cx="888" cy="372" r="3" fill="#FFF8E0"/>
+  <!-- Shanghai -->
+  <circle cx="1068" cy="308" r="9" fill="#FFD080" stroke="#FFEDAA" stroke-width="2" filter="url(#glow)"/>
+  <circle cx="1068" cy="308" r="3" fill="#FFF8E0"/>
+  <!-- Tokyo -->
+  <circle cx="1148" cy="272" r="9" fill="#FFD080" stroke="#FFEDAA" stroke-width="2" filter="url(#glow)"/>
+  <circle cx="1148" cy="272" r="3" fill="#FFF8E0"/>
+  <!-- São Paulo -->
+  <circle cx="298" cy="648" r="9" fill="#FFD080" stroke="#FFEDAA" stroke-width="2" filter="url(#glow)"/>
+  <circle cx="298" cy="648" r="3" fill="#FFF8E0"/>
+  <!-- Lagos (outside wheel: distance ≈ 200px from centre) -->
+  <circle cx="582" cy="612" r="9" fill="#FFD080" stroke="#FFEDAA" stroke-width="2" filter="url(#glow)"/>
+  <circle cx="582" cy="612" r="3" fill="#FFF8E0"/>
+  <!-- Johannesburg -->
+  <circle cx="652" cy="742" r="9" fill="#FFD080" stroke="#FFEDAA" stroke-width="2" filter="url(#glow)"/>
+  <circle cx="652" cy="742" r="3" fill="#FFF8E0"/>
+  <!-- Sydney -->
+  <circle cx="1172" cy="698" r="9" fill="#FFD080" stroke="#FFEDAA" stroke-width="2" filter="url(#glow)"/>
+  <circle cx="1172" cy="698" r="3" fill="#FFF8E0"/>
+
+  <!-- Node labels -->
+  <text x="228" y="314" font-family="sans-serif" font-size="9" fill="#FFD080" fill-opacity="0.85">New York</text>
+  <text x="118" y="410" font-family="sans-serif" font-size="9" fill="#FFD080" fill-opacity="0.85">L.A.</text>
+  <text x="588" y="218" font-family="sans-serif" font-size="9" fill="#FFD080" fill-opacity="0.85">London</text>
+  <text x="802" y="184" font-family="sans-serif" font-size="9" fill="#FFD080" fill-opacity="0.85">Moscow</text>
+  <text x="898" y="368" font-family="sans-serif" font-size="9" fill="#FFD080" fill-opacity="0.85">Mumbai</text>
+  <text x="1078" y="304" font-family="sans-serif" font-size="9" fill="#FFD080" fill-opacity="0.85">Shanghai</text>
+  <text x="1158" y="268" font-family="sans-serif" font-size="9" fill="#FFD080" fill-opacity="0.85">Tokyo</text>
+  <text x="308" y="644" font-family="sans-serif" font-size="9" fill="#FFD080" fill-opacity="0.85">São Paulo</text>
+  <text x="562" y="630" font-family="sans-serif" font-size="9" fill="#FFD080" fill-opacity="0.85">Lagos</text>
+  <text x="662" y="738" font-family="sans-serif" font-size="9" fill="#FFD080" fill-opacity="0.85">Jo'burg</text>
+  <text x="1148" y="716" font-family="sans-serif" font-size="9" fill="#FFD080" fill-opacity="0.85">Sydney</text>
+
+  <!-- ================================================================ -->
+  <!-- LAYER 3 — PLANETARY BOUNDARIES WHEEL (Stockholm diagram)         -->
+  <!-- Nine boundaries, each a sector. Concentric zone rings:           -->
+  <!--   Green  r=0–65   → safe operating space                        -->
+  <!--   Yellow r=65–105 → zone of uncertainty (increasing risk)       -->
+  <!--   Orange r=105–140→ high risk                                   -->
+  <!--   Red    r=140–165→ beyond boundary (critical)                  -->
+  <!-- The state polygon shows Turn 9 stress levels per boundary.       -->
+  <!-- cx=700 cy=450 max_r=165                                          -->
+  <!-- ================================================================ -->
+
+  <!-- Frosted-glass backing disk -->
+  <circle cx="700" cy="450" r="188" fill="url(#wheelBg)" stroke="#1e3a1e" stroke-width="1.5"/>
+
+  <!-- Zone rings (drawn large→small so inner overwrites outer) -->
+  <!-- Red critical zone: r=140–165; centre_r=152.5 sw=25 -->
+  <circle cx="700" cy="450" r="152" fill="none" stroke="#5a0808" stroke-width="25" stroke-opacity="0.80"/>
+  <!-- Orange danger zone: r=105–140; centre_r=122.5 sw=35 -->
+  <circle cx="700" cy="450" r="122" fill="none" stroke="#6a3005" stroke-width="35" stroke-opacity="0.80"/>
+  <!-- Yellow warning zone: r=65–105; centre_r=85 sw=40 -->
+  <circle cx="700" cy="450" r="85"  fill="none" stroke="#5a4005" stroke-width="40" stroke-opacity="0.80"/>
+  <!-- Green safe zone: r=0–65 -->
+  <circle cx="700" cy="450" r="65"  fill="#0d3a0d" stroke="none"/>
+
+  <!-- Sector divider lines: 9 sectors × 40°, angles: -90,-50,-10,30,70,110,150,190,230° -->
+  <!-- Each line from centre (700,450) to r=165 -->
+  <line x1="700" y1="450" x2="700" y2="285" stroke="#1e3e1e" stroke-width="1.5"/><!-- -90° -->
+  <line x1="700" y1="450" x2="806" y2="323" stroke="#1e3e1e" stroke-width="1.5"/><!-- -50° -->
+  <line x1="700" y1="450" x2="862" y2="421" stroke="#1e3e1e" stroke-width="1.5"/><!-- -10° -->
+  <line x1="700" y1="450" x2="843" y2="533" stroke="#1e3e1e" stroke-width="1.5"/><!-- +30° -->
+  <line x1="700" y1="450" x2="756" y2="605" stroke="#1e3e1e" stroke-width="1.5"/><!-- +70° -->
+  <line x1="700" y1="450" x2="644" y2="605" stroke="#1e3e1e" stroke-width="1.5"/><!--+110° -->
+  <line x1="700" y1="450" x2="557" y2="533" stroke="#1e3e1e" stroke-width="1.5"/><!--+150° -->
+  <line x1="700" y1="450" x2="538" y2="421" stroke="#1e3e1e" stroke-width="1.5"/><!--+190° -->
+  <line x1="700" y1="450" x2="594" y2="323" stroke="#1e3e1e" stroke-width="1.5"/><!--+230° -->
+
+  <!-- Zone boundary rings (thin outlines to mark transitions clearly) -->
+  <circle cx="700" cy="450" r="65"  fill="none" stroke="#2a6a2a" stroke-width="0.8"/>
+  <circle cx="700" cy="450" r="105" fill="none" stroke="#806018" stroke-width="0.8"/>
+  <circle cx="700" cy="450" r="140" fill="none" stroke="#804018" stroke-width="0.8"/>
+  <circle cx="700" cy="450" r="165" fill="none" stroke="#601818" stroke-width="0.8"/>
+
+  <!--
+    Current-state polygon (Turn 9 — Industrial Era sample):
+    Stress levels per boundary (0.0=safe, 1.0=critical), max_r=165:
+      0 Climate Change        0.85 → r=140  angle=−90°  → (700, 310)
+      1 Biosphere Integrity   0.80 → r=132  angle=−50°  → (785, 349)
+      2 Land System Change    0.75 → r=124  angle=−10°  → (822, 429)
+      3 Freshwater Change     0.55 → r= 91  angle= +30° → (779, 496)
+      4 Biogeochem Flows (NP) 0.90 → r=149  angle= +70° → (751, 590)
+      5 Ocean Acidification   0.60 → r= 99  angle=+110° → (666, 543)
+      6 Atmospheric Aerosol   0.40 → r= 66  angle=+150° → (643, 483)
+      7 Stratospheric Ozone   0.25 → r= 41  angle=+190° → (659, 443)
+      8 Novel Entities        0.70 → r=116  angle=+230° → (625, 361)
+  -->
+  <polygon
+    points="700,310 785,349 822,429 779,496 751,590 666,543 643,483 659,443 625,361"
+    fill="#E05020" fill-opacity="0.30"
+    stroke="#FF8040" stroke-width="2.2" stroke-opacity="0.85"/>
+
+  <!-- Centre dot (the "healthy world" reference point) -->
+  <circle cx="700" cy="450" r="10" fill="#30b830" stroke="#60e060" stroke-width="1.5"/>
+  <circle cx="700" cy="450" r="3"  fill="#90ff90"/>
+
+  <!-- Boundary labels around the wheel (outside r=165, at ~185) -->
+  <text x="700"  y="262"  font-family="sans-serif" font-size="8.5" fill="#a0d0a0" fill-opacity="0.9" text-anchor="middle">CLIMATE</text>
+  <text x="828"  y="305"  font-family="sans-serif" font-size="8.5" fill="#a0d0a0" fill-opacity="0.9" text-anchor="start">BIOSPHERE</text>
+  <text x="875"  y="420"  font-family="sans-serif" font-size="8.5" fill="#a0d0a0" fill-opacity="0.9" text-anchor="start">LAND</text>
+  <text x="858"  y="548"  font-family="sans-serif" font-size="8.5" fill="#a0d0a0" fill-opacity="0.9" text-anchor="start">FRESHWATER</text>
+  <text x="755"  y="632"  font-family="sans-serif" font-size="8.5" fill="#a0d0a0" fill-opacity="0.9" text-anchor="middle">N/P FLOWS</text>
+  <text x="616"  y="632"  font-family="sans-serif" font-size="8.5" fill="#a0d0a0" fill-opacity="0.9" text-anchor="middle">OCEAN pH</text>
+  <text x="507"  y="548"  font-family="sans-serif" font-size="8.5" fill="#a0d0a0" fill-opacity="0.9" text-anchor="end">AEROSOL</text>
+  <text x="502"  y="420"  font-family="sans-serif" font-size="8.5" fill="#a0d0a0" fill-opacity="0.9" text-anchor="end">OZONE</text>
+  <text x="542"  y="305"  font-family="sans-serif" font-size="8.5" fill="#a0d0a0" fill-opacity="0.9" text-anchor="end">NOVEL ENTITIES</text>
+
+  <!-- Wheel label (inside, centre top) -->
+  <text x="700" y="438" font-family="sans-serif" font-size="7.5" fill="#60a060" fill-opacity="0.85" text-anchor="middle" letter-spacing="1">PLANETARY</text>
+  <text x="700" y="450" font-family="sans-serif" font-size="7.5" fill="#60a060" fill-opacity="0.85" text-anchor="middle" letter-spacing="1">BOUNDARIES</text>
+  <text x="700" y="464" font-family="sans-serif" font-size="6.5" fill="#408040" fill-opacity="0.70" text-anchor="middle">Turn 9 · Industrial Era</text>
+
+  <!-- ================================================================ -->
+  <!-- UI CHROME                                                         -->
+  <!-- ================================================================ -->
+
+  <!-- Title panel (top left) -->
+  <rect x="10" y="10" width="335" height="56" fill="#050e05" fill-opacity="0.82" rx="6"/>
+  <text x="22" y="36" font-family="Georgia,serif" font-size="21" fill="#B8D898" font-weight="bold">THE NASH EQUILIBRIUM</text>
+  <text x="22" y="56" font-family="sans-serif" font-size="11" fill="#789860" fill-opacity="0.85">Econosphere · 6X Strategy · 2–5 Players</text>
+
+  <!-- Era track (top right) -->
+  <rect x="1058" y="10" width="332" height="52" fill="#050e05" fill-opacity="0.82" rx="6"/>
+  <text x="1070" y="28" font-family="sans-serif" font-size="8.5" fill="#90b870" fill-opacity="0.85" letter-spacing="1">ERA PROGRESSION</text>
+  <rect x="1070" y="32" width="68" height="22" fill="#1e4e0a" rx="3"/>
+  <text x="1104" y="48" font-family="sans-serif" font-size="8" fill="#90e060" text-anchor="middle">AGRARIAN</text>
+  <rect x="1143" y="32" width="68" height="22" fill="#5a3a08" rx="3"/>
+  <text x="1177" y="48" font-family="sans-serif" font-size="8" fill="#e89820" text-anchor="middle">INDUSTRIAL</text>
+  <rect x="1216" y="32" width="68" height="22" fill="#0a1e4e" rx="3"/>
+  <text x="1250" y="48" font-family="sans-serif" font-size="8" fill="#60a8e8" text-anchor="middle">DIGITAL</text>
+  <rect x="1289" y="32" width="98" height="22" fill="#2a0a4e" rx="3"/>
+  <text x="1338" y="48" font-family="sans-serif" font-size="8" fill="#c080f0" text-anchor="middle">POST-SCARCITY</text>
+  <!-- Current position marker (Turn 9 = first turn of Industrial) -->
+  <polygon points="1143,32 1152,32 1147,24" fill="#FFD080"/>
+  <text x="1147" y="22" font-family="sans-serif" font-size="7.5" fill="#FFD080" text-anchor="middle">T9</text>
+
+  <!-- Turn phase reminder (bottom left) -->
+  <rect x="10" y="800" width="218" height="90" fill="#050e05" fill-opacity="0.85" rx="6"/>
+  <text x="22" y="818" font-family="sans-serif" font-size="9" fill="#90b870" font-weight="bold" letter-spacing="0.5">TURN PHASES</text>
+  <text x="22" y="833" font-family="sans-serif" font-size="8.5" fill="#688050">1. Resource Phase</text>
+  <text x="22" y="847" font-family="sans-serif" font-size="8.5" fill="#688050">2. Action Phase</text>
+  <text x="22" y="861" font-family="sans-serif" font-size="8.5" fill="#688050">3. eXchange Phase</text>
+  <text x="22" y="875" font-family="sans-serif" font-size="8.5" fill="#688050">4. eXperiment Phase</text>
+  <text x="22" y="889" font-family="sans-serif" font-size="8.5" fill="#688050">5. Crisis → Boundary → Assess</text>
+
+  <!-- Heat-map legend (bottom right) -->
+  <rect x="1058" y="800" width="332" height="90" fill="#050e05" fill-opacity="0.85" rx="6"/>
+  <text x="1072" y="818" font-family="sans-serif" font-size="9" fill="#90b870" font-weight="bold" letter-spacing="0.5">REGIONAL STRESS (THERMAL MAP)</text>
+  <rect x="1072" y="826" width="18" height="14" fill="#40A840" fill-opacity="0.80" rx="2"/>
+  <text x="1096" y="838" font-family="sans-serif" font-size="9" fill="#70c870">LOW — boundaries intact, sustainable</text>
+  <rect x="1072" y="845" width="18" height="14" fill="#CC8820" fill-opacity="0.80" rx="2"/>
+  <text x="1096" y="857" font-family="sans-serif" font-size="9" fill="#cca840">MODERATE — amber, approaching limits</text>
+  <rect x="1072" y="864" width="18" height="14" fill="#D07020" fill-opacity="0.80" rx="2"/>
+  <text x="1096" y="876" font-family="sans-serif" font-size="9" fill="#d09050">HIGH — boundary pressure, reform needed</text>
+  <rect x="1072" y="883" width="18" height="14" fill="#D04020" fill-opacity="0.80" rx="2"/>
+  <text x="1096" y="895" font-family="sans-serif" font-size="9" fill="#e06040">CRITICAL — beyond safe zone, cascade risk</text>
+
+  <!-- Wheel zone legend (bottom centre) -->
+  <rect x="558" y="812" width="282" height="76" fill="#050e05" fill-opacity="0.85" rx="6"/>
+  <text x="572" y="829" font-family="sans-serif" font-size="9" fill="#90b870" font-weight="bold" letter-spacing="0.5">BOUNDARY ZONES</text>
+  <circle cx="584" cy="843" r="6" fill="#0d3a0d"/>
+  <text x="596" y="847" font-family="sans-serif" font-size="8.5" fill="#60c060">Green — safe operating space</text>
+  <circle cx="584" cy="859" r="6" fill="#5a4005"/>
+  <text x="596" y="863" font-family="sans-serif" font-size="8.5" fill="#c0a040">Yellow — zone of uncertainty</text>
+  <circle cx="584" cy="875" r="6" fill="#6a3005"/>
+  <text x="596" y="879" font-family="sans-serif" font-size="8.5" fill="#e08040">Orange — high risk, boundary stress</text>
+  <circle cx="584" cy="891" r="6" fill="#5a0808"/>
+  <text x="596" y="895" font-family="sans-serif" font-size="8.5" fill="#e04040">Red — beyond planetary boundary</text>
+
+</svg>

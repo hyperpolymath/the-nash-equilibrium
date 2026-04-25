@@ -1,30 +1,205 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 // Copyright (c) 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
-= The Nash Equilibrium
+= The Nash Equilibrium (Econosphere)
 :toc: preamble
 :icons: font
 
-image:https://api.securityscorecards.dev/projects/github.com/hyperpolymath/the-nash-equilibrium/badge[OpenSSF Scorecard, link="https://securityscorecards.dev/viewer/?uri=github.com/hyperpolymath/the-nash-equilibrium"]
+image:https://api.securityscorecards.dev/projects/github.com/hyperpolymath/the-nash-equilibrium/badge[OpenSSF Scorecard,link="https://securityscorecards.dev/viewer/?uri=github.com/hyperpolymath/the-nash-equilibrium"]
 
-== Overview
+A **6X strategy board game** about guiding a civilisation from subsistence farming
+to a post-scarcity future — while collectively managing a shared planet with finite
+boundaries. Co-developed by Jonathan D.A. Jewell and son. AGPL-3.0-or-later.
 
-**The Nash Equilibrium** is a **6X strategy game** — extending the classic 4X genre
-(eXplore, eXpand, eXploit, eXterminate) with two additional strategic dimensions:
-**eXchange** (trade, diplomacy, game-theoretic negotiation) and **eXperiment**
-(speculative research with asymmetric payoffs).
+== The Game in One Paragraph
 
-Every strategic interaction is modelled through the lens of game theory — the
-winning strategy is finding the equilibrium, not just military dominance.
+Players choose a development pathway — Capitalist, Socialist, Green, or Techno-Utopian
+— and guide their civilisation through four eras: Agrarian → Industrial → Digital →
+Post-Scarcity. Resources are **Labour, Capital, Nature, Knowledge, and Energy**, each
+tied to one of the nine Stockholm planetary boundaries. Every turn a crisis card deck
+is drawn; the number of cards scales dynamically with how stressed the boundaries are —
+so cooperative stewardship produces fewer crises, and exploitative play spirals into
+cascade events. The game is named for its central mechanic: the winning position is
+never unilateral dominance, it is always the **Nash equilibrium** — the strategy no
+player can improve by defecting alone.
 
-Co-developed by Jonathan D.A. Jewell and son.
+== The Six Strategic Pillars (6X)
 
-See link:docs/game-design/6X-pillars.adoc[6X Pillars] for the full design rationale.
+The classic 4X (eXplore, eXpand, eXploit, eXterminate) is extended with two pillars
+that are the heart of the game-theoretic theme:
 
-== License
+* **eXchange** — repeated-game trade and diplomacy. Agreements have real mechanical
+  consequences. Defection is possible and sometimes rational; but defectors destabilise
+  the boundary dashboard for everyone.
+* **eXperiment** — speculative research with branching, non-deterministic outcomes and
+  asymmetric payoffs. Breakthrough technologies can shift the game state dramatically,
+  but the risks are real (AI uprising, automation displacement, ozone depletion).
 
-This project is licensed under the **GNU Affero General Public License v3.0 or later** (AGPL-3.0-or-later).
+== Era Progression
 
-See link:LICENSE[LICENSE] for the full text.
+[cols="1,2,1,1"]
+|===
+| Era | Character | Turns | Boundary pressure
+
+| Agrarian
+| Barter, subsistence, land-claiming
+| 1–8
+| Low; Nature abundant
+
+| Industrial
+| Factories, mass production, colonial expansion
+| 9–16
+| Rapid rise: Climate, Land, N/P flows
+
+| Digital
+| Automation, AI, global networks
+| 17–24
+| Novel Entities emerge; all boundaries under stress
+
+| Post-Scarcity
+| Potential abundance or cascade collapse
+| 25–32
+| Recovery possible — or runaway failure
+|===
+
+== Victory Conditions
+
+=== Cooperative Endings (whole-table wins or loses together)
+
+[cols="2,3"]
+|===
+| Ending | Condition
+
+| **Post-Scarcity Utopia**
+| Dyson Sphere (or equivalent megaproject) complete; all boundaries Green/Amber;
+  no player in social collapse. The technological transcendence path.
+
+| **Harmonic Degrowth**
+| All boundaries in Green zone; all players below a shared consumption ceiling;
+  global stability index above threshold. Harder than the Dyson Sphere —
+  requires everyone to choose sufficiency over growth. The actually-utopian ending.
+
+| **Digital Commons**
+| Three or more breakthrough technologies open-sourced; no player below poverty
+  threshold; Knowledge resource above starting level for all. The information-
+  abundance path without physical transcendence.
+
+| **Managed Decline**
+| Some boundaries exceeded but cascades halted; civilisation intact; at least one
+  player not eliminated. Not utopia — but survivable. A sombre but meaningful win.
+|===
+
+=== Individual Pathway Victories
+
+Pathway victories are available *only* if at least one cooperative ending is
+achieved — no individual wins if the planet collapses.
+
+[cols="1,3,1"]
+|===
+| Pathway | Condition | Difficulty
+
+| Capitalist
+| Highest Capital + active trade routes to all players
+| Medium
+
+| Socialist
+| Highest Stability + all players above poverty threshold
+| Hard
+
+| Green
+| All boundaries in Green zone + Nature above starting level
+| Hard
+
+| Techno-Utopian
+| 3+ breakthrough techs + Dyson Sphere under construction
+| Very Hard
+|===
+
+=== Loss Conditions
+
+* **Planetary Collapse**: 4+ boundaries at Black (stress 10) — ALL players lose, no exceptions
+* **Social Collapse**: Labour drops to 0 — that player is eliminated
+* **Resource Exhaustion**: Nature drops to 0 — cascading boundary failures begin
+
+== The Crisis Deck (Dynamic Scaling)
+
+Crisis cards are drawn each turn from a deck stratified by era. The **number of
+cards drawn** scales with how stressed the planetary boundaries are:
+
+----
+N = 1 + (Amber boundaries × 0.5) + (Red boundaries × 1) + (Black boundaries × 2)
+    rounded up; minimum 1, maximum 5
+----
+
+This means:
+* With all boundaries in Green: 1 card/turn (mostly positive or neutral events)
+* With 3 Amber and 1 Red: 3 cards/turn (mounting pressure)
+* With 2 Red and 1 Black: 4 cards/turn (cascade spiral)
+* Recovering boundaries *reduces* the draw rate — cooperative stewardship is
+  mechanically rewarded in real time
+
+Card categories span Environmental, Social, Technological, Economic, and Geopolitical
+crises — with era weighting (no AI uprisings in the Agrarian era).
+
+== The Planetary Boundaries Dashboard
+
+The central board element: the nine Stockholm boundaries, each tracked on a
+0–10 stress scale with four zones:
+
+[cols="1,1,2"]
+|===
+| Zone | Colour | Meaning
+
+| 0–3 | Green | Safe operating space
+| 4–6 | Amber | Zone of uncertainty — increasing risk
+| 7–9 | Orange/Red | Beyond safe boundary — high risk
+| 10  | Black | Critical threshold crossed — cascade possible
+|===
+
+Boundaries: Climate Change, Biosphere Integrity, Land System Change, Freshwater
+Change, Biogeochemical Flows (N/P), Ocean Acidification, Atmospheric Aerosol
+Loading, Stratospheric Ozone Depletion, Novel Entities.
+
+Linked boundaries cascade: pushing Climate into Red stresses Ocean Acidification
+and Freshwater. Pushing Land into Red stresses Biosphere.
+
+See link:docs/game-design/board-mockup.svg[board-mockup.svg] for a visual overview
+of the board layout: planetary boundaries wheel at centre, world topography
+heat-map, and the topological trade network.
+
+== Current State (Design Phase)
+
+This repository is in active design. No playable game engine yet.
+
+[cols="3,1"]
+|===
+| Milestone | Status
+
+| RSR scaffolding (CI/CD, machine_readable, contractiles)
+| 90% ✓
+
+| ABI/FFI interface stubs (Idris2 + Zig)
+| 50%
+
+| Game design documentation (6X pillars, core mechanics, player roles, board)
+| 60%
+
+| Playtesting protocol + event card catalogue + economic systems
+| 30%
+
+| Nash equilibrium solver / payoff-matrix engine
+| 0% — blocked on ADR-002 (Gleam vs Rust/SPARK)
+
+| Core game loop implementation
+| 0%
+
+| First family playtest (physical prototype)
+| 0%
+
+| Digital companion (optional, post-physical)
+| 0%
+|===
+
+See link:ROADMAP.adoc[ROADMAP.adoc] for the full milestone tracker and ADR log.
 
 == Repository Structure
 
@@ -32,23 +207,41 @@ See link:LICENSE[LICENSE] for the full text.
 |===
 | Path | Description
 
-| `src/` | Game source code
-| `src/interface/abi/` | Idris2 ABI definitions
-| `src/interface/ffi/` | Zig FFI implementation
-| `docs/` | Design documents and game design documentation
-| `tests/` | Test suites
-| `.machine_readable/` | A2ML metadata (STATE, META, ECOSYSTEM)
-| `.github/workflows/` | CI/CD pipelines
+| `docs/game-design/`
+| Game design documents: 6X pillars, core mechanics, player roles, board design,
+  economic systems, event cards, playtesting plan
+
+| `docs/research/`
+| Academic and scientific sources (planetary boundaries, game theory)
+
+| `docs/education/`
+| Learning objectives and real-world parallels
+
+| `docs/kickstarter/`
+| Crowdfunding strategy (post-design)
+
+| `src/interface/abi/`
+| Idris2 ABI definitions (formal interface contracts)
+
+| `src/interface/ffi/`
+| Zig FFI implementation (C-ABI bridge)
+
+| `.machine_readable/6a2/`
+| A2ML state files: STATE, META, ECOSYSTEM, AGENTIC, NEUROSYM, PLAYBOOK
+
+| `.machine_readable/contractiles/`
+| Contractile trident: intend / trust / must / bust / adjust / dust
+
+| `.github/workflows/`
+| CI/CD pipelines (27 workflows, SHA-pinned)
 |===
 
-== AI Gatekeeper Protocol
+== AI Agents
 
-All AI agents MUST read `0-AI-MANIFEST.a2ml` before any work.
+All AI agents MUST read `.machine_readable/0.1-AI-MANIFEST.a2ml` before any work.
+State is in `.machine_readable/6a2/STATE.a2ml`.
 
-== Getting Started
+== License
 
-[source,bash]
-----
-just build
-just test
-----
+AGPL-3.0-or-later — co-developed with son (hyperpolymath AGPL exception applies).
+See link:LICENSE[LICENSE].
