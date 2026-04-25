@@ -1,8 +1,0 @@
-;; SPDX-License-Identifier: AGPL-3.0-or-later
-;; Ecosystem position and relationships
-(ecosystem
-  (version "1.0.0")
-  (name "the-nash-equilibrium")
-  (type "library")
-  (purpose "6X strategy board game exploring economic systems, planetary boundaries, and post-scarcity futures")
-  (related-projects))

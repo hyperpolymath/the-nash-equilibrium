@@ -1,22 +1,97 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-= YOUR Template Repo Roadmap
+// Copyright (c) 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+= The Nash Equilibrium — Roadmap
+:toc:
+:icons: font
 
 == Current Status
 
-Initial development phase.
+*Phase: Design | Completion: 15% | Maturity: Experimental*
 
-== Milestones
+Co-developed by Jonathan D.A. Jewell and son. A 6X strategy board game where players
+guide civilisations from barter economies to post-scarcity futures while navigating
+planetary boundaries. The Nash Equilibrium mechanic — finding optimal strategies given
+what others are doing — is the core game-theoretic tension.
 
-=== v0.1.0 - Foundation
-* [ ] Core functionality
-* [ ] Basic documentation
-* [ ] CI/CD pipeline
+== Milestone Tracker
 
-=== v1.0.0 - Stable Release
-* [ ] Full feature set
-* [ ] Comprehensive tests
-* [ ] Production ready
+[cols="3,1,1"]
+|===
+| Milestone | Completion | Notes
 
-== Future Directions
+| *Phase 0: RSR scaffolding* (CI/CD, `.machine_readable`, contractiles)
+| 90%
+| CI workflows, 6A2 files, contractile trident complete
 
-_To be determined based on community feedback._
+| *Phase 0b: ABI/FFI interface stubs* (Idris2 ABI + Zig FFI)
+| 50%
+| `src/interface/abi/` Types/Layout/Foreign stubs present; Zig integration needs wiring
+
+| *Phase 1: Game design documentation*
+| 60%
+| OVERVIEW, core-mechanics, 6X-pillars, player-roles in progress; event-cards and board-design skeletal
+
+| *Phase 1b: Playtesting protocol + event cards + economic systems*
+| 30%
+| Skeleton docs exist; catalogues incomplete; playtesting plan not drafted
+
+| *Phase 2: Nash equilibrium solver / payoff-matrix engine*
+| 0%
+| Blocked on ADR-002 (Gleam/BEAM vs Rust/SPARK); not started
+
+| *Phase 3: Core game loop implementation*
+| 0%
+| Depends on Phase 2; not started
+
+| *Phase 4: Family playtesting — v0 physical prototype*
+| 0%
+| Paper prototype; family first session planned
+
+| *Phase 5: Digital companion (optional, post-physical)*
+| 0%
+| Out of scope until post-physical validation
+|===
+
+== Critical Next Actions
+
+. Complete `playtesting-plan.adoc` with concrete first-session checklist
+. Finish `event-cards.adoc` catalogue (currently skeleton)
+. Resolve ADR-002: implementation language for game engine (Gleam/BEAM or Rust/SPARK)
+. Draft Nash equilibrium solver spec for payoff-matrix integration
+. Run first family playtest of physical prototype (tabletop, paper rules)
+
+== Planned Releases
+
+=== v0.1 — Design Complete
+
+* [ ] All game design docs finished (board, player roles, event catalogue, economic systems)
+* [ ] Playtesting protocol documented
+* [ ] ADR-002 resolved
+* [ ] Physical prototype ready for family playtest
+
+=== v0.2 — Digital Prototype
+
+* [ ] Nash equilibrium solver implemented
+* [ ] Core game loop (resource/action/exchange/crisis/boundary phases)
+* [ ] Digital companion (rule reference, boundary dashboard, crisis deck)
+
+=== v1.0 — Stable Physical Edition
+
+* [ ] Post-playtesting balance revisions complete
+* [ ] Print-and-play files published
+* [ ] Optional Kickstarter campaign (see `docs/kickstarter/campaign-plan.adoc`)
+
+== Architecture Decision Log
+
+[cols="1,2,1"]
+|===
+| ADR | Decision | Status
+
+| ADR-001
+| Idris2 ABI definitions + Zig FFI implementation for any digital components
+| *Accepted*
+
+| ADR-002
+| Game engine implementation language: Gleam/BEAM vs Rust/SPARK
+| *Proposed* — resolution required before Phase 2
+|===
