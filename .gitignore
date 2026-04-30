@@ -14,7 +14,6 @@ Thumbs.db
 # Build
 /target/
 /_build/
-/build/
 /dist/
 /out/
 
@@ -112,3 +111,11 @@ deps/
 .cache/
 build/
 dist/
+
+# /build/ is a tracked config directory (build orchestration: contractile.just,
+# flake.nix, just/*.just, etc.) introduced in chore/root-cleanup. Whitelist
+# root-level /build/ so its contents are tracked. The blanket `build/` rule
+# above still ignores any nested `build/` directories (e.g. Rust crate
+# target/build/) — only the root-level path is exempt.
+!/build/
+!/build/**
