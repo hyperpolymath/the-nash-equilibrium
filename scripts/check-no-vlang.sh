@@ -41,14 +41,29 @@ PATTERNS=(
 
 PATTERN_OR=$(IFS='|'; echo "${PATTERNS[*]}")
 
+# Files that document the V-lang ban itself (the rule's own description
+# legitimately names "V-lang", "V-TRIPLE", etc.). Excluded by name.
+DOC_EXCLUSIONS=(
+    "estate-rules.yml"             # the workflow that calls this script
+    "check-no-vlang.sh"            # this script itself
+    "PLAYBOOK.a2ml"                # documents the [rsr-repo-skeleton] rules
+    "feedback_v_lang_banned.md"    # memory entry documenting the ban
+    "project_zig_unified_api.md"   # memory entry documenting the replacement
+)
+
+EXCLUDE_ARGS=()
+for f in "${DOC_EXCLUSIONS[@]}"; do
+    EXCLUDE_ARGS+=(--exclude="$f")
+done
+
 # Build grep arguments. Use -r to recurse, -n for line numbers, -i for
 # case-insensitive matching. Exclude .git, the affinescript subtree, and
-# this script itself (which contains the pattern strings).
+# files that legitimately document the ban.
 HITS=$(grep -rni -E "$PATTERN_OR" "$REPO_ROOT" \
     --exclude-dir=.git \
     --exclude-dir=affinescript \
     --exclude-dir=node_modules \
-    --exclude="$(basename "$0")" \
+    "${EXCLUDE_ARGS[@]}" \
     2>/dev/null || true)
 
 if [ -z "$HITS" ]; then
