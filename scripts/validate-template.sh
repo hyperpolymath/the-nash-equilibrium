@@ -303,7 +303,12 @@ echo ""
 
 check_file_exists "docs/developer/ABI-FFI-README.adoc" "ABI/FFI documentation"
 check_file_exists "TOPOLOGY.md" "Architecture topology" || check_file_exists "docs/architecture/TOPOLOGY.md" "Architecture topology (in docs)"
-check_file_exists "CONTRIBUTING.md" "Contribution guide"
+# CONTRIBUTING.md may live at root or in .github/ (GitHub auto-discovers either)
+if [ -f "$REPO_ROOT/CONTRIBUTING.md" ] || [ -f "$REPO_ROOT/.github/CONTRIBUTING.md" ]; then
+    [ "$VERBOSE" = "1" ] && log_pass "Contribution guide found"
+else
+    log_error "Required file missing: CONTRIBUTING.md (root or .github/)"
+fi
 
 # Governance can be at root or in docs/governance/
 if [ -f "$REPO_ROOT/GOVERNANCE.adoc" ] || [ -f "$REPO_ROOT/GOVERNANCE.md" ] || [ -d "$REPO_ROOT/docs/governance" ]; then
