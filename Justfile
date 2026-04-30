@@ -16,7 +16,7 @@ set positional-arguments := true
 
 # Import auto-generated contractile recipes (must-check, trust-verify, etc.)
 # Re-generate with: contractile gen-just
-import? "contractile.just"
+import? "build/contractile.just"
 
 # Project metadata — customize these
 project := "the-nash-equilibrium"
@@ -465,7 +465,7 @@ self-assess:
     HAS_IDRIS=false; ls *.ipkg >/dev/null 2>&1 && HAS_IDRIS=true
     HAS_ZIG=false; [ -f "build.zig" ] || [ -d "ffi/zig" ] && HAS_ZIG=true
     HAS_GLEAM=false; [ -f "gleam.toml" ] && HAS_GLEAM=true
-    HAS_CONTAINER=false; [ -f "Containerfile" ] || [ -f "container/Containerfile" ] && HAS_CONTAINER=true
+    HAS_CONTAINER=false; [ -f "Containerfile" ] || [ -f "container/Containerfile" ] || [ -f "build/Containerfile" ] && HAS_CONTAINER=true
     HAS_TESTS=false; [ -d "test" ] || [ -d "tests" ] || [ -d "__tests__" ] && HAS_TESTS=true
     HAS_API=false; grep -rq 'port\|listen\|endpoint' --include="*.exs" --include="*.rs" --include="*.toml" . 2>/dev/null && HAS_API=true
     IS_LIBRARY=false; [ -f "Cargo.toml" ] && grep -q '\[lib\]' Cargo.toml 2>/dev/null && IS_LIBRARY=true
@@ -555,12 +555,12 @@ self-assess:
         echo "  ○ .machine_readable/ai/PLACEHOLDERS.adoc — Template doc. Remove after init."
     fi
 
-    if [ -f "flake.nix" ] && ! command -v nix >/dev/null 2>&1; then
+    if { [ -f "build/flake.nix" ] || [ -f "flake.nix" ]; } && ! command -v nix >/dev/null 2>&1; then
         echo "  ○ flake.nix — Nix flake. Safe to remove if you don't use Nix."
         echo "    → KEEP if others might build with Nix."
     fi
 
-    if [ -f "guix.scm" ] && ! command -v guix >/dev/null 2>&1; then
+    if { [ -f "build/guix.scm" ] || [ -f "guix.scm" ]; } && ! command -v guix >/dev/null 2>&1; then
         echo "  ○ guix.scm — Guix package. Safe to remove if you don't use Guix."
         echo "    → KEEP if others might build with Guix."
     fi
@@ -997,10 +997,12 @@ container-build *args:
         cd container && ./ct-build.sh {{args}}
     elif [ -f "container/Containerfile" ]; then
         podman build -t the-nash-equilibrium:latest -f container/Containerfile .
+    elif [ -f "build/Containerfile" ]; then
+        podman build -t the-nash-equilibrium:latest -f build/Containerfile .
     elif [ -f "Containerfile" ]; then
         podman build -t the-nash-equilibrium:latest -f Containerfile .
     else
-        echo "No Containerfile found in container/ or project root"
+        echo "No Containerfile found in container/, build/, or project root"
         exit 1
     fi
 

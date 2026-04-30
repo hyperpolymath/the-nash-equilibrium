@@ -202,7 +202,7 @@ This repository is in active design. No playable game engine yet.
 | 0%
 |===
 
-See link:ROADMAP.adoc[ROADMAP.adoc] for the full milestone tracker and ADR log.
+See link:docs/status/ROADMAP.adoc[ROADMAP.adoc] for the full milestone tracker and ADR log.
 
 == Repository Structure
 
