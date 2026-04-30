@@ -1,0 +1,27 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+= Architecture Topology
+
+== Component Overview
+
+[cols="1,1,2", options="header"]
+|===
+| Component | Language | Purpose
+
+| game | Idris2 | 6X strategy board game
+|===
+
+== Data Flow
+
+----
+[Input] → [Processing] → [Output]
+----
+
+== Integration Points
+
+* *Upstream*: rsr-template-repo
+* *Downstream*: none
+
+== Deployment
+
+* Container: Stapeln Six ecosystem
+* CI/CD: GitHub Actions → Hypatia scan → Mirror
