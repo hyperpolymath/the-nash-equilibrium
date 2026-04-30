@@ -1,6 +1,6 @@
-= LLM Warmup — rsr-template-repo (User)
+= LLM Warmup — the-nash-equilibrium (User)
 
-== What is rsr-template-repo?
+== What is the-nash-equilibrium?
 
 See `README.adoc` for overview.
 
