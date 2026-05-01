@@ -1,0 +1,12 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+= Install Security Report
+:date: 2026-04-25T00:11:16+02:00
+
+== Platform
+* OS: linux (debian)
+* Arch: x86_64
+* Package manager: apt
+* Shell: bash
+
+== Security Status
+Run `just doctor` for full diagnostic.

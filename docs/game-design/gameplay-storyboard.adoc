@@ -1,0 +1,503 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (c) 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+= Gameplay Storyboard — Turn 12, Industrial Era
+:toc:
+:icons: font
+
+== Purpose
+
+A turn-by-turn walkthrough of one representative round, used to pressure-test
+the seven-phase turn structure (see `core-mechanics.adoc`) against the dynamic
+crisis-scaling formula and the four asymmetric pathways (`player-roles.adoc`).
+The economic structure assumed throughout — four factors and their returns,
+the Leontief production model, the Pigouvian/Ostromian dashboard, and the
+Hayekian emergence axiom — is specified in `economic-foundations.adoc`; this
+storyboard does not restate those commitments, it cites them.
+
+This is *design fiction*: nothing here is canonical card text — but every
+number is computed from the rules as currently written.
+
+If a phase here feels awkward, slow, or unclear, that is a finding — the rules
+need to change, not the storyboard.
+
+== Scene-Setting
+
+* *Players (4):* Isabella (Capitalist), Gandhi (Socialist), Musk (Techno-Utopian),
+  Greta (Green Activist).
+* *Era:* Industrial (turns 9–16). Turn 12 — three turns in.
+* *Tension:* Climate Change crossed Amber→Red at the *end* of turn 11. Players
+  are about to discover what that means for the crisis deck.
+
+=== Board state at start of turn 12
+
+Planetary Boundaries Dashboard. Stress 0–10. Linked-cascade arrows shown.
+
+----
+                         PLANETARY BOUNDARIES DASHBOARD
+                         (Green 0-3 | Amber 4-6 | Red 7-9 | Black 10)
+
+  Climate Change       [#######-----]  7  RED   ← tipped last turn
+                          |    \
+                          v     v
+  Ocean Acidification  [###---------]  3  green (cascade incoming)
+  Freshwater Change    [###---------]  3  green
+  Biogeochemical (N/P) [#####-------]  5  amber  ← industrial fertiliser
+  Land System Change   [#####-------]  5  amber  ← colonial expansion
+                          |
+                          v
+  Biosphere Integrity  [####--------]  4  amber  (linked to Land)
+  Aerosol Loading      [###---------]  3  green
+  Ozone Depletion      [#-----------]  1  green
+  Novel Entities       [------------]  0  green
+
+  ── Crisis card draw this turn ─────────────────────────────────────
+     N = 1 + (3 amber × 0.5) + (1 red × 1) + (0 black × 2)  =  3.5
+     ⌈3.5⌉ = 4 cards   (last turn was 1; the jump is the whole point)
+----
+
+=== Player boards at start of turn 12
+
+----
+  ┌─ ISABELLA (Capitalist) ────────────┐  ┌─ GANDHI (Socialist) ───────────────┐
+  │ Labour    ████░░░░░░  4            │  │ Labour    ███████░░░  7            │
+  │ Capital   █████████░  9  ← leader  │  │ Capital   ██░░░░░░░░  2            │
+  │ Nature    █░░░░░░░░░  1  ← bled    │  │ Nature    ████░░░░░░  4            │
+  │ Knowledge ██░░░░░░░░  2            │  │ Knowledge ███░░░░░░░  3            │
+  │ Energy    ██████░░░░  6            │  │ Energy    ███░░░░░░░  3            │
+  │ Infra: 3 Factory, 2 Trade Post     │  │ Infra: 4 Farm, 1 School            │
+  │ Hand: Trade Agreement (×2)         │  │ Hand: —                            │
+  └────────────────────────────────────┘  └────────────────────────────────────┘
+
+  ┌─ MUSK (Techno-Utopian) ────────────┐  ┌─ GRETA (Green Activist) ───────────┐
+  │ Labour    ███░░░░░░░  3  ← unrest  │  │ Labour    █████░░░░░  5            │
+  │ Capital   █████░░░░░  5            │  │ Capital   █░░░░░░░░░  1  ← weak    │
+  │ Nature    ██░░░░░░░░  2            │  │ Nature    ███████░░░  7  ← strong  │
+  │ Knowledge ██████░░░░  6  ← leader  │  │ Knowledge ████░░░░░░  4            │
+  │ Energy    ████░░░░░░  4            │  │ Energy    ██░░░░░░░░  2            │
+  │ Infra: 1 Factory, 2 Lab            │  │ Infra: 2 Farm, 1 Reserve, 1 Lab    │
+  │ Hand: Research (×1)                │  │ Hand: Trade Agreement (×1)         │
+  └────────────────────────────────────┘  └────────────────────────────────────┘
+----
+
+== Phase 1 — Production (recipe firings)
+
+Implements the Leontief production model from `economic-foundations.adoc` §3
+under the four-factor mapping in §4. Each player examines their recipe set;
+for each recipe whose inputs are present, the player elects to fire (paying
+input cubes, receiving output cubes, and emitting any externality token) or
+to idle the recipe. *The set of unfired recipes marks the binding-scarcity
+decisions of the turn* (`economic-foundations.adoc` §2.1).
+
+Recipe templates active in the Industrial era (full library lives in
+`core-mechanics.adoc`):
+
+----
+  RECIPE       INPUTS                  OUTPUTS              EXTERNALITY
+  ───────────  ──────────────────────  ───────────────────  ─────────────
+  Farm         1 Labour                2 Nature             —
+  Factory      1 Labour, 1 Energy      2 Capital            +1 pollution
+  Trade Post   1 Capital               1 Capital per        —
+                                       linked player
+  School       1 Labour                1 Knowledge          —
+  Lab          1 Knowledge, 1 Energy   2 Knowledge          —
+  Reserve      —                       1 Nature, -1 Land    —
+                                       stress (per turn)
+----
+
+Pollution tokens accumulate on the player board and convert to Climate
+stress in Phase 6 at a rate of 1 stress per 3 tokens (round down;
+remainder carries to next turn). This is the externality channel
+(`economic-foundations.adoc` §5).
+
+Per-player firings (factor flows in cubes; externality in tokens):
+
+----
+  ISABELLA  (start: L4, Cap9, Nat1, K2, E6 | 3 Factory, 2 Trade Post)
+    Factory ×3      pay 3 L, 3 E      → +6 Cap                ✓ all fire
+    Trade Post #1   pay 1 Cap         → +2 Cap (colonial      ✓ fires
+                                         route — pre-existing)
+    Trade Post #2   —                 → idle (no link yet)    ✗ idle
+    Colonial role   active iff ≥2 TP active                   — ✗ (only 1)
+    NET FACTOR FLOW:  -3 L, -3 E, +7 Cap
+    EXTERNALITY:      +3 pollution tokens
+
+  GANDHI    (start: L7, Cap2, Nat4, K3, E3 | 4 Farm, 1 School)
+    Farm ×4         pay 4 L           → +8 Nat                ✓ all fire
+    School          pay 1 L           → +1 K                  ✓ fires
+    Stability role  +1 social-floor token (table-wide)         ✓
+    NET FACTOR FLOW:  -5 L, +8 Nat, +1 K
+    EXTERNALITY:      0 tokens
+    DECISION SURFACED: 2 Labour left for Phase 2.
+
+  MUSK      (start: L3, Cap5, Nat2, K6, E4 | 1 Factory, 2 Lab)
+    Factory         pay 1 L, 1 E      → +2 Cap                ✓
+    Lab ×2          pay 2 K, 2 E      → +4 K                  ✓ both
+    Innovation role -1 Labour (automation displacement)        ✓
+    NET FACTOR FLOW:  -3 L (incl. role), -3 E, -2 K paid;
+                      +2 Cap, +4 K  →  net +2 Cap, +2 K
+    EXTERNALITY:      +1 pollution token
+    DECISION SURFACED: Energy at 1; Action phase E-purchases blocked.
+
+  GRETA     (start: L5, Cap1, Nat7, K4, E2 | 2 Farm, 1 Reserve, 1 Lab)
+    Farm ×2         pay 2 L           → +4 Nat                ✓
+    Reserve         —                 → +1 Nat, -1 Land       ✓ free
+                                         stress this turn
+    Lab             pay 1 K, 1 E      → +2 K                  ✓
+    Conservation    +1 Nat if Reserve active                   ✓
+    NET FACTOR FLOW:  -2 L, -1 E, -1 K paid; +6 Nat, +2 K  →
+                      -2 L, -1 E, +6 Nat, +1 K (and -1 Land)
+    EXTERNALITY:      0 tokens
+----
+
+*Design check 1.1 (scarcity legibility).* The unfired recipes — Isabella's
+Trade Post #2, Musk's Energy ceiling, Gandhi's Labour drawdown — *are* the
+interesting decisions of Phase 1. The previous additive model concealed all
+of them; this one surfaces them as physical idle/active tile states.
+
+*Design check 1.2 (4X-pillar binding).* Per `economic-foundations.adoc` §8,
+each recipe firing presupposes a history of eXplore/eXpand/eXperiment
+actions that established the recipe template, the hex it operates on, and
+the visibility of the surrounding biome. We do not re-narrate that history
+per turn, but each physical recipe tile *must* display the 4X-pillar
+preconditions on its face.
+
+*Design check 1.3 (factor returns are implicit).* Rent, Wage, Profit, and
+Interest are not paid as separate cube types; they are subsumed in the
+input/output structure of the recipes (Rent is implicit in the hex
+ownership underwriting Land inputs; Wage in the Labour cube paid; Interest
+in the Capital cube discount; Profit accrues to the player as the residual
+when a novel recipe earns more than competitive imitators). This is
+Limitation 4 in `economic-foundations.adoc` §9.
+
+== Phase 2 — Action (2–3 actions per player)
+
+Played roughly simultaneously, resolved in turn order.
+
+* *Isabella (3 actions):* (a) Build 1 Trade Post in Greta's territory — opens
+  trade lane. (b) Spend 4 Cap on Boundary Recovery — reduces Climate stress by 1
+  (mitigation tech). (c) Pay 2 Cap to draw a Trade Agreement card. *Capital: 9 → 1.*
+* *Gandhi (2 actions):* (a) Build 1 School (+1 Lab/turn ongoing). (b) Convert
+  1 Farm to Cooperative (raises poverty floor for whole table by 1). *Labour: 7 → 4.*
+* *Musk (3 actions):* (a) Begin Research: "Solar Cell" (-3 K, resolves in
+  Experiment phase). (b) Pay 2 Lab to suppress automation unrest. (c) Build 1 Lab.
+  *Knowledge: 6 → 3, Labour: 3 → 1 (danger).*
+* *Greta (2 actions):* (a) Restore Land boundary: spend 2 Nat → -1 Land stress.
+  (b) Sign Trade Agreement card with Isabella (deferred to Exchange phase).
+  *Nature: 7 → 5.*
+
+----
+  Actions taken this turn (icons):
+
+  Isabella  [trade-post] [recover Climate -1] [draw card]
+  Gandhi    [school]     [cooperative +floor]
+  Musk      [research]   [suppress unrest]    [lab]
+  Greta     [recover Land -1] [sign trade]
+
+  Boundary changes from Action phase:
+    Climate Change       7 → 6  (Isabella's mitigation)
+    Land System Change   5 → 4  (Greta's restoration)
+----
+
+*Design check:* Climate dropping back to 6 *might* take it out of Red before
+crisis draw — players will absolutely lawyer this. **Rule needed:** does the
+crisis-card formula sample boundaries at *start* of the Crisis phase, or at the
+*start of turn*? Recommend **start of turn**, otherwise the Action phase
+becomes "spam recovery to dodge crises" which collapses the whole strategic
+texture. *(File this as a design decision.)*
+
+== Phase 3 — Exchange
+
+Repeated-game trade and diplomacy. Trades are *typed*: each agreement is
+a card drawn from the trade-card library (`trade-cards.adoc`), with named
+template, defined parties, mechanical defection consequences, and a
+mechanical/strategic cue line on the card face. Free-form bartering is not
+supported by design.
+
+=== Bilateral: Greta ↔ Isabella
+
+*Card played:* `DEBT-FOR-NATURE SWAP`.
+
+* *Party A (creditor — Isabella):* pledges 1 Capital per turn for 3 turns,
+  plus 1 pollution-offset token per turn (cancels 1 of her Phase 1 pollution
+  tokens before Phase 6 conversion).
+* *Party B (debtor — Greta):* cedes 3 Nature now; commits 1 hex to permanent
+  Reserve status (the hex contributes Reserve recipe yield to the table for
+  the rest of the game).
+* *Defection clauses* (printed on card):
+** If Isabella misses a payment, Greta reclaims the Reserve hex and the
+   *defection ledger* (see Design check 3.2) records Isabella's break.
+** If Greta violates the Reserve, Isabella recovers all paid Capital and
+   the defection ledger records Greta's break.
+* *Tokens placed:* one signed-card token on the Greta–Isabella trade lane;
+  one Reserve marker on the ceded hex; one obligation tracker on Isabella
+  (3 turns).
+
+=== Multilateral (proposed, failed): Gandhi's Coal Phase-Out Pact
+
+* *Card played:* `COLLECTIVE EMISSIONS PACT`.
+* *Terms proposed:* No player adds a new Factory recipe to their active set
+  until turn 16. If upheld by all signatories at turn 16, table receives
+  -2 Climate stress.
+* *Quorum:* 3 of 4 signatories required for the pact to be *active*.
+* *Outcome:*
+** Isabella abstains (her economy is coal-dependent).
+** Gandhi, Musk, Greta sign.
+** Quorum (3/4) reached → pact *would* be active … but the card text
+   specifies that *unanimous* multilateral pacts on Climate-class boundaries
+   are required for table-wide stress reductions. Three-of-four pacts are
+   *advisory* and produce no mechanical reduction.
+** **Card moves to the *defection ledger* (face up, visible to all).**
+   Isabella's abstention is recorded with her token.
+
+----
+  Exchange ledger (end of phase):
+
+       Isabella  Gandhi  Musk   Greta
+        ────────  ──────  ────   ─────
+  DNS:    ●─────────────────────  ●     Debt-for-Nature Swap (active, 3 turns)
+  CEP:    [ABS]  ○      ○        ○     Collective Emissions Pact (advisory)
+
+  ●  signatory of an active agreement
+  ○  signatory of a failed/advisory pact (recorded in defection ledger)
+  [ABS]  abstained (recorded in defection ledger)
+----
+
+*Design check 3.1 (no historical flavour).* Trade cards carry mechanical
+mnemonics or strategic cues, not historical analogues; historical context
+lives in the rulebook appendix and the educational supplement
+(`economic-foundations.adoc` §9, Limitation 7).
+
+*Design check 3.2 (defection memory).* The defection ledger is a physical
+zone on the board where all failed/advisory pacts and missed obligations
+are placed face-up. Future trade cards may consult it (e.g.,
+`MOST-FAVOURED-NATION` will not sign with a player carrying ≥2 ledger
+tokens). This gives defection persistent mechanical memory across turns —
+the property that was missing under free-form bartering.
+
+*Design check 3.3 (information asymmetry preserved).* Pacts are signed in
+the open, but trade cards may also be played *face-down* (closed
+agreements; `economic-foundations.adoc` §6 on Akerlof-style asymmetric
+information). Closed trades carry a small Stability cost when later
+revealed, modelling the social cost of opacity.
+
+== Phase 4 — Experiment
+
+Speculative research; non-deterministic outcomes resolved on the d8.
+
+* Musk's "Solar Cell" research. Roll d8:
+** 1–2: *Failure.* Lose investment.
+** 3–5: *Partial.* Tech unlocked at half effect.
+** 6–7: *Success.* Tech unlocked, full effect.
+** 8: *Breakthrough.* Tech unlocked + draw a Breakthrough card.
+* Roll: *6.* Solar Cell unlocked at full effect.
+** Effect: Musk's Factories generate Energy without Climate stress for the rest
+   of the game. Open-source option available — would grant +1 Knowledge to every
+   player but reduce Musk's pathway lead.
+** Musk *keeps it private.* (Records this in pathway tracker — open-sourcing
+   counts toward the *Digital Commons* cooperative ending.)
+
+*Design check:* The keep/open-source decision is exactly the kind of
+defection-at-equilibrium choice the README promises. **The breakthrough card
+itself should make this choice mechanically prominent** — front-of-card text:
+"Keep (private bonus) — Open-source (collective bonus + 1 Cooperative ending
+progress)." The decision shouldn't be buried in a rulebook footnote.
+
+== Phase 5 — Crisis
+
+Draw 4 cards from the Industrial deck. Resolve in order.
+
+----
+  Card 1 ─ DUST BOWL                                    [Industrial / Environmental]
+  Trigger: Land ≥ 4. (Land = 4. Triggers.)
+  Effect : All players with Farm infrastructure: -1 Nature per Farm.
+           +1 Land System Change. +1 Biosphere Integrity (cascade).
+  Choice : Spend 2 Knowledge to "rotate crops" → halve effect for self.
+
+  Resolutions:
+    Gandhi (4 Farm): -4 Nature. Spends 2 K to rotate → -2 Nature instead.
+    Greta  (2 Farm): -2 Nature. Has Reserve → cancels effect entirely.
+    Isabella (0): unaffected.
+    Musk (0): unaffected.
+
+  Card 2 ─ COAL BOOM                                    [Industrial / Economic]
+  Effect : Factory-heavy players gain +2 Cap per Factory but +1 Climate per
+           Factory beyond the first.
+  Resolutions:
+    Isabella (3 Factory): +6 Cap, +2 Climate.
+    Musk     (1 Factory): +2 Cap, +0 Climate.
+    Gandhi/Greta: no Factory; unaffected.
+
+  Card 3 ─ MONTREAL FORESHADOWING                       [Industrial / Tech (positive)]
+  Effect : Knowledge leader may invest 3 K to pre-empt the Ozone boundary —
+           Ozone gains +2 max-resistance for the rest of the game.
+  Resolution:
+    Musk is K-leader (post-Solar at 3 K) — declines (just spent 3 on Solar).
+    Card discarded; effect lost.
+
+  Card 4 ─ WORKERS' REVOLT                              [Industrial / Social]
+  Trigger: Any player with Labour ≤ 2.
+  Hits  : Musk (Labour 1).
+  Effect: Musk loses 1 Factory OR concedes 2 Capital + 1 Stability to Gandhi
+          (mediation) OR spends 2 Capital + 1 Knowledge to suppress.
+  Choice: Musk concedes — pays Gandhi 2 Cap, +1 Stability to Gandhi.
+          (Suppression would have raised Musk's pathway "instability" tracker.)
+
+  ── Boundary changes from Crisis phase ────────────────
+     Land System Change    4 → 5  (Dust Bowl)
+     Biosphere Integrity   4 → 5  (Land cascade)
+     Climate Change        6 → 8  (Coal Boom — back into Red, deeper)
+----
+
+*Design check:* This is the densest phase by far — four cards is plausibly
+*too much* in real play time. **Recommend:** prototype with a "fast resolution"
+template (one card = at most one die roll + one binary choice). If a card
+needs more, it's a *Major Crisis* and is drawn instead of two regular cards.
+
+== Phase 6 — Boundary update
+
+Apply pending cascades, convert pollution tokens to Climate stress, settle
+stress markers, recompute zones.
+
+Pollution-token conversion this turn:
+* Phase 1 emissions: Isabella 3 tokens, Musk 1 token (table total: 4).
+* Debt-for-Nature offset (Isabella, this turn): -1 token.
+* Net pollution: 3 tokens → ⌊3/3⌋ = +1 Climate stress; remainder 0.
+
+----
+  END OF TURN 12 — BOUNDARIES
+
+  Climate Change       [#########---]  9  RED    (was 7; +1 production
+                                                   conversion, +2 Coal Boom,
+                                                   -1 mitigation)
+  Land System Change   [####--------]  4  amber  (was 5; -1 Reserve passive,
+                                                   -1 Greta restore action,
+                                                   +1 Dust Bowl)
+  Biosphere Integrity  [#####-------]  5  amber  (was 4; +1 Dust Bowl cascade)
+  Biogeochemical (N/P) [#####-------]  5  amber  (no change)
+  Ocean Acidification  [####--------]  4  amber  (was 3; +1 Climate-Red
+                                                   cascade)
+  Freshwater Change    [###---------]  3  green
+  Aerosol Loading      [###---------]  3  green
+  Ozone Depletion      [#-----------]  1  green
+  Novel Entities       [------------]  0  green
+
+  Zone count: 4 amber, 1 red, 4 green
+  Next-turn crisis draw: N = ⌈1 + 2 + 1⌉ = 4 cards. (Stays at 4.)
+----
+
+== Phase 7 — Assessment
+
+Check victory and loss conditions. Per `economic-foundations.adoc` §7
+(Emergence Axiom), *no separate stability index is computed*. Stability is
+read off the existing rule mechanisms — the boundary dashboard, the
+defection ledger, the Labour floors, and the next-turn crisis draw.
+
+* *Planetary Collapse?* No (Black boundaries: 0; need 4). **Read from the
+  dashboard.**
+* *Social Collapse?* Musk's Labour = 1 (after Phase 5 Workers' Revolt
+  resolution where he conceded). Above 0. Survives. **Read from his player
+  board.**
+* *Resource Exhaustion?* Isabella's Nature = 0 + 3 (Debt-for-Nature swap
+  this turn). Safe. **Read from her player board.**
+* *Cooperative-ending progress* (read from the cooperative-ending tracker
+  on the main board, not computed):
+** Digital Commons: 0/3 breakthroughs open-sourced (Musk declined to
+   open-source Solar this turn).
+** Harmonic Degrowth: blocked while Climate ≥ Red.
+** Post-Scarcity Utopia: blocked (no megaproject infrastructure yet).
+** Managed Decline: live but distant (no boundaries at Black yet).
+* *Pathway leaders* (read from each player's pathway-progress tracker):
+** Capitalist: Isabella (highest Capital among Capital pathways; one active
+   trade route — needs routes to *all* players).
+** Socialist: Gandhi (highest Stability; one cooperative built).
+** Green: Greta (one boundary recovered this turn; high Nature).
+** Techno-Utopian: Musk (one breakthrough; Solar held private).
+
+*Stability signals at end of turn 12 (read, not calculated):*
+
+* Boundary dashboard: 1 Red, 4 Amber, 4 Green — *worsening since last turn*.
+* Defection ledger: 1 advisory pact (CEP); 0 active defections.
+* Labour floors: Musk at 1 (one Workers' Revolt away from elimination);
+  others ≥ 4.
+* Next-turn crisis draw: 4 cards — *unchanged from this turn, no relief*.
+
+These four signals together are what the table reads to know whether the
+game is in equilibrium, drifting, or collapsing. No statistic combines them.
+
+*Turn ends.* Turn marker advances to 13. Era still Industrial.
+
+== Reading the Storyboard as a Design Tool
+
+Findings surfaced by walking this single turn:
+
+[cols="1,4"]
+|===
+| # | Finding
+
+| 1
+| The crisis-scaling formula needs a *sampling time* rule. Sampling at start of
+  turn keeps strategy honest; sampling at start of Crisis phase incentivises
+  recovery-spam. (See Phase 2 design check.)
+
+| 2
+| Failed pacts need persistent visibility. A discarded-pacts area on the board
+  gives defection mechanical memory across turns. (See Phase 3.)
+
+| 3
+| Breakthrough cards must surface the keep/open-source decision *on the card
+  face*, not in the rulebook. (See Phase 4.)
+
+| 4
+| Four crisis cards in a single Crisis phase is heavy. Either time-box card
+  resolution or introduce a "Major Crisis" that costs two card slots.
+  (See Phase 5.)
+
+| 5
+| Player-board ASCII (above) suggests the physical player boards should show
+  resource pools, infrastructure, hand, *and pathway-progress trackers* — the
+  four pathway-victory conditions need persistent in-game visibility, not a
+  rulebook lookup. (Implicit throughout.)
+
+| 6
+| The Industrial-era turn is dense: ~7 phases × 4 players × 4 crisis cards.
+  *Estimated wall-clock for turn 12: 25–35 minutes.* If the game is 32 turns,
+  that does not fit a single sitting. The era-counts may need to compress, or
+  later eras need to be lighter, not heavier.
+
+| 7
+| Stability is *emergent*, not measured (Hayek 1945; codified as the
+  Emergence Axiom in `economic-foundations.adoc` §7). No stability index,
+  harmony score, or harmonic-mean rating phase is to be introduced. The
+  signal lives in the dashboard, defection ledger, Labour floors, and
+  next-turn crisis draw — read off the board, not computed.
+
+| 8
+| Trade agreements must be *typed and named*, not free-form. Each trade is
+  a card from the trade-card library (`trade-cards.adoc`) with explicit
+  parties, terms, defection clauses, and a printed strategic cue. Free-form
+  bartering is removed from the design.
+
+| 9
+| Recipe firings must *bind* to 4X-pillar action history (eXplore, eXpand,
+  eXperiment) per `economic-foundations.adoc` §8. A recipe is not freestanding
+  furniture on the player board; it is a contract between an action history
+  and a production output. Physical recipe tiles must display 4X-pillar
+  precondition icons on their face.
+|===
+
+== Next Storyboards (suggested)
+
+To complete the design coverage, follow up with:
+
+. *Turn 4 Agrarian* — verifies the "low pressure / 1 card" baseline feels
+  *different enough* to be a distinct era, not just slow Industrial.
+. *Turn 18 Digital* — first appearance of AI Uprising and breakthrough chains;
+  exercises Novel Entities boundary.
+. *Turn 28 Post-Scarcity, cooperative ending attempt* — the Dyson Sphere
+  megaproject in active construction; verifies the cooperative-ending math.
+. *Turn 28 Post-Scarcity, cascade-collapse path* — the same turn but with
+  4 boundaries at Black; verifies the loss state actually feels like loss
+  rather than a stalemate.
+
+The *deltas* between these four storyboards are the design's load-bearing arc.
+If they all feel similar, the era progression isn't pulling its weight.

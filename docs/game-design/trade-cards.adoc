@@ -1,0 +1,455 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (c) 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+= Trade-Card Library (eXchange Pillar)
+:toc: preamble
+:icons: font
+:sectnums:
+:sectnumlevels: 2
+
+== Purpose
+
+The eXchange pillar is implemented through a small library of *typed* trade
+cards. Every agreement at the table is a card — there is no free-form
+bartering — and every card carries: parties, terms, duration, defection
+clauses, and a printed mechanical/strategic cue line on the card face. This
+document is the canonical card library; printed cards in the box should
+match this spec word-for-word in clause text.
+
+Foundations are specified in `economic-foundations.adoc`:
+
+* §2.2 (information symmetry, asymmetric information, fog) — informs which
+  cards may be played face-down and what penalty applies on reveal.
+* §2.4 (externalities) — informs the externality-related cards (Carbon
+  Offset, Collective Emissions Pact).
+* §5 (Pigouvian register) — the boundary dashboard against which
+  externality clauses register.
+
+The design decision (2026-04-30) is that **cards do not carry historical
+flavour text.** The cue line is a mechanical mnemonic or a strategic prompt
+to help the player reason about the card in play. Historical and
+educational context lives in the rulebook appendix and the educational
+supplement, not on the card face.
+
+== Card design conventions
+
+Every trade card uses the same template:
+
+----
+  ┌─────────────────────────────────────────────────┐
+  │ [icon]  CARD NAME                  [Class]      │
+  │         [Bilateral / Multilateral / Coercive]   │
+  ├─────────────────────────────────────────────────┤
+  │ TERMS:    Party A obligations                   │
+  │           Party B obligations                   │
+  │                                                 │
+  │ DURATION: [one-off | N turns | permanent]       │
+  │                                                 │
+  │ QUORUM:   [N/A | k of n signatories]            │
+  │                                                 │
+  │ DEFECTION:                                      │
+  │           If A breaks: ...                      │
+  │           If B breaks: ...                      │
+  │                                                 │
+  │ LEDGER:   [conditions under which a copy of     │
+  │           this card moves to the defection      │
+  │           ledger]                               │
+  ├─────────────────────────────────────────────────┤
+  │ CUE: [mechanical/strategic prompt for play —    │
+  │       not flavour]                              │
+  └─────────────────────────────────────────────────┘
+----
+
+*Class* is one of: Cooperative, Commodity, Procedural, Externality,
+Coercive, Post-conflict, Multilateral. The class determines which
+discard/ledger pile the card joins on resolution.
+
+*Quorum* applies only to Multilateral cards. Bilateral cards require both
+parties to sign.
+
+*Ledger* events make a face-up token visible to all players for the rest
+of the game (see `gameplay-storyboard.adoc` Phase 3 design check 3.2).
+
+== The library
+
+=== Card 1 — Debt-for-Nature Swap (bilateral, cooperative)
+
+----
+  ┌─────────────────────────────────────────────────┐
+  │ ⚖  DEBT-FOR-NATURE SWAP            [Cooperative]│
+  │    Bilateral                                    │
+  ├─────────────────────────────────────────────────┤
+  │ TERMS:                                          │
+  │  Party A (creditor):  pays 1 Capital/turn for   │
+  │                       3 turns                   │
+  │                       + 1 pollution offset/turn │
+  │  Party B (debtor):    cedes 3 Nature now        │
+  │                       + commits 1 hex to        │
+  │                         permanent Reserve       │
+  │                                                 │
+  │ DURATION: 3 turns (Reserve commitment permanent)│
+  │ QUORUM:   N/A (bilateral)                       │
+  │                                                 │
+  │ DEFECTION:                                      │
+  │  If A misses payment: B reclaims Reserve hex.   │
+  │                       Card to ledger (A break). │
+  │  If B violates Reserve: A recovers paid Capital.│
+  │                       Card to ledger (B break). │
+  │                                                 │
+  │ LEDGER:  Either defection above.                │
+  ├─────────────────────────────────────────────────┤
+  │ CUE: A pays a stream; B pays a stock. Mismatched│
+  │      time-shapes — both parties feel cheated    │
+  │      late if the other is winning.              │
+  └─────────────────────────────────────────────────┘
+----
+
+=== Card 2 — Long-Term Supply Contract (bilateral, commodity)
+
+----
+  ┌─────────────────────────────────────────────────┐
+  │ 🜨  LONG-TERM SUPPLY CONTRACT      [Commodity]  │
+  │     Bilateral                                   │
+  ├─────────────────────────────────────────────────┤
+  │ TERMS:                                          │
+  │  Party A (supplier):  delivers N units of       │
+  │                       resource R per turn for   │
+  │                       T turns                   │
+  │  Party B (buyer):     pays K Capital per turn   │
+  │                       for T turns                │
+  │                                                 │
+  │ Parameters set at signing:                      │
+  │   R ∈ {Labour, Capital, Nature, Knowledge,      │
+  │        Energy}                                  │
+  │   N ∈ {1, 2, 3}                                 │
+  │   K ∈ {1 … 6}                                   │
+  │   T ∈ {2 … 6}                                   │
+  │                                                 │
+  │ DURATION: T turns                               │
+  │ QUORUM:   N/A (bilateral)                       │
+  │                                                 │
+  │ DEFECTION:                                      │
+  │  If A under-delivers: B recovers all paid       │
+  │                       Capital this turn AND     │
+  │                       cancels remaining terms.  │
+  │  If B under-pays:     A retains undelivered     │
+  │                       resource AND cancels.     │
+  │                       In both cases: card to    │
+  │                       ledger.                   │
+  │                                                 │
+  │ LEDGER:  Either defection. Repeated supply-     │
+  │          contract defections by the same player │
+  │          block them from signing further        │
+  │          contracts of this type.                │
+  ├─────────────────────────────────────────────────┤
+  │ CUE: Volatility kills it. Sign when both        │
+  │      parties have stable production; tear up    │
+  │      when either's recipe set changes.          │
+  └─────────────────────────────────────────────────┘
+----
+
+=== Card 3 — Royalty / Concession (bilateral, commodity)
+
+----
+  ┌─────────────────────────────────────────────────┐
+  │ ⛏  ROYALTY / CONCESSION           [Commodity]  │
+  │     Bilateral                                   │
+  ├─────────────────────────────────────────────────┤
+  │ TERMS:                                          │
+  │  Party A (host):      grants Party B the right  │
+  │                       to fire one specified     │
+  │                       recipe on a specified     │
+  │                       hex Party A owns          │
+  │  Party B (operator):  fires the recipe paying   │
+  │                       its inputs; sends 1 unit  │
+  │                       of the recipe's primary   │
+  │                       output to Party A per     │
+  │                       firing                    │
+  │                                                 │
+  │ DURATION: Until either party cancels (1-turn    │
+  │           notice) or the hex changes hands      │
+  │ QUORUM:   N/A (bilateral)                       │
+  │                                                 │
+  │ EXTERNALITY:                                    │
+  │  Pollution emissions from the recipe register   │
+  │  on Party A's territory (the host's land bears  │
+  │  the externality), not Party B's.               │
+  │                                                 │
+  │ DEFECTION:                                      │
+  │  If A revokes without notice: B recovers the    │
+  │                               last 2 turns of   │
+  │                               royalty payments. │
+  │  If B fires without paying:   A may seize the   │
+  │                               recipe tile.      │
+  │                                                 │
+  │ LEDGER:  Sudden revocation; non-payment.        │
+  ├─────────────────────────────────────────────────┤
+  │ CUE: Host bears the pollution. Operator bears   │
+  │      the input cost. Asymmetric — designed for  │
+  │      it.                                        │
+  └─────────────────────────────────────────────────┘
+----
+
+=== Card 4 — Most-Favoured-Nation Clause (bilateral, procedural)
+
+----
+  ┌─────────────────────────────────────────────────┐
+  │ ★  MOST-FAVOURED-NATION CLAUSE   [Procedural]   │
+  │    Bilateral                                    │
+  ├─────────────────────────────────────────────────┤
+  │ TERMS:                                          │
+  │  Both parties commit: any future trade card     │
+  │  signed with a third party that offers terms    │
+  │  *better than* current MFN-bound terms must     │
+  │  be offered to the MFN partner first.           │
+  │                                                 │
+  │ DURATION: Permanent until cancelled (2-turn     │
+  │           notice required)                      │
+  │ QUORUM:   N/A (bilateral)                       │
+  │                                                 │
+  │ DEFECTION:                                      │
+  │  Signing a better-terms card with a third       │
+  │  party without first offering it to the MFN     │
+  │  partner is a defection. The MFN partner may    │
+  │  match the terms retroactively OR collect a     │
+  │  penalty of 3 Capital from the defector.        │
+  │  Card to ledger.                                │
+  │                                                 │
+  │ LEDGER:  Any unannounced better-terms trade.    │
+  │  Cannot sign a new MFN while ledger holds an    │
+  │  active MFN defection.                          │
+  ├─────────────────────────────────────────────────┤
+  │ CUE: Cheap to sign, expensive to live with.     │
+  │      Accepts a tax on your future flexibility   │
+  │      in exchange for the partner's.             │
+  └─────────────────────────────────────────────────┘
+----
+
+=== Card 5 — Carbon Offset Purchase (bilateral, externality)
+
+----
+  ┌─────────────────────────────────────────────────┐
+  │ 🜂  CARBON OFFSET PURCHASE      [Externality]   │
+  │     Bilateral                                   │
+  ├─────────────────────────────────────────────────┤
+  │ TERMS:                                          │
+  │  Party A (emitter):   pays 2 Capital per        │
+  │                       pollution token offset    │
+  │  Party B (sequester): on signing, marks one     │
+  │                       Reserve or Forest hex as  │
+  │                       offset-active for 3 turns;│
+  │                       absorbs 1 of A's pollution│
+  │                       tokens per turn (before   │
+  │                       Phase 6 conversion)       │
+  │                                                 │
+  │ DURATION: 3 turns                               │
+  │ QUORUM:   N/A (bilateral)                       │
+  │                                                 │
+  │ EXTERNALITY:                                    │
+  │  Verified offset only — Party B's hex must      │
+  │  remain a Reserve/Forest for the full duration. │
+  │  If B converts the hex to other use, offset     │
+  │  retroactively cancelled (see DEFECTION).       │
+  │                                                 │
+  │ DEFECTION:                                      │
+  │  If B converts the offset hex: all of A's       │
+  │                                cancelled tokens │
+  │                                return to A's    │
+  │                                pollution stock; │
+  │                                B refunds all    │
+  │                                Capital paid.    │
+  │  If A under-pays: offset suspends until paid.   │
+  │                                                 │
+  │ LEDGER:  Conversion of an offset-active hex.    │
+  ├─────────────────────────────────────────────────┤
+  │ CUE: Look at the dashboard. If conversion would │
+  │      push Climate to a new zone next turn, the  │
+  │      offset is worth more than its sticker.     │
+  └─────────────────────────────────────────────────┘
+----
+
+=== Card 6 — Tariff Wall (bilateral, coercive)
+
+----
+  ┌─────────────────────────────────────────────────┐
+  │ ▣  TARIFF WALL                    [Coercive]    │
+  │    Unilateral imposition (becomes bilateral on  │
+  │    retaliation)                                 │
+  ├─────────────────────────────────────────────────┤
+  │ TERMS:                                          │
+  │  Party A (imposer):  declares all Trade Posts   │
+  │                      and trade-route tokens     │
+  │                      between A and target       │
+  │                      Party B inactive for       │
+  │                      3 turns. Pays 1 Stability  │
+  │                      cost per turn.             │
+  │  Party B (target):   loses access to all Trade  │
+  │                      Post output flows from A   │
+  │                      for 3 turns. May retaliate │
+  │                      by playing this card on A. │
+  │                                                 │
+  │ DURATION: 3 turns                               │
+  │ QUORUM:   N/A (unilateral)                      │
+  │                                                 │
+  │ DEFECTION:                                      │
+  │  Tariff is itself the action; there is no       │
+  │  "defection" — only the choice to lift it       │
+  │  early. Lifting early returns 1 Stability to    │
+  │  imposer per remaining turn.                    │
+  │                                                 │
+  │ LEDGER:  Card automatically goes to the         │
+  │          defection ledger at the moment of      │
+  │          imposition (this *is* the defection    │
+  │          from any pre-existing trade            │
+  │          arrangement with the target).          │
+  ├─────────────────────────────────────────────────┤
+  │ CUE: You pay Stability *now* to deny the target │
+  │      *now*. Useful only if the target's blocked │
+  │      output is strategically critical to them   │
+  │      this era — not future eras.                │
+  └─────────────────────────────────────────────────┘
+----
+
+=== Card 7 — Reparations (bilateral, post-conflict)
+
+----
+  ┌─────────────────────────────────────────────────┐
+  │ ⚜  REPARATIONS                   [Post-conflict]│
+  │    Forced bilateral                             │
+  ├─────────────────────────────────────────────────┤
+  │ PRECONDITION:                                   │
+  │  Triggered only by a prior coercive card        │
+  │  (Tariff Wall, Embargo) or a Crisis card whose  │
+  │  text references reparations. Cannot be played  │
+  │  spontaneously.                                 │
+  │                                                 │
+  │ TERMS:                                          │
+  │  Party A (debtor):    transfers a fixed sum of  │
+  │                       resources to Party B over │
+  │                       T turns. Sum and T are    │
+  │                       set by the triggering card│
+  │                       or by table majority vote │
+  │                       if not specified.         │
+  │  Party B (creditor):  receives the resources;   │
+  │                       cannot impose any further │
+  │                       coercive card on A while  │
+  │                       reparations are paying.   │
+  │                                                 │
+  │ DURATION: T turns                               │
+  │ QUORUM:   N/A (forced; not negotiated)          │
+  │                                                 │
+  │ DEFECTION:                                      │
+  │  If A under-pays in any turn: B may impose a    │
+  │                              fresh coercive card│
+  │                              free of Stability  │
+  │                              cost; remaining    │
+  │                              reparations double.│
+  │                                                 │
+  │ LEDGER:  Any under-payment.                     │
+  ├─────────────────────────────────────────────────┤
+  │ CUE: Reparations can stabilise a post-conflict  │
+  │      table or destabilise it further. Watch the │
+  │      debtor's Labour floor while it pays.       │
+  └─────────────────────────────────────────────────┘
+----
+
+=== Card 8 — Collective Emissions Pact (multilateral)
+
+----
+  ┌─────────────────────────────────────────────────┐
+  │ ☰  COLLECTIVE EMISSIONS PACT    [Multilateral]  │
+  │    All players invited                          │
+  ├─────────────────────────────────────────────────┤
+  │ TERMS:                                          │
+  │  Each signatory commits: no new pollution-      │
+  │  emitting recipe added to active set until      │
+  │  end-of-era. Existing emitting recipes may      │
+  │  fire but no NEW ones may be built or unlocked. │
+  │                                                 │
+  │  At end-of-era, if pact upheld by all           │
+  │  signatories: each signatory receives Knowledge │
+  │  bonus (+2) and the table receives a one-time   │
+  │  -2 Climate stress reduction.                   │
+  │                                                 │
+  │ DURATION: To end of current era                 │
+  │ QUORUM:   *Unanimous* required for full effect. │
+  │           k-of-n with k < n: pact is *advisory* │
+  │           — no mechanical reduction; abstainers │
+  │           and signatories alike recorded in the │
+  │           defection ledger.                     │
+  │                                                 │
+  │ DEFECTION:                                      │
+  │  A signatory who builds a new emitting recipe   │
+  │  forfeits the bonus AND loses 2 Stability AND   │
+  │  the pact downgrades to advisory for the rest   │
+  │  of the era. Card to ledger.                    │
+  │                                                 │
+  │ LEDGER:  Abstention from a unanimous-pact       │
+  │          attempt; defection from a signed pact. │
+  ├─────────────────────────────────────────────────┤
+  │ CUE: The 3-of-4 case is the most interesting.   │
+  │      Abstaining doesn't escape the ledger; it   │
+  │      announces your priorities to everyone.     │
+  └─────────────────────────────────────────────────┘
+----
+
+== Defection-ledger interactions
+
+The defection ledger is a public face-up zone on the main board where
+copies of cards land when one of the conditions in their LEDGER row fires.
+The ledger has these systemic effects:
+
+. *Future MFN clauses cannot be signed by a player carrying ≥2 ledger
+  tokens.* (Card 4 — credibility cost.)
+. *Repeated Long-Term Supply Contract defections by the same player block
+  further contracts of that type with anyone.* (Card 2 — reputation
+  signalling.)
+. *Tariff Walls and Reparations are first-class ledger entries* — they
+  are inherent records, not consequences of breakage.
+. *At end-of-era*, players with the cleanest ledger receive a small
+  Stability bonus (+1) and players with the most-cluttered ledger receive
+  a Stability penalty (-1). This implements the long-run reputation effect
+  the README's repeated-game framing requires.
+
+The ledger is an *information* structure (`economic-foundations.adoc`
+§2.2): it is common knowledge once a card lands there, and it shapes the
+choice set of all future trades. A player's prior defections cannot be
+hidden — but a player's prior compliance is also visible, which is why
+the ledger is a strategic asset for cooperators and not only a punishment
+register.
+
+== Open design questions
+
+. *Should trades be playable face-down?* `economic-foundations.adoc` §6
+  discusses asymmetric-information trades (closed agreements with a
+  Stability cost on later reveal). The library above assumes open play;
+  closed-play variants need a separate design pass and likely a small
+  set of "Lemon" cards (in the Akerlofian sense) that exploit closed
+  play.
+
+. *Card-card interactions.* What happens when a Tariff Wall is imposed on
+  a player carrying an active Long-Term Supply Contract with the
+  imposer? Current draft answer: the LSC suspends for the duration; both
+  sides accumulate "debt" tokens that resolve when the wall lifts. This
+  needs playtest.
+
+. *Quorum rules for Multilateral cards beyond Card 8.* Are there
+  multilateral commodity contracts (e.g., a four-way Labour-pooling
+  cooperative)? Likely yes for Socialist-pathway design space, but not
+  yet specified.
+
+. *Card cost.* Cards above are assumed *free to play* — players have
+  trade cards in hand and can play them with no Capital cost. A future
+  iteration may charge a small Capital cost per signing, internalising
+  the transaction-cost insight from Coase (1960). This would also gate
+  spam.
+
+. *Card supply.* How many copies of each card exist in the game box?
+  The Debt-for-Nature Swap could plausibly recur many times in a single
+  game; the Reparations card should not be plentiful (it should feel
+  like a punctuation event). Print runs need calibration through
+  playtesting.
+
+. *Negotiation phase time-boxing.* Phase 3 in the storyboard hits a
+  natural time problem: with 8 cards available and 4 players, complex
+  multi-step negotiations are possible. Recommend a 5-minute hard cap
+  on Phase 3 with an explicit "anyone may pass" early termination.

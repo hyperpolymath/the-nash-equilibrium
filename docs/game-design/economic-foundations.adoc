@@ -1,0 +1,631 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (c) 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+= Economic Foundations of The Nash Equilibrium
+Jonathan D.A. Jewell (with co-author)
+v0.1, 2026-04-30
+:toc: preamble
+:icons: font
+:stem: latexmath
+:sectnums:
+:sectnumlevels: 3
+:xrefstyle: short
+
+[abstract]
+== Abstract
+
+_The Nash Equilibrium_ is a 6X strategy board game whose rules are constructed
+to encode four foundational principles of economic theory:
+(i) scarcity and opportunity cost;
+(ii) information symmetry and asymmetry, including fog;
+(iii) factors of production and their characteristic returns; and
+(iv) externalities. This document specifies the formal economic structure that
+underwrites the game's mechanics. We adopt the canonical four-factor production
+model (Land, Labour, Entrepreneurship, Capital, with returns Rent, Wage,
+Profit, Interest) and reconcile the game's five named gameplay resources
+to it, treating Energy as a produced intermediate good in the sense of
+Leontief (1941). We argue that the game's stability concept must be _emergent_
+in the sense of Hayek (1945) rather than _computed_ in the sense of Walras
+(1874) and Arrow & Debreu (1954); the planetary-boundaries dashboard is
+specified as a Pigouvian externality register, calibrated against the
+Stockholm framework of Rockström et al. (2009). We close with the limitations
+of the formalisation and the empirical (playtesting) programme required to
+validate it.
+
+== Introduction
+
+The intellectual aspiration of _The Nash Equilibrium_ is that a player who has
+played the game well has, _ipso facto_, acted as a competent economic agent
+under conditions of scarcity, partial information, factor heterogeneity, and
+externalities. The four principles above are not flavour; they are the load-
+bearing structure on which the rules are built. This document is intended as
+the canonical economic specification for the design — the artefact a future
+contributor consults to determine whether a proposed mechanic is consistent
+with the game's economic commitments.
+
+Two methodological commitments are made at the outset. First, we follow Robbins
+(1932, p.16) in defining economics as "the science which studies human
+behaviour as a relationship between ends and scarce means which have
+alternative uses"; the game's choice architecture must therefore make scarcity
+binding and alternatives visible. Second, we follow Hayek (1945) in treating
+equilibrium as a property that markets _reveal_ rather than _compute_; the
+game's rules must therefore generate stability signals through the existing
+mechanisms (production, exchange, externality registration) rather than
+through a separate index layer.
+
+The remainder of the paper is organised as follows. <<sec_principles>>
+formalises the four principles. <<sec_production>> states the four-factor
+production model. <<sec_mapping>> reconciles the five gameplay resources to
+the four factors. <<sec_externalities>> develops the boundary dashboard as a
+Pigouvian register. <<sec_information>> formalises the fog mechanic.
+<<sec_emergence>> defends the Hayekian commitment against the Walrasian
+alternative. <<sec_pillars>> binds the production model to the 6X action
+pillars. <<sec_limitations>> declares the model's limitations and open
+questions.
+
+[[sec_principles]]
+== The Four Principles
+
+=== Scarcity and Opportunity Cost
+
+A choice architecture exhibits _binding scarcity_ if, for at least one
+resource _r_ and one decision node _d_, the set of actions affordable at _d_
+is a proper subset of the set of actions available at _d_. The _opportunity
+cost_ of a chosen action _a_ at _d_ is the value of the highest-ranked
+alternative _a'_ foregone by choosing _a_, in the sense of Wicksteed (1910)
+and Buchanan (1969).
+
+In the game, binding scarcity is enforced at three levels:
+
+. *Resource scarcity in the production phase.* A player's recipe set is, at
+  most turns, infeasible to fire in full given the cubes held; the player
+  must choose which recipes to activate.
+. *Hex scarcity in the expansion phase.* The 7×9 hex map is exhausted in
+  finite turns; eXpand actions race for the most productive biomes.
+. *Action-budget scarcity per turn.* Each player has 2–3 actions per turn;
+  the choice of which to spend is the per-turn opportunity-cost decision.
+
+We claim that opportunity cost is _legible_ when, for any chosen action _a_,
+the foregone alternative _a'_ is visibly representable on the player's board.
+This is a design constraint, not a theorem: it is the principle that recipe
+tiles, hex tiles, and action tokens be physically distinguishable so that
+trade-offs are perceptible at a glance.
+
+=== Information, Symmetry, and Fog
+
+Following Aumann (1976), we distinguish _common knowledge_ (a fact known to
+all players, known to be known by all, ad infinitum) from _private
+information_ (held by a strict subset of players). Following Akerlof (1970)
+and Stiglitz & Weiss (1981), we recognise that asymmetric information
+generates inefficiencies — adverse selection, signalling costs, credit
+rationing — that no efficient equilibrium can ignore.
+
+In the game, the following are common knowledge:
+
+* The boundary dashboard state.
+* The set of recipes each player has unlocked (Schumpeterian innovation is
+  not patentable in this game, by design — see <<sec_limitations>>).
+* Hex ownership and infrastructure placement.
+* Active trade agreements and their terms.
+
+The following are private:
+
+* Hand of unrevealed Crisis cards (when held privately).
+* Hex contents under fog (eXplore is required to reveal them).
+* Resource stocks (in some variants — playtest decision pending).
+* Pact intentions prior to formal signing.
+
+The fog-of-war mechanism is therefore a _structural_ rather than _stylistic_
+feature: it is the game's enactment of the principle that information is
+costly to acquire (Stigler 1961) and that this cost shapes equilibrium.
+
+=== Factors of Production and Their Characteristic Returns
+
+We adopt the canonical four-factor model:
+
+[cols="1,2,1,3", options="header"]
+|===
+| Factor | Defining property | Return | Characteristic theory
+
+| Land
+| Inelastic supply; cannot be produced
+| Rent
+| Ricardo (1817); George (1879)
+
+| Labour
+| Time and effort of human persons
+| Wage
+| Smith (1776); Marshall (1890); Clark (1899)
+
+| Entrepreneurship
+| Bearing of uncertainty; novel combination
+| Profit
+| Knight (1921); Schumpeter (1934)
+
+| Capital
+| Produced means of production
+| Interest
+| Böhm-Bawerk (1889); Fisher (1930); Keynes (1936)
+|===
+
+Three theoretical claims attach to this taxonomy:
+
+. *Rent arises from differential productivity.* For two land plots _L_₁ and
+  _L_₂ with _L_₁ more productive, _L_₁ commands a positive rent above _L_₂'s
+  zero-rent margin (Ricardo 1817, Ch. II).
+. *Profit is the residual claimant.* After Rent, Wage, and Interest are paid
+  to their respective factors, the remainder accrues to the entrepreneur as
+  Profit; under perfect competition and full information, this residual
+  vanishes (Knight 1921, Pt. III). True Profit therefore arises only under
+  uncertainty.
+. *Interest is the price of time preference.* Following Böhm-Bawerk (1889)
+  and Fisher (1930), interest compensates the postponement of consumption.
+
+The game's recipe model implements these as follows. Each recipe specifies
+input cubes (Rent paid to Land, Wage paid to Labour, Interest implicit in
+Capital infrastructure cost) and output cubes (Profit residual to the
+operating player when the recipe is novel; commodity output otherwise). The
+returns are not paid to separate "factor owners" — in a single-player
+controlled-economy framing, the player owns all four factor positions — but
+the structure of the recipe makes the contribution of each factor visible.
+
+=== Externalities
+
+Following Pigou (1920), an _externality_ is a cost or benefit accruing to a
+party not party to the transaction that produced it. Following Coase (1960),
+the efficient internalisation of externalities is sensitive to property-rights
+allocation and transaction costs. Following Ostrom (1990), commons-pool
+resources can be governed by neither pure markets nor pure states, but by
+nested institutional arrangements with monitoring, sanctions, and
+conflict-resolution mechanisms.
+
+The game's central externality is the planetary-boundaries dashboard. Each
+production recipe that emits pollution registers stress on a specific
+boundary; the boundary's zone (Green/Amber/Red/Black) is common knowledge.
+The dashboard is therefore the game's _Pigouvian register_: it makes the
+external cost of every recipe firing publicly visible and quantitatively
+attributable.
+
+The game does not impose a Pigouvian _tax_ — there is no automatic levy on
+emissions. Instead, the externality manifests through the crisis-card draw
+formula
+
+[stem]
+++++
+N_t = \left\lceil 1 + 0.5 a_t + r_t + 2 b_t \right\rceil, \quad N_t \in [1, 5]
+++++
+
+where stem:[a_t, r_t, b_t] are the counts of Amber, Red, and Black boundaries
+at the start of turn stem:[t]. Polluting players raise stem:[N_t], drawing
+crisis cards on themselves and on every other player. This is a _Coasean_
+externality without internalisation by default; the game's diplomatic
+mechanisms (eXchange, multilateral pacts) provide the _Ostromian_ governance
+layer through which players may collectively internalise.
+
+[[sec_production]]
+== The Four-Factor Production Model
+
+We model production as a Leontief technology (Leontief 1941) with binary
+activation. Let stem:[\mathcal{R}] denote the set of recipes available in the
+current era, and stem:[\mathcal{F} = \{\text{Land, Labour, Capital, Knowledge}\}]
+the factor index set. (We discuss Knowledge's mapping to Entrepreneurship in
+<<sec_mapping>>.) Each recipe stem:[r \in \mathcal{R}] is characterised by an
+input vector stem:[\mathbf{i}_r \in \mathbb{Z}_{\geq 0}^{|\mathcal{F}|}] and
+an output vector stem:[\mathbf{o}_r], with possible non-zero externality
+component stem:[\mathbf{e}_r] indicating boundary stress emitted.
+
+Player stem:[i] holds factor stocks stem:[\mathbf{x}_{i,t}] at the start of
+turn stem:[t]. The activation indicator for recipe stem:[r] under player
+stem:[i] is
+
+[stem]
+++++
+\alpha_{i,r,t} = \begin{cases}
+1 & \text{if } \mathbf{x}_{i,t} \geq \mathbf{i}_r \text{ and player elects to fire} \\
+0 & \text{otherwise}
+\end{cases}
+++++
+
+The post-production stock is
+
+[stem]
+++++
+\mathbf{x}_{i,t}^+ = \mathbf{x}_{i,t} + \sum_{r \in \mathcal{R}_i} \alpha_{i,r,t}(\mathbf{o}_r - \mathbf{i}_r)
+++++
+
+and the externality contribution to the boundary register is
+stem:[\sum_r \alpha_{i,r,t} \mathbf{e}_r]. Recipes the player owns but cannot
+or chooses not to fire contribute zero. This formulation has three desirable
+properties for board-game implementation:
+
+. *Atomicity.* Each recipe either fires or does not; there are no fractional
+  outputs.
+. *Local computability.* Activation depends only on the player's own stocks
+  and decisions; no global price vector need be solved.
+. *Visible scarcity.* The set of unfired recipes is precisely the set of
+  binding-scarcity decisions made this turn.
+
+The Leontief specification is appropriate to board-game discreteness in a way
+that the more general Cobb–Douglas form stem:[Y = AL^\alpha K^\beta] is not:
+the latter requires fractional inputs and outputs and presumes smooth
+substitution, neither of which is implementable with cubes on cardboard. We
+note that the Leontief specification _excludes_ smooth factor substitution by
+construction; we restore an analogue of substitution at the _recipe-choice_
+level (a player may select between a Labour-intensive Farm recipe and a
+Capital-intensive Mechanised Farm recipe) rather than at the marginal level.
+
+[[sec_mapping]]
+== The Resource-to-Factor Mapping
+
+The game's design names five gameplay resources: Labour, Capital, Nature,
+Knowledge, Energy. Reconciliation to the four-factor model requires two
+non-trivial moves.
+
+=== Nature ↔ Land
+
+Nature is the game's Land factor under the ecological-economics rebranding of
+Daly (1977), Georgescu-Roegen (1971), and Raworth (2017). The substantive
+content is Ricardian: Nature is inelastically supplied, exhibits differential
+productivity by biome, and accrues Rent to its holder. The terminological
+substitution from "Land" to "Nature" is a design choice to foreground the
+boundary-stress register in <<sec_externalities>>.
+
+=== Knowledge ↔ Entrepreneurship
+
+We adopt the Schumpeterian rather than Beckerian reading of Knowledge.
+Becker (1964) and Mincer (1974) treat knowledge as _human capital_ — a stock
+that augments Labour's marginal product and earns a wage premium.
+Schumpeter (1934) treats it as the input to _innovation_ — the creation of
+"new combinations" that earn temporary monopoly Profit until competitive
+imitation erodes them.
+
+The game uses the Schumpeterian reading: Knowledge is consumed in the
+eXperiment phase to attempt breakthroughs (with stochastic success governed
+by a d8 roll), and successful breakthroughs unlock new recipes that earn
+Profit until they are open-sourced or imitated. Knowledge is therefore _the
+factor that, when combined with uncertainty, becomes Entrepreneurship_. The
+return to Knowledge in the game is Profit, not a wage premium.
+
+=== Energy as Intermediate Good
+
+Energy is _not_ a fifth factor. We treat it as a produced intermediate good
+in the sense of Leontief (1941): a commodity that appears as the output of
+some recipes (e.g., Coal Plant, Solar Plant) and as the input to others
+(e.g., Factory, Lab). This is consistent with the standard treatment of
+energy in input-output analysis and with the absence of energy from the
+classical four-factor enumeration.
+
+The cost of this treatment is that we cannot represent energy's
+thermodynamic uniqueness — its irreversibility in the sense of Georgescu-
+Roegen (1971) — at the production-function level. We restore this asymmetry
+through the externality channel: energy production from fossil sources
+emits Climate stress, while production from renewable sources does not.
+
+The complete mapping:
+
+[cols="1,1,1,2", options="header"]
+|===
+| Game resource | Factor | Return | Notes
+
+| Nature
+| Land
+| Rent
+| Hex-derived; biome-differentiated; non-replenishable except by recovery action
+
+| Labour
+| Labour
+| Wage
+| Population-derived; floors at 0 (social collapse)
+
+| Capital
+| Capital
+| Interest
+| Infrastructure-derived; compounds when reinvested
+
+| Knowledge
+| Entrepreneurship (when applied)
+| Profit
+| Stock under Becker; flow into novelty under Schumpeter; we use Schumpeter
+
+| Energy
+| —
+| —
+| Intermediate good; produced by some recipes, consumed by others
+|===
+
+[[sec_externalities]]
+== The Planetary Boundaries Dashboard as Pigouvian Register
+
+We specify the boundary dashboard as a public register of externality stress.
+Let stem:[\mathcal{B} = \{B_1, \ldots, B_9\}] be the nine boundaries of
+Rockström et al. (2009) and Steffen et al. (2015): Climate Change, Biosphere
+Integrity, Land System Change, Freshwater Change, Biogeochemical Flows
+(N/P), Ocean Acidification, Atmospheric Aerosol Loading, Stratospheric Ozone
+Depletion, and Novel Entities. Let stem:[s_{j,t} \in \{0, 1, \ldots, 10\}]
+denote the stress on boundary stem:[j] at time stem:[t]. Stress increments
+arise from:
+
+. *Recipe externality emissions* stem:[\mathbf{e}_r] (endogenous to player
+  choice).
+. *Cascade propagation* across linked boundaries (rule-determined; e.g.,
+  Climate→Ocean, Land→Biosphere).
+. *Crisis-card effects* (stochastic, drawn from era-stratified deck).
+
+Stress decrements arise from:
+
+. *Recovery actions* (player spends Capital and/or Knowledge to reduce
+  stress on a chosen boundary).
+. *Positive crisis events* (e.g., a Montreal-Protocol-analogue card in the
+  Digital era).
+
+The dashboard is _Pigouvian_ in that it makes external costs publicly
+visible and attributable. It is _not_ Pigouvian in the standard textbook
+sense of imposing a tax stem:[\tau = \text{MEC}] equal to marginal external
+cost; the game has no centralised taxing authority. Instead, the externality
+manifests through:
+
+. The crisis-draw formula stem:[N_t], which raises crisis frequency for all
+  players when stress is high (a _shared_ cost — itself an externality).
+. Loss thresholds (4+ boundaries at Black ⇒ Planetary Collapse, all players
+  lose), which impose a discrete catastrophic cost.
+. Cooperative-victory thresholds, which require all-or-most boundaries in
+  Green/Amber, providing a positive incentive for collective restraint.
+
+This is closer to the _Ostromian_ commons-governance arrangement (Ostrom
+1990) than to a Pigouvian tax: institutional rules and player coordination,
+not a central planner, are the means of internalisation. We make this design
+choice explicit because it foregrounds the diplomatic mechanism (eXchange)
+as the primary lever rather than as colour.
+
+[[sec_information]]
+== Information, Symmetry, and the Fog Mechanic
+
+The fog mechanic is the game's enactment of costly information acquisition
+in the sense of Stigler (1961) and the Hayekian dispersion of knowledge
+(Hayek 1945). At game start, hexes outside each player's starting region
+are face-down. The eXplore action reveals one or more adjacent hexes at a
+cost (one action token, possibly Knowledge expenditure). Information
+acquired is privately held by default and may be made common knowledge
+through eXchange (sharing maps under a trade agreement) or through eXpand
+(visible movement onto a hex reveals its contents to all observers).
+
+The game-theoretic significance of fog is that it creates _credible scope
+for surprise_: a player may exit fog with a configuration of resources
+unanticipated by others, generating the Knightian uncertainty that makes
+genuine Profit possible (cf. Knight 1921, Pt. III; Schumpeter 1934). Without
+fog, the game collapses to a perfect-information game in which optimal
+strategies are (in principle) computable, and the Schumpeterian Profit
+channel evaporates.
+
+We note that fog is _asymmetric_: each player has private information about
+their own explored area. This is not the symmetric incomplete information of
+a typical Bayesian game (Harsanyi 1967), but a true asymmetric-information
+setting. Lemons-style adverse selection (Akerlof 1970) is therefore in
+principle possible — a player may offer to trade resources from a hex of
+which the buyer knows little — and is a designed-in feature of the eXchange
+phase. Trade-card text should accordingly include _due-diligence_ provisions
+(see <<sec_pillars>>).
+
+[[sec_emergence]]
+== The Emergence of Stability
+
+We confront a foundational design choice: should the game compute a
+stability index, or should stability emerge?
+
+The Walrasian tradition (Walras 1874; Arrow & Debreu 1954) treats equilibrium
+as the simultaneous solution of all market-clearing conditions; in its
+fictional implementation an _auctioneer_ calls out price vectors until
+markets clear (_tâtonnement_). The Hayekian critique (Hayek 1945) is that
+no such auctioneer exists in actual markets, and equilibrium emerges from
+local agents responding to local information through the price system.
+
+Daskalakis, Goldberg & Papadimitriou (2009) showed that computing a Nash
+equilibrium is PPAD-complete; no polynomial algorithm is known. Asking four
+players around a table to solve for a Nash equilibrium each turn is
+therefore not merely impractical but theoretically infeasible.
+
+We adopt the Hayekian commitment as a design axiom:
+
+[NOTE]
+====
+*Axiom (Emergent Stability).* The game shall maintain no separate stability
+index, harmony score, or computed equilibrium statistic. Stability shall be
+read off the existing rule mechanisms: the boundary dashboard, the active-
+versus-discarded pact ledger, the Labour floors, and the next-turn crisis
+draw count. If stability is not visible from these signals, the rule system
+is under-specified, not under-instrumented.
+====
+
+This axiom has three consequences for the design:
+
+. *No "Stability Index" mechanic.* Earlier drafts of the storyboard
+  proposed a weighted-sum index. This is rejected on Hayekian grounds.
+. *No "Temperature Phase".* Earlier drafts proposed a player-rating
+  mechanism with harmonic-mean aggregation. This is rejected for the same
+  reason: it is a Walrasian auctioneer in a different costume.
+. *Cooperative endings are gated on observable conditions.* The
+  Post-Scarcity Utopia, Harmonic Degrowth, Digital Commons, and Managed
+  Decline endings each specify their conditions in terms of dashboard
+  state, infrastructure, and player survival — quantities already on
+  the board.
+
+The game-theoretic claim — that the cooperative-ending boundary states are
+approximate Nash equilibria of the underlying repeated game — is to be
+established offline by the design team using a payoff-matrix analysis (see
+ROADMAP item ADR-002), not at the table.
+
+[[sec_pillars]]
+== Binding to the 6X Action Pillars
+
+Production does not occur in a vacuum. Each recipe-firing presupposes a
+history of actions that established the necessary inputs. We therefore bind
+each recipe activation to a precondition over the 6X pillar action history:
+
+[cols="1,2,2", options="header"]
+|===
+| Pillar | Generates | Recipe precondition supplied
+
+| eXplore
+| Knowledge of map; reveals hexes
+| Visibility of biome (required to know which recipes are even applicable)
+
+| eXpand
+| Hex ownership; Land-factor access
+| The Land input (a recipe cannot fire on an unowned hex)
+
+| eXploit
+| Recipe firings (production phase itself)
+| The activation event itself
+
+| eXterminate
+| Denial of inputs to rivals
+| Disables a rival's recipes (e.g., trade-route blockade reduces input flow)
+
+| eXchange
+| Re-routes inputs and outputs across players
+| A player's surplus may satisfy another's input requirement
+
+| eXperiment
+| Unlocks new recipes
+| Recipe membership in stem:[\mathcal{R}_i] is itself a function of
+  prior eXperiment activity
+|===
+
+A recipe tile is therefore not freestanding furniture on a player board; it
+is a contract between a 6X action history and a production output. Visually,
+this can be made legible by colour-coding recipe-tile preconditions to the
+6X pillar that supplied them.
+
+We note that this binding closes a potential exploit in earlier drafts: a
+player could not, under the bound model, suddenly fire a Factory recipe in
+the first turn merely because they have the cubes. The Factory recipe
+requires (i) a hex with appropriate terrain (eXplore + eXpand), (ii) the
+recipe template to be in the player's set (eXperiment in some variants;
+era-default in others), and (iii) the input cubes (the production
+precondition). All three preconditions are independently checkable on the
+board.
+
+[[sec_limitations]]
+== Limitations and Open Questions
+
+We declare the following limitations of the present formalisation. Each is
+a candidate for resolution through playtesting or further design work.
+
+. *Single-player controlled-economy framing.* We treat each player as the
+  sole owner of all four factor positions in their region. We do not model
+  intra-civilisation factor markets (workers, landlords, capitalists, and
+  entrepreneurs as distinct agents). This is a deliberate simplification;
+  expansions could introduce role cards (e.g., the existing Gandhi card
+  approximates a labour-coalition model) that partially restore this
+  structure.
+. *No money, no prices.* The game uses cube barter rather than a numeraire
+  good. This sacrifices the Walrasian-price-vector channel but greatly
+  simplifies bookkeeping. A future expansion could introduce a Currency
+  resource as a Hicksian numeraire (Hicks 1939), with attendant inflation
+  mechanics.
+. *Recipe novelty is non-rivalrous and non-patentable.* Once a recipe is
+  unlocked by any player, design intent is that other players may unlock
+  it through their own eXperiment actions, but a player cannot prevent
+  another's eXperimentation. This is a deliberate departure from real
+  intellectual-property regimes; the design choice favours legibility and
+  short rules over IP-system simulation.
+. *The Profit residual is implicit, not explicit.* The four-factor returns
+  (Rent, Wage, Profit, Interest) are not paid out as separate cube types in
+  the current model; they are subsumed in the recipe input/output structure.
+  A future iteration could introduce explicit factor-return tokens, at the
+  cost of additional component complexity.
+. *Asymmetric information equilibria are not solved.* Our claim that
+  cooperative endings are approximate Nash equilibria of the repeated game
+  presumes a tractable payoff-matrix model that has not yet been
+  constructed (see ROADMAP ADR-002). Until that model exists, the claim is
+  a design conjecture, not a theorem.
+. *Boundary cascade weights are not calibrated.* The cascade graph topology
+  is given; the cascade weights (how much stress propagates from one
+  boundary to another) are stipulative. Calibration against the
+  Earth-system literature (Steffen et al. 2015; Lenton et al. 2008) is
+  required and is non-trivial.
+. *Card text replaces historical flavour with mechanical/strategic cue text
+  by design decision (2026-04-30).* Cards do not carry historical analogues
+  in their flavour text; they carry mechanical mnemonics or strategic
+  prompts. The educational-historical content lives in the rulebook
+  appendix and the supplementary educational supplement, not on the cards
+  themselves.
+
+== References
+
+[bibliography]
+* [[[akerlof70]]] Akerlof, G. A. (1970). "The Market for 'Lemons':
+  Quality Uncertainty and the Market Mechanism." _Quarterly Journal of
+  Economics_ 84(3): 488–500.
+* [[[arrowdebreu54]]] Arrow, K. J., & Debreu, G. (1954). "Existence of
+  an Equilibrium for a Competitive Economy." _Econometrica_ 22(3): 265–290.
+* [[[aumann76]]] Aumann, R. J. (1976). "Agreeing to Disagree." _Annals of
+  Statistics_ 4(6): 1236–1239.
+* [[[axelrod84]]] Axelrod, R. (1984). _The Evolution of Cooperation._
+  Basic Books.
+* [[[becker64]]] Becker, G. S. (1964). _Human Capital: A Theoretical and
+  Empirical Analysis._ Columbia University Press.
+* [[[bohmbawerk89]]] Böhm-Bawerk, E. von (1889). _Kapital und Kapitalzins._
+  Wagner.
+* [[[buchanan69]]] Buchanan, J. M. (1969). _Cost and Choice: An Inquiry in
+  Economic Theory._ Markham.
+* [[[clark99]]] Clark, J. B. (1899). _The Distribution of Wealth: A Theory
+  of Wages, Interest and Profits._ Macmillan.
+* [[[coase60]]] Coase, R. H. (1960). "The Problem of Social Cost."
+  _Journal of Law and Economics_ 3: 1–44.
+* [[[daly77]]] Daly, H. E. (1977). _Steady-State Economics._ Freeman.
+* [[[dgp09]]] Daskalakis, C., Goldberg, P. W., & Papadimitriou, C. H.
+  (2009). "The Complexity of Computing a Nash Equilibrium." _SIAM
+  Journal on Computing_ 39(1): 195–259.
+* [[[fisher30]]] Fisher, I. (1930). _The Theory of Interest._ Macmillan.
+* [[[george79]]] George, H. (1879). _Progress and Poverty._
+* [[[georgescuroegen71]]] Georgescu-Roegen, N. (1971). _The Entropy Law
+  and the Economic Process._ Harvard University Press.
+* [[[harsanyi67]]] Harsanyi, J. C. (1967). "Games with Incomplete
+  Information Played by 'Bayesian' Players, I–III." _Management Science_
+  14(3, 5, 7).
+* [[[hayek45]]] Hayek, F. A. (1945). "The Use of Knowledge in Society."
+  _American Economic Review_ 35(4): 519–530.
+* [[[hicks39]]] Hicks, J. R. (1939). _Value and Capital._ Clarendon.
+* [[[keynes36]]] Keynes, J. M. (1936). _The General Theory of Employment,
+  Interest and Money._ Macmillan.
+* [[[knight21]]] Knight, F. H. (1921). _Risk, Uncertainty, and Profit._
+  Houghton Mifflin.
+* [[[lenton08]]] Lenton, T. M., et al. (2008). "Tipping Elements in the
+  Earth's Climate System." _PNAS_ 105(6): 1786–1793.
+* [[[leontief41]]] Leontief, W. W. (1941). _The Structure of American
+  Economy, 1919–1929._ Harvard University Press.
+* [[[marshall90]]] Marshall, A. (1890). _Principles of Economics._
+  Macmillan.
+* [[[mincer74]]] Mincer, J. (1974). _Schooling, Experience, and Earnings._
+  NBER.
+* [[[nash50]]] Nash, J. F. (1950). "Equilibrium Points in N-Person Games."
+  _PNAS_ 36(1): 48–49.
+* [[[ostrom90]]] Ostrom, E. (1990). _Governing the Commons: The Evolution
+  of Institutions for Collective Action._ Cambridge University Press.
+* [[[pigou20]]] Pigou, A. C. (1920). _The Economics of Welfare._ Macmillan.
+* [[[raworth17]]] Raworth, K. (2017). _Doughnut Economics: Seven Ways to
+  Think Like a 21st-Century Economist._ Random House.
+* [[[ricardo17]]] Ricardo, D. (1817). _On the Principles of Political
+  Economy and Taxation._ John Murray.
+* [[[robbins32]]] Robbins, L. (1932). _An Essay on the Nature and
+  Significance of Economic Science._ Macmillan.
+* [[[rockstrom09]]] Rockström, J., et al. (2009). "A Safe Operating Space
+  for Humanity." _Nature_ 461: 472–475.
+* [[[romer90]]] Romer, P. M. (1990). "Endogenous Technological Change."
+  _Journal of Political Economy_ 98(5, Pt. 2): S71–S102.
+* [[[schumpeter34]]] Schumpeter, J. A. (1934). _The Theory of Economic
+  Development._ Harvard University Press.
+* [[[smith1776]]] Smith, A. (1776). _An Inquiry into the Nature and Causes
+  of the Wealth of Nations._ Strahan & Cadell.
+* [[[steffen15]]] Steffen, W., et al. (2015). "Planetary Boundaries:
+  Guiding Human Development on a Changing Planet." _Science_ 347(6223):
+  1259855.
+* [[[stigler61]]] Stigler, G. J. (1961). "The Economics of Information."
+  _Journal of Political Economy_ 69(3): 213–225.
+* [[[stiglitzweiss81]]] Stiglitz, J. E., & Weiss, A. (1981). "Credit
+  Rationing in Markets with Imperfect Information." _American Economic
+  Review_ 71(3): 393–410.
+* [[[walras74]]] Walras, L. (1874). _Éléments d'économie politique pure._
+  Corbaz.
+* [[[wicksteed10]]] Wicksteed, P. H. (1910). _The Common Sense of
+  Political Economy._ Macmillan.
