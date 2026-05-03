@@ -1,0 +1,30 @@
+{
+  "capitalist": {
+    "name": "Capitalist",
+    "fantasy": "Rapid capital accumulation, market expansion, high production.",
+    "startingResources": { "labour": 3, "capital": 6, "nature": 2, "knowledge": 2, "energy": 2 },
+    "income": { "capital": 1 },
+    "ability": "market_multiplier"
+  },
+  "socialist": {
+    "name": "Socialist",
+    "fantasy": "Social stability, redistribution, planned resilience.",
+    "startingResources": { "labour": 5, "capital": 3, "nature": 3, "knowledge": 2, "energy": 1 },
+    "income": { "labour": 1 },
+    "ability": "public_provision"
+  },
+  "green": {
+    "name": "Green",
+    "fantasy": "Ecological preservation, boundary repair, resilient commons.",
+    "startingResources": { "labour": 3, "capital": 2, "nature": 6, "knowledge": 2, "energy": 1 },
+    "income": { "nature": 1 },
+    "ability": "regenerative_practice"
+  },
+  "techno_utopian": {
+    "name": "Techno-Utopian",
+    "fantasy": "Research acceleration, automation, breakthrough solutions.",
+    "startingResources": { "labour": 2, "capital": 3, "nature": 2, "knowledge": 6, "energy": 2 },
+    "income": { "knowledge": 1 },
+    "ability": "accelerated_research"
+  }
+}

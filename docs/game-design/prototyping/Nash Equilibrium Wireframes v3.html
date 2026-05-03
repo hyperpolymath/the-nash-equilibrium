@@ -1,0 +1,1802 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=1280" />
+  <title>Nash Equilibrium — Wireframes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Kalam:wght@300;400;700&family=Special+Elite&display=swap" rel="stylesheet" />
+  <style>
+/* === Nash Equilibrium — Wireframe System === */
+:root {
+  --paper: oklch(0.97 0.01 85);
+  --paper-2: oklch(0.94 0.015 80);
+  --ink: oklch(0.27 0.02 250);
+  --ink-soft: oklch(0.45 0.02 250);
+  --ink-faint: oklch(0.68 0.015 250);
+  --terra: oklch(0.62 0.14 35);
+  --moss:  oklch(0.55 0.10 145);
+  --sky:   oklch(0.62 0.10 235);
+  --amber: oklch(0.78 0.13 75);
+  --rose:  oklch(0.60 0.16 25);
+  --hand: 'Caveat', 'Kalam', cursive;
+  --hand2: 'Kalam', 'Caveat', cursive;
+  --type: 'Special Elite', ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); font-family: var(--hand2); }
+
+body {
+  background-image:
+    radial-gradient(circle at 20% 10%, oklch(0.99 0.01 85) 0%, transparent 40%),
+    radial-gradient(circle at 80% 90%, oklch(0.94 0.02 70) 0%, transparent 50%),
+    repeating-linear-gradient(0deg, transparent 0 23px, oklch(0.85 0.02 240 / 0.18) 23px 24px);
+  min-height: 100vh;
+}
+
+/* === Header === */
+.app-header {
+  padding: 28px 40px 12px;
+  display: flex; align-items: baseline; gap: 24px; flex-wrap: wrap;
+  border-bottom: 2px dashed var(--ink-faint);
+}
+.app-title {
+  font-family: var(--hand);
+  font-size: 56px; line-height: 0.9; margin: 0;
+  letter-spacing: -1px;
+}
+.app-subtitle {
+  font-family: var(--type);
+  font-size: 13px; color: var(--ink-soft);
+  text-transform: uppercase; letter-spacing: 2px;
+}
+.app-meta {
+  margin-left: auto;
+  font-family: var(--hand2);
+  color: var(--ink-soft);
+  font-size: 16px;
+  max-width: 380px;
+  text-align: right;
+}
+
+/* === Tabs === */
+.tabs {
+  padding: 14px 40px 0;
+  display: flex; gap: 6px; flex-wrap: wrap;
+  border-bottom: 1px solid var(--ink-faint);
+}
+.tab {
+  font-family: var(--hand);
+  font-size: 24px;
+  background: transparent;
+  border: none;
+  padding: 10px 18px 14px;
+  color: var(--ink-soft);
+  cursor: pointer;
+  position: relative;
+  transition: color .15s;
+}
+.tab:hover { color: var(--ink); }
+.tab.active {
+  color: var(--terra);
+}
+.tab.active::after {
+  content: '';
+  position: absolute;
+  left: 8px; right: 8px; bottom: -2px; height: 4px;
+  background: var(--terra);
+  border-radius: 2px;
+  transform: rotate(-0.4deg);
+}
+
+/* === Page === */
+.page {
+  padding: 32px 40px 80px;
+  display: block;
+}
+
+.page-intro {
+  font-family: var(--hand2);
+  font-size: 18px;
+  max-width: 760px;
+  color: var(--ink);
+  margin: 0 0 28px;
+  line-height: 1.45;
+}
+.page-intro b { font-family: var(--type); font-size: 14px; letter-spacing: 1px; text-transform: uppercase; }
+
+/* === Variant grid === */
+.variants {
+  display: grid;
+  gap: 28px;
+  grid-template-columns: repeat(auto-fit, minmax(440px, 1fr));
+}
+.variants.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.variants.cols-1 { grid-template-columns: 1fr; }
+
+.variant {
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  padding: 18px 18px 22px;
+  position: relative;
+  box-shadow: 3px 4px 0 var(--ink-faint);
+  transform: rotate(var(--tilt, -0.2deg));
+}
+.variant:nth-child(2n) { --tilt: 0.3deg; }
+.variant:nth-child(3n) { --tilt: -0.4deg; }
+.variant:nth-child(4n) { --tilt: 0.2deg; }
+
+.variant-tag {
+  position: absolute;
+  top: -14px; left: 16px;
+  background: var(--paper);
+  padding: 0 10px;
+  font-family: var(--type);
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--ink-soft);
+}
+.variant-title {
+  font-family: var(--hand);
+  font-size: 30px;
+  margin: 6px 0 4px;
+  line-height: 1;
+}
+.variant-desc {
+  font-family: var(--hand2);
+  font-size: 15px;
+  color: var(--ink-soft);
+  margin: 0 0 14px;
+  line-height: 1.4;
+}
+.variant-canvas {
+  background: var(--paper-2);
+  border: 1px dashed var(--ink-faint);
+  border-radius: 4px;
+  padding: 14px;
+  min-height: 280px;
+  position: relative;
+}
+.variant-notes {
+  margin-top: 12px;
+  font-family: var(--hand2);
+  font-size: 14px;
+  color: var(--ink);
+  line-height: 1.45;
+}
+.variant-notes ul { margin: 6px 0 0; padding-left: 20px; }
+.variant-notes li { margin: 2px 0; }
+
+/* === Sketchy primitives === */
+.sk-box {
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-family: var(--hand2);
+  font-size: 13px;
+  background: var(--paper);
+  position: relative;
+}
+.sk-box.dashed { border-style: dashed; }
+.sk-box.thin { border-width: 1px; }
+.sk-box.fill-amber { background: oklch(0.94 0.06 80); }
+.sk-box.fill-moss { background: oklch(0.92 0.05 145); }
+.sk-box.fill-rose { background: oklch(0.92 0.05 25); }
+.sk-box.fill-sky { background: oklch(0.92 0.04 235); }
+
+.sk-label {
+  font-family: var(--type);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.sk-h {
+  font-family: var(--hand);
+  font-size: 20px;
+  line-height: 1;
+}
+
+.sk-arrow {
+  stroke: var(--ink);
+  stroke-width: 1.6;
+  fill: none;
+  stroke-linecap: round;
+}
+
+/* SVG canvases */
+.sk-svg { width: 100%; height: auto; display: block; }
+.sk-svg .ink { stroke: var(--ink); fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.sk-svg .ink-thick { stroke-width: 2.4; }
+.sk-svg .ink-thin { stroke-width: 1; }
+.sk-svg .ink-dash { stroke-dasharray: 4 3; }
+.sk-svg .terra { stroke: var(--terra); fill: none; stroke-width: 1.6; stroke-linecap: round; }
+.sk-svg .moss { stroke: var(--moss); fill: none; stroke-width: 1.6; stroke-linecap: round; }
+.sk-svg .rose { stroke: var(--rose); fill: none; stroke-width: 1.6; stroke-linecap: round; }
+.sk-svg .sky { stroke: var(--sky); fill: none; stroke-width: 1.6; stroke-linecap: round; }
+.sk-svg .amber { stroke: var(--amber); fill: none; stroke-width: 1.6; stroke-linecap: round; }
+.sk-svg .fill-paper { fill: var(--paper); }
+.sk-svg text {
+  font-family: var(--hand2);
+  font-size: 13px;
+  fill: var(--ink);
+}
+.sk-svg text.tiny { font-size: 10px; fill: var(--ink-soft); }
+.sk-svg text.label {
+  font-family: var(--type);
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  fill: var(--ink-soft);
+}
+.sk-svg text.title {
+  font-family: var(--hand);
+  font-size: 18px;
+  fill: var(--ink);
+}
+.sk-svg .swatch-amber { fill: oklch(0.85 0.13 75 / 0.55); }
+.sk-svg .swatch-moss  { fill: oklch(0.78 0.12 145 / 0.55); }
+.sk-svg .swatch-rose  { fill: oklch(0.78 0.16 25 / 0.55); }
+.sk-svg .swatch-sky   { fill: oklch(0.82 0.10 235 / 0.55); }
+.sk-svg .swatch-ink   { fill: oklch(0.4 0.02 250 / 0.4); }
+
+/* Footnote / divider */
+.divider {
+  margin: 36px 0 20px;
+  border-top: 2px dashed var(--ink-faint);
+  position: relative;
+}
+.divider span {
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  background: var(--paper);
+  padding: 0 14px;
+  font-family: var(--type);
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--ink-soft);
+}
+
+/* === Tweaks scoping === */
+body.dark {
+  --paper: oklch(0.18 0.01 250);
+  --paper-2: oklch(0.22 0.015 250);
+  --ink: oklch(0.92 0.01 85);
+  --ink-soft: oklch(0.72 0.01 85);
+  --ink-faint: oklch(0.42 0.015 250);
+}
+body.no-grain { background-image: none; background: var(--paper); }
+
+/* mini cards inside variants */
+.row { display: flex; gap: 8px; flex-wrap: wrap; }
+.col { display: flex; flex-direction: column; gap: 8px; }
+.mini { font-size: 11px; padding: 4px 6px; }
+
+/* legend chips */
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--type); font-size: 10px; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--ink-soft);
+}
+.chip::before {
+  content: ''; width: 10px; height: 10px; border-radius: 2px;
+  background: var(--c, var(--ink));
+}
+.chip.amber { --c: oklch(0.78 0.13 75); }
+.chip.moss  { --c: oklch(0.62 0.14 145); }
+.chip.rose  { --c: oklch(0.60 0.16 25); }
+.chip.sky   { --c: oklch(0.62 0.10 235); }
+.chip.ink   { --c: var(--ink); }
+
+/* footer */
+.app-footer {
+  padding: 22px 40px 60px;
+  font-family: var(--hand2);
+  font-size: 14px;
+  color: var(--ink-soft);
+  border-top: 1px dashed var(--ink-faint);
+}
+
+  </style>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="app-header">
+    <h1 class="app-title">Nash Equilibrium</h1>
+    <div class="app-subtitle">Wireframe explorations · v3 — locked + reworked</div>
+    <div class="app-meta">A + boundaries cascade locked. Player boards reworked around Plague-style 4-phase turns + meme tree. Territory: continents with contested cards. Treaties keep cards + add private addendum. Victory: individual + collective dual track.</div>
+  </header>
+  <main id="root"></main>
+  <footer class="app-footer">
+    Notes are deliberately rough. Comment on any variant and we'll move chosen directions into hi-fi mocks next pass.
+  </footer>
+
+  <script type="text/babel" data-presets="react">
+
+// tweaks-panel.jsx
+// Reusable Tweaks shell + form-control helpers.
+//
+// Owns the host protocol (listens for __activate_edit_mode / __deactivate_edit_mode,
+// posts __edit_mode_available / __edit_mode_set_keys / __edit_mode_dismissed) so
+// individual prototypes don't re-roll it. Ships a consistent set of controls so you
+// don't hand-draw <input type="range">, segmented radios, steppers, etc.
+//
+// Usage (in an HTML file that loads React + Babel):
+//
+//   const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+//     "primaryColor": "#D97757",
+//     "fontSize": 16,
+//     "density": "regular",
+//     "dark": false
+//   }/*EDITMODE-END*/;
+//
+//   function App() {
+//     const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+//     return (
+//       <div style={{ fontSize: t.fontSize, color: t.primaryColor }}>
+//         Hello
+//         <TweaksPanel>
+//           <TweakSection label="Typography" />
+//           <TweakSlider label="Font size" value={t.fontSize} min={10} max={32} unit="px"
+//                        onChange={(v) => setTweak('fontSize', v)} />
+//           <TweakRadio  label="Density" value={t.density}
+//                        options={['compact', 'regular', 'comfy']}
+//                        onChange={(v) => setTweak('density', v)} />
+//           <TweakSection label="Theme" />
+//           <TweakColor  label="Primary" value={t.primaryColor}
+//                        onChange={(v) => setTweak('primaryColor', v)} />
+//           <TweakToggle label="Dark mode" value={t.dark}
+//                        onChange={(v) => setTweak('dark', v)} />
+//         </TweaksPanel>
+//       </div>
+//     );
+//   }
+//
+// ─────────────────────────────────────────────────────────────────────────────
+
+const __TWEAKS_STYLE = `
+  .twk-panel{position:fixed;right:16px;bottom:16px;z-index:2147483646;width:280px;
+    max-height:calc(100vh - 32px);display:flex;flex-direction:column;
+    background:rgba(250,249,247,.78);color:#29261b;
+    -webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);
+    border:.5px solid rgba(255,255,255,.6);border-radius:14px;
+    box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 12px 40px rgba(0,0,0,.18);
+    font:11.5px/1.4 ui-sans-serif,system-ui,-apple-system,sans-serif;overflow:hidden}
+  .twk-hd{display:flex;align-items:center;justify-content:space-between;
+    padding:10px 8px 10px 14px;cursor:move;user-select:none}
+  .twk-hd b{font-size:12px;font-weight:600;letter-spacing:.01em}
+  .twk-x{appearance:none;border:0;background:transparent;color:rgba(41,38,27,.55);
+    width:22px;height:22px;border-radius:6px;cursor:default;font-size:13px;line-height:1}
+  .twk-x:hover{background:rgba(0,0,0,.06);color:#29261b}
+  .twk-body{padding:2px 14px 14px;display:flex;flex-direction:column;gap:10px;
+    overflow-y:auto;overflow-x:hidden;min-height:0;
+    scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.15) transparent}
+  .twk-body::-webkit-scrollbar{width:8px}
+  .twk-body::-webkit-scrollbar-track{background:transparent;margin:2px}
+  .twk-body::-webkit-scrollbar-thumb{background:rgba(0,0,0,.15);border-radius:4px;
+    border:2px solid transparent;background-clip:content-box}
+  .twk-body::-webkit-scrollbar-thumb:hover{background:rgba(0,0,0,.25);
+    border:2px solid transparent;background-clip:content-box}
+  .twk-row{display:flex;flex-direction:column;gap:5px}
+  .twk-row-h{flex-direction:row;align-items:center;justify-content:space-between;gap:10px}
+  .twk-lbl{display:flex;justify-content:space-between;align-items:baseline;
+    color:rgba(41,38,27,.72)}
+  .twk-lbl>span:first-child{font-weight:500}
+  .twk-val{color:rgba(41,38,27,.5);font-variant-numeric:tabular-nums}
+
+  .twk-sect{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+    color:rgba(41,38,27,.45);padding:10px 0 0}
+  .twk-sect:first-child{padding-top:0}
+
+  .twk-field{appearance:none;width:100%;height:26px;padding:0 8px;
+    border:.5px solid rgba(0,0,0,.1);border-radius:7px;
+    background:rgba(255,255,255,.6);color:inherit;font:inherit;outline:none}
+  .twk-field:focus{border-color:rgba(0,0,0,.25);background:rgba(255,255,255,.85)}
+  select.twk-field{padding-right:22px;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='rgba(0,0,0,.5)' d='M0 0h10L5 6z'/></svg>");
+    background-repeat:no-repeat;background-position:right 8px center}
+
+  .twk-slider{appearance:none;-webkit-appearance:none;width:100%;height:4px;margin:6px 0;
+    border-radius:999px;background:rgba(0,0,0,.12);outline:none}
+  .twk-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
+    width:14px;height:14px;border-radius:50%;background:#fff;
+    border:.5px solid rgba(0,0,0,.12);box-shadow:0 1px 3px rgba(0,0,0,.2);cursor:default}
+  .twk-slider::-moz-range-thumb{width:14px;height:14px;border-radius:50%;
+    background:#fff;border:.5px solid rgba(0,0,0,.12);box-shadow:0 1px 3px rgba(0,0,0,.2);cursor:default}
+
+  .twk-seg{position:relative;display:flex;padding:2px;border-radius:8px;
+    background:rgba(0,0,0,.06);user-select:none}
+  .twk-seg-thumb{position:absolute;top:2px;bottom:2px;border-radius:6px;
+    background:rgba(255,255,255,.9);box-shadow:0 1px 2px rgba(0,0,0,.12);
+    transition:left .15s cubic-bezier(.3,.7,.4,1),width .15s}
+  .twk-seg.dragging .twk-seg-thumb{transition:none}
+  .twk-seg button{appearance:none;position:relative;z-index:1;flex:1;border:0;
+    background:transparent;color:inherit;font:inherit;font-weight:500;min-height:22px;
+    border-radius:6px;cursor:default;padding:4px 6px;line-height:1.2;
+    overflow-wrap:anywhere}
+
+  .twk-toggle{position:relative;width:32px;height:18px;border:0;border-radius:999px;
+    background:rgba(0,0,0,.15);transition:background .15s;cursor:default;padding:0}
+  .twk-toggle[data-on="1"]{background:#34c759}
+  .twk-toggle i{position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;
+    background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:transform .15s}
+  .twk-toggle[data-on="1"] i{transform:translateX(14px)}
+
+  .twk-num{display:flex;align-items:center;height:26px;padding:0 0 0 8px;
+    border:.5px solid rgba(0,0,0,.1);border-radius:7px;background:rgba(255,255,255,.6)}
+  .twk-num-lbl{font-weight:500;color:rgba(41,38,27,.6);cursor:ew-resize;
+    user-select:none;padding-right:8px}
+  .twk-num input{flex:1;min-width:0;height:100%;border:0;background:transparent;
+    font:inherit;font-variant-numeric:tabular-nums;text-align:right;padding:0 8px 0 0;
+    outline:none;color:inherit;-moz-appearance:textfield}
+  .twk-num input::-webkit-inner-spin-button,.twk-num input::-webkit-outer-spin-button{
+    -webkit-appearance:none;margin:0}
+  .twk-num-unit{padding-right:8px;color:rgba(41,38,27,.45)}
+
+  .twk-btn{appearance:none;height:26px;padding:0 12px;border:0;border-radius:7px;
+    background:rgba(0,0,0,.78);color:#fff;font:inherit;font-weight:500;cursor:default}
+  .twk-btn:hover{background:rgba(0,0,0,.88)}
+  .twk-btn.secondary{background:rgba(0,0,0,.06);color:inherit}
+  .twk-btn.secondary:hover{background:rgba(0,0,0,.1)}
+
+  .twk-swatch{appearance:none;-webkit-appearance:none;width:56px;height:22px;
+    border:.5px solid rgba(0,0,0,.1);border-radius:6px;padding:0;cursor:default;
+    background:transparent;flex-shrink:0}
+  .twk-swatch::-webkit-color-swatch-wrapper{padding:0}
+  .twk-swatch::-webkit-color-swatch{border:0;border-radius:5.5px}
+  .twk-swatch::-moz-color-swatch{border:0;border-radius:5.5px}
+`;
+
+// ── useTweaks ───────────────────────────────────────────────────────────────
+// Single source of truth for tweak values. setTweak persists via the host
+// (__edit_mode_set_keys → host rewrites the EDITMODE block on disk).
+function useTweaks(defaults) {
+  const [values, setValues] = React.useState(defaults);
+  // Accepts either setTweak('key', value) or setTweak({ key: value, ... }) so a
+  // useState-style call doesn't write a "[object Object]" key into the persisted
+  // JSON block.
+  const setTweak = React.useCallback((keyOrEdits, val) => {
+    const edits = typeof keyOrEdits === 'object' && keyOrEdits !== null
+      ? keyOrEdits : { [keyOrEdits]: val };
+    setValues((prev) => ({ ...prev, ...edits }));
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits }, '*');
+  }, []);
+  return [values, setTweak];
+}
+
+// ── TweaksPanel ─────────────────────────────────────────────────────────────
+// Floating shell. Registers the protocol listener BEFORE announcing
+// availability — if the announce ran first, the host's activate could land
+// before our handler exists and the toolbar toggle would silently no-op.
+// The close button posts __edit_mode_dismissed so the host's toolbar toggle
+// flips off in lockstep; the host echoes __deactivate_edit_mode back which
+// is what actually hides the panel.
+function TweaksPanel({ title = 'Tweaks', children }) {
+  const [open, setOpen] = React.useState(false);
+  const dragRef = React.useRef(null);
+  const offsetRef = React.useRef({ x: 16, y: 16 });
+  const PAD = 16;
+
+  const clampToViewport = React.useCallback(() => {
+    const panel = dragRef.current;
+    if (!panel) return;
+    const w = panel.offsetWidth, h = panel.offsetHeight;
+    const maxRight = Math.max(PAD, window.innerWidth - w - PAD);
+    const maxBottom = Math.max(PAD, window.innerHeight - h - PAD);
+    offsetRef.current = {
+      x: Math.min(maxRight, Math.max(PAD, offsetRef.current.x)),
+      y: Math.min(maxBottom, Math.max(PAD, offsetRef.current.y)),
+    };
+    panel.style.right = offsetRef.current.x + 'px';
+    panel.style.bottom = offsetRef.current.y + 'px';
+  }, []);
+
+  React.useEffect(() => {
+    if (!open) return;
+    clampToViewport();
+    if (typeof ResizeObserver === 'undefined') {
+      window.addEventListener('resize', clampToViewport);
+      return () => window.removeEventListener('resize', clampToViewport);
+    }
+    const ro = new ResizeObserver(clampToViewport);
+    ro.observe(document.documentElement);
+    return () => ro.disconnect();
+  }, [open, clampToViewport]);
+
+  React.useEffect(() => {
+    const onMsg = (e) => {
+      const t = e?.data?.type;
+      if (t === '__activate_edit_mode') setOpen(true);
+      else if (t === '__deactivate_edit_mode') setOpen(false);
+    };
+    window.addEventListener('message', onMsg);
+    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+    return () => window.removeEventListener('message', onMsg);
+  }, []);
+
+  const dismiss = () => {
+    setOpen(false);
+    window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*');
+  };
+
+  const onDragStart = (e) => {
+    const panel = dragRef.current;
+    if (!panel) return;
+    const r = panel.getBoundingClientRect();
+    const sx = e.clientX, sy = e.clientY;
+    const startRight = window.innerWidth - r.right;
+    const startBottom = window.innerHeight - r.bottom;
+    const move = (ev) => {
+      offsetRef.current = {
+        x: startRight - (ev.clientX - sx),
+        y: startBottom - (ev.clientY - sy),
+      };
+      clampToViewport();
+    };
+    const up = () => {
+      window.removeEventListener('mousemove', move);
+      window.removeEventListener('mouseup', up);
+    };
+    window.addEventListener('mousemove', move);
+    window.addEventListener('mouseup', up);
+  };
+
+  if (!open) return null;
+  return (
+    <>
+      <style>{__TWEAKS_STYLE}</style>
+      <div ref={dragRef} className="twk-panel" data-noncommentable=""
+           style={{ right: offsetRef.current.x, bottom: offsetRef.current.y }}>
+        <div className="twk-hd" onMouseDown={onDragStart}>
+          <b>{title}</b>
+          <button className="twk-x" aria-label="Close tweaks"
+                  onMouseDown={(e) => e.stopPropagation()}
+                  onClick={dismiss}>✕</button>
+        </div>
+        <div className="twk-body">{children}</div>
+      </div>
+    </>
+  );
+}
+
+// ── Layout helpers ──────────────────────────────────────────────────────────
+
+function TweakSection({ label, children }) {
+  return (
+    <>
+      <div className="twk-sect">{label}</div>
+      {children}
+    </>
+  );
+}
+
+function TweakRow({ label, value, children, inline = false }) {
+  return (
+    <div className={inline ? 'twk-row twk-row-h' : 'twk-row'}>
+      <div className="twk-lbl">
+        <span>{label}</span>
+        {value != null && <span className="twk-val">{value}</span>}
+      </div>
+      {children}
+    </div>
+  );
+}
+
+// ── Controls ────────────────────────────────────────────────────────────────
+
+function TweakSlider({ label, value, min = 0, max = 100, step = 1, unit = '', onChange }) {
+  return (
+    <TweakRow label={label} value={`${value}${unit}`}>
+      <input type="range" className="twk-slider" min={min} max={max} step={step}
+             value={value} onChange={(e) => onChange(Number(e.target.value))} />
+    </TweakRow>
+  );
+}
+
+function TweakToggle({ label, value, onChange }) {
+  return (
+    <div className="twk-row twk-row-h">
+      <div className="twk-lbl"><span>{label}</span></div>
+      <button type="button" className="twk-toggle" data-on={value ? '1' : '0'}
+              role="switch" aria-checked={!!value}
+              onClick={() => onChange(!value)}><i /></button>
+    </div>
+  );
+}
+
+function TweakRadio({ label, value, options, onChange }) {
+  const trackRef = React.useRef(null);
+  const [dragging, setDragging] = React.useState(false);
+  const opts = options.map((o) => (typeof o === 'object' ? o : { value: o, label: o }));
+  const idx = Math.max(0, opts.findIndex((o) => o.value === value));
+  const n = opts.length;
+
+  // The active value is read by pointer-move handlers attached for the lifetime
+  // of a drag — ref it so a stale closure doesn't fire onChange for every move.
+  const valueRef = React.useRef(value);
+  valueRef.current = value;
+
+  const segAt = (clientX) => {
+    const r = trackRef.current.getBoundingClientRect();
+    const inner = r.width - 4;
+    const i = Math.floor(((clientX - r.left - 2) / inner) * n);
+    return opts[Math.max(0, Math.min(n - 1, i))].value;
+  };
+
+  const onPointerDown = (e) => {
+    setDragging(true);
+    const v0 = segAt(e.clientX);
+    if (v0 !== valueRef.current) onChange(v0);
+    const move = (ev) => {
+      if (!trackRef.current) return;
+      const v = segAt(ev.clientX);
+      if (v !== valueRef.current) onChange(v);
+    };
+    const up = () => {
+      setDragging(false);
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', up);
+    };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  };
+
+  return (
+    <TweakRow label={label}>
+      <div ref={trackRef} role="radiogroup" onPointerDown={onPointerDown}
+           className={dragging ? 'twk-seg dragging' : 'twk-seg'}>
+        <div className="twk-seg-thumb"
+             style={{ left: `calc(2px + ${idx} * (100% - 4px) / ${n})`,
+                      width: `calc((100% - 4px) / ${n})` }} />
+        {opts.map((o) => (
+          <button key={o.value} type="button" role="radio" aria-checked={o.value === value}>
+            {o.label}
+          </button>
+        ))}
+      </div>
+    </TweakRow>
+  );
+}
+
+function TweakSelect({ label, value, options, onChange }) {
+  return (
+    <TweakRow label={label}>
+      <select className="twk-field" value={value} onChange={(e) => onChange(e.target.value)}>
+        {options.map((o) => {
+          const v = typeof o === 'object' ? o.value : o;
+          const l = typeof o === 'object' ? o.label : o;
+          return <option key={v} value={v}>{l}</option>;
+        })}
+      </select>
+    </TweakRow>
+  );
+}
+
+function TweakText({ label, value, placeholder, onChange }) {
+  return (
+    <TweakRow label={label}>
+      <input className="twk-field" type="text" value={value} placeholder={placeholder}
+             onChange={(e) => onChange(e.target.value)} />
+    </TweakRow>
+  );
+}
+
+function TweakNumber({ label, value, min, max, step = 1, unit = '', onChange }) {
+  const clamp = (n) => {
+    if (min != null && n < min) return min;
+    if (max != null && n > max) return max;
+    return n;
+  };
+  const startRef = React.useRef({ x: 0, val: 0 });
+  const onScrubStart = (e) => {
+    e.preventDefault();
+    startRef.current = { x: e.clientX, val: value };
+    const decimals = (String(step).split('.')[1] || '').length;
+    const move = (ev) => {
+      const dx = ev.clientX - startRef.current.x;
+      const raw = startRef.current.val + dx * step;
+      const snapped = Math.round(raw / step) * step;
+      onChange(clamp(Number(snapped.toFixed(decimals))));
+    };
+    const up = () => {
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', up);
+    };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  };
+  return (
+    <div className="twk-num">
+      <span className="twk-num-lbl" onPointerDown={onScrubStart}>{label}</span>
+      <input type="number" value={value} min={min} max={max} step={step}
+             onChange={(e) => onChange(clamp(Number(e.target.value)))} />
+      {unit && <span className="twk-num-unit">{unit}</span>}
+    </div>
+  );
+}
+
+function TweakColor({ label, value, onChange }) {
+  return (
+    <div className="twk-row twk-row-h">
+      <div className="twk-lbl"><span>{label}</span></div>
+      <input type="color" className="twk-swatch" value={value}
+             onChange={(e) => onChange(e.target.value)} />
+    </div>
+  );
+}
+
+function TweakButton({ label, onClick, secondary = false }) {
+  return (
+    <button type="button" className={secondary ? 'twk-btn secondary' : 'twk-btn'}
+            onClick={onClick}>{label}</button>
+  );
+}
+
+Object.assign(window, {
+  useTweaks, TweaksPanel, TweakSection, TweakRow,
+  TweakSlider, TweakToggle, TweakRadio, TweakSelect,
+  TweakText, TweakNumber, TweakColor, TweakButton,
+});
+
+  </script>
+  <script type="text/babel" data-presets="react">
+/* global React */
+const { useState, useMemo, Fragment } = React;
+
+// ============================================================
+// Reusable sketch primitives
+// ============================================================
+function SkBox({ children, w, h, x, y, dashed, fill, label, style }) {
+  const cls = ['sk-box', dashed && 'dashed', fill && `fill-${fill}`].filter(Boolean).join(' ');
+  return (
+    <div className={cls} style={{ width: w, height: h, position: x !== undefined ? 'absolute' : undefined, left: x, top: y, ...style }}>
+      {label && <div className="sk-label">{label}</div>}
+      {children}
+    </div>
+  );
+}
+
+function Variant({ tag, title, desc, children, notes }) {
+  return (
+    <div className="variant">
+      <span className="variant-tag">{tag}</span>
+      <h3 className="variant-title">{title}</h3>
+      <p className="variant-desc">{desc}</p>
+      <div className="variant-canvas">{children}</div>
+      {notes && <div className="variant-notes">{notes}</div>}
+    </div>
+  );
+}
+
+// Wobbly hand-drawn rectangle (offset path simulates shake)
+function WobbleRect({ x, y, w, h, cls = 'ink', rx = 4 }) {
+  const w1 = w + (Math.random() * 1 - 0.5);
+  return (
+    <rect x={x} y={y} width={w} height={h} rx={rx} ry={rx + 1} className={cls} />
+  );
+}
+
+// Hand-drawn-feel text block inside SVG
+function SvgLabel({ x, y, children, cls }) {
+  return <text x={x} y={y} className={cls}>{children}</text>;
+}
+
+// ============================================================
+// 1) FULL TABLE LAYOUTS
+// ============================================================
+function TableLayouts() {
+  return (
+    <div className="page active" data-page="table">
+      <p className="page-intro">
+        <b>Table layout · LOCKED →</b> Compass / 4-corner symmetry. Fastest to teach, supports any seat count up to 4,
+        gives every player equal sight-lines to the central planet. The boundaries dial sits dead-centre as a
+        global focal object; the world map fills the rest of the centre. Treaty corridors run between adjacent
+        seats so informal bilateral talk has its own physical zone.
+      </p>
+      <div className="variants cols-1">
+        <Variant tag="LOCKED" title="Compass · the canonical table"
+          desc="4 player boards on the corners. Boundaries dial dead-centre. World map fills the rest of the centre. Treaty corridors between adjacent seats. Treaty ledger card sits along one edge."
+          notes={<ul>
+            <li>+ teach in 30 seconds — turn order is just 'go clockwise'</li>
+            <li>+ adjacent-seat treaty corridors give bilateral talk a physical home</li>
+            <li>+ central dial = single point of attention for the whole table</li>
+            <li>+ map fills the centre — supports zoomable Earth without competing with the dial</li>
+            <li>· next: confirm map vs dial size ratio at hi-fi pass</li>
+          </ul>}>
+          <svg viewBox="0 0 600 380" className="sk-svg">
+            {/* corner boards */}
+            {[
+              {x:20,y:14,n:'Industrialist',c:'rose',side:'top'},
+              {x:400,y:14,n:'Socialist',c:'sky',side:'top'},
+              {x:20,y:300,n:'Green',c:'moss',side:'bot'},
+              {x:400,y:300,n:'Techno-Utopian',c:'amber',side:'bot'},
+            ].map((b,i)=>(
+              <g key={i}>
+                <rect x={b.x} y={b.y} width="180" height="66" className={`swatch-${b.c}`} rx="5" />
+                <rect x={b.x} y={b.y} width="180" height="66" className="ink ink-thick" rx="5" />
+                <text x={b.x+10} y={b.y+24} className="title">{b.n}</text>
+                <text x={b.x+10} y={b.y+44} className="label">PLAYER {i+1} · IDEOLOGY BOARD</text>
+                <text x={b.x+10} y={b.y+58} className="tiny">tech tree · resources · phase tracker</text>
+              </g>
+            ))}
+            {/* centre map */}
+            <rect x="100" y="100" width="400" height="180" className="ink ink-thick fill-paper" rx="8" />
+            <text x="110" y="118" className="label">SHARED WORLD MAP · continents + territory cards</text>
+            {/* abstract continents */}
+            <path d="M120 150 Q160 130 220 145 T320 155 T440 140 L430 200 Q380 220 320 210 T180 220 Z" className="moss ink-thin" />
+            <path d="M450 200 Q480 195 495 215 L488 240 Q470 245 455 232 Z" className="moss ink-thin" />
+            {/* central dial overlay */}
+            <circle cx="300" cy="190" r="50" className="terra ink-thick fill-paper" />
+            <circle cx="300" cy="190" r="38" className="rose" />
+            <circle cx="300" cy="190" r="26" className="terra" />
+            <circle cx="300" cy="190" r="14" className="moss" />
+            {Array.from({length:9}, (_,i) => {
+              const a = (i/9)*Math.PI*2 - Math.PI/2;
+              return <line key={i} x1="300" y1="190" x2={300+Math.cos(a)*50} y2={190+Math.sin(a)*50} className="ink ink-thin" />;
+            })}
+            <text x="270" y="194" className="tiny">PLANET</text>
+            {/* treaty corridors */}
+            <line x1="200" y1="48" x2="400" y2="48" className="ink ink-dash" />
+            <text x="260" y="42" className="label">CORRIDOR</text>
+            <line x1="200" y1="332" x2="400" y2="332" className="ink ink-dash" />
+            <text x="260" y="358" className="label">CORRIDOR</text>
+            <line x1="100" y1="80" x2="100" y2="300" className="ink ink-dash" />
+            <line x1="500" y1="80" x2="500" y2="300" className="ink ink-dash" />
+            {/* treaty ledger along bottom edge */}
+            <rect x="20" y="350" width="560" height="20" className="ink ink-dash" rx="3" />
+            <text x="30" y="364" className="tiny">TREATY LEDGER · running record of active treaties</text>
+          </svg>
+        </Variant>
+      </div>
+    </div>
+  );
+}
+
+window.TableLayouts = TableLayouts;
+
+function TerritorySystems() {
+  return (
+    <div className="page" data-page="territory">
+      <p className="page-intro">
+        <b>Territory v3 — Plague-style continents.</b> Earth-shaped continents are the fixed substrate. Players don't
+        contest the continents themselves — they contest <i>territory cards</i> that get drafted onto each continent.
+        Continents have slot capacity (e.g. Africa = 5 slots) and a biome modifier. Cards stack on the continent;
+        whoever holds the most cards on a continent gets its income at Phase 1.
+      </p>
+      <div className="variants">
+
+        <Variant tag="A · BOARD" title="Continents with card slots"
+          desc="Earth at low-zoom. Each continent is a coloured zone with N printed slot rectangles. Cards laid face-up onto slots — small player marker on each card showing controller."
+          notes={<>
+            <p style={{margin:'0 0 6px',fontFamily:'var(--type)',fontSize:11,letterSpacing:1}}>HOW IT WORKS</p>
+            <ul>
+              <li>Continent has fixed slots (Africa 5, N. America 4, Asia 6, Europe 4, S. America 3, Oceania 2, Antarctica 1)</li>
+              <li>Phase 3 (Expand): play a territory card from hand onto a continent slot · pay cost</li>
+              <li>To <b>contest</b>: play a card on a slot already held — see Variant B for resolution</li>
+              <li>Phase 1 (Collect): each continent pays its income to whoever holds the most cards there · ties = no income, all blocked</li>
+              <li>Cards stay until contested-out OR a card-effect removes them</li>
+            </ul>
+          </>}>
+          <svg viewBox="0 0 600 380" className="sk-svg">
+            <rect x="6" y="6" width="588" height="368" className="ink ink-thick fill-paper" rx="6" />
+            {/* continents - very stylised */}
+            {/* N. America */}
+            <path d="M50 90 Q90 60 150 70 T220 90 L210 160 Q170 180 130 175 T70 170 Z" className="moss ink-thin" />
+            <text x="100" y="120" className="label">N. AMERICA · 4</text>
+            {/* slots */}
+            {[0,1,2,3].map(i => <rect key={i} x={70+i*36} y="130" width="30" height="40" className="ink ink-thin fill-paper" rx="2" />)}
+            {/* cards on slots */}
+            <rect x="70" y="130" width="30" height="40" className="swatch-rose" />
+            <rect x="70" y="130" width="30" height="40" className="ink" />
+            <text x="76" y="146" className="tiny">USA</text>
+            <circle cx="92" cy="164" r="4" className="swatch-rose ink" />
+            <rect x="106" y="130" width="30" height="40" className="swatch-amber" />
+            <rect x="106" y="130" width="30" height="40" className="ink" />
+            <text x="112" y="146" className="tiny">CAN</text>
+            <circle cx="128" cy="164" r="4" className="swatch-amber ink" />
+
+            {/* S. America */}
+            <path d="M170 200 Q190 195 210 215 L215 280 Q200 320 180 310 T160 270 Z" className="moss ink-thin" />
+            <text x="160" y="225" className="label">S. AMERICA · 3</text>
+            {[0,1,2].map(i => <rect key={i} x={166+i*16} y="240" width="14" height="22" className="ink ink-thin fill-paper" rx="2" />)}
+
+            {/* Europe */}
+            <path d="M280 70 Q310 60 340 75 T370 100 L360 130 Q330 140 305 130 T280 110 Z" className="moss ink-thin" />
+            <text x="290" y="92" className="label">EU · 4</text>
+            {[0,1,2,3].map(i => <rect key={i} x={290+i*22} y="100" width="18" height="26" className={i===0?'swatch-sky':'ink ink-thin fill-paper'} rx="2" />)}
+            {[0,1,2,3].map(i => <rect key={i} x={290+i*22} y="100" width="18" height="26" className="ink ink-thin" rx="2" />)}
+
+            {/* Africa */}
+            <path d="M280 140 Q320 130 360 150 T400 220 L380 280 Q340 300 310 290 T270 250 Z" className="amber ink-thin" />
+            <text x="305" y="170" className="label">AFRICA · 5</text>
+            {[0,1,2,3,4].map(i => <rect key={i} x={290+i*22} y="180" width="18" height="26" className={i===2?'swatch-moss':'fill-paper'} rx="2" />)}
+            {[0,1,2,3,4].map(i => <rect key={i} x={290+i*22} y="180" width="18" height="26" className="ink ink-thin" rx="2" />)}
+
+            {/* Asia */}
+            <path d="M380 70 Q440 60 510 80 T560 130 L545 170 Q480 180 430 165 T380 130 Z" className="amber ink-thin" />
+            <text x="430" y="92" className="label">ASIA · 6</text>
+            {[0,1,2,3,4,5].map(i => <rect key={i} x={420+i*22} y="100" width="18" height="26" className={i<2?'swatch-rose':i<4?'swatch-amber':'fill-paper'} rx="2" />)}
+            {[0,1,2,3,4,5].map(i => <rect key={i} x={420+i*22} y="100" width="18" height="26" className="ink ink-thin" rx="2" />)}
+
+            {/* Oceania */}
+            <path d="M460 240 Q490 230 510 250 L505 280 Q480 290 465 280 Z" className="terra ink-thin" />
+            <text x="465" y="262" className="label">OCE · 2</text>
+            {[0,1].map(i => <rect key={i} x={465+i*22} y="270" width="18" height="14" className="ink ink-thin fill-paper" rx="2" />)}
+
+            {/* Antarctica */}
+            <path d="M150 340 L460 340 L450 360 L160 360 Z" className="sky ink-thin" />
+            <text x="280" y="354" className="label">ANTARCTICA · 1 (locked)</text>
+
+            <text x="14" y="22" className="label">EARTH · 7 CONTINENTS · 25 SLOTS · TERRITORY CARDS LAY ON TOP</text>
+            <text x="14" y="372" className="tiny">marker on card = controller · most cards on a continent = controller of that continent's income</text>
+          </svg>
+        </Variant>
+
+        <Variant tag="B · CONTEST" title="Card contest resolution (action-points)"
+          desc="To contest a slot: spend Expand actions equal to the defender's card value. Defender may counter-spend equal actions to retain. Tied stand-offs go to the active player."
+          notes={<>
+            <p style={{margin:'0 0 6px',fontFamily:'var(--type)',fontSize:11,letterSpacing:1}}>STEP-BY-STEP</p>
+            <ul>
+              <li>Active player declares: "Contest <i>Brazil</i> on the S.America continent"</li>
+              <li>Brazil's card value = 3 · attacker spends 3 Expand actions</li>
+              <li>Defender (current Brazil controller) may match (3 actions) to retain · OR fold</li>
+              <li>If matched: card is now mutually contested — DRAW a wildcard event (e.g. 'Coup', 'Trade pact', 'Riot') resolves which side wins</li>
+              <li>Loser's marker is removed · winner places theirs · each card has a one-per-round contest cooldown</li>
+              <li>This subsumes 'card-vs-card battle' from the Plague-style multi-card-on-continent draft</li>
+            </ul>
+          </>}>
+          <svg viewBox="0 0 600 380" className="sk-svg">
+            <rect x="6" y="6" width="588" height="368" className="ink ink-thick fill-paper" rx="6" />
+            {/* contest sequence */}
+            <text x="20" y="30" className="title">CONTEST: Brazil (S. America)</text>
+            {/* step 1 */}
+            <g transform="translate(20 50)">
+              <text x="0" y="14" className="label">1 · DECLARE</text>
+              <rect x="0" y="20" width="170" height="80" className="ink ink-dash fill-paper" rx="3" />
+              <text x="8" y="36" className="tiny">Active: Industrialist (P1)</text>
+              <text x="8" y="52" className="tiny">target: Brazil card</text>
+              <text x="8" y="68" className="tiny">card value: 3</text>
+              <text x="8" y="84" className="tiny">cost to attack: 3 EXP</text>
+            </g>
+            <text x="200" y="92" className="title">→</text>
+            {/* step 2 */}
+            <g transform="translate(220 50)">
+              <text x="0" y="14" className="label">2 · DEFEND</text>
+              <rect x="0" y="20" width="170" height="80" className="ink ink-dash fill-paper" rx="3" />
+              <text x="8" y="36" className="tiny">Defender: Green (P3)</text>
+              <text x="8" y="52" className="tiny">match 3 EXP? · YES</text>
+              <text x="8" y="68" className="tiny">→ contested · draw event</text>
+              <text x="8" y="84" className="tiny">(or fold = attacker wins)</text>
+            </g>
+            <text x="400" y="92" className="title">→</text>
+            {/* step 3 */}
+            <g transform="translate(420 50)">
+              <text x="0" y="14" className="label">3 · EVENT</text>
+              <rect x="0" y="20" width="160" height="80" className="ink ink-dash fill-paper" rx="3" />
+              <rect x="8" y="28" width="60" height="64" className="swatch-amber" />
+              <rect x="8" y="28" width="60" height="64" className="ink ink-thick" rx="3" />
+              <text x="14" y="44" className="tiny">EVENT</text>
+              <text x="14" y="58" className="tiny">"Trade</text>
+              <text x="14" y="68" className="tiny">pact"</text>
+              <text x="76" y="46" className="tiny">attacker</text>
+              <text x="76" y="62" className="tiny">+1 modifier</text>
+              <text x="76" y="80" className="tiny">→ wins 4-3</text>
+            </g>
+            {/* aftermath */}
+            <text x="20" y="140" className="label">AFTERMATH</text>
+            <rect x="20" y="146" width="560" height="60" className="ink ink-dash fill-paper" rx="3" />
+            <text x="30" y="166" className="tiny">P3 marker removed from Brazil · P1 marker placed · Brazil card stays on board (still S.America slot 1)</text>
+            <text x="30" y="184" className="tiny">Brazil enters one-round contest cooldown · S.America income at Phase 1 next round goes to P1 if they hold most</text>
+            {/* card anatomy */}
+            <text x="20" y="232" className="label">TERRITORY CARD ANATOMY</text>
+            <g transform="translate(20 240)">
+              <rect x="0" y="0" width="160" height="120" className="fill-paper" rx="4" />
+              <rect x="0" y="0" width="160" height="120" className="ink ink-thick" rx="4" />
+              <rect x="0" y="0" width="160" height="22" className="swatch-amber" />
+              <rect x="0" y="0" width="160" height="22" className="ink" />
+              <text x="8" y="16" className="title">BRAZIL</text>
+              <text x="120" y="16" className="title">3</text>
+              <text x="8" y="38" className="tiny">continent: S. America</text>
+              <text x="8" y="54" className="tiny">biome: Rainforest</text>
+              <text x="8" y="70" className="tiny">income: +2 Nat / round</text>
+              <text x="8" y="86" className="tiny">special: dieback if</text>
+              <text x="8" y="98" className="tiny">Biosphere ≥ Red</text>
+              <text x="8" y="114" className="tiny">contest cost: 3</text>
+            </g>
+            <g transform="translate(200 240)">
+              <text x="0" y="-2" className="label">FIELDS:</text>
+              <text x="0" y="14" className="tiny">· NAME · CONTEST VALUE</text>
+              <text x="0" y="30" className="tiny">· CONTINENT · BIOME</text>
+              <text x="0" y="46" className="tiny">· INCOME (resource per round)</text>
+              <text x="0" y="62" className="tiny">· SPECIAL effect (often biome-tied)</text>
+              <text x="0" y="78" className="tiny">· CONTEST COST</text>
+              <text x="0" y="100" className="label">DECK COMPOSITION</text>
+              <text x="0" y="116" className="tiny">~50 cards · 7 per continent (avg)</text>
+              <text x="0" y="132" className="tiny">drafted into hand at Phase 2 maybe?</text>
+            </g>
+          </svg>
+        </Variant>
+
+        <Variant tag="C · DRAFT" title="Where do territory cards come from?"
+          desc="Open question. Three options shown: shared draft pool, per-ideology decks, scenario-seeded deal."
+          notes={<>
+            <p style={{margin:'0 0 6px',fontFamily:'var(--type)',fontSize:11,letterSpacing:1}}>OPEN DECISION</p>
+            <ul>
+              <li><b>Shared pool</b> (3-card open market, refilled): everyone draws from same pile · maximises contest</li>
+              <li><b>Per-ideology decks</b>: Industrial deck has industrial-friendly cards · maximises asymmetry</li>
+              <li><b>Scenario deal</b>: cards pre-distributed by scenario · maximises narrative structure</li>
+              <li>Hybrid (shared pool + 1 ideology card per round) probably wins · TBD playtest</li>
+            </ul>
+          </>}>
+          <svg viewBox="0 0 600 380" className="sk-svg">
+            <rect x="6" y="6" width="588" height="368" className="ink ink-thick fill-paper" rx="6" />
+            {/* shared pool */}
+            <g transform="translate(20 30)">
+              <text x="0" y="14" className="label">A · SHARED POOL (open market)</text>
+              <rect x="0" y="20" width="170" height="180" className="ink ink-dash" rx="3" />
+              {[0,1,2].map(i => (
+                <g key={i} transform={`translate(${10+i*52} 32)`}>
+                  <rect x="0" y="0" width="44" height="62" className="fill-paper" rx="3" />
+                  <rect x="0" y="0" width="44" height="62" className="ink" rx="3" />
+                  <text x="6" y="14" className="tiny">card {i+1}</text>
+                </g>
+              ))}
+              <text x="10" y="120" className="tiny">draw 1 each Develop phase</text>
+              <text x="10" y="136" className="tiny">discard refills market</text>
+              <text x="10" y="152" className="tiny">→ everyone same pool</text>
+              <text x="10" y="170" className="tiny">→ contest is fierce</text>
+            </g>
+            {/* per-ideology */}
+            <g transform="translate(220 30)">
+              <text x="0" y="14" className="label">B · PER-IDEOLOGY DECKS</text>
+              <rect x="0" y="20" width="170" height="180" className="ink ink-dash" rx="3" />
+              {[['rose','Ind'],['sky','Soc'],['moss','Grn'],['amber','Tec']].map(([c,n],i)=>(
+                <g key={n} transform={`translate(${10+(i%2)*78} ${32+Math.floor(i/2)*70})`}>
+                  <rect x="0" y="0" width="64" height="58" className={`swatch-${c}`} rx="3" />
+                  <rect x="0" y="0" width="64" height="58" className="ink" rx="3" />
+                  <text x="6" y="14" className="tiny">{n} deck</text>
+                  <text x="6" y="28" className="tiny">flavoured</text>
+                </g>
+              ))}
+              <text x="10" y="186" className="tiny">→ asymmetry max · less direct contest</text>
+            </g>
+            {/* scenario */}
+            <g transform="translate(420 30)">
+              <text x="0" y="14" className="label">C · SCENARIO DEAL</text>
+              <rect x="0" y="20" width="160" height="180" className="ink ink-dash" rx="3" />
+              <text x="10" y="40" className="tiny">scenario card determines</text>
+              <text x="10" y="56" className="tiny">starting deal:</text>
+              <text x="10" y="80" className="tiny">"2030 Climate Crunch"</text>
+              <text x="10" y="96" className="tiny">- Ind: Texas, Russia, Saudi</text>
+              <text x="10" y="112" className="tiny">- Soc: Norway, France, Cuba</text>
+              <text x="10" y="128" className="tiny">- Grn: Costa Rica, NZ, Bhutan</text>
+              <text x="10" y="144" className="tiny">- Tec: SK, Japan, Singapore</text>
+              <text x="10" y="170" className="tiny">→ narrative · replayable scenarios</text>
+            </g>
+            {/* recommendation */}
+            <text x="20" y="230" className="label">RECOMMEND · HYBRID</text>
+            <rect x="20" y="240" width="560" height="120" className="ink ink-dash" rx="3" />
+            <text x="30" y="262" className="tiny">· Scenario sets STARTING territory holdings (4 cards each)</text>
+            <text x="30" y="280" className="tiny">· Shared pool refills with neutral cards · everyone draws from it</text>
+            <text x="30" y="298" className="tiny">· Each ideology has a 'wildcard' deck of 5 special cards drawn 1/round (asymmetry on top)</text>
+            <text x="30" y="316" className="tiny">→ scenario gives narrative · pool gives contest · wildcards give ideology flavour</text>
+            <text x="30" y="346" className="tiny">decision pending playtest</text>
+          </svg>
+        </Variant>
+      </div>
+    </div>
+  );
+}
+
+window.TerritorySystems = TerritorySystems;
+
+function VictoryTracker() {
+  return (
+    <div className="page" data-page="victory">
+      <p className="page-intro">
+        <b>Victory v3 — dual track.</b> Default model (per the timed-out questions): <i>collective state determines whether anyone can win at all</i>.
+        The cooperative endings (Post-Scarcity Utopia, etc.) and failure states (Climate Collapse, etc.) are GAME-END triggers — they decide
+        whether the game ends in success, neutral, or failure. <i>Within</i> a non-failure ending, each ideology has its own win condition
+        (often hidden, ideology-specific) which determines which player(s) personally win. So:
+        ① Game-end check (collective) → ② Personal-win check (individual within that ending). Endings shown as state machine; individual wins as a separate surface.
+      </p>
+      <div className="variants">
+
+        <Variant tag="A · COLLECTIVE" title="Game-end state machine (5 endings)"
+          desc="The world's state at game end determines which ending fires. Endings can fire mid-game if all conditions are met. Failure states are also endings (game ends, but no one wins individually)."
+          notes={<>
+            <p style={{margin:'0 0 6px',fontFamily:'var(--type)',fontSize:11,letterSpacing:1}}>ENDING CONDITIONS (collective)</p>
+            <ul>
+              <li><b>Post-Scarcity Utopia</b> (cooperative WIN): all boundaries Green/Amber · all players ≥ baseline Welfare · 3+ ACTIVE treaties · ≥ 1 Singularity-tier tech unlocked</li>
+              <li><b>Sustainable Plurality</b> (cooperative WIN): all boundaries ≤ Amber · all players ≥ baseline Welfare · no failed treaties this game</li>
+              <li><b>Authoritarian Stability</b> (mixed): 1 player has 2× Capital of next · all boundaries ≤ Red · Welfare floor met · &lt; 2 active treaties</li>
+              <li><b>Climate Cascade</b> (FAIL): any boundary in Black · 2+ cascade fires this round</li>
+              <li><b>Collapse</b> (FAIL): 3+ boundaries in Black · OR Welfare floor breached for 2 rounds</li>
+            </ul>
+            <p style={{margin:'8px 0 0'}}>Game ends as soon as ANY ending's conditions hold. If multiple are simultaneously satisfied: ranked priority (Utopia &gt; Plurality &gt; Auth &gt; Cascade &gt; Collapse).</p>
+          </>}>
+          <svg viewBox="0 0 600 380" className="sk-svg">
+            <rect x="6" y="6" width="588" height="368" className="ink ink-thick fill-paper" rx="6" />
+            <text x="20" y="30" className="title">COLLECTIVE STATE MACHINE · only ONE fires</text>
+            {/* Endings as nodes */}
+            {(() => {
+              const ns = [
+                {n:'Post-Scarcity\nUtopia',c:'moss',x:120,y:80,kind:'WIN'},
+                {n:'Sustainable\nPlurality',c:'moss',x:280,y:80,kind:'WIN'},
+                {n:'Authoritarian\nStability',c:'amber',x:440,y:80,kind:'MIXED'},
+                {n:'Climate\nCascade',c:'rose',x:200,y:230,kind:'FAIL'},
+                {n:'Collapse',c:'rose',x:400,y:230,kind:'FAIL'},
+              ];
+              const arrows = [
+                [0,1, 'utopia missed?'],
+                [1,2, 'inequality grows'],
+                [1,3, 'boundary breach'],
+                [2,3, 'planet pays'],
+                [3,4, 'multi-cascade'],
+                [2,4, 'welfare floor'],
+              ];
+              return <>
+                {arrows.map(([a,b,lbl],k)=>(
+                  <g key={k}>
+                    <line x1={ns[a].x} y1={ns[a].y+30} x2={ns[b].x} y2={ns[b].y-30} className="ink ink-dash" />
+                    <text x={(ns[a].x+ns[b].x)/2 - 30} y={(ns[a].y+ns[b].y)/2} className="tiny">{lbl}</text>
+                  </g>
+                ))}
+                {ns.map((r,i)=>(
+                  <g key={i}>
+                    <circle cx={r.x} cy={r.y} r="40" className={`swatch-${r.c}`} />
+                    <circle cx={r.x} cy={r.y} r="40" className="ink ink-thick" />
+                    {r.n.split('\n').map((s,k)=> <text key={k} x={r.x-30} y={r.y-8+k*12} className="tiny">{s}</text>)}
+                    <text x={r.x-15} y={r.y+22} className="label" style={{fontSize:9}}>{r.kind}</text>
+                  </g>
+                ))}
+              </>;
+            })()}
+            <text x="20" y="290" className="label">RANKED PRIORITY (if multiple fire simultaneously)</text>
+            <text x="20" y="310" className="tiny">UTOPIA › PLURALITY › AUTH › CASCADE › COLLAPSE</text>
+            <text x="20" y="332" className="label">EARLY-EXIT</text>
+            <text x="20" y="352" className="tiny">if any ending's conditions hold at end of any round, game ends immediately · otherwise game ends at round 12</text>
+          </svg>
+        </Variant>
+
+        <Variant tag="B · INDIVIDUAL" title="Per-ideology personal win conditions"
+          desc="Each ideology has its own win check. Evaluated AFTER collective state machine. In WIN endings (Utopia, Plurality), 0+ players may individually win. In MIXED, only some can. In FAIL, no one wins."
+          notes={<>
+            <p style={{margin:'0 0 6px',fontFamily:'var(--type)',fontSize:11,letterSpacing:1}}>PERSONAL WIN CONDITIONS</p>
+            <ul>
+              <li><b>Industrialist</b>: Capital ≥ 12 AND own ≥ 6 territory cards</li>
+              <li><b>Socialist</b>: Welfare ≥ 10 across ALL players (incl. opponents) AND own ≥ 4 active treaties total game</li>
+              <li><b>Green</b>: ≥ 5 boundaries Green (no Red/Black) AND personally healed ≥ 3 cascade fires</li>
+              <li><b>Techno-Utopian</b>: ≥ 1 Singularity-tier tech unlocked AND own Knowledge ≥ 8</li>
+            </ul>
+            <p style={{margin:'8px 0 0'}}>These are PUBLIC ideology goals (printed on the back of each ideology board). Optional secret-agenda card add-on shifts them per game (TBD playtest).</p>
+          </>}>
+          <svg viewBox="0 0 600 380" className="sk-svg">
+            <rect x="6" y="6" width="588" height="368" className="ink ink-thick fill-paper" rx="6" />
+            {[
+              {n:'INDUSTRIALIST',c:'rose',gx:20,gy:30,goals:['Capital ≥ 12','Own ≥ 6 territories','(any WIN/MIXED ending)']},
+              {n:'SOCIALIST',c:'sky',gx:300,gy:30,goals:['ALL players Welfare ≥ 10','Own ≥ 4 lifetime treaties','(WIN ending only)']},
+              {n:'GREEN',c:'moss',gx:20,gy:200,goals:['5+ boundaries Green','3+ cascade heals personally','(WIN ending only)']},
+              {n:'TECHNO-UTOPIAN',c:'amber',gx:300,gy:200,goals:['1+ Singularity tech unlocked','Knowledge ≥ 8','(any non-FAIL ending)']},
+            ].map((p,i) => (
+              <g key={i} transform={`translate(${p.gx} ${p.gy})`}>
+                <rect x="0" y="0" width="280" height="160" className={`swatch-${p.c}`} rx="6" />
+                <rect x="0" y="0" width="280" height="160" className="ink ink-thick" rx="6" />
+                <rect x="0" y="0" width="280" height="34" className="ink" />
+                <text x="14" y="24" className="title" style={{fill:'oklch(0.97 0.01 85)'}}>{p.n}</text>
+                <text x="220" y="24" className="label" style={{fill:'oklch(0.97 0.01 85)'}}>WIN IF</text>
+                {p.goals.map((g,k)=>(
+                  <text key={k} x="14" y={56+k*22} className="tiny">· {g}</text>
+                ))}
+              </g>
+            ))}
+            <text x="20" y="380" className="tiny" style={{display:'none'}}>winners checked AFTER collective ending fires</text>
+            <text x="20" y="376" className="label">CHECK ORDER · 1) collective ending · 2) per-player personal win</text>
+          </svg>
+        </Variant>
+
+        <Variant tag="C · COMBINED" title="Single end-of-game scoring sheet"
+          desc="What the table actually fills out at game end: ending box checked at top, then each player's personal-win box checked or not. Single sheet handles both layers."
+          notes={<ul>
+            <li>+ resolves the table in 60 seconds at game end</li>
+            <li>+ shows clearly: was it a good or bad world AND who personally succeeded</li>
+            <li>+ supports outcomes like "we got Plurality but only Green personally won" or "we Cascaded — no one wins, but Industrialist had the highest Capital"</li>
+            <li>+ post-mortem fodder: addendums flip, scoring sheet completes</li>
+          </ul>}>
+          <svg viewBox="0 0 600 380" className="sk-svg">
+            <rect x="6" y="6" width="588" height="368" className="ink ink-thick fill-paper" rx="6" />
+            <text x="20" y="32" className="title">END-OF-GAME SHEET</text>
+            <text x="20" y="50" className="label">step 1 · TICK THE ENDING</text>
+            {['Post-Scarcity Utopia','Sustainable Plurality','Authoritarian Stability','Climate Cascade','Collapse'].map((n,i)=>(
+              <g key={n}>
+                <rect x={20+i*112} y="60" width="100" height="32" className={`swatch-${i<2?'moss':i===2?'amber':'rose'}`} rx="3" />
+                <rect x={20+i*112} y="60" width="100" height="32" className="ink ink-thick" rx="3" />
+                <rect x={26+i*112} y="68" width="14" height="14" className={i===1?'ink':'ink ink-thin'} fill={i===1?'oklch(0.27 0.02 250)':'none'} />
+                <text x={44+i*112} y="80" className="tiny">{n.length>14?n.slice(0,14)+'…':n}</text>
+              </g>
+            ))}
+            <text x="20" y="120" className="label">step 2 · TICK EACH PLAYER'S PERSONAL WIN</text>
+            {[
+              {n:'Industrialist',c:'rose',win:false,note:'Cap=14 ✓ · Terr=4 ✗'},
+              {n:'Socialist',c:'sky',win:true,note:'Welfare ≥10 ✓ · 5 treaties ✓'},
+              {n:'Green',c:'moss',win:true,note:'5 Green boundaries ✓ · 4 heals ✓'},
+              {n:'Techno-Utopian',c:'amber',win:false,note:'Singularity ✗'},
+            ].map((p,i)=>(
+              <g key={p.n} transform={`translate(20 ${140+i*52})`}>
+                <rect x="0" y="0" width="540" height="44" className={`swatch-${p.c}`} rx="3" />
+                <rect x="0" y="0" width="540" height="44" className="ink ink-thick" rx="3" />
+                <text x="10" y="16" className="title" style={{fontSize:14}}>{p.n}</text>
+                <rect x="180" y="14" width="20" height="20" className="ink ink-thick" fill={p.win?'oklch(0.55 0.10 145)':'none'} />
+                <text x="210" y="28" className="tiny">{p.win?'WIN':'no personal win'}</text>
+                <text x="320" y="28" className="tiny">{p.note}</text>
+              </g>
+            ))}
+            <text x="20" y="362" className="label">RESULT EXAMPLE</text>
+            <text x="160" y="362" className="tiny">"Sustainable Plurality · Socialist + Green personally won · Industrialist + Techno fell short"</text>
+          </svg>
+        </Variant>
+      </div>
+    </div>
+  );
+}
+
+window.VictoryTracker = VictoryTracker;
+
+window.SkBox = SkBox;
+window.Variant = Variant;
+
+  </script>
+  <script type="text/babel" data-presets="react">
+/* global React */
+
+// ============================================================
+// 2) PLAYER BOARDS / IDEOLOGY TRACKS
+// ============================================================
+function PlayerBoards() {
+  return (
+    <div className="page" data-page="boards">
+      <p className="page-intro">
+        <b>Player boards v3 — Plague-style.</b> Each turn = 4 fixed phases:
+        <i> 1. Collect (exploit)</i> · <i>2. Develop (meme/tech)</i> · <i>3. Expand (territory)</i> · <i>4. Interact (treaties · contest · counter)</i>.
+        The board is built around the meme tree (the heart) with the phase tracker as a permanent UI strip down one side. Resources sit as physical token tracks.
+        Three takes below: the canonical layout, a tighter compact variant, and the meme tree on its own to show structure.
+      </p>
+      <div className="variants">
+
+        <Variant tag="A · CANONICAL" title="Plague-style ideology board"
+          desc="Big meme tree fills the centre-right. Phase tracker runs vertically down the left as a permanent strip — pawn moves down it during your turn. Resource token tracks across the top. Hand of unique action cards along the bottom."
+          notes={<>
+            <p style={{margin:'0 0 6px',fontFamily:'var(--type)',fontSize:11,letterSpacing:1}}>TURN STRUCTURE</p>
+            <ul>
+              <li><b>1. Collect</b> — gain resources from your meme spread + territories you hold</li>
+              <li><b>2. Develop</b> — spend resources to unlock 1 meme/tech node (prereqs must be met)</li>
+              <li><b>3. Expand</b> — play territory cards onto continents, contest, place stress on the dial as your footprint demands</li>
+              <li><b>4. Interact</b> — propose / accept treaties, declare breach, trade, play hand cards on others</li>
+            </ul>
+            <p style={{margin:'8px 0 0'}}>Same chassis across all 4 ideologies; tree contents differ. Industrialist's tree has cheap exploit nodes + leverage; Green's has restoration + cascade-heal; Socialist's has redistribution + welfare; Techno's has breakthrough + automation.</p>
+          </>}>
+          <svg viewBox="0 0 600 380" className="sk-svg">
+            {/* board outline */}
+            <rect x="6" y="6" width="588" height="368" className="ink ink-thick" rx="6" />
+            {/* title bar */}
+            <rect x="6" y="6" width="588" height="34" className="swatch-rose" />
+            <rect x="6" y="6" width="588" height="34" className="ink" />
+            <text x="18" y="28" className="title">INDUSTRIALIST · capitalist pathway</text>
+            <text x="430" y="28" className="label">P1</text>
+            {/* phase tracker (left strip) */}
+            <rect x="14" y="48" width="64" height="318" className="ink ink-dash" rx="3" />
+            <text x="20" y="62" className="label">PHASES</text>
+            {[
+              {n:'1·COLLECT', sub:'exploit', y:80},
+              {n:'2·DEVELOP', sub:'meme/tech', y:152},
+              {n:'3·EXPAND', sub:'territory', y:224},
+              {n:'4·INTERACT', sub:'treaty', y:296},
+            ].map((p,i)=>(
+              <g key={i}>
+                <rect x="20" y={p.y} width="52" height="56" className="ink ink-thin" rx="3" />
+                <text x="24" y={p.y+18} className="title" style={{fontSize:13}}>{p.n}</text>
+                <text x="24" y={p.y+34} className="tiny">{p.sub}</text>
+                {i===0 && <circle cx="46" cy={p.y+46} r="6" className="swatch-rose ink ink-thick" />}
+              </g>
+            ))}
+            <text x="14" y="378" className="tiny" style={{display:'none'}}>pawn moves through phases each turn</text>
+            {/* resource tokens (top of right zone) */}
+            <text x="92" y="58" className="label">RESOURCES (physical tokens)</text>
+            {[['Cap','rose'],['Lab','sky'],['Nat','moss'],['Knw','amber'],['Sta','terra']].map(([n,c],i)=>(
+              <g key={n}>
+                <rect x={92+i*86} y="64" width="78" height="22" className={`swatch-${c}`} rx="2" />
+                <rect x={92+i*86} y="64" width="78" height="22" className="ink" rx="2" />
+                <text x={98+i*86} y="79" className="tiny">{n} ●●●○○</text>
+              </g>
+            ))}
+            {/* MEME TREE — centre */}
+            <text x="92" y="106" className="label">MEME / TECH TREE — develop one node per turn</text>
+            <rect x="92" y="112" width="496" height="186" className="ink ink-dash" rx="4" />
+            {(() => {
+              const nodes = [
+                {id:'A',x:130,y:140,unlocked:true,n:'Drill'},
+                {id:'B',x:200,y:140,unlocked:true,n:'Mine'},
+                {id:'C',x:130,y:200,unlocked:true,n:'Refine'},
+                {id:'D',x:270,y:170,unlocked:true,n:'Trade'},
+                {id:'E',x:200,y:230,unlocked:false,n:'Auto'},
+                {id:'F',x:340,y:140,unlocked:false,n:'Lobby'},
+                {id:'G',x:340,y:230,unlocked:false,n:'Frack'},
+                {id:'H',x:420,y:170,unlocked:false,n:'Cartel'},
+                {id:'I',x:500,y:140,unlocked:false,n:'Privatise'},
+                {id:'J',x:500,y:230,unlocked:false,n:'Hegemony'},
+                {id:'K',x:560,y:170,unlocked:false,n:'Capture\nstate'},
+              ];
+              const edges = [['A','D'],['B','D'],['B','F'],['C','E'],['D','F'],['D','G'],['E','G'],['F','H'],['G','H'],['H','I'],['H','J'],['I','K'],['J','K']];
+              const map = Object.fromEntries(nodes.map(n => [n.id, n]));
+              return <>
+                {edges.map(([a,b],k)=>(
+                  <line key={k} x1={map[a].x} y1={map[a].y} x2={map[b].x} y2={map[b].y} className={map[a].unlocked && map[b].unlocked ? 'ink ink-thin' : 'ink ink-dash'} />
+                ))}
+                {nodes.map((n,k)=>(
+                  <g key={k}>
+                    <circle cx={n.x} cy={n.y} r="14" className={n.unlocked ? 'swatch-rose' : 'fill-paper'} />
+                    <circle cx={n.x} cy={n.y} r="14" className={n.unlocked ? 'ink ink-thick' : 'ink ink-thin'} />
+                    {n.n.split('\n').map((s,j)=>(
+                      <text key={j} x={n.x-12} y={n.y-2+j*8} className="tiny">{s}</text>
+                    ))}
+                  </g>
+                ))}
+              </>;
+            })()}
+            {/* hand at bottom */}
+            <text x="92" y="318" className="label">UNIQUE ACTION CARDS · hand of 5</text>
+            {[0,1,2,3,4].map(i=>(
+              <g key={i} transform={`translate(${94+i*94} 326) rotate(${(i-2)*1.5})`}>
+                <rect x="0" y="0" width="86" height="44" className="fill-paper" rx="3" />
+                <rect x="0" y="0" width="86" height="44" className="ink" rx="3" />
+                <text x="6" y="14" className="tiny">card {i+1}</text>
+                <text x="6" y="28" className="tiny">cost · effect</text>
+              </g>
+            ))}
+          </svg>
+        </Variant>
+
+        <Variant tag="B · COMPACT" title="Tight board · for 6-player expansion"
+          desc="Same components, smaller footprint. Phase tracker becomes a horizontal strip. Meme tree compresses to vertical layout. Resource tokens on a single sidebar."
+          notes={<ul>
+            <li>+ table-friendly when 4+ corner boards crowd a smaller table</li>
+            <li>+ phase tracker as horizontal strip is a hair faster to read</li>
+            <li>− meme tree readability suffers slightly</li>
+            <li>· same data, denser presentation</li>
+          </ul>}>
+          <svg viewBox="0 0 600 380" className="sk-svg">
+            <rect x="6" y="6" width="588" height="368" className="ink ink-thick" rx="6" />
+            <text x="18" y="26" className="title">GREEN · planet-safe pathway</text>
+            <text x="540" y="26" className="label">P3</text>
+            {/* horizontal phase strip */}
+            <rect x="14" y="40" width="572" height="34" className="ink ink-dash" rx="3" />
+            {['1·COLLECT','2·DEVELOP','3·EXPAND','4·INTERACT'].map((p,i)=>(
+              <g key={i}>
+                <rect x={20+i*142} y="46" width="134" height="22" className={i===1?'swatch-moss':'fill-paper'} rx="2" />
+                <rect x={20+i*142} y="46" width="134" height="22" className={i===1?'ink ink-thick':'ink ink-thin'} rx="2" />
+                <text x={26+i*142} y="61" className="title" style={{fontSize:13}}>{p}</text>
+              </g>
+            ))}
+            {/* sidebar resources */}
+            <rect x="14" y="84" width="100" height="220" className="ink ink-dash" rx="3" />
+            <text x="20" y="98" className="label">RES</text>
+            {['Cap','Lab','Nat','Knw','Sta'].map((n,i)=>(
+              <g key={n}>
+                <text x="22" y={120+i*36} className="tiny">{n}</text>
+                <rect x="22" y={124+i*36} width="84" height="14" className="ink ink-thin" rx="2" />
+                <circle cx="30" cy={131+i*36} r="3" className="swatch-moss ink" />
+                <circle cx="42" cy={131+i*36} r="3" className="swatch-moss ink" />
+                <circle cx="54" cy={131+i*36} r="3" className="fill-paper ink" />
+              </g>
+            ))}
+            {/* compact tree (vertical) */}
+            <text x="124" y="98" className="label">MEME TREE (vertical)</text>
+            <rect x="124" y="104" width="350" height="200" className="ink ink-dash" rx="3" />
+            {(() => {
+              const ns = [
+                {x:200,y:130,n:'Restore'},
+                {x:300,y:130,n:'Reforest'},
+                {x:400,y:130,n:'Wetland'},
+                {x:200,y:200,n:'Corridor'},
+                {x:300,y:200,n:'Rewild'},
+                {x:400,y:200,n:'Heal'},
+                {x:300,y:270,n:'Regen.'},
+              ];
+              const es = [[0,3],[1,3],[1,4],[2,4],[2,5],[3,6],[4,6],[5,6]];
+              return <>
+                {es.map(([a,b],k)=> <line key={k} x1={ns[a].x} y1={ns[a].y} x2={ns[b].x} y2={ns[b].y} className="ink ink-thin" />)}
+                {ns.map((n,k)=>(
+                  <g key={k}>
+                    <circle cx={n.x} cy={n.y} r="16" className={k<4?'swatch-moss':'fill-paper'} />
+                    <circle cx={n.x} cy={n.y} r="16" className="ink" />
+                    <text x={n.x-14} y={n.y+3} className="tiny">{n.n}</text>
+                  </g>
+                ))}
+              </>;
+            })()}
+            {/* hand zone */}
+            <text x="484" y="98" className="label">HAND</text>
+            <rect x="484" y="104" width="100" height="200" className="ink ink-dash" rx="3" />
+            {[0,1,2,3].map(i=>(
+              <rect key={i} x="492" y={114+i*46} width="84" height="40" className="ink ink-thin fill-paper" rx="2" />
+            ))}
+            <text x="14" y="324" className="label">PHASE PAWN MOVES ALONG TOP STRIP →</text>
+          </svg>
+        </Variant>
+
+        <Variant tag="C · TREE FOCUS" title="Just the meme tree (Plague-Inc-faithful)"
+          desc="Showing the tree structure on its own — same DAG shape across ideologies, different node names + costs. Cost = resources to unlock; effect = ongoing benefit + footprint."
+          notes={<>
+            <p style={{margin:'0 0 6px',fontFamily:'var(--type)',fontSize:11,letterSpacing:1}}>NODE ANATOMY</p>
+            <ul>
+              <li>NAME · COST (resources) · ONGOING EFFECT · FOOTPRINT (per round)</li>
+              <li>Prereq edges: must hold all incoming nodes to unlock</li>
+              <li>Roots free at start · 3 'capstone' endpoints (high-impact, expensive)</li>
+              <li>Footprint accumulates → pushes wedges on the dial</li>
+            </ul>
+          </>}>
+          <svg viewBox="0 0 600 380" className="sk-svg">
+            <rect x="6" y="6" width="588" height="368" className="ink ink-thick fill-paper" rx="6" />
+            <text x="18" y="26" className="title">TECHNO-UTOPIAN tree (sample)</text>
+            {(() => {
+              const tiers = [
+                {nodes:[{n:'Compute',cost:1},{n:'Sensor',cost:1},{n:'Network',cost:1}], y:80},
+                {nodes:[{n:'AI assist',cost:2},{n:'Bio-mod',cost:2},{n:'Geo-eng',cost:2},{n:'Robotics',cost:2}], y:170},
+                {nodes:[{n:'AGI',cost:4},{n:'Cure',cost:4},{n:'Climate fix',cost:4}], y:260},
+                {nodes:[{n:'Singularity',cost:8}], y:340},
+              ];
+              const edges = [];
+              return <>
+                {/* edges: tier 0 → tier 1 → tier 2 → tier 3 (mostly fan-out then fan-in) */}
+                {[
+                  // tier 0 → tier 1
+                  [{t:0,i:0},{t:1,i:0}],[{t:0,i:0},{t:1,i:1}],
+                  [{t:0,i:1},{t:1,i:1}],[{t:0,i:1},{t:1,i:3}],
+                  [{t:0,i:2},{t:1,i:0}],[{t:0,i:2},{t:1,i:2}],[{t:0,i:2},{t:1,i:3}],
+                  // tier 1 → tier 2
+                  [{t:1,i:0},{t:2,i:0}],[{t:1,i:1},{t:2,i:1}],[{t:1,i:2},{t:2,i:2}],[{t:1,i:3},{t:2,i:0}],
+                  // tier 2 → tier 3
+                  [{t:2,i:0},{t:3,i:0}],[{t:2,i:1},{t:3,i:0}],[{t:2,i:2},{t:3,i:0}],
+                ].map((e,k) => {
+                  const a = tiers[e[0].t], b = tiers[e[1].t];
+                  const ax = 80 + e[0].i * (440 / Math.max(1, a.nodes.length-1)) + (a.nodes.length===1?220:0);
+                  const bx = 80 + e[1].i * (440 / Math.max(1, b.nodes.length-1)) + (b.nodes.length===1?220:0);
+                  return <line key={k} x1={ax} y1={a.y} x2={bx} y2={b.y} className="ink ink-thin" />;
+                })}
+                {tiers.map((tier,t) =>
+                  tier.nodes.map((n,i) => {
+                    const x = 80 + i * (440 / Math.max(1, tier.nodes.length-1)) + (tier.nodes.length===1?220:0);
+                    return (
+                      <g key={`${t}-${i}`}>
+                        <circle cx={x} cy={tier.y} r="22" className={t===0?'swatch-amber':t===3?'swatch-rose':'fill-paper'} />
+                        <circle cx={x} cy={tier.y} r="22" className="ink ink-thick" />
+                        <text x={x-18} y={tier.y-2} className="tiny">{n.n}</text>
+                        <text x={x-8} y={tier.y+10} className="tiny">{n.cost}◊</text>
+                      </g>
+                    );
+                  })
+                )}
+                <text x="14" y="370" className="tiny">unlocked = filled · prereq = incoming edges · capstones = high cost / high impact</text>
+              </>;
+            })()}
+          </svg>
+        </Variant>
+      </div>
+    </div>
+  );
+}
+
+window.PlayerBoards = PlayerBoards;
+
+  </script>
+  <script type="text/babel" data-presets="react">
+/* global React */
+
+// ============================================================
+// 3) PLANETARY BOUNDARIES DASHBOARD
+// ============================================================
+function BoundariesDashboard() {
+  return (
+    <div className="page" data-page="boundaries">
+      <p className="page-intro">
+        <b>Boundaries · LOCKED →</b> Stockholm-style 9 wedges, 4 bands (Green / Amber / Red / Black). Cascade arcs
+        printed faintly inside the dial: when a wedge crosses Red, finger-trace the arc to its targets and add
+        stress. Crossing Black double-fires (the 'outbreak' beat). One central object, two layers of meaning.
+      </p>
+      <div className="variants cols-1">
+        <Variant tag="LOCKED · A+CASCADE" title="Wedge dial with printed cascade arcs"
+          desc="9 wedges = 9 planetary boundaries (Climate, Biosphere, Biogeochem, Ocean acid, Freshwater, Land-use, Novel ent., Ozone, Aerosols). Stress fills outward through 4 bands. Inner cascade arcs encode coupling — when a wedge enters Red the arcs fire."
+          notes={<>
+            <p style={{margin:'0 0 6px',fontFamily:'var(--type)',fontSize:11,letterSpacing:1}}>RULES</p>
+            <ul>
+              <li>Stress fills wedges outward · wedge bands: Green → Amber → Red → Black</li>
+              <li>When a wedge ENTERS Red, trace its outgoing cascade arcs · each target wedge gains +1 stress</li>
+              <li>When a wedge ENTERS Black, all outgoing arcs fire double (+2)</li>
+              <li>Player actions can ADD or REMOVE stress; some cards heal cascades</li>
+              <li>Cascade arcs are printed quietly — they only matter at threshold crossings</li>
+            </ul>
+            <p style={{margin:'8px 0 0',fontFamily:'var(--type)',fontSize:11,letterSpacing:1}}>EXAMPLE EDGES</p>
+            <ul>
+              <li>Climate → Biosphere, Ocean acid, Freshwater</li>
+              <li>Land-use → Biosphere · Biosphere → Biogeochem</li>
+              <li>Biogeochem → Freshwater · Freshwater → Biosphere</li>
+              <li>Novel ent. → Ozone · Aerosols → Climate</li>
+            </ul>
+          </>}>
+          <svg viewBox="0 0 460 380" className="sk-svg">
+            <g transform="translate(230 190)">
+              {/* outer ring + bands */}
+              <circle r="160" className="ink ink-dash" />
+              <circle r="130" className="rose" />
+              <circle r="96" className="terra" />
+              <circle r="58" className="moss" />
+              <circle r="160" className="ink ink-thick fill-none" style={{fill:'none'}} />
+              {/* spokes */}
+              {Array.from({length:9}, (_,i) => {
+                const a = (i/9)*Math.PI*2 - Math.PI/2;
+                return <line key={i} x1={0} y1={0} x2={Math.cos(a)*160} y2={Math.sin(a)*160} className="ink ink-thin" />;
+              })}
+              {/* sample stress fills */}
+              {[
+                {i:0, r:144, c:'rose'},  // Climate - Red
+                {i:1, r:118, c:'terra'}, // Biosphere - Amber-Red
+                {i:5, r:108, c:'terra'}, // Land-use - Amber
+                {i:2, r:80,  c:'moss'},  // Biogeochem - Green
+              ].map((w,k) => {
+                const a1 = (w.i/9)*Math.PI*2 - Math.PI/2;
+                const a2 = ((w.i+1)/9)*Math.PI*2 - Math.PI/2;
+                const cls = w.r > 130 ? 'swatch-rose' : w.r > 96 ? 'swatch-amber' : 'swatch-moss';
+                const path = `M0,0 L${Math.cos(a1)*w.r},${Math.sin(a1)*w.r} A${w.r},${w.r} 0 0 1 ${Math.cos(a2)*w.r},${Math.sin(a2)*w.r} Z`;
+                return <path key={k} d={path} className={cls + ' ink ink-thin'} />;
+              })}
+              {/* cascade arcs (printed inside) */}
+              {[[0,1],[0,3],[0,4],[5,1],[1,2],[2,4],[6,7],[8,0]].map(([s,t],k) => {
+                const aS = (s/9)*Math.PI*2 - Math.PI/2 + Math.PI/9;
+                const aT = (t/9)*Math.PI*2 - Math.PI/2 + Math.PI/9;
+                const r = 44;
+                const x1 = Math.cos(aS)*r, y1 = Math.sin(aS)*r;
+                const x2 = Math.cos(aT)*r, y2 = Math.sin(aT)*r;
+                return <path key={k} d={`M${x1} ${y1} Q 0 0 ${x2} ${y2}`} className="ink ink-dash" />;
+              })}
+              {/* labels around outside */}
+              {['Climate','Biosphere','Biogeochem','Ocean acid','Freshwater','Land-use','Novel ent.','Ozone','Aerosols'].map((n,i) => {
+                const a = (i/9)*Math.PI*2 - Math.PI/2 + Math.PI/9;
+                const r = 178;
+                return <text key={n} x={Math.cos(a)*r-22} y={Math.sin(a)*r+4} className="label" style={{fontSize:10}}>{n}</text>;
+              })}
+            </g>
+            <text x="14" y="22" className="label">CASCADE ARCS PRINTED INSIDE · TRACE ON CROSSING</text>
+          </svg>
+        </Variant>
+      </div>
+    </div>
+  );
+}
+
+window.BoundariesDashboard = BoundariesDashboard;
+
+  </script>
+  <script type="text/babel" data-presets="react">
+/* global React */
+
+
+
+  </script>
+  <script type="text/babel" data-presets="react">
+/* global React */
+
+// ============================================================
+// 5) TREATY / NEGOTIATION
+// ============================================================
+function Treaties() {
+  return (
+    <div className="page" data-page="treaties">
+      <p className="page-intro">
+        <b>Treaties v3.</b> Public treaty card stays as the canonical artifact (kept from v2). Added: optional
+        <i> private addendum</i> known only to the two parties, revealed at game end. Non-fulfilment mechanic
+        retained but specced clearly: not a voting circus — a finite, deterministic procedure with one option
+        for table arbitration where it matters.
+      </p>
+      <div className="variants">
+
+        <Variant tag="A · PUBLIC" title="Public treaty card (canonical)"
+          desc="Sits face-up on the Treaty Ledger. PARTIES · TERMS (player-written) · DURATION · WITNESS. Visible to all. Anyone may invoke breach against it on their Interact phase."
+          notes={<ul>
+            <li>+ written in natural language: edge cases ARE the game</li>
+            <li>+ public state — every player can plan around it</li>
+            <li>+ duration is a hard counter (rounds remaining)</li>
+            <li>+ witness is a 3rd party named by mutual consent — they get a small reward (+1 Trust) when treaty completes intact</li>
+          </ul>}>
+          <svg viewBox="0 0 600 380" className="sk-svg">
+            <rect x="40" y="20" width="520" height="340" className="ink ink-thick fill-paper" rx="8" />
+            <line x1="40" y1="62" x2="560" y2="62" className="ink" />
+            <text x="60" y="48" className="title">PUBLIC TREATY · v3</text>
+            <text x="500" y="48" className="label">SEAL ▢</text>
+
+            <text x="60" y="86" className="label">PARTIES</text>
+            <line x1="160" y1="90" x2="320" y2="90" className="ink ink-thin" />
+            <text x="166" y="86" className="tiny">Industrialist</text>
+            <text x="332" y="86" className="label">&</text>
+            <line x1="356" y1="90" x2="540" y2="90" className="ink ink-thin" />
+            <text x="362" y="86" className="tiny">Green</text>
+
+            <text x="60" y="116" className="label">TERMS · written by parties</text>
+            <rect x="60" y="124" width="480" height="80" className="ink ink-dash" rx="3" />
+            <text x="70" y="142" className="tiny">"Industrialist will not contest any RAINFOREST card while it remains on the board"</text>
+            <text x="70" y="160" className="tiny">"Green will share 1 Knowledge token with Industrialist each Collect phase"</text>
+            <text x="70" y="178" className="tiny">"emergency exception: if Climate enters Black, all terms suspend until band returns"</text>
+            <text x="70" y="196" className="tiny">— signed P1, P3</text>
+
+            <text x="60" y="222" className="label">DURATION</text>
+            <rect x="160" y="212" width="100" height="16" className="ink ink-dash" rx="2" />
+            <text x="166" y="222" className="tiny">3 rounds (then auto-expires)</text>
+            <text x="290" y="222" className="label">WITNESS</text>
+            <line x1="370" y1="226" x2="540" y2="226" className="ink ink-thin" />
+            <text x="376" y="222" className="tiny">Techno (gains +1 Trust if upheld)</text>
+
+            <text x="60" y="254" className="label">ADDENDUM SLOT</text>
+            <rect x="60" y="262" width="480" height="34" className="ink ink-dash" rx="2" />
+            <text x="70" y="282" className="tiny">[ optional · private addendum card lives here · face-down · revealed at game end ]</text>
+
+            <text x="60" y="318" className="label">BREACH PROCEDURE</text>
+            <text x="70" y="336" className="tiny">on any Interact phase, a party may invoke breach (see Variant C) · table goes through</text>
+            <text x="70" y="350" className="tiny">a deterministic 4-step procedure · no voting unless ambiguous (defaults to witness arbitration)</text>
+          </svg>
+        </Variant>
+
+        <Variant tag="B · PRIVATE" title="Private addendum (face-down)"
+          desc="Optional second card kept by the two parties only. Modifies the public treaty silently. Revealed at game end as part of the post-mortem (or earlier if either party chooses to flip it as a signal)."
+          notes={<ul>
+            <li>+ asymmetric information — table sees the public treaty, not the addendum</li>
+            <li>+ creates dramatic reveals: at game end, addendums flip and re-narrate the game's history</li>
+            <li>+ either party may unilaterally flip face-up to signal sincerity (or extract leverage)</li>
+            <li>+ if addendum CONTRADICTS public terms, it does not invalidate the public terms — both bind, but the addendum has its own consequence at reveal</li>
+            <li>− adds rules surface: keep optional, used at the parties' discretion</li>
+          </ul>}>
+          <svg viewBox="0 0 600 380" className="sk-svg">
+            {/* face-down addendum card stack */}
+            <g transform="translate(40 40) rotate(-3)">
+              <rect x="0" y="0" width="280" height="200" className="ink ink-thick fill-paper" rx="6" />
+              <text x="14" y="24" className="label">PUBLIC TREATY</text>
+              <line x1="14" y1="34" x2="266" y2="34" className="ink ink-thin" />
+              <text x="14" y="54" className="tiny">P1 & P3 · Rainforest non-aggression</text>
+              <text x="14" y="72" className="tiny">duration 3 rounds</text>
+              <text x="14" y="100" className="label">— face-up · table reads —</text>
+            </g>
+            <g transform="translate(280 130) rotate(4)">
+              <rect x="0" y="0" width="260" height="190" className="terra ink-thick" rx="6" />
+              <rect x="0" y="0" width="260" height="190" className="ink ink-thick" rx="6" fill="none" />
+              <text x="14" y="24" className="label" style={{fill:'oklch(0.97 0.01 85)'}}>PRIVATE ADDENDUM · FACE-DOWN</text>
+              <line x1="14" y1="34" x2="246" y2="34" className="ink ink-thin" style={{stroke:'oklch(0.97 0.01 85)'}} />
+              <text x="14" y="54" className="tiny" style={{fill:'oklch(0.97 0.01 85)'}}>"P3 will warn P1 before invoking</text>
+              <text x="14" y="68" className="tiny" style={{fill:'oklch(0.97 0.01 85)'}}>any Cascade-Heal action that would</text>
+              <text x="14" y="82" className="tiny" style={{fill:'oklch(0.97 0.01 85)'}}>cost P1 income"</text>
+              <text x="14" y="106" className="tiny" style={{fill:'oklch(0.97 0.01 85)'}}>"P1 will not lobby for fossil</text>
+              <text x="14" y="120" className="tiny" style={{fill:'oklch(0.97 0.01 85)'}}>subsidies in Africa"</text>
+              <text x="14" y="148" className="tiny" style={{fill:'oklch(0.97 0.01 85)'}}>— signed P1, P3 only</text>
+              <text x="14" y="172" className="tiny" style={{fill:'oklch(0.97 0.01 85)'}}>flip on demand · auto-reveal at game end</text>
+            </g>
+            <text x="14" y="354" className="label">REVEAL TRIGGERS</text>
+            <text x="14" y="370" className="tiny">· either party may flip on their own turn (signal of sincerity, or threat to defect) · auto-flip at game end · auto-flip if treaty is breached</text>
+          </svg>
+        </Variant>
+
+        <Variant tag="C · BREACH" title="Non-fulfilment · 4-step procedure"
+          desc="Deterministic procedure. No mass-vote unless step 3 deadlocks. Witness has a defined arbitration role. Reputation costs are fixed."
+          notes={<>
+            <p style={{margin:'0 0 6px',fontFamily:'var(--type)',fontSize:11,letterSpacing:1}}>4 STEPS</p>
+            <ul>
+              <li><b>1. INVOKE</b> — accuser names treaty + the action they claim breached it · costs 1 Trust to invoke (filter for frivolous claims)</li>
+              <li><b>2. DEFEND</b> — accused has one response: ADMIT, DENY, or CITE EXCEPTION (e.g. emergency clause)</li>
+              <li><b>3. RESOLVE</b> — if ADMIT: accused pays Duration × 1 Trust to accuser, treaty void · if DENY/EXCEPTION: WITNESS adjudicates as fact-finder · only if WITNESS recuses or is a party, the table votes</li>
+              <li><b>4. SETTLE</b> — Trust transfers, treaty status updated (void / amended / upheld) · addendum (if any) flipped face-up</li>
+            </ul>
+            <p style={{margin:'8px 0 0'}}>Trust is the currency of treaties — earned by upholding past treaties, spent on invoking breach, transferred on settlement. The witness has skin in the game (+1 Trust if treaty completes intact).</p>
+          </>}>
+          <svg viewBox="0 0 600 380" className="sk-svg">
+            <rect x="6" y="6" width="588" height="368" className="ink ink-thick fill-paper" rx="6" />
+            <text x="20" y="30" className="title">BREACH FLOWCHART</text>
+            {[
+              {x:20,y:60,n:'1 · INVOKE',d:'accuser names act · pays 1 Trust',c:'rose'},
+              {x:20,y:140,n:'2 · DEFEND',d:'admit / deny / except',c:'amber'},
+              {x:20,y:220,n:'3 · RESOLVE',d:'witness arbitrates · table only if witness recuses',c:'sky'},
+              {x:20,y:300,n:'4 · SETTLE',d:'Trust transfers · addendum reveals',c:'moss'},
+            ].map((s,i)=>(
+              <g key={i}>
+                <rect x={s.x} y={s.y} width="200" height="60" className={`swatch-${s.c}`} rx="4" />
+                <rect x={s.x} y={s.y} width="200" height="60" className="ink ink-thick" rx="4" />
+                <text x={s.x+10} y={s.y+22} className="title" style={{fontSize:14}}>{s.n}</text>
+                <text x={s.x+10} y={s.y+44} className="tiny">{s.d}</text>
+                {i<3 && <path d={`M${s.x+100} ${s.y+60} L${s.x+100} ${s.y+80}`} className="ink ink-thick" />}
+                {i<3 && <path d={`M${s.x+95} ${s.y+74} L${s.x+100} ${s.y+82} L${s.x+105} ${s.y+74}`} className="ink ink-thick" />}
+              </g>
+            ))}
+            {/* trust ledger */}
+            <text x="260" y="78" className="label">TRUST LEDGER</text>
+            <rect x="260" y="86" width="320" height="220" className="ink ink-dash" rx="3" />
+            {['Industrialist','Socialist','Green','Techno-Utopian'].map((n,i) => (
+              <g key={n}>
+                <text x="270" y={108+i*48} className="tiny">{n}</text>
+                {Array.from({length:8}, (_,j) => (
+                  <circle key={j} cx={270+j*22} cy={120+i*48} r="6" className={j < (i===2?5:i===0?2:3) ? 'swatch-amber ink' : 'fill-paper ink'} />
+                ))}
+                <text x="450" y={124+i*48} className="tiny">earn: uphold treaty (+1)</text>
+                <text x="450" y={140+i*48} className="tiny">spend: invoke breach (-1)</text>
+              </g>
+            ))}
+            <text x="260" y="324" className="tiny">TRUST is the political currency · 0 Trust = locked out of treaty system until earned back</text>
+            <text x="260" y="346" className="tiny">trust pool is visible to all · public reputation</text>
+          </svg>
+        </Variant>
+      </div>
+    </div>
+  );
+}
+
+window.Treaties = Treaties;
+
+  </script>
+  <script type="text/babel" data-presets="react">
+/* global React */
+
+
+
+  </script>
+  <script type="text/babel" data-presets="react">
+    const { useEffect } = React;
+    const TABS = [
+      { id: 'table',      label: 'Table layout',  Comp: window.TableLayouts },
+      { id: 'boards',     label: 'Player boards', Comp: window.PlayerBoards },
+      { id: 'boundaries', label: 'Boundaries',    Comp: window.BoundariesDashboard },
+      { id: 'territory',  label: 'Territory',     Comp: window.TerritorySystems },
+      { id: 'treaties',   label: 'Treaties',      Comp: window.Treaties },
+      { id: 'victory',    label: 'Victory',       Comp: window.VictoryTracker },
+    ];
+    const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+      "tab": "table",
+      "paperGrain": true,
+      "dark": false
+    }/*EDITMODE-END*/;
+    function App() {
+      const [tweaks, setTweak] = window.useTweaks(TWEAK_DEFAULTS);
+      useEffect(() => {
+        document.body.classList.toggle('dark', !!tweaks.dark);
+        document.body.classList.toggle('no-grain', !tweaks.paperGrain);
+      }, [tweaks.dark, tweaks.paperGrain]);
+      const active = tweaks.tab || 'table';
+      const ActiveComp = (TABS.find(t => t.id === active) || TABS[0]).Comp;
+      return (
+        <>
+          <nav className="tabs">
+            {TABS.map(t => (
+              <button key={t.id}
+                      className={'tab' + (active === t.id ? ' active' : '')}
+                      data-screen-label={`tab-${t.id}`}
+                      onClick={() => setTweak('tab', t.id)}>
+                {t.label}
+              </button>
+            ))}
+          </nav>
+          <main data-screen-label={active}>
+            {ActiveComp ? <ActiveComp /> : null}
+          </main>
+          <window.TweaksPanel title="Tweaks">
+            <window.TweakSection label="View">
+              <window.TweakSelect label="Active tab" value={tweaks.tab}
+                                  onChange={v => setTweak('tab', v)}
+                                  options={TABS.map(t => ({ value: t.id, label: t.label }))} />
+              <window.TweakToggle label="Paper grain" value={tweaks.paperGrain}
+                                  onChange={v => setTweak('paperGrain', v)} />
+              <window.TweakToggle label="Dark / chalkboard" value={tweaks.dark}
+                                  onChange={v => setTweak('dark', v)} />
+            </window.TweakSection>
+          </window.TweaksPanel>
+        </>
+      );
+    }
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>

@@ -1,0 +1,784 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (c) 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+= Mechanism Survey: Mappings to Engelstein & Shalev
+:toc:
+:icons: font
+
+== Purpose
+
+This document maps twenty-five mechanism entries from Engelstein and Shalev's
+_Building Blocks of Tabletop Game Design_ (2nd ed., 2022) onto the four
+economic principles that anchor _The Nash Equilibrium_. The survey is a
+*design reference*, not canonical theory; the load-bearing specification is
+`economic-foundations.adoc`. The defection ledger and trade-card library are
+specified in `trade-cards.adoc`, the Turn 12 walkthrough is in
+`gameplay-storyboard.adoc`.
+
+The entries here are organised by *which Nash Equilibrium principle they
+serve* rather than by Engelstein's chapters. Same content, different axis.
+Where Engelstein groups by mechanism family (Actions, Economics, Uncertainty,
+…), we group by load-bearing role in our own design — making the survey a
+checklist for design decisions rather than a wiki of someone else's
+taxonomy.
+
+== Visual Map
+
+Two diagrams: a verdict matrix (mechanisms grouped by which Nash Equilibrium
+principle they serve, coloured by Adopt / Adapt / Reject) and a cluster
+overlay (the five cross-cutting design moves the survey identifies). The
+text below is the load-bearing artefact; these diagrams are for orientation
+at a glance.
+
+=== Verdict matrix — twenty-five mechanisms by principle
+
+[mermaid]
+....
+flowchart TB
+    classDef adopt    fill:#c8e6c9,stroke:#2e7d32,color:#1b5e20
+    classDef adapt    fill:#fff3b0,stroke:#b8860b,color:#5d4e00
+    classDef reject   fill:#ffcdd2,stroke:#c62828,color:#7f0000
+    classDef header   fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+
+    subgraph P1["Principle 1 — Scarcity & Opportunity Cost"]
+        ACT02["ACT-02 Action Drafting"]:::adapt
+        ACT10["ACT-10 Rondel"]:::adapt
+        ACT11["ACT-11 Action Selection Restrictions"]:::adopt
+        ECO17["ECO-17 Increase Value of Unchosen"]:::reject
+    end
+
+    subgraph P2["Principle 2 — Information Symmetry & Fog"]
+        UNC05["UNC-05 Roles w/ Asymmetric Information"]:::adapt
+        UNC09["UNC-09 Probability Management"]:::reject
+    end
+
+    subgraph P3["Principle 3 — Factors & Factor Returns"]
+        ECO01["ECO-01 Exchanging"]:::adopt
+        ECO02["ECO-02 Trading"]:::adopt
+        ECO05["ECO-05 Income"]:::adapt
+        ECO13["ECO-13 Investment"]:::reject
+        ECO14["ECO-14 Ownership"]:::adopt
+        ECO15["ECO-15 Contracts"]:::adopt
+        ECO19["ECO-19 Alliances"]:::adopt
+        ECO20["ECO-20 Resource Queue"]:::reject
+        WPL05["WPL-05 Adding/Blocking Buildings"]:::adapt
+        ACT15["ACT-15 Gating & Unlocking"]:::adopt
+        ACT16["ACT-16 Tech Trees / Tracks"]:::adapt
+        ACT20["ACT-20 Splaying"]:::adopt
+        SET04["SET-04 Network Building"]:::adopt
+    end
+
+    subgraph P4["Principle 4 — Externalities"]
+        VIC15["VIC-15 Circuit Breaker / Sudden Death"]:::adopt
+    end
+
+    subgraph META["Meta-Design — Structure & Endgame"]
+        STR05["STR-05 Semi-Cooperative"]:::adopt
+        VIC19["VIC-19 Tug of War"]:::adapt
+        RES08["RES-08 Prisoner's Dilemma"]:::adopt
+        ECO18["ECO-18 Negotiation"]:::adopt
+    end
+
+    subgraph PATH["Pathway Asymmetry"]
+        ACT12["ACT-12 Variable Player Powers"]:::adopt
+    end
+
+    class P1,P2,P3,P4,META,PATH header
+
+    legend["Legend: green = ADOPT &nbsp;·&nbsp; amber = ADAPT &nbsp;·&nbsp; red = REJECT"]
+    style legend fill:#fafafa,stroke:#999,color:#333
+....
+
+The four rejections (ECO-13, ECO-17, ECO-20, UNC-09) all fail for the same
+root reason: they are incompatible with the deterministic Leontief recipe
+model. That visual scarcity is the point — the survey is honest about what
+does not fit, not maximally absorptive.
+
+=== Cluster overlay — the five cross-cutting design moves
+
+[mermaid]
+....
+flowchart LR
+    classDef cluster fill:#f3e5f5,stroke:#6a1b9a,color:#4a148c
+
+    subgraph C1["① Engine-Reveal (endogenous productivity)"]
+        direction LR
+        c1a["ACT-15<br/>era gating"] --> c1b["ACT-16<br/>pathway tracks"] --> c1c["ACT-20 Splaying<br/>★ load-bearing"] --> c1d["WPL-05<br/>add buildings"]
+    end
+
+    subgraph C2["② Binding-Strength Ladder (commitment depth)"]
+        direction LR
+        c2a["ECO-01<br/>Exchange"] --> c2b["ECO-02<br/>Trade"] --> c2c["ECO-15<br/>Contract"] --> c2d["ECO-18<br/>Negotiation"] --> c2e["ECO-19<br/>Alliance"]
+    end
+
+    subgraph C3["③ Scythe-Shaped Action Grid"]
+        direction LR
+        c3a["ACT-02<br/>drafting"] --- c3b["ACT-10<br/>rondel geometry"] --- c3c["ACT-11<br/>no-repeat rule"]
+    end
+
+    subgraph C4["④ Prisoner's Dilemma Precedent"]
+        c4a["RES-08<br/>literal, not metaphorical"]
+    end
+
+    subgraph C5["⑤ Pathway Asymmetry Pair"]
+        direction LR
+        c5a["ACT-12<br/>variable powers"] --- c5b["UNC-05 weak<br/>asymmetric valuation"]
+    end
+
+    class C1,C2,C3,C4,C5 cluster
+....
+
+Cluster ① collapses four chapters of Engelstein onto one mechanism (Splaying);
+cluster ② makes the defection ledger load-bearing as the institution holding
+deferred rungs together; cluster ③ names a Scythe-shaped pattern that has no
+single Engelstein ID; cluster ④ is the strongest single endorsement in the
+survey; cluster ⑤ is the cognitive-load tradeoff for asymmetric play.
+
+== Reading Conventions
+
+Each entry is cited as `ID Name (book p.N)`, where the ID is Engelstein's
+stable mnemonic (e.g. `ACT-10`, `ECO-15`) and the page reference is the
+printed book page (CRC Press, 2022).
+
+Each entry carries one of three verdicts:
+
+[cols="1,3"]
+|===
+| *ADOPT* | Engelstein's mechanism is taken essentially as described, modulo
+   thematic skinning. Our existing design already uses or should use it.
+| *ADAPT* | The mechanism is taken with material modification to fit one of
+   our load-bearing constraints (Leontief recipes, emergent stability,
+   public engine state, four-factor model).
+| *REJECT* | The mechanism is incompatible with one of our locked-in
+   decisions and is *not* used. Documented here only to forestall
+   re-litigation.
+|===
+
+The survey is selective. Engelstein covers ~250 mechanisms across thirteen
+chapters; this document treats the twenty-five most directly relevant to our
+four economic principles, our 6X pillar structure, and the Scythe-style
+paired action grid currently under consideration.
+
+== Principle 1 — Scarcity and Opportunity Cost
+
+These mechanisms make foregone alternatives *visible*. Robbins's (1932)
+opportunity-cost framing is mechanically realised when a player's choice of
+one action geometrically forecloses others.
+
+=== ACT-02 Action Drafting (book p.81)
+
+*Mechanism.* Players select Actions from a shared pool; once selected, an
+Action is denied to other players. Worker Placement and Role Selection are
+sub-types.
+
+*Mapping.* Implements opportunity cost at the *inter-player* layer:
+choosing locks competitors out of the same Action this round.
+
+*Verdict.* ADAPT. Our Scythe-style paired action grid is closer to ACT-10
+Rondel + ACT-11 Selection Restrictions than to pure drafting; columns are
+not denied to other players, only to *the same player on the next turn*.
+
+*Example.* _Citadels_ (Faidutti, 2000); _Puerto Rico_ (Seyfarth, 2002).
+
+=== ACT-10 Rondel (book p.102)
+
+*Mechanism.* Available Actions are arranged on a circle. Each player has a
+token; on their turn they advance it and take the Action where it lands.
+Moving further is more costly.
+
+*Mapping.* Geometric realisation of opportunity cost: the player sees
+exactly which Actions they are passing over, and at what cost.
+
+*Verdict.* ADAPT. Our paired-action grid borrows the Rondel's *spatial
+inevitability* (you cannot pretend the foregone option doesn't exist) but
+replaces the circle with three columns of paired top/bottom actions.
+
+*Example.* _Imperial_ (Gerdts, 2006); _Concordia_ (Gerdts, 2013).
+
+=== ACT-11 Action Selection Restrictions (book p.104)
+
+*Mechanism.* A constraint on which Actions a player may choose this turn.
+Engelstein collects exotic instances: Kemet's pyramid, Goa's grid adjacency,
+Tzolk'in's rotating gears, Keyforge's house restriction.
+
+*Mapping.* The restriction is the opportunity-cost mechanism — it forces
+foregone alternatives into the present decision.
+
+*Verdict.* ADOPT. The Scythe no-repeat-column rule belongs to this family.
+Cannot pick the same column two turns running. One sentence in the rules,
+massive effect on play: prevents production-spam, prevents single-pillar
+dominance.
+
+*Example.* _Keyforge: Call of the Archons_ (Garfield, 2018); _Tzolk'in_
+(Luciani and Tascini, 2012).
+
+=== ECO-17 Increase Value of Unchosen Resources (book p.345)
+
+*Mechanism.* Actions or Resources not chosen this turn accumulate value
+(coins, bonus points) until someone takes them. _Puerto Rico_'s unfilled
+roles are the canonical case.
+
+*Mapping.* Surfaces opportunity cost by making *delay* the price.
+
+*Verdict.* REJECT. Incompatible with the Leontief recipe model: recipes are
+binary (fire / idle), not Dutch-auction-priced. Adding accumulating coins to
+unfired recipes would convert deterministic production into a price-discovery
+mechanism, which is exactly what our model rejects in favour of Hayekian
+emergence (Foundations §7).
+
+*Example.* _Puerto Rico_ (Seyfarth, 2002); _Small World_ (Keyaerts, 2009).
+
+== Principle 2 — Information Symmetry and Fog
+
+Our commitment is *strong*: the entire economic engine (recipes,
+infrastructure, defection ledger, dashboard) is public; fog applies only to
+tactical hex contents. Engelstein's hidden-information mechanisms are
+mostly incompatible with this; the few that survive are softer asymmetries.
+
+=== UNC-05 Roles with Asymmetric Information (book p.280)
+
+*Mechanism.* One player has different information from the others — the
+"spy" doesn't know the location, the "fake artist" doesn't know the word.
+Often one role is opposed to the rest.
+
+*Mapping.* Tempting for pathway asymmetry, but the strong form (one player
+hides identity or reads a different game) violates our public-engine
+commitment.
+
+*Verdict.* ADAPT. The *weak* form survives: pathway players read the
+dashboard with different *priorities*, not different *data*. The Green
+Activist sees high Climate stress as proximate-loss; Queen Isabella sees the
+same data as a tradeable carbon offset opportunity. Same numbers, different
+salience. This is asymmetry of *valuation*, not of information.
+
+*Example.* _Spyfall_ (Ushan, 2014) — rejected pattern. _Mysterium_ (Nevskiy
+and Sidorenko, 2015) — rejected pattern. _Hanabi_ (Bauza, 2010) — partial
+analogue (information asymmetric in form, public in substance).
+
+=== UNC-09 Probability Management (book p.290)
+
+*Mechanism.* Players cannot directly determine outcomes but can shift the
+*probabilities* of outcomes — buying dice modifiers, deck-thinning,
+managing the composition of a draw deck.
+
+*Mapping.* Would attach to Random Production (ECO-12) or dice-based combat,
+neither of which we use.
+
+*Verdict.* REJECT. Our recipes are deterministic; production is binary
+activation, not stochastic. We have no draw deck whose composition the
+player can tune. Probability Management requires randomness somewhere
+load-bearing in the economy, and we have deliberately removed it.
+
+*Example.* _Dominion_ (Vaccarino, 2008); _Twilight Struggle_ (Gupta and
+Matthews, 2005).
+
+== Principle 3 — Factors and Factor Returns
+
+The largest cluster. These mechanisms operationalise factor flows
+(Land→Rent, Labour→Wage, Entrepreneurship→Profit, Capital→Interest), the
+Leontief recipe model, and the endogenous-growth dynamics that turn factors
+into accumulating productivity.
+
+=== ECO-01 Exchanging (book p.308)
+
+*Mechanism.* A fixed-formula transformation of one set of assets into
+another, via the bank. Distinguishes hierarchical from lateral conversions.
+
+*Mapping.* Our Leontief recipe firings are exactly hierarchical Exchanges:
+fixed input vector → fixed output vector. Each recipe tile *is* an
+ECO-01 transformation.
+
+*Verdict.* ADOPT. Recipe tiles are the canonical visual realisation of
+ECO-01. Cross-reference: `core-mechanics.adoc` Resources section.
+
+*Example.* _Roads and Boats_ (Doumen and Wiersinga, 1999) — particularly
+relevant: hierarchical resource graph similar to our Energy → Capital flow.
+
+=== ECO-02 Trading (book p.310)
+
+*Mechanism.* Players Exchange directly with each other; terms are
+negotiated, not formula-fixed. Set Collection (Chapter 12) is the typical
+mechanism for ensuring resources have different values to different players.
+
+*Mapping.* Our typed trade cards (Debt-for-Nature Swap, Carbon Offset
+Purchase, Long-Term Supply Contract) are constrained-form Trading: the
+*template* is fixed, the *terms* are negotiated within it.
+
+*Verdict.* ADOPT. The constrained-template form solves the open-trading
+downsides Engelstein flags (slow, excludes shy players) without losing
+strategic depth. Cross-reference: `trade-cards.adoc`.
+
+*Example.* _Sidereal Confluence_ (Deichmann, 2017); _Civilization_
+(Tresham, 1980).
+
+=== ECO-05 Income (book p.318)
+
+*Mechanism.* Players gain resources at defined times — scheduled,
+player-controlled, or random. Open vs Closed economies.
+
+*Mapping.* Factor returns (Rent / Wage / Profit / Interest) are our Income
+mechanism. Each accrues from a different factor: Land yields Rent each turn,
+Labour yields Wage when employed in a recipe, Capital yields Interest as
+infrastructure throughput, Entrepreneurship yields Profit when innovation
+succeeds.
+
+*Verdict.* ADAPT. We use scheduled Income (every turn factors are owned)
+*plus* player-controlled Income (recipe firings). We are explicitly an Open
+Economy with the Pigouvian dashboard tracking the externalities the open
+economy generates.
+
+*Example.* _Brass_ (Wallace, 2007); _Le Havre_ (Rosenberg, 2008) — both
+combine scheduled and player-controlled income.
+
+=== ECO-13 Investment (book p.335)
+
+*Mechanism.* Share ownership in companies; dividends and majority bonuses.
+Most prominently in 18xx games.
+
+*Mapping.* Could in principle be used for joint stewardship of Nature
+reserves or shared infrastructure, but the corporate-share metaphor is the
+mechanism's heart.
+
+*Verdict.* REJECT. Inserts a corporate-finance layer between players and
+factors that has no analogue in our four-factor model. Pathways are
+philosophical archetypes, not corporations. Adopting share-ownership would
+require a fifth factor (financial capital separate from physical capital)
+which we have explicitly excluded.
+
+*Example.* _1830_ (Tresham, 1986); _Acquire_ (Sackson, 1964).
+
+=== ECO-14 Ownership (book p.338)
+
+*Mechanism.* Players own entities; can use them freely; collect a fee when
+others use them.
+
+*Mapping.* This is *Land* in the Ricardian sense. A player who owns a hex
+(through eXpand) extracts Rent when others traverse or use it.
+
+*Verdict.* ADOPT. Land ownership generates Rent flow exactly per ECO-14.
+Trade Posts owned by player A but used by player B's recipes pay Rent to A.
+This is the cleanest mechanical implementation of the Land-factor return in
+classical economics.
+
+*Example.* _Le Havre_ (Rosenberg, 2008); _Caylus_ (Attia, 2005).
+
+=== ECO-15 Contracts (book p.341)
+
+*Mechanism.* Players fulfil pre-defined Contracts (specific input
+combination → specific reward). Contracts may be public (race) or private
+(only the holder may complete).
+
+*Mapping.* Our typed trade cards include Contract-shaped instances:
+Long-Term Supply Contract, Carbon Offset Purchase, Royalty/Concession.
+
+*Verdict.* ADOPT. Engelstein's binding-Contract framing is exactly what
+distinguishes our trade cards from informal Negotiation (ECO-18). Pair with
+the Defection Ledger to enforce contracts that span multiple turns.
+
+*Example.* _Empire Builder_ (Bromley and Fawcett, 1982); _Century: Spice
+Road_ (Matsuuchi, 2017).
+
+=== ECO-19 Alliances (book p.350)
+
+*Mechanism.* Formal multi-player relationships with rules-defined effects:
+allied players cannot attack each other, may share scoring, may break the
+alliance at defined moments.
+
+*Mapping.* The Collective Emissions Pact (`trade-cards.adoc`) is a
+multilateral ECO-19. Pathway-based loose alliances (Green Activist + Gandhi
+on conservation) are emergent ECO-19s without formal cards.
+
+*Verdict.* ADOPT. The defection-ledger is what makes Alliances binding
+across turns. Engelstein notes that _Cosmic Encounter_'s alliance step is
+short-lived (one turn); ours are explicitly multi-turn with formal exit
+penalties.
+
+*Example.* _Dune_ (Eberle, Kittredge, and Olatka, 1979); _Cosmic Encounter_
+(Eberle et al., 1977).
+
+=== ECO-20 Resource Queue (book p.352)
+
+*Mechanism.* Resources are arranged in a line; only the head (or tail) can
+be drawn from. Walks the Dogs, Patchwork, Bohnanza.
+
+*Mapping.* Could in principle be used for crisis-card reveal order or for
+ordered recipe firing, but neither use is well-motivated.
+
+*Verdict.* REJECT. Recipes fire in *parallel* (any subset of recipes whose
+inputs are available may fire); a head-of-queue restriction would convert
+this into serial production, which contradicts the simultaneous-economy
+character of the game. Crisis cards are dashboard-driven (boundary-stress
+triggered), not queue-positioned.
+
+*Example.* _Patchwork_ (Rosenberg, 2014) — well-implemented Resource Queue
+that we are choosing not to emulate.
+
+=== WPL-05 Adding and Blocking Buildings (book p.417)
+
+*Mechanism.* Buildings (action spaces) are added to the worker-placement
+pool during play; some are public, some are owned. Soft blocking, bumping,
+and blocked-by-cost variants exist.
+
+*Mapping.* Recipe tiles are buildings. They are added to the player's
+tableau through eXpand and eXperiment, and used through eXploit.
+
+*Verdict.* ADAPT. We borrow the *adding* dimension fully but mostly
+*reject blocking*: a recipe can fire each turn for its owner, and other
+players can only access it through trade or alliance, not through
+worker-placement competition. This keeps recipes in the production-economy
+domain rather than turning them into action-drafting spaces.
+
+*Example.* _Caylus_ (Attia, 2005); _Lords of Waterdeep_ (Lee and Thompson,
+2012).
+
+=== ACT-15 Gating and Unlocking (book p.112)
+
+*Mechanism.* New Actions become available when conditions trigger — turn
+count, threshold crossed, shared resource depleted, narrative beat reached.
+
+*Mapping.* Era progression (Agrarian → Industrial → Digital → Post-Scarcity)
+is gating by turn count. Pathway-specific recipe unlocks are gating by
+pathway-progress threshold. Boundary-cascade-triggered crisis cards are
+gating by dashboard state.
+
+*Verdict.* ADOPT. We use ACT-15 in three load-bearing places. The mechanism
+is general enough to bind era progression, pathway progression, and crisis
+escalation under one design.
+
+*Example.* _Through the Ages_ (Chvátil, 2006); _SpaceCorp_ (Butterfield,
+2018) — both era-gated.
+
+=== ACT-16 Tech Trees / Tech Tracks / Track Bonuses (book p.115)
+
+*Mechanism.* Per-player Action upgrades, typically bought with a research
+currency. Subtly different from ACT-15: gating is global, tech is personal.
+
+*Mapping.* Pathway-progress trackers are Tech Tracks: each pathway
+(Capitalist / Socialist / Green / Techno-Utopian) has milestone bonuses
+unlocked by pathway-specific actions.
+
+*Verdict.* ADAPT. The full *tech-tree* form (research prerequisites,
+Eclipse-style branches) is more complexity than we want; we use the
+flatter *tech-track* form (Russian Railroads, Orleans), where progress is
+linear and milestones grant fixed bonuses. The eXperiment pillar feeds the
+track but does not branch it.
+
+*Example.* _Russian Railroads_ (Ohley and Orgler, 2013); _Orleans_
+(Stockhausen, 2014).
+
+=== ACT-20 Layering (Splaying subset) (book p.125)
+
+*Mechanism.* Components placed atop other components; only top-most icons
+active. The *Splaying* subset (Innovation, Mystic Vale) keeps cards layered
+exactly so that previously-covered icons can be revealed by re-arrangement.
+
+*Mapping.* Scythe's engine-reveal is a hard-card analogue: as you place
+infrastructure tokens onto the main board, you uncover discount slots
+underneath. Our recipe-tile placement on the player mat could similarly
+uncover efficiency bonuses (reduced Knowledge cost on Lab firings, etc.).
+
+*Verdict.* ADOPT (Splaying subset only). The general Layering mechanism
+(stacked tableau, transparent cards) is more component-heavy than we want.
+Splaying — covered slots that reveal bonuses on uncovering — is the
+Solow/Romer growth mechanic made tactile, and is the highest-leverage single
+borrowing from this entire survey.
+
+*Example.* _Innovation_ (Chudyk, 2010); _Mystic Vale_ (Clair, 2016);
+_Scythe_ (Stegmaier, 2016).
+
+=== SET-04 Network Building (book p.519)
+
+*Mechanism.* Sets-as-edges-between-nodes; routes through a graph that
+provides synergy beyond the sum of parts. Three sub-types: Point-to-Point,
+Tile Placement, Existing Network.
+
+*Mapping.* Trade routes between player territories form a network. Trade
+cards (Most-Favoured-Nation Clause, Long-Term Supply Contract) operate
+across network edges. The defection ledger weights edges with trust.
+
+*Verdict.* ADOPT. We use the Existing Network sub-type (Ticket to Ride,
+Power Grid): the hex map's territories are pre-defined, players claim
+edges through the eXchange pillar.
+
+*Example.* _Ticket to Ride_ (Moon, 2004); _Power Grid_ (Friese, 2004);
+_Brass_ (Wallace, 2007).
+
+== Principle 4 — Externalities
+
+The boundary dashboard is a Pigouvian register of externalised costs. The
+relevant Engelstein mechanism is the trigger that converts accumulated
+externalised cost into game-ending consequence.
+
+=== VIC-15 Circuit Breaker / Sudden Death (book p.244)
+
+*Mechanism.* A fixed end condition plus a *special* condition that ends the
+game prematurely — typically when one player runs away with it
+(Circuit Breaker) or when a special victory is achieved (Sudden Death).
+
+*Mapping.* Boundary collapse is a Circuit Breaker, but inverted: it ends
+the game in *cooperative loss* rather than individual victory. If any of
+the nine boundary tracks reaches Black (10), the game ends and *no player
+wins*. This converts the externality dashboard from a passive scoreboard
+into an active end-state trigger.
+
+*Verdict.* ADOPT. This is the mechanism that makes externalities
+*economically real* in our design. Without VIC-15, the dashboard is
+ornamental; with it, every recipe's pollution-token output is a marginal
+contribution to a known catastrophe threshold.
+
+*Example.* _Twilight Struggle_ (Gupta and Matthews, 2005) — DEFCON 1
+triggers immediate loss for whoever caused it; structurally identical to
+our boundary-cascade trigger except cooperative rather than individual.
+
+== Meta-Design — Game Structure, Endgame, and Strategic Tension
+
+These mechanisms shape the *texture* of strategic interaction rather than
+serving any single principle. They are why the game has its characteristic
+shape.
+
+=== STR-05 Semi-Cooperative Games (book p.15)
+
+*Mechanism.* Players win or lose individually, *and* win or lose
+collectively. The collective loss condition is necessary; without it, the
+game is just a competitive game with negotiation.
+
+*Mapping.* The boundary-cascade collective loss + per-pathway individual
+victory makes us a textbook semi-cooperative game in Engelstein's
+definition.
+
+*Verdict.* ADOPT. Engelstein names the failure mode honestly ("like trying
+to land a jet plane in a phone booth") and the prerequisite ("all players
+must agree whether group-win-with-individual-loss is acceptable"). Our
+design must communicate this expectation clearly in the rulebook —
+otherwise sabotage and grief are predictable.
+
+*Example.* _Republic of Rome_ (Berthold, Greenwood, and Haines, 1990);
+_CO2_ (Lacerda, 2012); _Archipelago_ (Boelinger, 2012).
+
+=== VIC-19 Tug of War (book p.252)
+
+*Mechanism.* A marker moves up and back along a track between two opposed
+endpoints. Reaching an end triggers victory or scoring.
+
+*Mapping.* Each boundary track on the dashboard is a *single-direction*
+Tug of War — only one end (Black/collapse) is a trigger; the other end
+(Green/safe) is a passive state. Restoration efforts pull the marker back
+toward Green; production externalities push it toward Black.
+
+*Verdict.* ADAPT. We are using VIC-19 inverted (single-direction, against
+the human players collectively) rather than two-player. Each of the nine
+boundaries is its own track; cascade arrows allow stress to spill between
+them.
+
+*Example.* _Twilight Struggle_'s VP track is the canonical
+two-player Tug of War. _Churchill_'s three-player track is closer to our
+multi-track form.
+
+=== RES-08 Prisoner's Dilemma (book p.159)
+
+*Mechanism.* Two-or-more-player choice between Cooperate and Defect, where
+mutual cooperation maximises total payoff but unilateral defection
+maximises individual payoff.
+
+*Mapping.* This is the *theoretical core* of our entire game. The name
+"Nash Equilibrium" announces it. Every trade card is a potential PD;
+the defection ledger formalises the iterated-PD tit-for-tat penalty
+structure.
+
+*Verdict.* ADOPT, with strong endorsement. Engelstein's caveat — that
+two-player PD always has Defect as the dominant strategy — is exactly why
+we have four players: PD only generates interesting dynamics with three or
+more, where the *third party*'s reaction creates iterated stakes.
+
+*Example.* _Diplomacy_ (Calhamer, 1959); _Cosmic Encounter_ (Eberle et al.,
+1977) — both feature non-binding negotiation that becomes binding through
+reputation effects, exactly our defection-ledger pattern.
+
+=== ECO-15 Contracts and ECO-18 Negotiation (book pp.341, 348)
+
+*Mechanism (ECO-18).* Players make agreements about future actions, often
+non-binding, often distinct from resource-trading.
+
+*Mapping.* The *binding-vs-non-binding* distinction Engelstein draws is
+load-bearing for our trade-card design. Carbon Offset Purchase (binding
+ECO-15) and the Tariff Wall declaration (non-binding ECO-18) are
+deliberately mechanically distinct.
+
+*Verdict.* ADOPT both. The defection ledger turns nominally non-binding
+ECO-18 negotiations into *socially binding* commitments, because reneging
+costs future trust capital. This is the iterated-game embedding of
+Coase (1960) bargaining into a finite-horizon design.
+
+*Example.* _Diplomacy_ — non-binding promises (ECO-18) with reputational
+consequences. _The Resistance_ (Eskridge, 2009) — voting-as-implicit-
+negotiation.
+
+== Pathway Asymmetry
+
+=== ACT-12 Variable Player Powers (book p.106)
+
+*Mechanism.* Each player has special Actions or modifiers unique to them.
+Engelstein notes the cognitive-load tradeoff: simple framework + diverse
+powers (Cosmic Encounter) vs complex framework + matched powers (Root,
+Spirit Island).
+
+*Mapping.* Queen Isabella, Gandhi, Elon Musk, Green Activist are
+Variable Player Powers in Engelstein's strict sense — distinct starting
+bonuses, constraints, and victory paths.
+
+*Verdict.* ADOPT. Engelstein's design caution is highly relevant to us:
+keep the *base* mechanics simple (recipe firings, dashboard, ledger)
+precisely so that the asymmetric pathway powers can carry weight. Cosmic
+Encounter's "simple combat resolution + radical alien powers" is the
+explicit model.
+
+*Example.* _Cosmic Encounter_ (Eberle et al., 1977); _Root_ (Wehrle, 2018);
+_Spirit Island_ (Reuss, 2017).
+
+== Cross-Cutting Recommendations
+
+The twenty-five entries cluster into five design moves, each more
+load-bearing than any single entry:
+
+*1. The "engine-reveal" cluster: ACT-15 + ACT-16 + ACT-20 (Splaying) + WPL-05.*
+These four mechanisms span four chapters of Engelstein but implement the
+same economic idea — *endogenous productivity growth* — at different
+granularities. ACT-15 is global gating (era transition unlocks). ACT-16 is
+per-player track progression (pathway milestones). ACT-20 Splaying is the
+moment-to-moment reveal (build a Lab → uncover its discount). WPL-05 is the
+addition of new buildings to the action pool. Recognising this clustering
+collapses what looked like four separate decisions into one design move:
+the Splaying form is the *load-bearing* expression because it is tactile
+(removing a token reveals a bonus) and self-documenting (the player's mat
+visibly grows in capability without rule-text).
++
+The recommendation is to commit to Splaying for in-construction recipes,
+ACT-16 tracks for pathway progression, and ACT-15 gating for era
+transitions — three layers of the same economic principle, each at its
+appropriate temporal grain.
+
+*2. The "binding-strength ladder" of economic interaction: ECO-01 → ECO-02 → ECO-15 → ECO-18 → ECO-19.*
+Engelstein implicitly arranges these in increasing order of how far a
+commitment extends in time and how non-formula the terms are: Exchange is
+immediate and formula-fixed; Trade is immediate and negotiated; Contract is
+deferred but formula-fixed; Negotiation is deferred and non-formula;
+Alliance is deferred, structural, and multilateral. Our typed trade-card
+library should be cross-mapped to this ladder explicitly:
++
+[cols="2,1,3"]
+|===
+| Trade card | Engelstein rung | Why this rung
+| Carbon Offset Purchase | ECO-01 | Immediate, formula-fixed
+| Long-Term Supply Contract | ECO-15 | Deferred, formula-fixed
+| Royalty/Concession | ECO-15 | Deferred, formula-fixed
+| Most-Favoured-Nation Clause | ECO-15 | Procedural Contract on future trades
+| Debt-for-Nature Swap | ECO-02 + ECO-15 | Negotiated terms, formula payment
+| Tariff Wall | ECO-18 (coercive) | Unilateral, non-binding declaration
+| Reparations | ECO-15 (post-coercive) | Formula-fixed, ledger-triggered
+| Collective Emissions Pact | ECO-19 | Multilateral, structural
+|===
++
+Reading the trade cards through this lens makes the *defection ledger*
+load-bearing: it is the institution that prevents the deferred rungs
+(ECO-15, ECO-18, ECO-19) from collapsing into trivial non-commitment.
+
+*3. The "Scythe-shaped action grid" sits at the intersection of ACT-02 + ACT-10 + ACT-11.*
+Engelstein has no single name for the Scythe pattern. It is *drafting*
+without denial (you don't lock other players out), it is *rondel*-like
+geometric inevitability of foregone alternatives, and it is *selection
+restriction* through the no-repeat rule. The combination is greater than
+its parts: opportunity cost is realised geometrically (ACT-10), variety is
+forced mechanically (ACT-11), and the consumption-vs-investment macro
+distinction is realised through the top/bottom action pairing (an
+Engelstein-shaped innovation that does not appear under any single ID).
++
+The recommendation is to specify the paired action grid in a new doc
+(`player-mat-design.adoc`) under three explicit ID citations rather than
+trying to name it as a single mechanism.
+
+*4. RES-08 Prisoner's Dilemma is the load-bearing precedent for the entire design.*
+Engelstein lists Diplomacy, Cosmic Encounter, Incan Gold, and Dead Last as
+exemplars. Our design generalises across all of them by making the PD
+*economic*: every trade card is a potential PD, every alliance is a
+multi-player PD, every recipe-firing-with-pollution-output is a PD against
+the boundary dashboard. The defection ledger formalises Axelrod's
+(1984) iterated-PD tit-for-tat memory mechanism.
++
+This is the strongest endorsement in the survey. The game's name is
+literal, not metaphorical.
+
+*5. The asymmetry recommendation is to pair ACT-12 + weak UNC-05.*
+Pathway powers (ACT-12 strict form) plus pathway-specific *valuations* of
+the public dashboard (UNC-05 weak form, where data is shared but salience
+differs). Engelstein's caution about cognitive load is directly relevant:
+keep base mechanics simple precisely so that pathway distinctness can
+carry the asymmetric weight without overwhelming new players.
+
+== Tensions and Open Design Questions
+
+The survey surfaced six real tensions with our locked-in design.
+
+. *VIC-15 wants a single trigger; we have nine.* Engelstein's Circuit
+Breaker is typically one threshold (Twilight Struggle DEFCON, Liberté
+landslide, 7 Wonders Duel military victory). Our boundary collapse is
+*any one of nine* tracks reaching Black. Is the dilution of urgency
+across nine boundaries a feature (forces multi-front attention) or a bug
+(no single boundary feels load-bearing)? Worth thinking about whether some
+boundaries should aggregate (e.g. fold biosphere integrity and biogeochemical
+flows into a single Living Systems track) so the trigger is sharper.
+
+. *ECO-05 Income's Open vs Closed Economy distinction is unclear in our
+design.* We have an Open Economy (Land yields Rent each turn from a bank,
+not from other players). But the Pigouvian dashboard is *Closed* in a
+specific sense: every pollution token issued by a recipe contributes to a
+finite catastrophe budget. This is a Closed *externality* economy on top of
+an Open *production* economy. The Foundations doc should probably name
+this hybrid explicitly.
+
+. *ECO-14 Ownership's rent-collection mechanic creates "fee creep."*
+Engelstein notes that Le Havre and Caylus generate substantial player
+interaction through fees-on-others'-buildings, but it slows games. If every
+hex Land owner extracts Rent from every traversal, gameplay could grind.
+Worth deciding: do we charge Rent on *use* (Le Havre style) or only on
+*ownership change* (lighter)?
+
+. *ACT-12 cognitive load risk.* Engelstein names this as the central
+design tradeoff: powerful asymmetric powers + simple base = good (Cosmic
+Encounter); powerful asymmetric powers + complex base = unteachable. Our
+base is *not* simple (recipes, dashboard, ledger, paired action grid, hex
+movement). The pathway powers must therefore stay relatively *quiet*
+mechanically, expressing themselves through valuation differences rather
+than through new actions. Should be named explicitly in the Foundations
+doc as a constraint.
+
+. *RES-08 PD requires three-plus players.* Engelstein notes that two-player
+PD has Defect as the dominant strategy because there is no third party
+whose reaction creates iterated stakes. Our four-player design is fine;
+but a *three-player* variant (one role left out) needs careful design
+review — at three, defection is still strategically interesting but the
+ledger has thinner accounting. A *two-player* variant should probably not
+exist.
+
+. *ECO-15 vs ECO-18 enforcement asymmetry.* Engelstein cleanly separates
+binding (Contract) from non-binding (Negotiation). Our defection ledger
+*partially* binds ECO-18 — reneging costs future trust capital, but
+not the immediate transaction. Is this a coherent middle ground or an
+unstable one? The honest answer is: untested. Playtesting will tell us
+whether non-binding-but-reputation-tracked negotiation feels like cheating
+or feels like real diplomacy. This is the single biggest design risk in
+the trade-card library.
+
+== References
+
+* Engelstein G. and Shalev I. (2022) _Building Blocks of Tabletop Game
+  Design: An Encyclopedia of Mechanisms_, 2nd ed., CRC Press.
+* Cross-references within this project:
+  - `economic-foundations.adoc` — canonical four-principle specification
+  - `trade-cards.adoc` — typed trade-card library with defection clauses
+  - `gameplay-storyboard.adoc` — Turn 12 walkthrough of all seven phases
+  - `player-roles.adoc` — Variable Player Powers (ACT-12) instances
+  - `core-mechanics.adoc` — recipe templates, era progression
+* Theoretical citations carried over from `economic-foundations.adoc`:
+  Robbins (1932), Akerlof (1970), Hayek (1945), Leontief (1941),
+  Schumpeter (1934), Solow (1956), Romer (1990), Rockström et al. (2009),
+  Pigou (1920), Coase (1960), Daskalakis-Goldberg-Papadimitriou (2009),
+  Axelrod (1984).

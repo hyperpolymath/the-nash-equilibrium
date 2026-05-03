@@ -1,0 +1,14 @@
+[
+  { "id": "factory", "name": "Factory", "type": "Industrial", "cost": { "capital": 3, "energy": 1 }, "produce": { "input": { "labour": 1, "energy": 1 }, "output": { "capital": 4 }, "stress": { "climate": 1, "social": 1 } }, "productive": true },
+  { "id": "coal_plant", "name": "Coal Plant", "type": "Energy", "cost": { "capital": 2, "nature": 1 }, "produce": { "input": { "labour": 1 }, "output": { "energy": 3 }, "stress": { "climate": 2 } }, "productive": true },
+  { "id": "solar_farm", "name": "Solar Farm", "type": "Energy", "cost": { "capital": 3, "knowledge": 1 }, "produce": { "input": { "labour": 1 }, "output": { "energy": 2 }, "stress": {} }, "productive": true, "tags": ["clean_technology"] },
+  { "id": "lab", "name": "Lab", "type": "Research", "cost": { "capital": 2, "energy": 1 }, "produce": { "input": { "energy": 1 }, "output": { "knowledge": 3 }, "stress": { "social": 1 } }, "productive": true },
+  { "id": "cooperative", "name": "Cooperative", "type": "Social", "cost": { "capital": 2, "labour": 2 }, "produce": { "input": { "labour": 1 }, "output": { "capital": 2, "labour": 1 }, "stressReduction": { "social": 1 }, "stress": {} }, "productive": true },
+  { "id": "reserve", "name": "Reserve", "type": "Ecological", "cost": { "capital": 1, "labour": 2 }, "produce": { "input": { "labour": 1 }, "output": { "nature": 1 }, "stressReduction": { "biosphere": 1 }, "stress": {} }, "productive": true },
+  { "id": "carbon_capture", "name": "Carbon Capture", "type": "Ecological/Tech", "cost": { "capital": 3, "knowledge": 2 }, "produce": { "input": { "energy": 1 }, "output": {}, "stressReduction": { "climate": 2 }, "stress": {} }, "productive": true, "tags": ["clean_technology"] },
+  { "id": "trade_hub", "name": "Trade Hub", "type": "Economic", "cost": { "capital": 2, "knowledge": 1 }, "produce": { "input": {}, "output": { "capital": 1 }, "stress": {} }, "contractBonus": true, "productive": true },
+  { "id": "public_works", "name": "Public Works", "type": "Social", "cost": { "capital": 2, "labour": 1 }, "produce": { "input": { "labour": 1 }, "output": { "labour": 2, "capital": 1 }, "stress": {} }, "productive": true },
+  { "id": "automation_platform_asset", "name": "Automation Platform", "type": "Tech", "cost": { "capital": 3, "knowledge": 2 }, "produce": { "input": { "energy": 1 }, "output": { "capital": 3 }, "stress": { "social": 2 } }, "productive": true },
+  { "id": "organic_farm", "name": "Organic Farm", "type": "Green", "cost": { "capital": 1, "nature": 2 }, "produce": { "input": { "labour": 1 }, "output": { "labour": 1, "nature": 2 }, "stress": {} }, "productive": true },
+  { "id": "recycling_plant", "name": "Recycling Plant", "type": "Green/Industrial", "cost": { "capital": 2, "knowledge": 1 }, "produce": { "input": { "energy": 1 }, "output": { "capital": 2, "nature": 1 }, "stressReduction": { "biosphere": 1 }, "stress": {} }, "productive": true }
+]

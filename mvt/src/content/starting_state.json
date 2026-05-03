@@ -1,0 +1,9 @@
+{
+  "stress": { "climate": 1, "biosphere": 1, "social": 1 },
+  "players": [
+    { "id": "player_capitalist", "name": "Player 1", "role": "capitalist", "assets": ["factory"] },
+    { "id": "player_socialist", "name": "Player 2", "role": "socialist", "assets": ["cooperative"] },
+    { "id": "player_green", "name": "Player 3", "role": "green", "assets": ["reserve"] },
+    { "id": "player_techno_utopian", "name": "Player 4", "role": "techno_utopian", "assets": ["lab"] }
+  ]
+}

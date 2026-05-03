@@ -1,0 +1,10 @@
+[
+  { "id": "spot_trade", "name": "Spot Trade", "requiresNegotiate": false, "duration": 0 },
+  { "id": "deferred_loan", "name": "Deferred Loan", "requiresNegotiate": true, "duration": 1 },
+  { "id": "energy_for_nature_swap", "name": "Energy-for-Nature Swap", "requiresNegotiate": true, "duration": 1 },
+  { "id": "research_consortium", "name": "Research Consortium", "requiresNegotiate": true, "duration": 1 },
+  { "id": "emissions_pact", "name": "Emissions Pact", "requiresNegotiate": true, "duration": 1 },
+  { "id": "restoration_compact", "name": "Restoration Compact", "requiresNegotiate": true, "duration": 1 },
+  { "id": "stability_fund", "name": "Stability Fund", "requiresNegotiate": true, "duration": 1 },
+  { "id": "technology_license", "name": "Technology License", "requiresNegotiate": true, "duration": 2 }
+]

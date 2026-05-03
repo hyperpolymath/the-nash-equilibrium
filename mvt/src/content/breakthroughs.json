@@ -1,0 +1,10 @@
+[
+  { "id": "clean_energy_grid", "name": "Clean Energy Grid", "effect": "solar_plus_energy", "risk": null, "cleanTechnology": true },
+  { "id": "automation_platform", "name": "Automation Platform", "effect": "produce_plus_capital", "risk": { "stress": { "social": 1 } } },
+  { "id": "circular_supply_chain", "name": "Circular Supply Chain", "effect": "build_biosphere_minus_one", "risk": null, "cleanTechnology": true },
+  { "id": "climate_modeling", "name": "Climate Modeling", "effect": "crisis_draw_minus_one_once", "risk": null },
+  { "id": "geoengineering", "name": "Geoengineering", "effect": "climate_minus_three", "risk": { "ifTrackBreached": "climate", "stress": { "biosphere": 1 } }, "cleanTechnology": true },
+  { "id": "ai_coordination", "name": "AI Coordination", "effect": "extra_contract_slot", "risk": { "stress": { "social": 1 } } },
+  { "id": "public_health_systems", "name": "Public Health Systems", "effect": "social_minus_two", "risk": null },
+  { "id": "precision_agriculture", "name": "Precision Agriculture", "effect": "farm_plus_labour_or_nature", "risk": null }
+]
