@@ -1,0 +1,10 @@
+[
+  { "id": "produce", "name": "Produce", "apCost": 1 },
+  { "id": "extract", "name": "Extract", "apCost": 1 },
+  { "id": "build", "name": "Build", "apCost": 2 },
+  { "id": "research", "name": "Research", "apCost": 2 },
+  { "id": "restore", "name": "Restore", "apCost": 1 },
+  { "id": "stabilize", "name": "Stabilize", "apCost": 1 },
+  { "id": "negotiate", "name": "Negotiate", "apCost": 1 },
+  { "id": "offset", "name": "Offset", "apCost": 1 }
+]

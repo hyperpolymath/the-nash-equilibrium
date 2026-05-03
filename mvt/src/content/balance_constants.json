@@ -1,0 +1,11 @@
+{
+  "version": "0.1.0",
+  "maxTurns": 6,
+  "actionPointsPerTurn": 3,
+  "resourceCap": 10,
+  "stressCap": 12,
+  "visibleAssetCount": 8,
+  "breakthroughProgressRequired": 2,
+  "researchKnowledgeCost": 2,
+  "untrustedBondCapital": 1
+}
