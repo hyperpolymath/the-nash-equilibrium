@@ -93,7 +93,7 @@ projects co-developed with Joshua. PMPL-licensed tools (Hypatia, panic-attack,
 a2ml, etc.) are used as dependencies under their own license — standard
 third-party license respect.
 
-*Alternatives considered:* PMPL-1.0-or-later (standard for solo hyperpolymath
+*Alternatives considered:* MPL-2.0 (standard for solo hyperpolymath
 work). Rejected — co-development with Joshua follows the AGPL precedent.
 
 *Status:* RESOLVED

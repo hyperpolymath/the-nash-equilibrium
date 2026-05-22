@@ -15,10 +15,10 @@ recovery.
 ## License Integrity
 
 ### wrong-spdx-header
-- description: AGPL-3.0-or-later header accidentally replaced by PMPL-1.0-or-later in source files
+- description: AGPL-3.0-or-later header accidentally replaced by MPL-2.0 in source files
 - class: rollback
-- injection-probe: "grep -rl 'SPDX-License-Identifier: PMPL-1.0-or-later' src/ .machine_readable/ 2>/dev/null | head -1 | grep -q ."
-- recovery-probe: "! grep -rl 'SPDX-License-Identifier: PMPL-1.0-or-later' src/ .machine_readable/ 2>/dev/null | head -1 | grep -q ."
+- injection-probe: "grep -rl 'SPDX-License-Identifier: MPL-2.0' src/ .machine_readable/ 2>/dev/null | head -1 | grep -q ."
+- recovery-probe: "! grep -rl 'SPDX-License-Identifier: MPL-2.0' src/ .machine_readable/ 2>/dev/null | head -1 | grep -q ."
 - expected-recovery-time-seconds: 60
 - status: declared
 - notes: This project is AGPL-3.0-or-later. PMPL is the template default and can drift in when files are copied from rsr-template-repo. Recovery — sed replace + commit.

@@ -106,7 +106,7 @@ bust-check: bust-no-pmpl-in-source bust-state-not-template bust-no-leaked-secret
     @echo 'Bust checks passed (recovery paths documented)'
 
 bust-no-pmpl-in-source:
-    ! grep -rl 'SPDX-License-Identifier: PMPL-1.0-or-later' src/ .machine_readable/ 2>/dev/null | head -1 | grep -q .
+    ! grep -rl 'SPDX-License-Identifier: MPL-2.0' src/ .machine_readable/ 2>/dev/null | head -1 | grep -q .
 
 bust-state-not-template:
     ! grep -q 'project = "rsr-template-repo"' .machine_readable/6a2/STATE.a2ml 2>/dev/null
@@ -139,7 +139,7 @@ dust-no-tracked-artifacts:
     ! git ls-files lib/bs/ lib/ocaml/ target/release/ _build/ zig-cache/ zig-out/ 2>/dev/null | head -1 | grep -q .
 
 dust-no-pmpl-drift:
-    ! grep -rl 'SPDX-License-Identifier: PMPL-1.0-or-later' src/ .machine_readable/ 2>/dev/null | head -1 | grep -q .
+    ! grep -rl 'SPDX-License-Identifier: MPL-2.0' src/ .machine_readable/ 2>/dev/null | head -1 | grep -q .
 
 # ============================================================================
 # ADJUST — Accessibility checks (advisory)

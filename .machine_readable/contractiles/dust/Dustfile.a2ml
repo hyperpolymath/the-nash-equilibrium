@@ -56,7 +56,7 @@ These are housekeeping items, not hard blockers.
 ## AGPL Drift
 
 ### no-pmpl-in-source
-- description: No PMPL-1.0-or-later headers in source or machine-readable files (AGPL project — PMPL is drift)
-- run: "! grep -rl 'SPDX-License-Identifier: PMPL-1.0-or-later' src/ .machine_readable/ 2>/dev/null | head -1 | grep -q ."
+- description: No MPL-2.0 headers in source or machine-readable files (AGPL project — PMPL is drift)
+- run: "! grep -rl 'SPDX-License-Identifier: MPL-2.0' src/ .machine_readable/ 2>/dev/null | head -1 | grep -q ."
 - severity: warning
 - notes: Reported in Bustfile as a rollback scenario; tracked here for advisory cleanup sweep.
