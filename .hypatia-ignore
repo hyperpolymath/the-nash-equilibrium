@@ -1,0 +1,10 @@
+# Hypatia governance bundle exemptions
+# Format: <rule>:<path> — whole-line fixed-string match (grep -qxF)
+# Detail: hyperpolymath/standards/.github/workflows/governance-reusable.yml `is_exempt()`
+#
+# examples/SafeDOMExample.res — pre-existing ReScript example, scheduled for
+# ReScript→AffineScript migration tracked in the affinescript#57 corpus run.
+# Keeping the example until the migration assistant is ready to convert it
+# in-place; flagging it as a banned-language file would block unrelated PRs
+# (e.g. dependabot bumps).
+cicd_rules/banned_language_file:examples/SafeDOMExample.res
