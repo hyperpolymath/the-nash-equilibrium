@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-License-Identifier: MPL-2.0
 """The Nash Equilibrium - 6X strategy prototype.
 
 Simulates the eXchange dimension: an iterated Prisoner's Dilemma between

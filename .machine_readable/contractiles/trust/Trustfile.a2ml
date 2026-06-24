@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-License-Identifier: MPL-2.0
 # Trustfile — Integrity and provenance verification
 # Author: Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 
@@ -35,7 +35,7 @@ project is co-developed by Jonathan D.A. Jewell and son.
 
 ### agpl-spdx-in-license
 - description: LICENSE SPDX header specifically says AGPL-3.0-or-later
-- run: grep -q 'SPDX-License-Identifier: AGPL-3.0-or-later' LICENSE
+- run: grep -q 'SPDX-License-Identifier: MPL-2.0' LICENSE
 - severity: critical
 
 ### co-author-attribution

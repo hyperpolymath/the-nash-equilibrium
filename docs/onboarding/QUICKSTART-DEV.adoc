@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
+// SPDX-License-Identifier: CC-BY-SA-4.0
 // Template: QUICKSTART-DEV.adoc — clone → build → test → PR
 // Replace rsr-template-repo, just build, just test, Idris2 (ABI), Zig (FFI), ReScript (UI) with actuals
 = rsr-template-repo — Quick Start for Developers
