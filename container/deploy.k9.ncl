@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-License-Identifier: MPL-2.0
 # deploy.k9.ncl — The Nash Equilibrium deployment component (Hunt level)
 #
 # k9-svc deployment specification with full pedigree (L1-L5).

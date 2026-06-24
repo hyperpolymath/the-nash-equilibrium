@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
+// SPDX-License-Identifier: CC-BY-SA-4.0
 // Template: QUICKSTART-MAINTAINER.adoc — packaging, deploying, and maintaining
 // Replace rsr-template-repo, the-nash-equilibrium, idris2, zig, deno with actuals
 = rsr-template-repo — Quick Start for Platform Maintainers
