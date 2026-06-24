@@ -3,7 +3,7 @@
 # Re-generate with: contractile gen-just --dir .machine_readable/contractiles
 # Last updated: 2026-04-24
 #
-# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-License-Identifier: MPL-2.0
 
 # ============================================================================
 # MUST — Physical state checks (hard gates)
@@ -82,7 +82,7 @@ trust-agpl-license:
     grep -q 'AGPL' LICENSE
 
 trust-agpl-spdx:
-    grep -q 'SPDX-License-Identifier: AGPL-3.0-or-later' LICENSE
+    grep -q 'SPDX-License-Identifier: MPL-2.0' LICENSE
 
 trust-no-dockerfile:
     test ! -f Dockerfile
