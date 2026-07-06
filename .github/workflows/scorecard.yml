@@ -24,4 +24,3 @@ jobs:
       contents: read
       security-events: write
       id-token: write
-    timeout-minutes: 15
