@@ -1,0 +1,131 @@
+// SPDX-License-Identifier: CC-BY-SA-4.0
+// Copyright (c) 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+= The Nash Equilibrium — Way Forward (2026-07)
+:toc: preamble
+:icons: font
+
+_A concrete plan to move the game from a documented concept to something played at
+your kitchen table — while keeping the rules single-sourced so a digital edition can
+derive from the same logic later._
+
+== The one-sentence diagnosis
+
+The design is *rich*; the game is *unplayed*. The economics and eXchange subsystems are
+rigorously specified (see `economic-foundations.adoc`, `trade-cards.adoc`), but there is
+no finished card catalogue, no resolved length/density decision, no print-and-play kit,
+and no playtest has been run. **This is not a lack-of-design problem — it is a
+lack-of-playable-prototype problem.** Every step below is aimed at the shortest path to a
+first real play.
+
+== The keystone: one canonical model, many surfaces
+
+To offer *maximum flexibility* without fragmenting the logic, everything derives from a
+single source of truth:
+
+* **`docs/game-design/CANONICAL-MODEL.adoc`** — the authoritative, contradiction-free
+  ruleset (turn loop, resources→boundaries, victory conditions, Nash mechanic).
+* **Machine-readable data** for the variable content — cards, boundary thresholds,
+  Leontief recipes, victory thresholds — as A2ML/data files, not prose.
+
+From that spine, both surfaces are *generated*, never hand-maintained twice:
+
+[cols="1,3"]
+|===
+| Surface | Derives from the canonical model as…
+| **Tabletop (primary)** | printable board, card sheets (PDF/PNG), token counts, rulebook
+| **Digital (optional, later)** | a rules engine in an estate-approved language (Rust/Gleam), the Nash/payoff solver
+|===
+
+This is the same "author once, derive many" pattern used elsewhere in the estate. It is
+what lets the physical and digital editions never drift apart.
+
+== The honest constraint
+
+The critical path runs **through you and your son actually playing**. An agent can get the
+game to a playable print-and-play kit; it cannot run the playtest. So the plan optimises
+for *getting a kit into your hands in days*, then iterating on real feedback — not for
+perfecting the design in the abstract.
+
+== Phases
+
+=== Phase 0 — Reconcile & decide (needs owner)
+
+Produce the canonical model by resolving the contradictions the corpus already contains,
+and surface the genuinely owner-gated calls as a short decision list. Draft prepared by
+agent; **rulings are yours**:
+
+* **Stale turn-loop clash** — `core-mechanics.adoc` Phase 1 = passive "collect"; the
+  storyboard + foundations = active Leontief production. → adopt the production version,
+  retire the stale text.
+* **Crisis-draw timing exploit** — sample boundary stress at *start-of-turn* vs
+  *start-of-Crisis-phase* (`gameplay-storyboard.adoc:200`). Recommend start-of-turn to
+  close the "recovery-spam to dodge crises" hole.
+* **Length/density — the #1 risk.** A single Industrial turn is estimated at 25–35 min ×
+  32 turns; the playtest target is 90–150 min. → make the **"Short Game" (2 eras / ~12
+  turns)** the *default* playable configuration; keep the 32-turn "Campaign" as advanced.
+* **Open design decisions to rule on:** DD-006 (named living figures vs archetypes —
+  *legal risk*, esp. Musk), DD-008 (target complexity), DD-009 (game length), DD-010
+  (cascade threshold = 8, provisional), DD-011 (eXchange binding rules), DD-012
+  (eXperiment randomness model).
+
+=== Phase 1 — Content to playable (Opus manages friends)
+
+Fan out subagents against the canonical model to fill the biggest content gaps to a
+*playable* (not final) bar:
+
+* **Crisis/event card catalogue** — draft the full ~78 era-stratified cards (one agent per
+  era: Agrarian 12 / Industrial 20 / Digital 24 / Post-Scarcity 22).
+* **eXperiment subsystem** — flesh out the d8 research outcome tables (currently gestured).
+* **First-pass victory thresholds** — numeric tuning for the cooperative + 4 pathway
+  endings, marked provisional pending playtest.
+* **Consistency + balance critics** — one agent checks every draft against the canonical
+  model; one runs light Monte-Carlo on the Leontief/boundary loop to flag runaway or dead
+  states before humans waste a playtest on them.
+
+=== Phase 2 — Print-and-play kit
+
+Generate a paper prototype from the Phase-1 data:
+
+* Printable board (from `board-mockup.svg`), card sheets (PDF/PNG from card data), the
+  cube/disc/token bill-of-materials, boundary dashboard, defection-ledger.
+* A **self-sufficient 4-page rulebook + 1-page quick-start** for the Short Game.
+* Target: **you + son play the Short Game within days of Phase 1 landing.**
+
+=== Phase 3 — Playtest loop (needs owner — the true critical path)
+
+You run the paper playtest; agent converts each session's notes into concrete balance
+edits *against the canonical model* (so the data, board, and rulebook update together).
+Repeat until the `playtesting-plan.adoc` success gates pass (90–150 min, all pathways win
+≥20 %, collapse 10–30 %, satisfaction ≥4/5, rulebook self-sufficient).
+
+=== Phase 4 — Kickstarter prep (gated on Phase 3)
+
+Only after the gates pass: firm up `campaign-plan.adoc`, produce the v1.0 print-and-play,
+art direction, and the £10–20k campaign assets.
+
+=== Phase 5 — Optional digital companion (derived, post-physical)
+
+Per the ROADMAP's own sequencing, digital stays out of scope until the physical game is
+validated. When built, it derives from the canonical model and uses an approved language
+(Rust or Gleam per ADR-002). **The existing `src/core/main.py` iterated-PD toy is retired
+or ported — it violates the repo language policy and is not game logic.**
+
+== Where agents help vs where only you can act
+
+[cols="1,1"]
+|===
+| Agents (Opus-coordinated) | Only you / your son
+| Reconcile docs into canonical model | Design *rulings* (DD-006…012, length, complexity)
+| Draft the 78-card catalogue | Playing the game
+| eXperiment tables, threshold first-pass | Judging "is this fun?"
+| Consistency + Monte-Carlo balance checks | Kickstarter go/no-go
+| Print-and-play kit generation | Educator relationships
+| Turn playtest notes into balance edits | Final art / manufacturing calls
+|===
+
+== Immediate next action
+
+On your word, Phase 0: an agent produces `CANONICAL-MODEL.adoc` (reconciled, no
+contradictions) plus a one-page decision sheet listing DD-006…012 and the length call, so
+you can rule on all of them in one sitting. Phase 1's card fan-out follows the moment those
+rulings land. Nothing after Phase 0 needs you until the kit is ready to play.
