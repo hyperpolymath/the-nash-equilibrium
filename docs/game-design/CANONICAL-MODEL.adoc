@@ -1,0 +1,285 @@
+// SPDX-License-Identifier: CC-BY-SA-4.0
+// Copyright (c) 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+= The Nash Equilibrium — Canonical Model
+:toc: left
+:toclevels: 3
+:icons: font
+:sectnums:
+
+[.lead]
+This is the *single source of truth* for the rules of The Nash Equilibrium. Every other
+design document is subordinate to it; where any doc disagrees with this one, this one wins.
+Variable content (card text, boundary thresholds, production recipes, victory numbers) lives
+in machine-readable *data files* (see <<data>>), so the tabletop kit and any future digital
+edition both *derive* from the same source and never drift apart.
+
+NOTE: Status — *foundational draft, 2026-07*. Bakes in owner rulings DD-006, DD-008, DD-009,
+DD-010. Open holes: DD-011, DD-012 (see <<open>>). Numeric thresholds marked _(provisional)_
+are the primary playtest tuning knobs.
+
+== Design philosophy (the guardrails)
+
+These three principles constrain every mechanic, card, and subsystem. They are testable — if
+a proposed rule fails them, it is cut or simplified.
+
+[horizontal]
+The corridor:: Deeper than roll-and-move (never *Monopoly*: no game where luck dominates
+agency), but never a hyper-detailed simulation (never *Grigsby*: no lookup-table-per-turn
+data entry). The strategic ceiling aspires to *Civilization*'s feel.
+Emergence, not simulation:: Depth comes from a *few elegant systems interacting*, not from
+exhaustive realistic detail. Easy to learn, hard to master.
+The one filter:: For every rule, card, or token ask: *does this add a decision, or just
+bookkeeping?* If it is bookkeeping, cut it or automate it.
+
+== The scalability architecture
+
+The game is *one ruleset with two independent dials*: **length** and **weight (complexity)**.
+This is what lets it be a minimalist family game or a Civilization-depth epic without
+becoming a different game.
+
+=== Weight dial — modular layers (DD-008)
+
+The game ships as a *complete minimalist Core* plus optional depth *layers*. The Core is a
+real, satisfying game on its own — not a tutorial. Each layer adds exactly one strategic
+*system* (never a pile of exceptions).
+
+[cols="1,4,1",options="header"]
+|===
+| Layer | Adds | ~Weight
+| *Core* | 5 resources · the **core-four boundaries** · simplified production · 2 actions/turn · basic crisis draw · open trades · pathway goals | 2.0
+| *+ Boundaries* | full 9 boundaries + cascades + pollution→stress conversion | +0.4
+| *+ Economy* | full Leontief recipe engine, externality tokens, factor-income model | +0.4
+| *+ Diplomacy* | typed trade cards, binding treaties, the defection ledger _(the game-theory heart)_ | +0.4
+| *+ Research* | the eXperiment d8 branching technology | +0.3
+| *+ Legacy* | 5th player, expansion roles, megaprojects (Dyson Sphere), multi-session state | +0.4
+|===
+
+Minimalist = Core only (~2.0). Full "Civilization-depth" = Core + every layer (~4.0–4.5).
+
+=== Length dial — presets
+
+[cols="1,2,2,2",options="header"]
+|===
+| | *Short — "Skirmish"* | *Standard — "Ascent"* | *Extended — "Legacy"*
+| Purpose | Playtest / family / classroom on-ramp | The default box experience | Enthusiast / epic / Kickstarter flagship
+| Eras | 2 (Agrarian→Industrial) | 3 (→ Digital) | 4 (→ Post-Scarcity)
+| Turns | ~5–6 | ~9–10 | 32 (multi-session)
+| Time target | 60–90 min | 120–180 min | 4–6 hr / across sittings
+| Default layers | Core (+ Diplomacy) | Core + Boundaries + Economy + Diplomacy | all layers
+| Default weight | ~2.0–2.5 | *3.0–3.5* | ~4.0–4.5
+|===
+
+The presets are just *bundles of the two dials* — players may mix (e.g. a short-but-deep game).
+Post-Scarcity is the narrative *horizon*; Short and Standard end at their final era with a
+scored assessment rather than requiring era 4 to be fully played.
+
+=== Leaner-turn levers
+
+Applied to Short by default; offered as optional speed dials for Standard. They cut turn time
+without changing the rules:
+
+* *Simultaneous Production* — all players resolve production at once, not in sequence.
+* *Time-boxed Exchange* — a fixed ~3-minute trading window per turn.
+* *Batched boundary update* — resolve all pollution→stress and cascades in one end-of-turn pass.
+
+== Core concepts
+
+=== Resources (5)
+
+Labour, Capital, Nature, Knowledge, Energy. In the *Economy layer* these map onto the classical
+factor model:
+
+[cols="1,1,2",options="header"]
+|===
+| Resource | Economic factor | Income form
+| Nature | Land | Rent
+| Labour | Labour | Wage
+| Capital | Capital | Interest
+| Knowledge | Entrepreneurship | Profit (Schumpeterian)
+| Energy | _intermediate good — not a factor_ | (consumed in production)
+|===
+
+=== Planetary boundaries (9)
+
+On a shared dashboard, each with a stress track *0–10*: **Climate Change · Biosphere Integrity ·
+Freshwater Change · Novel Entities** (the *core-four*, used in the Core game) plus **Land-System
+Change · Biogeochemical Flows (N & P) · Stratospheric Ozone Depletion · Ocean Acidification ·
+Atmospheric Aerosol Loading** (added by the Boundaries layer).
+
+[cols="1,2",options="header"]
+|===
+| Zone | Stress
+| Green | 0–3
+| Amber | 4–6
+| Red | 7–9
+| Black | 10
+|===
+
+=== Resource → boundary pressure
+
+Exploiting a resource stresses linked boundaries (canonical map, Boundaries layer):
+
+[horizontal]
+Labour:: Freshwater
+Capital:: Climate, Novel Entities
+Nature:: Biosphere, Land-System
+Knowledge:: Ozone, Novel Entities
+Energy:: Climate, Aerosols
+
+== Turn structure (7 phases)
+
+RECONCILED: Phase 1 is *active Leontief Production*, superseding the stale "passive collect"
+text in `core-mechanics.adoc` (see <<reconcile>>).
+
+. *Production* — fire the Leontief recipes you can activate; gain outputs, emit externality tokens.
+. *Action* — take 2 (Core) to 3 actions: eXplore, eXpand, eXploit, eXterminate (see <<pillars>>).
+. *Exchange* — the eXchange pillar: trade resources / play typed trade cards (Diplomacy layer).
+. *Experiment* — the eXperiment pillar: research via a d8 outcome table (Research layer).
+. *Crisis* — draw *N* crisis cards for the era (N per <<crisis>>).
+. *Boundary update* — convert pollution→stress, resolve cascades, update the dashboard.
+. *Assessment* — check victory / loss conditions.
+
+IMPORTANT: *Crisis-draw timing (reconciled).* The boundary stress that sets *N* is sampled at
+*start of turn*, not at the start of the Crisis phase. This closes the "recovery-spam to dodge
+this turn's crises" exploit flagged in `gameplay-storyboard.adoc`.
+
+[[pillars]]
+== The 6X pillars
+
+The classic 4X plus two game-theoretic pillars, mapped to the turn:
+
+[cols="1,3",options="header"]
+|===
+| Pillar | Where it lives
+| eXplore | Action phase — reveal map / opportunities
+| eXpand | Action phase — grow territory / capacity
+| eXploit | Action + Production — extract resources (stresses boundaries)
+| eXterminate | Action phase — competitive/coercive plays
+| *eXchange* | Exchange phase — repeated-game trade & diplomacy; defection is possible and sometimes rational, but destabilises the shared dashboard
+| *eXperiment* | Experiment phase — speculative research, branching non-deterministic payoffs
+|===
+
+== Production (Economy layer)
+
+Binary-activation *Leontief* recipes: a recipe either has *all* its inputs (and fires, all-or-
+nothing) or it does not. Chosen over Cobb–Douglas because cubes on cardboard cannot represent
+fractional inputs. Firing a recipe emits *externality tokens* (pollution) that convert to
+boundary stress in Phase 6 at *1 stress per 3 tokens* _(provisional)_. In the Core game,
+production is simplified to fixed per-resource yields without the full recipe engine.
+
+[[cascades]]
+== Boundaries & cascades (Boundaries layer) — DD-010
+
+A *cascade* is when an over-stressed boundary spills stress into the boundaries it is linked to,
+modelling Earth-system tipping points. Canonical cascade links:
+
+* Climate → Freshwater
+* Climate → Ocean Acidification
+* Land-System → Biosphere
+* Biogeochemical → Freshwater
+* Novel Entities → Biosphere
+
+Ruling DD-010 _(all provisional — top of the playtest tuning list)_:
+
+[horizontal]
+Trigger:: A boundary cascades when its stress reaches *8* (entering the Red→Black zone).
+Spill:: *+1* stress onto each linked boundary (*+2* in the Extended/Legacy layer).
+Chaining:: *On, but capped* — a cascaded boundary may itself cascade, but each boundary
+cascades at most *once per turn* (real runaway spirals without a single turn wiping the board).
+
+*Collapse (all players lose):* *4 or more* of the 9 boundaries at Black (stress 10).
+
+[[crisis]]
+== Crisis / event deck
+
+Era-stratified decks totalling *78* cards (Agrarian 12 / Industrial 20 / Digital 24 /
+Post-Scarcity 22). Each turn the number drawn scales with planetary stress:
+
+[source]
+----
+N = ceil( 1 + 0.5·(#amber) + 1·(#red) + 2·(#black) ),  clamped to [1, 5]
+----
+
+Cooperative stewardship (boundaries in Green/Amber) → fewer crises; exploitation (Red/Black) →
+crisis cascades. This is the mechanical engine of the game's thesis.
+
+== Player pathways (4) — DD-006 applied
+
+Real living/near-living figures are replaced by *archetypes* that carry a subtle name/emblem
+*nod* to the original, keeping them legally safe and instantly recognisable. Asymmetric
+bonuses/constraints, balanced for interesting decisions rather than raw power.
+
+[cols="1,1,3",options="header"]
+|===
+| Pathway | Archetype (nod) | Identity
+| Capitalist | *The Financier-Sovereign* (Reina / Castella) | crown-and-coin sigil; patron-of-expeditions; rapid wealth extraction
+| Socialist | *The Great-Soul Steward* (Shanti / Ananda) | spinning-wheel + salt emblem; cooperative, redistributive, self-sufficiency
+| Green | *The Warden* (Gaia / Sylva) | leaf-and-hourglass; boundary protection, degrowth, doughnut economics
+| Techno-Utopian | *The Prometheus* | rocket-and-flame; technology-as-solution, high-risk breakthroughs
+|===
+
+NOTE: Expansion roles (e.g. a *Revolutionary* archetype nodding to Marx) follow the same
+archetype-with-a-nod rule and live in the Legacy layer.
+
+== Victory & loss
+
+=== The Nash mechanic
+
+The winning position is never unilateral dominance — it is the *Nash equilibrium*: the state
+no player can improve by defecting alone. Per the *Axiom of Emergent Stability*, this is
+*emergent, not computed* — there is no stability index. It is read off the dashboard, the
+defection ledger, the Labour floors, and the size of the next crisis draw.
+
+=== Conditions
+
+[horizontal]
+Cooperative victory:: The shared megaproject (Dyson Sphere, Legacy layer) completed *and* all
+boundaries Green/Amber *and* no collapse.
+Pathway victories:: Each of the 4 pathways has its own individual win condition (numeric
+thresholds _provisional_, tuned in playtest).
+Loss:: Planetary collapse (4+ boundaries Black) · social collapse (a player's Labour = 0) ·
+resource exhaustion (Nature = 0).
+
+[[open]]
+== Open decisions (do not treat as settled)
+
+[cols="1,3",options="header"]
+|===
+| ID | Question
+| *DD-011* | Are treaties/trade agreements *mechanically binding* (enforced by the rules) or *social promises* a player may break at a mechanical cost? Governs how sharp the defection dilemma is.
+| *DD-012* | How random is the eXperiment research roll? Pure d8 lottery vs. mitigated (re-roll / modifier) vs. push-your-luck. Governs the risk texture of the tech game.
+|===
+
+Also provisional and flagged for playtest tuning: cascade numbers (DD-010), pollution→stress
+ratio, all victory thresholds, per-era turn counts.
+
+[[data]]
+== Machine-readable data (to be authored)
+
+The variable content is data, not prose, so both surfaces derive from it:
+
+[cols="1,3",options="header"]
+|===
+| File (proposed) | Holds
+| `data/boundaries.a2ml` | the 9 boundaries, zones, cascade links, DD-010 numbers
+| `data/resources.a2ml` | 5 resources, factor mapping, resource→boundary pressure
+| `data/recipes.a2ml` | Leontief production recipes + externality emissions
+| `data/cards/crisis-*.a2ml` | the 78 era-stratified crisis/event cards
+| `data/cards/trade.a2ml` | typed trade cards + defection ledger
+| `data/pathways.a2ml` | the 4 archetypes + expansion roles
+| `data/scenarios.a2ml` | Short/Standard/Extended presets = {eras, turns, layers, thresholds}
+|===
+
+[[reconcile]]
+== Reconciliation log (what this doc supersedes)
+
+* *Turn Phase 1* — `core-mechanics.adoc` "Resource Phase (collect)" is *retired*; Phase 1 is
+  active Leontief Production per `economic-foundations.adoc` and the storyboard.
+* *Crisis-draw timing* — sampled at *start of turn* (was undecided); closes the recovery-spam
+  exploit.
+* *Named figures* — Isabella / Gandhi / Musk replaced by archetypes-with-a-nod (DD-006).
+* *Length* — the flat 32-turn game is now the *Extended* preset; Short/Standard are canonical
+  presets, not variants (DD-009).
+* *Complexity* — a fixed weight target is replaced by the *modular-layer weight dial* (DD-008).
+* *Boundary count* — the canonical count is *9*; the 11 rows in `planetary-boundaries.adoc`
+  (Biosphere and Biogeochemical each split in two) are sub-components, not separate boundaries.
