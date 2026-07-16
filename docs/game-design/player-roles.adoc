@@ -1,20 +1,108 @@
 // SPDX-License-Identifier: CC-BY-SA-4.0
 // Copyright (c) 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
-= Player Roles and Asymmetric Gameplay
+= Player Roles, Characters, and Asymmetric Gameplay
 :toc:
 :icons: font
 
 == Overview
 
-Players assume asymmetric roles with unique starting bonuses, constraints, and
-victory paths. This encourages diverse strategies and highlights tensions between
-different economic philosophies.
+Players assume asymmetric characters with unique starting bonuses, constraints,
+and victory paths. This encourages diverse strategies and highlights tensions
+between different economic philosophies.
 
-== Role Cards
+A character is *not* a fixed role card. Per DD-006, it is built in layers: an
+immutable *Core* that everyone can see, a set of *Aspects* that inflect it and
+stay hidden, a *name* the player supplies at the table, and a hidden *private
+objective* running alongside the main game.
 
-=== Queen Isabella
+[NOTE]
+====
+*Status: framework, not final content.* The layer structure and the design rules
+below are settled (DD-006, DD-013). The aspect pools and private-objective deck
+are illustrative first drafts — Phase 1 work, pending playtesting.
+====
 
-*Archetype:* Colonial Capitalist
+== 1. The Character Model
+
+[cols="1,1,3", options="header"]
+|===
+| Layer | Visibility | Content
+
+| *Core*
+| *Public*
+| The archetypal essence — a *type*, never a person. Immutable. Sets the
+  character's fundamental strengths, constraints, and victory path.
+
+| *Aspects*
+| *Hidden*
+| Two strengths, one weakness, and one appeal/antipathy pair, drawn or chosen
+  from the Core's pools. Inflects *how* this instance of the Core plays.
+
+| *Name*
+| Player's own
+| Supplied at the table. Never printed. See §6.
+
+| *Private objective*
+| *Hidden*
+| A quiet parallel goal. Non-critical to winning, but tugs against the commons.
+  See §5.
+|===
+
+=== Why the Core is public and the rest is not
+
+Per DD-013, this split is deliberate. Public Cores keep the table *legible* —
+everyone can see you are a techno-plutocrat, and can bargain with you
+accordingly, which the eXchange pillar (DD-011) requires. Hidden aspects and
+objectives mean nobody knows your exact payoff function, only a distribution over
+it — which is what makes the game one of incomplete information, and its
+equilibrium a *Bayes–Nash* one.
+
+Legibility on the outside, uncertainty underneath.
+
+Deciding what to *reveal*, and when, is itself a move: disclosing a strength to
+win a negotiation is a costly signal. The exact mechanism (voluntary, triggered,
+or costed) is open — see the DD-013 tracker entry.
+
+== 2. The Four Cores
+
+Each Core is a *category* of actor, not a portrait of an individual.
+
+[cols="1,2,3", options="header"]
+|===
+| Core | Archetype | Immutable essence (public)
+
+| *The Chartered Extractor*
+| Colonial Capitalist
+| Wealth extracted from distant territories under a licence from an authority
+  back home. Rich, dirty, and living on borrowed legitimacy.
+
+| *The Nonviolent Mobiliser*
+| Cooperative Socialist
+| Moves people, not armies. Social cohesion over growth rate. Cannot compel —
+  only persuade.
+
+| *The Off-World Plutocrat*
+| Techno-Utopian Innovator
+| Vast private capital and a cult following that grants reach far beyond any
+  formal power. Fixated on an exit — off this world entirely. Better at
+  conjuring belief than at governing or complying.
+
+| *The Steward*
+| Environmental Steward
+| Protects the boundaries everyone else is drawing down. Capital-poor,
+  time-rich; weak early, indispensable late.
+|===
+
+== 3. Presets (Beginner Mode)
+
+A preset is a *fully-built character*: Core plus aspects pre-chosen, with a
+suggested name offered at the table. Deal one and play — no build step. Per
+DD-008, presets are the low-complexity end of the same system, not a separate
+ruleset.
+
+The four presets below are the original role cards, unchanged mechanically.
+
+=== Preset: "Queen Isabella" — The Chartered Extractor
 
 [cols="1,3"]
 |===
@@ -25,16 +113,13 @@ different economic philosophies.
 | Path to Victory | Exploit -> Industrialise -> Adapt (or face revolution)
 |===
 
-*Flavour:* Represents the colonial-capitalist model — rapid wealth extraction
-from new territories at the cost of indigenous populations and environmental
-degradation. Must transition to sustainable practices before boundaries collapse.
+*Flavour:* Rapid wealth extraction from new territories at the cost of indigenous
+populations and environmental degradation. Must transition to sustainable
+practices before boundaries collapse.
 
-*Historical parallel:* Spanish Empire, British East India Company, extraction
-economies.
+*Parallels:* Spanish Empire, chartered trading companies, extraction economies.
 
-=== Gandhi
-
-*Archetype:* Cooperative Socialist
+=== Preset: "Gandhi" — The Nonviolent Mobiliser
 
 [cols="1,3"]
 |===
@@ -45,16 +130,13 @@ economies.
 | Path to Victory | Sustainability -> Equality -> Collective advancement
 |===
 
-*Flavour:* Represents non-violent, community-centred development. Strong social
-fabric but slow economic growth. Wins through collective well-being rather than
-individual dominance.
+*Flavour:* Non-violent, community-centred development. Strong social fabric but
+slow economic growth. Wins through collective well-being rather than individual
+dominance.
 
-*Historical parallel:* Indian independence movement, cooperative movements,
-Scandinavian social democracy.
+*Parallels:* Independence movements, cooperative movements, social democracy.
 
-=== Elon Musk
-
-*Archetype:* Techno-Utopian Innovator
+=== Preset: "Elon Musk" — The Off-World Plutocrat
 
 [cols="1,3"]
 |===
@@ -65,15 +147,13 @@ Scandinavian social democracy.
 | Path to Victory | Automate -> Breakthrough -> Space (Dyson Sphere)
 |===
 
-*Flavour:* Represents the Silicon Valley vision — technology as the solution to
-all problems. Powerful innovation engine but creates social disruption through
-automation and can neglect environmental boundaries in pursuit of breakthroughs.
+*Flavour:* Technology as the solution to all problems. Powerful innovation engine
+that creates social disruption through automation, and can neglect environmental
+boundaries in pursuit of breakthroughs.
 
-*Historical parallel:* Tech industry, space programmes, nuclear power optimism.
+*Parallels:* Tech industry, private space programmes, nuclear optimism.
 
-=== Green Activist
-
-*Archetype:* Environmental Steward
+=== Preset: "Green Activist" — The Steward
 
 [cols="1,3"]
 |===
@@ -84,53 +164,157 @@ automation and can neglect environmental boundaries in pursuit of breakthroughs.
 | Path to Victory | Balance -> Resilience -> Post-Scarcity (sustainable)
 |===
 
-*Flavour:* Represents the environmental movement and Green economics. Protects
-planetary boundaries but starts economically weak. Becomes powerful in later eras
-as boundary stress makes sustainability essential.
+*Flavour:* Protects planetary boundaries but starts economically weak. Becomes
+powerful in later eras as boundary stress makes sustainability essential.
 
-*Historical parallel:* Greenpeace, Costa Rica, doughnut economics, degrowth.
+*Parallels:* Environmental movements, doughnut economics, degrowth.
 
-== Role Summary Table
+=== Preset Summary Table
 
 [cols="1,2,2,2"]
 |===
-| Role | Starting Bonuses | Constraints | Path to Victory
+| Preset (Core) | Starting Bonuses | Constraints | Path to Victory
 
-| Queen Isabella
+| "Isabella" (Chartered Extractor)
 | +2 Gold/turn (colonies)
 | No barter; high pollution
 | Exploit -> Industrialise -> Adapt
 
-| Gandhi
+| "Gandhi" (Nonviolent Mobiliser)
 | +1 Stability (nonviolence)
 | No military; slow growth
 | Sustainability -> Equality
 
-| Elon Musk
+| "Musk" (Off-World Plutocrat)
 | +1 Tech/turn (innovation)
 | High Knowledge cost; unstable Labour
 | Automate -> Space
 
-| Green Activist
+| "Green Activist" (Steward)
 | +1 Nature/turn (conservation)
 | Low Capital; vulnerable to exploitation
 | Balance -> Post-Scarcity
 |===
 
-== Expansion Roles (Future)
+== 4. The Builder (Advanced Mode)
 
-Potential additional roles for expansion packs:
+Take a Core, then draw or choose:
 
-* *Pharaoh* — Agrarian era specialist, monumental construction
-* *Marx* — Revolutionary Socialist, can trigger regime change in other players
-* *Pirate Queen* — Disrupts trade routes, asymmetric warfare
-* *Indigenous Elder* — Deep Nature connection, unique boundary recovery abilities
-* *AI Singleton* — Digital era specialist, post-human victory path
+* *2 Strengths* from that Core's strength pool
+* *1 Weakness* from its weakness pool
+* *1 Appeal/Antipathy pair*
+* *1 Private objective* (§5)
 
-== Role Balance Notes
+*Draw* for a fast, surprising game; *choose* for a deliberate one; *draft* (pass
+the pool around) for a competitive one. All three are legal — the group picks.
 
-* Roles are intentionally *not* balanced for raw power — they are balanced for
-  *interesting decisions*
-* Each role has a window of strength and vulnerability
-* The Nash Equilibrium dynamic means no single role can win alone in most games
-* Playtesting should focus on ensuring each role has meaningful agency in every era
+The same Core therefore plays differently every session, and — because aspects
+are hidden — your opponents must infer which build they are facing from how you
+behave. That inference *is* the game.
+
+=== Worked example: The Off-World Plutocrat
+
+Illustrative pools, to show the shape. Numbers are placeholders pending Phase 1.
+
+*Strengths (draw/choose 2):*
+
+[cols="1,3"]
+|===
+| Hype Engine | Once per turn, convert Stability into Capital — belief as a resource.
+| Vertical Integration | Ignore one input prerequisite per Leontief recipe.
+| Regulatory Arbitrage | Relocate to dodge one crisis effect per era.
+| Talent Magnet | +1 Knowledge whenever *any* player completes research.
+|===
+
+*Weaknesses (draw/choose 1):*
+
+[cols="1,3"]
+|===
+| Thin Skin | Lose Stability whenever publicly defected against.
+| Attention Deficit | Cannot hold more than two binding agreements at once.
+| Overpromise | Must announce a breakthrough one turn before it resolves.
+|===
+
+*Appeal / Antipathy (draw/choose 1 pair):*
+
+[cols="1,3"]
+|===
+| Retail believers / Regulators | Bonus while Stability is high; penalised in dealings with institutional players.
+| Engineers / Labour | Bonus to research trades; penalised on Labour stability.
+|===
+
+Note that these inflect *the same public Core*. Everyone can see you are an
+off-world plutocrat. Nobody can see whether you are the thin-skinned kind who
+must be handled gently, or the arbitrage kind who will simply leave.
+
+== 5. Private Objectives
+
+A hidden parallel goal, drawn at setup. Non-critical — you can win without it,
+and it should never overshadow the main game — but it adds challenge, and it
+makes your true payoff function unreadable.
+
+[IMPORTANT]
+====
+*Design rule: private objectives must tug against the commons — never run
+orthogonal to it.*
+
+The shared planetary-boundaries dashboard (DD-007) is the game's commons
+dilemma. A private objective is *interesting* exactly when it tempts you to
+defect from it on a given turn: _do I spend this action shoring up the boundary,
+or quietly advancing my own exit?_
+
+An objective *orthogonal* to the commons is a solitaire task that pulls attention
+off the table. An objective *incentive-misaligned* with it deepens the very
+dilemma the game is about.
+
+*Misaligned, never independent.* Every objective drafted in Phase 1 must be
+checked against this rule.
+====
+
+*Example — "Escape Hatch"* (Off-World Plutocrat): quietly bank Capital and
+Knowledge off-world. Scores *even if the commons collapses* — but every unit
+banked is a unit not spent on the boundary. This is the rule made concrete: the
+objective pays best precisely when you defect, and the table cannot see you doing
+it — only infer it from what you decline to contribute.
+
+== 6. Naming at the Table
+
+The name is the *player's*, always. Nothing on the printed card names a real
+person.
+
+*The line to hold — archetype, not portrait.* Printed Cores describe a
+*category* of actor. They must stay free of uniquely-identifying specifics — real
+company names, real quotations, one-to-one biography — that would make a Core
+identifiable as one particular living individual. "A Mars-fixated plutocrat with
+a cult following" is a *type*; a great many people would recognise several
+candidates, and that is exactly the point.
+
+This is not a limitation on the humour — it is what *licenses* it. We hand the
+players a caricature of a type, and the players do the impression. The game makes
+no claim about any real person.
+
+[quote, Jonathan, 2026-07-16]
+____
+The Day of the Triffids is never held to a standard of validity, reliability, and
+fidelity.
+____
+
+== 7. Expansion Cores (Future)
+
+* *The Monument Builder* — Agrarian era specialist, monumental construction
+* *The Revolutionary* — can trigger regime change in other players
+* *The Corsair* — disrupts trade routes, asymmetric warfare
+* *The Elder* — deep Nature connection, unique boundary recovery abilities
+* *The Singleton* — Digital era specialist, post-human victory path
+
+== 8. Balance Notes
+
+* Cores are intentionally *not* balanced for raw power — they are balanced for
+  *interesting decisions*.
+* Each Core has a window of strength and a window of vulnerability.
+* The Nash Equilibrium dynamic means no single Core can win alone in most games.
+* Aspects must not stack into a dominant build. Phase 1 balance critics should
+  Monte-Carlo the aspect pools for runaway combinations before any playtest is
+  spent discovering them.
+* Playtesting should confirm each Core has meaningful agency in every era, and
+  that hidden aspects create *inference*, not *confusion*.

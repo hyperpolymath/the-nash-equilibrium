@@ -140,43 +140,113 @@ a partnership, not a contribution.
 
 *Raised by:* Claude
 
-*Decision:* OPEN — needs discussion between Jonathan and Joshua.
+*Decision:* RESOLVED (2026-07-16, Jonathan with Joshua concurring) — *neither
+horn*. Ship an *immutable archetypal Core* plus a *character builder*. The player
+supplies the name at their own table; nothing is printed.
 
-*The question:* The initial design uses named historical/contemporary figures
-(Queen Isabella, Gandhi, Elon Musk, Green Activist). Should these be replaced
-with archetypes (The Colonist, The Pacifist, The Innovator, The Steward)?
+*The question (as originally framed):* The initial design uses named
+historical/contemporary figures (Queen Isabella, Gandhi, Elon Musk, Green
+Activist). Should these be replaced with archetypes (The Colonist, The Pacifist,
+The Innovator, The Steward)?
 
-*Arguments for named characters:*
+*Why the original framing was wrong:* Both horns lose something. Named figures
+carry recognition but also likeness exposure and a shelf-life problem. Flat
+archetypes are safe but bland. And the earlier "best of both worlds" compromise
+— archetype mechanics with named figures as printed flavour text — still *ships
+the name*, so it keeps the exposure it was trying to avoid while gaining little.
 
-* Immediate recognition and engagement
-* Historical connection reinforces educational value
-* Flavourful and memorable
+*What was decided instead:* A character has layers.
 
-*Arguments for archetypes:*
+[cols="1,3", options="header"]
+|===
+| Layer | Content
 
-* Avoids likeness/trademark concerns (especially living people like Musk)
-* Ages better — public perception of named individuals shifts over time
-* More inclusive — archetypes can represent broader movements, not individuals
-* Gandhi as a game character is culturally sensitive territory
-* Musk is polarising — could alienate part of the audience
+| *Core* (immutable)
+| The archetypal essence — a *type*, never a person. Fixed. Makes the character
+  legible at the table. Always *public* (see DD-013).
 
-*Potential compromise:* Archetypes as the mechanical identity, with named
-figures as flavour text examples ("plays like a Gandhi — nonviolent, community-
-centred, slow growth"). Best of both worlds.
+| *Aspects* (chosen or drawn)
+| A small pool that inflects the Core — strengths, a weakness, and an
+  appeal/antipathy pair (who rallies to them, who recoils). *Hidden* by default.
 
-*Status:* OPEN
+| *Name* (free)
+| Player-supplied, at the table. Never printed.
+
+| *Private objective* (hidden)
+| A quiet parallel goal running alongside the main game. Non-critical, but adds
+  challenge and risk-appetite variance.
+|===
+
+*Reasoning:*
+
+* *Legal.* The shipped artefact never names or depicts a living individual. It
+  ships a *class* of figure — "a Mars-fixated, cult-followed plutocrat" — which is
+  satire of a type. Any resemblance is supplied by the players at their own table:
+  their speech, not the publisher's.
+* *Humour.* Freeing the name is what *licenses* the comedy rather than suppressing
+  it. The players do the impression; we hand them the stage. This is an
+  opportunity for contemporary satire, not a constraint on it.
+* *Ageing.* A type outlives a person. The Core still reads in 2046 when today's
+  figures are footnotes.
+* *Replayability.* The aspect pool means the same Core plays differently every
+  game. A static role card never does.
+* *Theme.* Hidden aspects and private payoffs make this a game of *incomplete
+  information* — see DD-013. This is the largest gain: the character system
+  upgrades the equilibrium the game actually explores.
+* *Complexity dial.* The builder doubles as the answer to DD-008 — presets for
+  beginners, builder for advanced play. Same system, two depths.
+
+*The existing four roles are not lost — they become presets.* Queen Isabella,
+Gandhi, Elon Musk and Green Activist are re-cast as *sample fully-built
+characters*: identical mechanics, Core and aspects pre-chosen, name offered as a
+*suggestion at the table* rather than a printing. See `player-roles.adoc` for the
+framework and the four Cores.
+
+*Design rule — private objectives must tug against the commons.* A private
+objective is only interesting when it tempts the player to defect from the shared
+planetary-boundaries constraint (DD-007) on a given turn: _help the boundary, or
+quietly advance my own escape hatch?_ An objective merely *orthogonal* to the
+commons is a solitaire task that pulls attention off the table. An objective
+*incentive-misaligned* with it deepens the exact dilemma the game is about.
+Misaligned, never independent.
+
+*Alternatives considered:*
+
+* *Named figures as shipped* (the original) — rejected: likeness exposure, ages
+  badly, and polarises.
+* *Flat archetypes* (The Colonist, The Pacifist…) — rejected: safe but bland;
+  loses the recognition hook entirely.
+* *Archetype mechanics + named flavour text* (the earlier compromise) — rejected:
+  still prints the name, so it retains the exposure while gaining little.
+
+*Status:* RESOLVED — framework. Aspect pool and private-objective deck are Phase 1
+drafting work.
 
 *FAQ:*
 
 * _Q: Are there legal issues with using Elon Musk's name?_
-  A: Potentially. Living public figures have publicity rights. Using the name
-  in a game without permission is legally grey. Archetypes are safer.
+  A: Moot under this decision — we don't use it. We ship the *type*; the player
+  names their own. The line to hold is *archetype, not portrait*: keep the printed
+  Core free of uniquely-identifying specifics (real company names, real quotes,
+  one-to-one biography) that would make it identifiable as one particular real
+  individual. A Mars-fixated plutocrat with a cult following is a *category*.
+  (Not legal advice — but that is the standard satire seam.)
 
 * _Q: What about Gandhi?_
-  A: Gandhi's estate doesn't typically pursue game usage, but the cultural
-  sensitivity of reducing a complex historical figure to game mechanics is
-  worth considering. The archetype approach respects the legacy while
-  keeping the mechanical design intact.
+  A: Same resolution, and it defuses the cultural-sensitivity concern too. We ship
+  "nonviolent mass-mobiliser, cohesion over growth" as a Core. A table that wants
+  to name theirs Gandhi may do so; we are not reducing a real historical figure to
+  a stat block *in print*.
+
+* _Q: But players will just name it Elon anyway — isn't that the same thing?_
+  A: No, and that distinction is the whole point. The game makes no claim about
+  any real person; it hands players a caricature of a *type* and they do as they
+  like with it. Fiction is not a documentary. As Jonathan put it: _"The Day of the
+  Triffids is never held to a standard of validity, reliability, and fidelity."_
+
+* _Q: Doesn't a builder make setup slower?_
+  A: Only if you use it. Presets exist precisely so a Short Game starts in a
+  minute — deal a built character and play. The builder is opt-in (DD-008).
 
 === DD-007: Planetary Boundaries — Dashboard as Shared Constraint
 
@@ -217,6 +287,14 @@ comparable to Terraforming Mars (BGG weight 3.2/5) or heavier.
 * *Quick-start scenario:* 30-minute single-era game
 * *Reference cards:* Per-player aids with phase sequence and resource summary
 * *Turn count:* Consider 20-24 turns instead of 32 (see DD-009)
+* *Character presets vs. builder:* the DD-006 character builder *is* a complexity
+  dial — deal a pre-built preset for beginner mode, expose the aspect pool and
+  private objectives for advanced play. Same system, two depths, no separate
+  ruleset to maintain.
+
+*Partial resolution (2026-07-16):* the *character-layer* dial is settled by
+DD-006. The remaining question — boundary/resource/era counts, and the target
+weight — still needs playtesting.
 
 *Status:* OPEN (design question for playtesting)
 
@@ -316,18 +394,87 @@ research results, bluffing about capabilities).
 
 '''
 
+== Session 2: The Character Model (2026-07-16)
+
+=== DD-013: Information Model — Public Core, Hidden Aspects (Bayes–Nash)
+
+*Raised by:* Claude (structure), Jonathan (adopted; Joshua concurring)
+
+*Decision:* RESOLVED — the *Core is always public*; *aspects and the private
+objective are hidden*. This makes the game one of *incomplete information*.
+
+*Reasoning:*
+
+Once players hold hidden aspects and private payoffs, nobody knows anyone else's
+payoff function — only a distribution over the possibilities. That is precisely a
+*Bayesian game*, and its solution concept is the *Bayes–Nash equilibrium*
+(Harsanyi's generalisation of Nash to hidden "types"). The *reveal dial* — how
+much of your build you disclose, and when — is a *signalling game* (Spence):
+disclosure becomes a strategic, sometimes costly, move rather than bookkeeping.
+
+This matters because it makes the character system *load-bearing on the theme*
+rather than cosmetic. The game's central concept is upgraded from
+complete-information Nash to Bayes–Nash — a richer equilibrium space — and it
+does so through the *characters*, which is exactly where players' attention
+already is. The players need never hear the word "Bayesian"; they will simply
+find they are reading each other rather than reading a stat block.
+
+*Why the Core stays public:* fully hidden information stalls a kitchen-table
+game — analysis paralysis sets in, and table talk breaks down when nobody can
+read anybody. Public Cores keep the table legible ("everyone can see you're a
+techno-plutocrat") while the hidden layer preserves the Bayesian structure.
+Legibility on the outside, uncertainty underneath. The eXchange pillar (DD-011)
+depends on this: players must be able to read each other *enough to bargain at
+all*.
+
+*Alternatives considered:*
+
+* *Everything public* (the current design) — rejected: complete information, no
+  signalling, characters reduce to stat blocks.
+* *Everything hidden* — rejected: unreadable table, kills negotiation, breaks
+  DD-011.
+
+*Status:* RESOLVED (in principle). The exact reveal mechanism — voluntary,
+triggered, or costed — is Phase 1 / playtesting work.
+
+[NOTE]
+====
+*Game title deliberately parked.* The shift to Bayes–Nash raises an obvious
+question about the title. It is *explicitly out of scope for now* (Jonathan,
+2026-07-16): "The Nash Equilibrium" has the better ring, the audience is not
+mathematicians, and the name is — remarkably — unclaimed. DD-001 stands
+unchanged. Recorded here only so the reasoning chain survives and this is not
+re-litigated by accident.
+====
+
+*FAQ:*
+
+* _Q: If the equilibrium is really Bayes–Nash, is the game misnamed?_
+  A: No. A Bayes–Nash equilibrium *is* a Nash equilibrium — Nash's concept
+  extended to incomplete information, not a rival to it. The title remains
+  accurate. See the parking note above; this is not a live question.
+
+* _Q: Doesn't hidden information make the game feel unfair, like DD-007 warned?_
+  A: DD-007 rejected hidden *boundary levels* — the shared constraint must stay
+  visible, and it does. Hiding a player's own aspects is different: it is
+  symmetric (everyone has hidden aspects), it is about *players*, not the world,
+  and it is the source of the negotiation the game is built on.
+
+'''
+
 == Open Questions Tracker
 
 [cols="1,3,1"]
 |===
 | ID | Question | Status
 
-| DD-006 | Named characters vs. archetypes? | OPEN — Jonathan + Joshua to discuss
-| DD-008 | Complexity management approach? | OPEN — playtesting needed
+| DD-006 | Aspect pool + private-objective deck content | OPEN — Phase 1 drafting (framework RESOLVED 2026-07-16)
+| DD-008 | Complexity management approach? | OPEN — playtesting (character dial resolved by DD-006)
 | DD-009 | Game length (32 turns vs. shorter)? | OPEN — playtesting needed
 | DD-010 | Cascade threshold (8 correct?) | PROVISIONAL — playtesting needed
 | DD-011 | eXchange binding mechanics? | OPEN — core design needed
 | DD-012 | eXperiment randomness level? | OPEN — core design needed
+| DD-013 | Reveal mechanism (voluntary/triggered/costed?) | OPEN — Phase 1 (model RESOLVED 2026-07-16)
 |===
 
 == Decision Template
