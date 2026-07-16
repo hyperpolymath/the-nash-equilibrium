@@ -132,8 +132,11 @@ dust-no-ai-djot:
 dust-no-scm-files:
     ! find .machine_readable/ -name '*.scm' 2>/dev/null | head -1 | grep -q .
 
+# NOTE: `{{{{` is just's escape for a literal `{{`. Writing the pattern
+# unescaped makes just parse it as an interpolation and abort — which broke
+# *every* recipe in the repo, not merely this one.
 dust-no-placeholder-tokens:
-    ! grep -rl '{{[A-Z_]*}}' --include='*.a2ml' --include='*.adoc' --exclude-dir='.git' . 2>/dev/null | head -1 | grep -q .
+    ! grep -rl '{{{{[A-Z_]*}}' --include='*.a2ml' --include='*.adoc' --exclude-dir='.git' . 2>/dev/null | head -1 | grep -q .
 
 dust-no-tracked-artifacts:
     ! git ls-files lib/bs/ lib/ocaml/ target/release/ _build/ zig-cache/ zig-out/ 2>/dev/null | head -1 | grep -q .
