@@ -66,3 +66,11 @@ jobs:
           else
             echo "✅ Core documentation present"
           fi
+
+      # The check above tests that doc files *exist*; this tests they *parse*.
+      # Ruby ships preinstalled on ubuntu-latest, so no setup action is needed.
+      - name: Install asciidoctor
+        run: gem install asciidoctor --no-document
+
+      - name: Check every .adoc renders
+        run: ./scripts/check-docs-render.sh .

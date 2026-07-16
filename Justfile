@@ -187,7 +187,7 @@ test-all: test e2e aspect bench readiness
     @echo "All test categories passed — safe to merge!"
 
 # Run all quality checks
-quality: fmt-check lint test
+quality: fmt-check lint docs-check test
     @echo "All quality checks passed!"
 
 # Fix all auto-fixable issues [reversible: git checkout]
@@ -280,6 +280,23 @@ docs:
     just cookbook
     just man
     @echo "Documentation generated in docs/"
+
+# Check every .adoc actually renders (content-side counterpart to the .md ban)
+docs-check:
+    @./scripts/check-docs-render.sh .
+
+# Render the docs to HTML for local reading [reversible: rm -rf docs/generated/html]
+docs-html:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    if ! command -v asciidoctor >/dev/null 2>&1; then
+        echo "asciidoctor not found. Install with: gem install asciidoctor" >&2
+        exit 2
+    fi
+    mkdir -p docs/generated/html
+    find docs -name '*.adoc' -type f -print0 \
+        | xargs -0 asciidoctor -D docs/generated/html
+    echo "Rendered to docs/generated/html/"
 
 # Generate justfile cookbook documentation
 cookbook:
