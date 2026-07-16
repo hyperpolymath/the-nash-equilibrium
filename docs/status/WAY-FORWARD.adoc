@@ -48,25 +48,35 @@ perfecting the design in the abstract.
 
 == Phases
 
-=== Phase 0 — Reconcile & decide (needs owner)
+=== Phase 0 — Reconcile & decide — **DONE (2026-07-16)**
 
 Produce the canonical model by resolving the contradictions the corpus already contains,
 and surface the genuinely owner-gated calls as a short decision list. Draft prepared by
-agent; **rulings are yours**:
+agent; **rulings are yours**. Outcome of each:
 
 * **Stale turn-loop clash** — `core-mechanics.adoc` Phase 1 = passive "collect"; the
-  storyboard + foundations = active Leontief production. → adopt the production version,
-  retire the stale text.
+  storyboard + foundations = active Leontief production. → *Adopted:* production version;
+  stale text retired (`CANONICAL-MODEL.adoc` §Reconciliation log).
 * **Crisis-draw timing exploit** — sample boundary stress at *start-of-turn* vs
-  *start-of-Crisis-phase* (`gameplay-storyboard.adoc:200`). Recommend start-of-turn to
-  close the "recovery-spam to dodge crises" hole.
-* **Length/density — the #1 risk.** A single Industrial turn is estimated at 25–35 min ×
-  32 turns; the playtest target is 90–150 min. → make the **"Short Game" (2 eras / ~12
-  turns)** the *default* playable configuration; keep the 32-turn "Campaign" as advanced.
+  *start-of-Crisis-phase* (`gameplay-storyboard.adoc:200`). → *Adopted:* start-of-turn,
+  closing the "recovery-spam to dodge crises" hole.
+* **Length/density — the #1 risk.** → *Adopted:* not a single length at all, but a
+  three-preset **length dial** (`CANONICAL-MODEL.adoc` §"Length dial — presets"):
+  Short "Skirmish" (2 eras, *~5–6 turns*, 60–90 min) · Standard "Ascent" (3 eras, ~9–10
+  turns, 120–180 min) · Extended "Legacy" (4 eras, 32 turns, multi-session). Short is the
+  default playable configuration and the Phase 1 drafting target. DD-009 records this.
++
+NOTE: *The density half of this risk is not retired.* The 25–35 min figure
+(`gameplay-storyboard.adoc:463`) is a *full-weight Industrial* turn. Short assumes
+Core-only weight plus the leaner-turn levers cut that to 10–15 min/turn — a *~2–3×
+reduction that is assumed, not measured*. Timing a Core-weight turn is the first job of
+the first playtest.
 * **Open design decisions to rule on:** DD-006 (named living figures vs archetypes —
-  *legal risk*, esp. Musk), DD-008 (target complexity), DD-009 (game length), DD-010
-  (cascade threshold = 8, provisional), DD-011 (eXchange binding rules), DD-012
-  (eXperiment randomness model).
+  *legal risk*, esp. Musk) → *RESOLVED* via character builder + DD-013 Bayes–Nash model.
+  DD-009 (game length) → *RESOLVED* by the length dial above. Still open: DD-008 (target
+  complexity, partially dialled by DD-006), DD-010 (cascade threshold = 8, provisional),
+  DD-011 (eXchange binding rules), DD-012 (eXperiment randomness model), DD-013 (reveal
+  mechanism), DD-014 (information budget — *proposed, ruling pending*).
 
 === Phase 1 — Content to playable (Opus manages friends)
 
