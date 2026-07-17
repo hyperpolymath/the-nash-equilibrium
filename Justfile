@@ -281,9 +281,19 @@ docs:
     just man
     @echo "Documentation generated in docs/"
 
-# Check every .adoc actually renders (content-side counterpart to the .md ban)
-docs-check:
+# Check the docs three ways: named .adoc, parses, and is actually AsciiDoc.
+# The three are independent — eight files once passed the first two while their
+# bodies were still Markdown (SPDX headers rendering as visible text, tables
+# rendering as garbage). See scripts/check-adoc-not-markdown.sh.
+docs-check: docs-check-render docs-check-dialect
+
+# Every .adoc must parse (content-side counterpart to the .md extension ban)
+docs-check-render:
     @./scripts/check-docs-render.sh .
+
+# Every .adoc must be AsciiDoc, not Markdown wearing an .adoc extension
+docs-check-dialect:
+    @./scripts/check-adoc-not-markdown.sh .
 
 # Render the docs to HTML for local reading [reversible: rm -rf docs/generated/html]
 docs-html:

@@ -1,15 +1,11 @@
-= Project State Visualizer
-[source]
+// SPDX-License-Identifier: CC-BY-SA-4.0
+// TOPOLOGY.md — Project architecture map and completion dashboard
+// Last updated: 2026-02-28
+= RSR Template Repo — Project Topology
+
+== System Architecture
+
 ----
-<!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
-<!-- TOPOLOGY.md — Project architecture map and completion dashboard -->
-<!-- Last updated: 2026-02-28 -->
-
-# RSR Template Repo — Project Topology
-
-## System Architecture
-
-```
                         ┌─────────────────────────────────────────┐
                         │              NEW REPOSITORY             │
                         │        (Consumer of this Template)      │
@@ -56,11 +52,11 @@
                         │  Justfile / Mustfile  .machine_readable/  │
                         │  Codeowners / Reuse   0-AI-MANIFEST.a2ml  │
                         └─────────────────────────────────────────┘
-```
+----
 
-## Completion Dashboard
+== Completion Dashboard
 
-```
+----
 COMPONENT                          STATUS              NOTES
 ─────────────────────────────────  ──────────────────  ─────────────────────────────────
 CORE STANDARDS
@@ -92,11 +88,11 @@ REPO INFRASTRUCTURE
 
 ─────────────────────────────────────────────────────────────────────────────
 OVERALL:                            ██████████ 100%    RSR Template Stable & Certified
-```
+----
 
-## Key Dependencies
+== Key Dependencies
 
-```
+----
 Philosophy ──────► RSR Standard ──────► Template Scaffolding ──► New Repo
      │                 │                      │                    │
      ▼                 ▼                      ▼                    ▼
@@ -112,9 +108,9 @@ CCCP Policy ─────► 0-AI-MANIFEST ────────► Justfil
                                               │
                                               ▼
                                          k9-svc deploy
-```
+----
 
-## Update Protocol
+== Update Protocol
 
 This file is maintained by both humans and AI agents. When updating:
 
@@ -125,4 +121,3 @@ This file is maintained by both humans and AI agents. When updating:
 
 Progress bars use: `█` (filled) and `░` (empty), 10 characters wide.
 Percentages: 0%, 10%, 20%, ... 100% (in 10% increments).
-----
