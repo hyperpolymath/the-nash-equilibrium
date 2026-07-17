@@ -24,19 +24,14 @@ set -euo pipefail
 
 REPO_ROOT="${1:-.}"
 
-# Quarantined: half-converted Markdown carrying an .adoc extension (a `= Title`
-# line bolted onto a Markdown body — `#` headings, <!-- --> comments, | tables).
-# These satisfy check-no-md-in-docs.sh by extension while still being Markdown.
-# All are RSR boilerplate, not game design. Fix by converting the body properly,
-# then delete the entry. Do not add game-design docs to this list.
-ALLOWED=(
-    "docs/architecture/THREAT-MODEL.adoc"
-    "docs/decisions/0000-template.adoc"
-    "docs/decisions/0001-adopt-rsr-standard.adoc"
-    "docs/developer/ABI-FFI-README.adoc"
-    "docs/practice/AI-CONVENTIONS.adoc"
-    "docs/STATE-VISUALIZER.adoc"
-)
+# Quarantine for files that cannot yet be made to render. It is empty, and an
+# empty list is the goal — do not add a file here to turn a red build green.
+#
+# It previously held six half-converted files (a `= Title` bolted onto a
+# Markdown body). All six were converted to real AsciiDoc and removed from this
+# list; the dialect that put them here is now blocked at source by
+# check-adoc-not-markdown.sh.
+ALLOWED=()
 
 if ! command -v asciidoctor >/dev/null 2>&1; then
     echo "FAIL: asciidoctor not found. Install with: gem install asciidoctor" >&2
@@ -64,7 +59,10 @@ for f in "${FILES[@]}"; do
     rel="${rel#./}"
 
     skip=0
-    for allowed in "${ALLOWED[@]}"; do
+    # ${a[@]+"${a[@]}"} — expanding an empty array under `set -u` is an error
+    # on bash < 4.4 (still shipped by macOS). ALLOWED is empty and should stay
+    # that way, so this guard is load-bearing.
+    for allowed in ${ALLOWED[@]+"${ALLOWED[@]}"}; do
         if [ "$rel" = "$allowed" ]; then skip=1; break; fi
     done
     if [ $skip -eq 1 ]; then
