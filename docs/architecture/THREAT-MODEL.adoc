@@ -1,22 +1,23 @@
-= Threat Model
-<!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
-<!-- Copyright (c) 2026 Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk> -->
+// SPDX-License-Identifier: CC-BY-SA-4.0
+// Copyright (c) 2026 Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk>
+= Threat Model: The Nash Equilibrium
 
-# Threat Model: The Nash Equilibrium
+== Document Info
 
-## Document Info
+[cols="1,1",options="header"]
+|===
+| Field | Value
 
-| Field         | Value                          |
-|---------------|--------------------------------|
-| Project       | The Nash Equilibrium               |
-| Version       | 1.0                            |
-| Last Reviewed | 2026-04-04                       |
-| Author        | Jonathan D.A. Jewell                     |
-| Methodology   | STRIDE                         |
+| Project | The Nash Equilibrium
+| Version | 1.0
+| Last Reviewed | 2026-04-04
+| Author | Jonathan D.A. Jewell
+| Methodology | STRIDE
+|===
 
-## Scope
+== Scope
 
-### In Scope
+=== In Scope
 
 - Application source code and build pipeline
 - CI/CD workflows (GitHub Actions)
@@ -25,108 +26,135 @@
 - Dependencies (direct and transitive)
 - Deployment artifacts (binaries, containers, SBOM)
 
-### Out of Scope
+=== Out of Scope
 
 - Physical security of hosting infrastructure
 - GitHub/GitLab platform-level vulnerabilities
 - End-user device security
 - Social engineering attacks against maintainers (handled by org policy)
 
-## System Overview
+== System Overview
 
 Brief description of The Nash Equilibrium and its architecture.
 
-> See [STATE-VISUALIZER.adoc](../STATE-VISUALIZER.adoc) for the full architecture diagram and completion dashboard.
+> See xref:../STATE-VISUALIZER.adoc[STATE-VISUALIZER.adoc] for the full architecture diagram and completion dashboard.
 
-## Assets
+== Assets
 
-| Asset                | Classification | Owner       | Notes                                      |
-|----------------------|----------------|-------------|--------------------------------------------|
-| Source code           | Internal       | Maintainers | Public repos are still internal-integrity  |
-| Signing keys          | Restricted     | Release lead | Signing keys (e.g., Ed25519), GPG keys     |
-| CI/CD secrets         | Restricted     | Maintainers | GITHUB_TOKEN, deploy tokens, PATs          |
-| User/contributor data | Confidential   | Org          | Emails, contributor identity                |
-| Build artifacts       | Internal       | CI pipeline  | Binaries, WASM bundles                     |
-| Container images      | Internal       | CI pipeline  | Chainguard-based, signed via image signing tool |
-| SBOM / provenance     | Public         | CI pipeline  | SLSA attestations                          |
-| Dependencies          | Public         | Lockfile     | Cargo.lock, deno.lock, gleam.toml          |
-| Infrastructure config | Confidential   | Maintainers | Containerfiles, compose files, orchestration config |
+[cols="1,1,1,1",options="header"]
+|===
+| Asset | Classification | Owner | Notes
 
-## Trust Boundaries
+| Source code | Internal | Maintainers | Public repos are still internal-integrity
+| Signing keys | Restricted | Release lead | Signing keys (e.g., Ed25519), GPG keys
+| CI/CD secrets | Restricted | Maintainers | GITHUB_TOKEN, deploy tokens, PATs
+| User/contributor data | Confidential | Org | Emails, contributor identity
+| Build artifacts | Internal | CI pipeline | Binaries, WASM bundles
+| Container images | Internal | CI pipeline | Chainguard-based, signed via image signing tool
+| SBOM / provenance | Public | CI pipeline | SLSA attestations
+| Dependencies | Public | Lockfile | Cargo.lock, deno.lock, gleam.toml
+| Infrastructure config | Confidential | Maintainers | Containerfiles, compose files, orchestration config
+|===
 
-| Boundary                    | From (Lower Trust)        | To (Higher Trust)          |
-|-----------------------------|---------------------------|----------------------------|
-| Pull request submission      | External contributor       | Repository codebase        |
-| CI/CD workflow execution     | Workflow definition        | Runner with secrets access |
-| Container build boundary     | Build stage                | Runtime stage              |
-| External API calls           | Third-party service        | Application internals      |
-| User input (CLI/Web)         | End user                   | Application logic          |
-| Dependency resolution        | Package registry           | Build environment          |
-| Forge mirroring              | GitHub                     | GitLab / Bitbucket         |
+== Trust Boundaries
 
-## Threat Actors
+[cols="1,1,1",options="header"]
+|===
+| Boundary | From (Lower Trust) | To (Higher Trust)
 
-| Actor                    | Motivation                    | Capability |
-|--------------------------|-------------------------------|------------|
-| Script kiddie            | Vandalism, clout              | Low        |
-| Disgruntled contributor  | Sabotage, backdoor insertion  | Medium     |
-| Supply chain attacker    | Wide-impact compromise        | High       |
-| Nation state             | Espionage, disruption         | Very High  |
-| Automated bot            | Credential stuffing, spam PRs | Low-Medium |
+| Pull request submission | External contributor | Repository codebase
+| CI/CD workflow execution | Workflow definition | Runner with secrets access
+| Container build boundary | Build stage | Runtime stage
+| External API calls | Third-party service | Application internals
+| User input (CLI/Web) | End user | Application logic
+| Dependency resolution | Package registry | Build environment
+| Forge mirroring | GitHub | GitLab / Bitbucket
+|===
 
-## STRIDE Analysis
+== Threat Actors
 
-### Spoofing
+[cols="1,1,1",options="header"]
+|===
+| Actor | Motivation | Capability
 
-| Threat                          | Affected Asset    | Likelihood | Impact | Risk   | Mitigation                                    |
-|---------------------------------|-------------------|------------|--------|--------|------------------------------------------------|
-| Unsigned commits impersonate maintainer | Source code  | Medium     | High   | High   | Require GPG-signed commits; vigilant code review |
-| Forged bot actions (automated agents) | CI/CD pipeline  | Low        | High   | Medium | Bot tokens scoped minimally; audit bot activity |
-| Spoofed package registry identity | Dependencies    | Low        | High   | Medium | Pin dependencies by hash; verify provenance    |
+| Script kiddie | Vandalism, clout | Low
+| Disgruntled contributor | Sabotage, backdoor insertion | Medium
+| Supply chain attacker | Wide-impact compromise | High
+| Nation state | Espionage, disruption | Very High
+| Automated bot | Credential stuffing, spam PRs | Low-Medium
+|===
 
-### Tampering
+== STRIDE Analysis
 
-| Threat                          | Affected Asset    | Likelihood | Impact | Risk   | Mitigation                                    |
-|---------------------------------|-------------------|------------|--------|--------|------------------------------------------------|
-| Malicious pull request          | Source code        | Medium     | High   | High   | Branch protection; required reviews; CodeQL    |
-| Dependency poisoning (typosquat) | Dependencies     | Medium     | High   | High   | Lockfiles; secret-scanner; security scans      |
-| Tampered container base image   | Container images   | Low        | High   | Medium | Chainguard images; image signing verification  |
-| Workflow file modification      | CI/CD pipeline     | Low        | High   | Medium | CODEOWNERS on .github/; workflow-linter        |
+=== Spoofing
 
-### Repudiation
+[cols="1,1,1,1,1,1",options="header"]
+|===
+| Threat | Affected Asset | Likelihood | Impact | Risk | Mitigation
 
-| Threat                          | Affected Asset    | Likelihood | Impact | Risk   | Mitigation                                    |
-|---------------------------------|-------------------|------------|--------|--------|------------------------------------------------|
-| Unlogged deployment             | Build artifacts    | Medium     | Medium | Medium | SLSA provenance; deployment audit trail        |
-| Denied merge of vulnerable code | Source code        | Low        | Medium | Low    | Git history is immutable; signed commits       |
-| Secret rotation without record  | CI/CD secrets      | Low        | Low    | Low    | Secret rotation logged in STATE.a2ml           |
+| Unsigned commits impersonate maintainer | Source code | Medium | High | High | Require GPG-signed commits; vigilant code review
+| Forged bot actions (automated agents) | CI/CD pipeline | Low | High | Medium | Bot tokens scoped minimally; audit bot activity
+| Spoofed package registry identity | Dependencies | Low | High | Medium | Pin dependencies by hash; verify provenance
+|===
 
-### Information Disclosure
+=== Tampering
 
-| Threat                          | Affected Asset    | Likelihood | Impact | Risk   | Mitigation                                    |
-|---------------------------------|-------------------|------------|--------|--------|------------------------------------------------|
-| Secrets leaked in git history   | CI/CD secrets      | Medium     | High   | High   | TruffleHog in CI; secret-scanner workflow      |
-| Verbose error messages in prod  | Application logic  | Medium     | Medium | Medium | Sanitize outputs; structured logging           |
-| SBOM reveals internal structure | Infrastructure     | Low        | Low    | Low    | Accepted risk; SBOM is intentionally public    |
+[cols="1,1,1,1,1,1",options="header"]
+|===
+| Threat | Affected Asset | Likelihood | Impact | Risk | Mitigation
 
-### Denial of Service
+| Malicious pull request | Source code | Medium | High | High | Branch protection; required reviews; CodeQL
+| Dependency poisoning (typosquat) | Dependencies | Medium | High | High | Lockfiles; secret-scanner; security scans
+| Tampered container base image | Container images | Low | High | Medium | Chainguard images; image signing verification
+| Workflow file modification | CI/CD pipeline | Low | High | Medium | CODEOWNERS on .github/; workflow-linter
+|===
 
-| Threat                          | Affected Asset    | Likelihood | Impact | Risk   | Mitigation                                    |
-|---------------------------------|-------------------|------------|--------|--------|------------------------------------------------|
-| CI resource exhaustion (fork bomb in PR) | CI/CD pipeline | Medium | Medium | Medium | Concurrency limits; timeout on workflows       |
-| Spam issues/PRs flooding triage | Maintainer time    | Medium     | Low    | Low    | GitHub rate limits; bot auto-close stale        |
-| Large binary commits bloating repo | Source code      | Low        | Medium | Low    | .gitattributes LFS policy; pre-commit hooks    |
+=== Repudiation
 
-### Elevation of Privilege
+[cols="1,1,1,1,1,1",options="header"]
+|===
+| Threat | Affected Asset | Likelihood | Impact | Risk | Mitigation
 
-| Threat                          | Affected Asset    | Likelihood | Impact | Risk   | Mitigation                                    |
-|---------------------------------|-------------------|------------|--------|--------|------------------------------------------------|
-| Workflow injection via PR title/body | CI/CD pipeline | Medium   | High   | High   | Never interpolate PR fields in `run:`; use env vars |
-| GITHUB_TOKEN over-scoped         | CI/CD secrets     | Medium     | High   | High   | `permissions: read-all` default; per-job scoping |
-| Container escape                 | Runtime environment | Low      | High   | Medium | Hardened container runtime; read-only rootfs; no-new-privileges |
-| Compromised action dependency    | CI/CD pipeline     | Medium     | High   | High   | SHA-pin all actions; never use `@latest` tags  |
+| Unlogged deployment | Build artifacts | Medium | Medium | Medium | SLSA provenance; deployment audit trail
+| Denied merge of vulnerable code | Source code | Low | Medium | Low | Git history is immutable; signed commits
+| Secret rotation without record | CI/CD secrets | Low | Low | Low | Secret rotation logged in STATE.a2ml
+|===
 
-## Mitigations in Place
+=== Information Disclosure
+
+[cols="1,1,1,1,1,1",options="header"]
+|===
+| Threat | Affected Asset | Likelihood | Impact | Risk | Mitigation
+
+| Secrets leaked in git history | CI/CD secrets | Medium | High | High | TruffleHog in CI; secret-scanner workflow
+| Verbose error messages in prod | Application logic | Medium | Medium | Medium | Sanitize outputs; structured logging
+| SBOM reveals internal structure | Infrastructure | Low | Low | Low | Accepted risk; SBOM is intentionally public
+|===
+
+=== Denial of Service
+
+[cols="1,1,1,1,1,1",options="header"]
+|===
+| Threat | Affected Asset | Likelihood | Impact | Risk | Mitigation
+
+| CI resource exhaustion (fork bomb in PR) | CI/CD pipeline | Medium | Medium | Medium | Concurrency limits; timeout on workflows
+| Spam issues/PRs flooding triage | Maintainer time | Medium | Low | Low | GitHub rate limits; bot auto-close stale
+| Large binary commits bloating repo | Source code | Low | Medium | Low | .gitattributes LFS policy; pre-commit hooks
+|===
+
+=== Elevation of Privilege
+
+[cols="1,1,1,1,1,1",options="header"]
+|===
+| Threat | Affected Asset | Likelihood | Impact | Risk | Mitigation
+
+| Workflow injection via PR title/body | CI/CD pipeline | Medium | High | High | Never interpolate PR fields in `run:`; use env vars
+| GITHUB_TOKEN over-scoped | CI/CD secrets | Medium | High | High | `permissions: read-all` default; per-job scoping
+| Container escape | Runtime environment | Low | High | Medium | Hardened container runtime; read-only rootfs; no-new-privileges
+| Compromised action dependency | CI/CD pipeline | Medium | High | High | SHA-pin all actions; never use `@latest` tags
+|===
+
+== Mitigations in Place
 
 - **SLSA Provenance**: Build attestations via slsa-github-generator
 - **Secret Scanning**: TruffleHog + secret-scanner workflow on every push
@@ -141,16 +169,19 @@ Brief description of The Nash Equilibrium and its architecture.
 - **Edge Security**: Gateway with policy enforcement (optional, where applicable)
 - **SBOM**: Generated and published with releases
 
-## Residual Risks
+== Residual Risks
 
-| Risk                                          | Accepted Because                                  | Review Trigger          |
-|-----------------------------------------------|---------------------------------------------------|-------------------------|
-| Zero-day in GitHub Actions runner              | Platform responsibility; no feasible mitigation    | GitHub advisory          |
-| Maintainer account compromise                  | Mitigated by 2FA requirement; residual remains     | Any suspicious activity  |
-| Transitive dependency vulnerability (0-day)    | Lockfiles limit blast radius; scanning catches known CVEs | CVE database update |
-| SBOM exposes internal component names          | Transparency is a design goal                      | Policy change            |
+[cols="1,1,1",options="header"]
+|===
+| Risk | Accepted Because | Review Trigger
 
-## Review Schedule
+| Zero-day in GitHub Actions runner | Platform responsibility; no feasible mitigation | GitHub advisory
+| Maintainer account compromise | Mitigated by 2FA requirement; residual remains | Any suspicious activity
+| Transitive dependency vulnerability (0-day) | Lockfiles limit blast radius; scanning catches known CVEs | CVE database update
+| SBOM exposes internal component names | Transparency is a design goal | Policy change
+|===
+
+== Review Schedule
 
 This threat model should be reviewed:
 
