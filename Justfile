@@ -187,7 +187,7 @@ test-all: test e2e aspect bench readiness
     @echo "All test categories passed — safe to merge!"
 
 # Run all quality checks
-quality: fmt-check lint test
+quality: fmt-check lint docs-check test
     @echo "All quality checks passed!"
 
 # Fix all auto-fixable issues [reversible: git checkout]
@@ -280,6 +280,33 @@ docs:
     just cookbook
     just man
     @echo "Documentation generated in docs/"
+
+# Check the docs three ways: named .adoc, parses, and is actually AsciiDoc.
+# The three are independent — eight files once passed the first two while their
+# bodies were still Markdown (SPDX headers rendering as visible text, tables
+# rendering as garbage). See scripts/check-adoc-not-markdown.sh.
+docs-check: docs-check-render docs-check-dialect
+
+# Every .adoc must parse (content-side counterpart to the .md extension ban)
+docs-check-render:
+    @./scripts/check-docs-render.sh .
+
+# Every .adoc must be AsciiDoc, not Markdown wearing an .adoc extension
+docs-check-dialect:
+    @./scripts/check-adoc-not-markdown.sh .
+
+# Render the docs to HTML for local reading [reversible: rm -rf docs/generated/html]
+docs-html:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    if ! command -v asciidoctor >/dev/null 2>&1; then
+        echo "asciidoctor not found. Install with: gem install asciidoctor" >&2
+        exit 2
+    fi
+    mkdir -p docs/generated/html
+    find docs -name '*.adoc' -type f -print0 \
+        | xargs -0 asciidoctor -D docs/generated/html
+    echo "Rendered to docs/generated/html/"
 
 # Generate justfile cookbook documentation
 cookbook:

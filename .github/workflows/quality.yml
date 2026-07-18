@@ -66,3 +66,17 @@ jobs:
           else
             echo "✅ Core documentation present"
           fi
+
+      # The check above tests that doc files *exist*; this tests they *parse*.
+      # Ruby ships preinstalled on ubuntu-latest, so no setup action is needed.
+      - name: Install asciidoctor
+        run: gem install asciidoctor --no-document
+
+      - name: Check every .adoc renders
+        run: ./scripts/check-docs-render.sh .
+
+      # ...and that it renders *because it is AsciiDoc*, not because
+      # Asciidoctor's Markdown-compat mode quietly accepted a Markdown body.
+      # Needs no asciidoctor — it is a pure syntax scan.
+      - name: Check every .adoc is AsciiDoc, not Markdown
+        run: ./scripts/check-adoc-not-markdown.sh .

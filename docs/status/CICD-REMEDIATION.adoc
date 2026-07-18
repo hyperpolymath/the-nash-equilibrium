@@ -1,0 +1,162 @@
+// SPDX-License-Identifier: CC-BY-SA-4.0
+// Copyright (c) 2026 Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk>
+= CI/CD Remediation Plan — The Nash Equilibrium
+:toc: preamble
+
+_Working backlog for the foundational CI/CD cleanup started 2026-07-17. Findings
+are empirical — every "real-check" result below came from actually running the
+tool (idris2 0.7.0, zig 0.16.0, the Justfile recipes), not from reading status
+files. Governing principle: a check that cannot fail — or that is never run — is
+worse than no check, because it manufactures confidence._
+
+== The two structural facts that frame everything
+
+. *`main` has no required status checks.* `branches/main/protection` returns
+  `404 Branch not protected`; the ruleset enforces only signatures, linear
+  history, and deletion. Every one of the 26 workflows is *advisory* — including
+  ones whose headers claim "Required by branch protection." Nothing red has ever
+  blocked a merge. *(NEEDS-ADMIN: a `required_status_checks` rule is the keystone.)*
+. *CI reimplements checks as inline shell inside workflow YAML, disconnected from
+  the repo's real verification apparatus* (the `must-*`/`trust-*`/`bust-*`/`dust-*`
+  Justfile contractiles). That disconnection is the root of both the rule
+  _divergence_ (two contradictory Python policies) and the _triple-duplication_
+  (Hypatia runs up to 3× per push). The foundational fix is to wire CI to the
+  Justfile and single-source the checks — not to patch each YAML.
+
+== Hidden defects the vacuous CI was masking (real-check run, 2026-07-17)
+
+These are genuine failures found by running the real toolchains. None is visible
+in CI today because the checks that would catch them are either vacuous or unwired.
+
+[cols="1,3,1", options="header"]
+|===
+| Area | Defect (verbatim where useful) | Bucket
+
+| Idris2 ABI
+| `Types.idr` / `Foreign.idr` / `Layout.idr` all fail `idris2 --check` with
+  `Expected a capitalised identifier, got: the` — the `module the-nash-equilibrium.ABI.*`
+  declaration has hyphens + a lowercase-leading segment (invalid namespace). *Never
+  compiled.* `Layout.idr` also has 3 unfilled proof holes. Root cause: `{{PROJECT_NAME}}`
+  substituted literally into identifier position.
+| PUSHABLE-NOW (rename namespace) + follow-up (fill proofs)
+
+| Zig FFI
+| `src/interface/ffi/src/main.zig` fails `zig test`: `expected '(', found '-'` on
+  `export fn the-nash-equilibrium_init()` — same hyphen-in-identifier root cause.
+  `zig build test` also fails: `no step named 'test'` (build.zig wires no test step).
+  `.tool-versions` pins zig 0.14.0; local is 0.16.0.
+| PUSHABLE-NOW (rename + wire test step)
+
+| Licensing
+| *Stated license contradicts shipped license.* README + `0-AI-MANIFEST.a2ml` say
+  AGPL-3.0-or-later (matches DD-003, RESOLVED). But `LICENSE`, all 85 `src/` +
+  `.machine_readable/` SPDX headers, and `LICENSES/` are uniformly MPL-2.0, with
+  *zero* AGPL text anywhere. `trust-verify` is additionally unwinnable: one sub-check
+  greps `LICENSE` for `AGPL`, another for an `MPL-2.0` SPDX line — mutually exclusive.
+| NEEDS-DECISION (owner: which licence is correct?)
+
+| `.machine_readable/` path drift
+| `openssf-compliance.yml` (CI-wired) and `just verify` / `validate-rsr` check for
+  `.machine_readable/{STATE,META,ECOSYSTEM}.a2ml` at the *root*; the real files live
+  at `.machine_readable/6a2/`. The `6a2/` layout is deliberate (all six A2ML files
+  there). So fix the checks' paths, do not move the files.
+| NEEDS-WORKFLOW-SCOPE (openssf) + PUSHABLE-NOW (Justfile)
+
+| Template residue
+| Real `{{PLACEHOLDER}}` tokens remain in 6 files (`container/README.adoc`,
+  `.machine_readable/ai/PLACEHOLDERS.adoc`, and 4 more). `Justfile` still self-names
+  `rsr-template-repo`; `just doctor` / `crg-grade` reference it too. `verify-template`
+  fails for real.
+| PUSHABLE-NOW (many need owner values first)
+
+| Missing deliverables
+| `docs/AI_INSTALLATION_GUIDE.adoc` absent + no README "AI-Assisted Installation"
+  section (`validate-ai-install` fails). `READINESS.md` checked at root; real file is
+  `docs/status/READINESS.adoc` (self-graded *D*).
+| PUSHABLE-NOW
+
+| Broken utilities
+| `crg-grade` / `crg-badge` crash (`syntax error near unexpected token '('`) — recipes
+  use the Make-ism `$$(...)`; `just` passes `$` through, so bash sees `$$(...)`.
+| PUSHABLE-NOW
+|===
+
+== The Justfile is mostly theatre
+
+`build`, `build-release`, `test`, `test-verbose`, `test-smoke`, `e2e`, `aspect`,
+`bench`, `readiness`, `fmt`, `fmt-check`, `lint`, `deps`, `run`, `install` are all
+`# TODO`-stub recipes that echo a canned "passed!" and exit 0. The umbrellas built on
+them lie accordingly: `just quality` ("All quality checks passed!") runs only one real
+check (`docs-check`); `just ci` ("CI pipeline complete!") is almost entirely inert.
+Tool-absence is masked as success: `assail` (panic-attack), `sbom` (syft), `deps-audit`
+(trivy, and a `gitleaks --quiet` call that errors under `|| true`) all exit 0 having
+done nothing.
+
+*What is genuinely real and passing* (so we do not regress it): the two docs scripts
+(`check-docs-render.sh`, `check-adoc-not-markdown.sh` — 131 files, and the only real
+apparatus CI actually calls), and the bulk of `must-*`/`trust-*`/`bust-*`/`dust-*`
+file/grep contractiles.
+
+== Currently-failing CI checks on `main`
+
+[cols="1,2,1", options="header"]
+|===
+| Check | Cause | Status
+
+| RSR Anti-Pattern + Governance/language-policy | `src/core/main.py` (banned Python) | *FIXED* — PR #73 (verified green)
+| Code Quality / docs | `gem install asciidoctor` FilePermissionError (needs `sudo`); gate was *skipped, not run* | Fix staged (commit on `fix/docs-gate-gem-install`), blocked on `workflow` scope
+| OpenSSF Compliance | STATE.a2ml path bug (root vs `6a2/`) | NEEDS-WORKFLOW-SCOPE
+| Estate Rules | `root-allow.txt` drift (8 entries) | NEEDS-DECISION (relocate vs allowlist)
+| Secret Scanner | `startup_failure` every run — caller grants too few permissions for the reusable's gitleaks job | NEEDS-WORKFLOW-SCOPE
+| Instant Sync | Bad credentials to `.git-private-farm` (every run since 2026-07-09) | NEEDS-UPSTREAM (admin secret rotation)
+| `e2e.yml`, `dogfood-gate.yml` | YAML-invalid, red every run for 3+ months | NEEDS-WORKFLOW-SCOPE (fix or delete)
+| `ts-blocker`, `guix-nix-policy` | `HEAD~1` diff defeated by shallow checkout — structurally catch nothing | NEEDS-WORKFLOW-SCOPE
+|===
+
+== Remediation buckets
+
+*PUSHABLE-NOW* (non-workflow files; no scope needed)::
+Rename the Idris2/Zig namespaces off the hyphenated `{{PROJECT_NAME}}`; wire the Zig
+test step; fix `validate-state`/`validate-rsr`/`verify` paths to `6a2/`; fix
+`crg-grade`/`crg-badge` `$$` bug; fill placeholder tokens (where owner values are
+known); create `docs/AI_INSTALLATION_GUIDE.adoc`; de-`rsr-template-repo` the Justfile.
+
+*NEEDS-WORKFLOW-SCOPE* (`.github/workflows/*`; token lacks the `workflow` OAuth scope)::
+Push the staged docs-gate `sudo` fix; fix openssf STATE path; add secret-scanner
+permissions; fix or delete `e2e.yml`/`dogfood-gate.yml`; add `fetch-depth` to the
+`HEAD~1` workflows; give warn-only gates (`guix-nix-policy`, `security-policy`, docs
+"Check documentation") real `exit 1` paths; reconcile the two Python policies; wire CI
+to call `just must-check`/`trust-verify`/etc.; consolidate the triple-run duplicates.
+Unblock: `gh auth refresh -h github.com -s workflow`.
+
+*NEEDS-DECISION* (owner)::
+* *Licence:* AGPL-3.0 (per DD-003 + README) or MPL-2.0 (per the actual files)? This
+  contradiction blocks any honest licence check.
+* *root-allow.txt:* relocate `CONTRIBUTING.md`/`SECURITY.md` to `.github/`? homes for
+  `mvt/`, `INSTALL-SECURITY-REPORT.adoc`, `.claude/`? (`.codex` looks like deletable stray.)
+* Placeholder token *values*.
+
+*NEEDS-ADMIN / ruleset*::
+Add a `required_status_checks` rule so any of the above actually gates a merge.
+
+*NEEDS-UPSTREAM — stop-and-chat (per the CI/CD doctrine)*::
+Fixes that live in *other* repos and must not be started unilaterally:
+`hyperpolymath/standards` (the reusable secret-scanner + governance checks this repo
+calls); `rsr-template-repo` (shared root of the false-green proof gates + the
+hyphenated-name and placeholder residue — re-seeds 54 repos); `hyperpolymath/panic-attack`
+(its "required" gate depends on a release binary never published); `.git-private-farm`
+credentials (admin-only, genuinely unreachable).
+
+== Tooling gaps (not fixes — builds)
+
+No real *A2ML validator* exists anywhere in the estate yet ("runners not built"), so
+`validate-state` cannot be made genuinely honest without first building one. `lean`,
+`coq`, `syft`, `trivy`, `panic-attack` are absent locally; the doctrine says install
+and run rather than skip.
+
+== Work banked so far
+
+* PR #73 — retire `src/core/main.py` (greens 2 checks, verified). *Live.*
+* `fix/docs-gate-gem-install` — `sudo gem install` docs-gate fix. *Committed, unpushed
+  (workflow scope).*
+* `cicd-quality-doctrine` recorded in agent memory.
