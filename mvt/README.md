@@ -12,8 +12,8 @@ This directory is intentionally self-contained and dependency-free. The active r
 
 ```sh
 cd mvt
-bun test
-bun run serve
+deno task test
+deno task serve
 ```
 
 Then open `http://localhost:5173/`.
