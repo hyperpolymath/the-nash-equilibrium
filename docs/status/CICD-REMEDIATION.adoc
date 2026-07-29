@@ -110,7 +110,6 @@ file/grep contractiles.
 | Secret Scanner | `startup_failure` every run — caller grants too few permissions for the reusable's gitleaks job | NEEDS-WORKFLOW-SCOPE
 | Instant Sync | Bad credentials to `.git-private-farm` (every run since 2026-07-09) | NEEDS-UPSTREAM (admin secret rotation)
 | `e2e.yml`, `dogfood-gate.yml` | YAML-invalid, red every run for 3+ months | NEEDS-WORKFLOW-SCOPE (fix or delete)
-| `ts-blocker`, `guix-nix-policy` | `HEAD~1` diff defeated by shallow checkout — structurally catch nothing | NEEDS-WORKFLOW-SCOPE
 |===
 
 == Remediation buckets
