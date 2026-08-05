@@ -36,7 +36,7 @@ in CI today because the checks that would catch them are either vacuous or unwir
 | `Types.idr` / `Foreign.idr` / `Layout.idr` all fail `idris2 --check` with
   `Expected a capitalised identifier, got: the` — the `module the-nash-equilibrium.ABI.*`
   declaration has hyphens + a lowercase-leading segment (invalid namespace). *Never
-  compiled.* `Layout.idr` also has 3 unfilled proof holes. Root cause: `{{PROJECT_NAME}}`
+  compiled.* `Layout.idr` also has 3 unfilled proof holes. Root cause: `The Nash Equilibrium (Econosphere)`
   substituted literally into identifier position.
 | PUSHABLE-NOW (rename namespace) + follow-up (fill proofs)
 
@@ -115,7 +115,7 @@ file/grep contractiles.
 == Remediation buckets
 
 *PUSHABLE-NOW* (non-workflow files; no scope needed)::
-Rename the Idris2/Zig namespaces off the hyphenated `{{PROJECT_NAME}}`; wire the Zig
+Rename the Idris2/Zig namespaces off the hyphenated `The Nash Equilibrium (Econosphere)`; wire the Zig
 test step; fix `validate-state`/`validate-rsr`/`verify` paths to `6a2/`; fix
 `crg-grade`/`crg-badge` `$$` bug; fill placeholder tokens (where owner values are
 known); create `docs/AI_INSTALLATION_GUIDE.adoc`; de-`rsr-template-repo` the Justfile.
