@@ -364,7 +364,7 @@ container-init:
 
     if [ ! -d "container" ]; then
         echo "Error: container/ directory not found."
-        echo "This repo may not have been created from rsr-template-repo."
+        echo "This repo may not have been created from the-nash-equilibrium."
         exit 1
     fi
 
@@ -684,7 +684,7 @@ assail:
 
 # Self-diagnostic — checks dependencies, permissions, paths
 doctor:
-    @echo "Running diagnostics for rsr-template-repo..."
+    @echo "Running diagnostics for the-nash-equilibrium..."
     @echo "Checking required tools..."
     @command -v just >/dev/null 2>&1 && echo "  [OK] just" || echo "  [FAIL] just not found"
     @command -v git >/dev/null 2>&1 && echo "  [OK] git" || echo "  [FAIL] git not found"
@@ -694,7 +694,7 @@ doctor:
 
 # Guided tour of key features
 tour:
-    @echo "=== rsr-template-repo Tour ==="
+    @echo "=== the-nash-equilibrium Tour ==="
     @echo ""
     @echo "1. Project structure:"
     @ls -la
@@ -709,12 +709,12 @@ tour:
 
 # Open feedback channel with diagnostic context
 help-me:
-    @echo "=== rsr-template-repo Help ==="
+    @echo "=== the-nash-equilibrium Help ==="
     @echo "Platform: $(uname -s) $(uname -m)"
     @echo "Shell: $SHELL"
     @echo ""
     @echo "To report an issue:"
-    @echo "  https://github.com/hyperpolymath/rsr-template-repo/issues/new"
+    @echo "  https://github.com/hyperpolymath/the-nash-equilibrium/issues/new"
     @echo ""
     @echo "Include the output of 'just doctor' in your report."
 

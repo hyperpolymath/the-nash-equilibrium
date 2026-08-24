@@ -248,3 +248,5 @@ State is in `.machine_readable/6a2/STATE.a2ml`.
 
 AGPL-3.0-or-later — co-developed with son (hyperpolymath AGPL exception applies).
 See link:LICENSE[LICENSE].
+== AI-Assisted Installation
+See docs/AI_INSTALLATION_GUIDE.adoc
