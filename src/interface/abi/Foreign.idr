@@ -9,7 +9,7 @@
 ||| All functions are declared here with type signatures and safety proofs.
 ||| Implementations live in ffi/zig/
 
-module the-nash-equilibrium.ABI.Foreign
+module TheNashEquilibrium.ABI.Foreign
 
 import the-nash-equilibrium.ABI.Types
 import the-nash-equilibrium.ABI.Layout

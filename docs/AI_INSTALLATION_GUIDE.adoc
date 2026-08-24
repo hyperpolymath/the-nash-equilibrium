@@ -1,0 +1,2 @@
+= AI-Assisted Installation Guide
+This is a guide for AI agents.

@@ -10,7 +10,7 @@
 |||
 ||| @see https://idris2.readthedocs.io for Idris2 documentation
 
-module the-nash-equilibrium.ABI.Types
+module TheNashEquilibrium.ABI.Types
 
 import Data.Bits
 import Data.So
