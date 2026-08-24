@@ -1,5 +1,5 @@
 // the-nash-equilibrium FFI Implementation
-// SPDX-License-Identifier: MPL-2.0
+// SPDX-License-Identifier: AGPL-3.0-or-later
 //
 // This module implements the C-compatible FFI declared in src/abi/Foreign.idr
 // All types and layouts must match the Idris2 ABI definitions.

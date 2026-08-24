@@ -34,3 +34,7 @@ The full policy is canonical in `hyperpolymath/standards`. Key points:
 ### Documentation Format
 - All docs `.adoc` (AsciiDoc) except GitHub-required files (SECURITY.md, CONTRIBUTING.md, CODE_OF_CONDUCT.md, CHANGELOG.md).
 
+
+## [CRITICAL] agpl-license
+This repository is a deliberate exception to the estate MPL-2.0 policy.
+Do NOT change licenses to MPL-2.0. All code must remain AGPL-3.0-or-later.

@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: MPL-2.0
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # Copyright (c) 2026 Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk>
 # Authoritative source: docs/AI-CONVENTIONS.md
 
@@ -45,3 +45,7 @@
 # Use descriptive variable names.
 # Annotate and document all files.
 # Add SPDX-License-Identifier header to every source file.
+
+## [CRITICAL] agpl-license
+This repository is a deliberate exception to the estate MPL-2.0 policy.
+Do NOT change licenses to MPL-2.0. All code must remain AGPL-3.0-or-later.
