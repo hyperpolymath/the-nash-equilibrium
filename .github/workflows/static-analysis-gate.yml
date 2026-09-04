@@ -55,7 +55,8 @@ jobs:
           # every count silently became 0 via `|| echo 0`, and "Fail on critical
           # findings" could never fire on any input. Keep stderr on the log.
           if [ ! -s panic-attack-findings.json ]; then
-            echo "[]" > panic-attack-findings.json
+            echo "::error::panic-attack did not produce JSON output (exit ${PA_EXIT})"
+            exit 1
           fi
 
           # Deliberately a WARNING, not a failure. panic-attack is a downloaded
@@ -65,7 +66,8 @@ jobs:
           # Promote to `exit 1` (as the Hypatia job does) once that contract is
           # confirmed -- see the follow-up issue linked from this PR.
           if ! jq -e 'type == "array"' panic-attack-findings.json >/dev/null 2>&1; then
-            echo "::warning::panic-attack output is not a JSON array (exit ${PA_EXIT}); counts below are unreliable"
+            echo "::error::panic-attack output is not a JSON findings array (exit ${PA_EXIT})"
+            exit 1
           fi
 
           # Parse finding counts
