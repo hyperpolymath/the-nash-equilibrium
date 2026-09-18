@@ -55,3 +55,16 @@ container/                 # may host Containerfile if not at build/
 .gitlab-ci.yml             # TODO: relocate to ci/.gitlab-ci.yml after GitLab project-setting update
 .pre-commit-config.yaml    # TODO: relocate to ci/.pre-commit-config.yaml after invocation pattern decided
 .hypatia-ignore
+
+# ─── Re-synced with the estate's canonical allowlists (owner ruling, 2026-09-18) ──
+.claude/                    # committed Claude Code config (settings.json + hooks/); estate precedent in 5 repos
+ARCHITECTURE.adoc           # design overview; stays at root (owner ruling, 2026-09-18)
+CHANGELOG.adoc              # AsciiDoc is the estate-standard documentation format
+CONTRIBUTING.adoc           # current contributor guide; the root path is hard-required by openssf-compliance.yml
+GOVERNANCE.adoc             # governance model (validator accepts root or docs/governance/)
+LICENSES/                   # REUSE licence texts, dual-licence model (code MPL-2.0 / docs CC-BY-SA-4.0)
+MAINTAINERS                 # plain-text maintainer roster shipped alongside MAINTAINERS.adoc
+SECURITY.adoc               # current security policy; the root path is hard-required by openssf-compliance.yml
+mise.toml                   # pinned toolchains
+sonar-project.properties    # SonarCloud analysis config; the scanner reads it from the repository root
+www/                        # site-operations bundle; canonical .well-known/ lives at www/.well-known/ (issue #53)
