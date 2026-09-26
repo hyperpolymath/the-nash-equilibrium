@@ -5,8 +5,8 @@
 #
 # Input to: `launch-scaffolder mint .machine_readable/launcher/the-nash-equilibrium.launcher.a2ml`
 # Output:   scripts/the-nash-equilibrium-launcher.sh
-# Standard: launcher-standard.a2ml v0.2.0
-#           (developer-ecosystem/standards/launcher/launcher-standard.a2ml)
+# Standard: launcher-standard_praxis.deed v0.4.0
+#           (hyperpolymath/standards launcher/launcher-standard_praxis.deed)
 #
 # Lifecycle:
 #   Design phase (current): serves local game-design documentation at localhost:4242.
@@ -23,7 +23,7 @@
 #   ./scripts/the-nash-equilibrium-launcher.sh --disinteg
 
 # ---------------------------------------------------------------------------
-# A2ML metadata block (required by launcher-standard §a2ml-metadata-block)
+# A2ML metadata block (required by launcher-standard_praxis.deed (metadata-block ...))
 # ---------------------------------------------------------------------------
 
 id                       = "the-nash-equilibrium-launcher"
@@ -90,7 +90,7 @@ source = "{repo-dir}/assets/icon-256.png"
 # ---------------------------------------------------------------------------
 
 [integration]
-# Use standard defaults from launcher-standard.a2ml §integration.linux.
+# Use standard defaults from launcher-standard_praxis.deed (integration ...) clause, linux.
 # Override here when game-specific paths are needed.
 
 # ---------------------------------------------------------------------------
