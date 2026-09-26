@@ -224,14 +224,22 @@ running each gate locally.
 
 === Remaining / blocked
 
-* *`.github/workflows/actions.lock` regeneration* — required after the pin
-  changes; blocked this session because `github/gh-actions-lock` could not be
-  obtained (release-asset host unreachable) and the sandbox `GH_TOKEN` expired
-  mid-session (all GitHub API/git calls now 401). Run
-  `update-actions-lock.sh .github/workflows` then `--verify-local` once the
-  GitHub connection is refreshed, before pushing workflow changes — an out-of-
-  sync lock is the exact startup-failure class standards#968 documents.
-* *Push + PR for issue #117* — blocked on the same GitHub reconnection.
+* *`.github/workflows/actions.lock` regenerated* with `gh actions-lock`
+  v0.1.6 (built from source after the release-asset host proved unreachable),
+  then hand-corrected for job-level reusable refs the tool cannot see (six
+  standards callers at `da2c748a`, release.yml's SLSA generator, codeql's
+  de-pinned SHA) per the `check-lock-sync.sh` fix procedure. `--verify-local`
+  valid; all four lock-sync clauses green (Node port of the gawk script).
+* *Push + PR done* — PR #119 (closes #117).
+* *CI on PR #119 cannot RUN: actor gate (org-side).* Every run triggered by
+  `arena-ai-coding-agent[bot]` ends `startup_failure` with zero jobs and the
+  annotation `Actor is not allowed to trigger Actions workflows` — the GitHub
+  App is blocked org-wide, not by this branch's files (base-lock bisect also
+  failed all runs; a clean-tree control would fail identically). Documented in
+  `hyperpolymath/wordpress-tools#96`; standards#968/#992 cover the adjacent
+  lockfile semantics. Owner actions there: permit the App under org Settings →
+  Actions → General, re-run as the owner, or merge as the owner. Main's own
+  CI has shown the same signature for bot-triggered runs since 2026-09-25.
 * *`deed-validate.yml` not added* — the estate allowlist
   (`rhodium-standard-repositories/actions-allowlist/allowed-actions.json`) has
   no `hyperpolymath/deed-ecosystem/validate-action` entry, so the workflow would
