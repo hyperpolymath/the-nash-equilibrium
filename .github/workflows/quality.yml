@@ -44,6 +44,7 @@ jobs:
 
   docs:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     permissions:
       contents: read
     steps:
@@ -53,24 +54,15 @@ jobs:
           MISSING=""
           [ ! -f "README.md" ] && [ ! -f "README.adoc" ] && MISSING="$MISSING README"
           [ ! -f "LICENSE" ] && [ ! -f "LICENSE.txt" ] && [ ! -f "LICENSE.md" ] && MISSING="$MISSING LICENSE"
-          [ ! -f "CONTRIBUTING.md" ] && [ ! -f "CONTRIBUTING.adoc" ] && MISSING="$MISSING CONTRIBUTING"
-          
+          [ ! -f "CONTRIBUTING.md" ] && [ ! -f "CONTRIBUTING.adoc" ] && [ ! -f ".github/CONTRIBUTING.md" ] && [ ! -f ".github/CONTRIBUTING.adoc" ] && MISSING="$MISSING CONTRIBUTING"
+
           if [ -n "$MISSING" ]; then
             echo "::warning::Missing docs:$MISSING"
           else
             echo "✅ Core documentation present"
           fi
 
-      # The check above tests that doc files *exist*; this tests they *parse*.
-      # Ruby ships preinstalled on ubuntu-latest, so no setup action is needed.
-      - name: Install asciidoctor
-        run: gem install asciidoctor --no-document
-
-      - name: Check every .adoc renders
-        run: ./scripts/check-docs-render.sh .
-
-      # ...and that it renders *because it is AsciiDoc*, not because
-      # Asciidoctor's Markdown-compat mode quietly accepted a Markdown body.
-      # Needs no asciidoctor — it is a pure syntax scan.
-      - name: Check every .adoc is AsciiDoc, not Markdown
-        run: ./scripts/check-adoc-not-markdown.sh .
+      # The check above tests that doc files *exist*; whether they actually
+      # PARSE is enforced by estate-rules.yml (render gate + AsciiDoc-vs-Markdown
+      # scan), matching the rsr-template-repo split: quality checks presence,
+      # estate-rules checks content.

@@ -2,16 +2,15 @@
 git clone https://github.com/hyperpolymath/the-nash-equilibrium.git
 cd the-nash-equilibrium
 
-# Using Nix (recommended for reproducibility)
-nix develop
+# Using mise (preferred — toolchain per mise.toml)
+mise install
 
-# Or using toolbox/distrobox
-toolbox create the-nash-equilibrium-dev
-toolbox enter the-nash-equilibrium-dev
-# Install dependencies manually
+# Or direnv (loads .envrc / .tool-versions)
+direnv allow
 
-# Verify setup
-just check   # or: cargo check / mix compile / etc.
+# Or open in a devcontainer (.devcontainer/devcontainer.json)
+# Or install the toolchain manually, then verify:
+just doctor
 just test    # Run test suite
 ```
 
@@ -37,17 +36,15 @@ the-nash-equilibrium/
 ├── .github/             # GitHub config (Perimeter 1)
 │   ├── ISSUE_TEMPLATE/
 │   └── workflows/
-├── CHANGELOG.md
-├── CODE_OF_CONDUCT.md
-├── CONTRIBUTING.md      # This file
-├── GOVERNANCE.md
+├── CHANGELOG.adoc
+├── CONTRIBUTING.adoc
+├── GOVERNANCE.adoc
 ├── LICENSE
-├── MAINTAINERS.md
+├── MAINTAINERS
 ├── README.adoc
-├── SECURITY.md
-├── flake.nix            # Nix flake — fallback (Perimeter 1)
-├── guix.scm             # Guix package — primary (Perimeter 1)
-└── Justfile             # Task runner (Perimeter 1)
+├── SECURITY.adoc
+├── mise.toml            # toolchain manifest
+└── Justfile             # Task runner recipes
 ```
 
 ---

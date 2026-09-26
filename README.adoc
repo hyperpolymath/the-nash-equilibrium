@@ -229,7 +229,7 @@ See link:docs/status/ROADMAP.adoc[ROADMAP.adoc] for the full milestone tracker a
 | `src/interface/ffi/`
 | Zig FFI implementation (C-ABI bridge)
 
-| `.machine_readable/6a2/`
+| `.machine_readable/descriptiles/`
 | A2ML state files: STATE, META, ECOSYSTEM, AGENTIC, NEUROSYM, PLAYBOOK
 
 | `.machine_readable/contractiles/`
@@ -242,7 +242,7 @@ See link:docs/status/ROADMAP.adoc[ROADMAP.adoc] for the full milestone tracker a
 == AI Agents
 
 All AI agents MUST read `.machine_readable/0.1-AI-MANIFEST.a2ml` before any work.
-State is in `.machine_readable/6a2/STATE.a2ml`.
+State is in `.machine_readable/descriptiles/STATE.a2ml`.
 
 == License
 

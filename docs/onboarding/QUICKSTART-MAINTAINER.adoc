@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: CC-BY-SA-4.0
 // Template: QUICKSTART-MAINTAINER.adoc — packaging, deploying, and maintaining
 // Replace rsr-template-repo, the-nash-equilibrium, idris2, zig, deno with actuals
-= rsr-template-repo — Quick Start for Platform Maintainers
+= the-nash-equilibrium — Quick Start for Platform Maintainers
 :toc:
 :toclevels: 2
 
 == Overview
 
-This guide covers packaging, deploying, and maintaining rsr-template-repo for
+This guide covers packaging, deploying, and maintaining the-nash-equilibrium for
 distribution on your platform.
 
 == Runtime Dependencies
@@ -18,8 +18,8 @@ idris2, zig, deno
 
 [source,bash]
 ----
-git clone https://github.com/hyperpolymath/rsr-template-repo.git
-cd rsr-template-repo
+git clone https://github.com/hyperpolymath/the-nash-equilibrium.git
+cd the-nash-equilibrium
 just build-release
 ----
 
@@ -27,26 +27,11 @@ Output: `build/`
 
 == Packaging
 
-=== Guix
+=== Container
 
 [source,bash]
 ----
-guix build -f guix.scm
-----
-
-=== Nix
-
-[source,bash]
-----
-nix build
-----
-
-=== Container (Stapeln)
-
-[source,bash]
-----
-just stapeln-export    # Generates Containerfile
-podman build -t rsr-template-repo .
+podman build -f container/Containerfile -t the-nash-equilibrium .
 ----
 
 === Manual Package
@@ -125,5 +110,5 @@ Each instance has isolated config, data, and logs.
 
 == Reporting Issues
 
-* Upstream: https://github.com/hyperpolymath/rsr-template-repo/issues
+* Issues: https://github.com/hyperpolymath/the-nash-equilibrium/issues
 * With diagnostic: `just help-me` (pre-fills context)

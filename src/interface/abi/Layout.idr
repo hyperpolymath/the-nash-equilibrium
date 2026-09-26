@@ -138,6 +138,8 @@ public export
 checkCABI : (layout : StructLayout) -> Either String (CABICompliant layout)
 checkCABI layout =
   -- Verify C ABI rules
+  -- DEBT: FieldsAligned proof stubbed with believe_me; owner @metadatastician; deadline INDEFINITE (design phase).
+  --   See docs/proof-debt.md §(d) entry "cabi-fields-aligned".
   Right (CABIOk layout believe_me ())
 
 --------------------------------------------------------------------------------
@@ -159,6 +161,8 @@ exampleLayout =
 ||| Proof that example layout is valid
 export
 exampleLayoutValid : CABICompliant exampleLayout
+-- DEBT: example layout alignment assumed via believe_me; owner @metadatastician; deadline INDEFINITE (design phase).
+--   See docs/proof-debt.md §(d) entry "example-layout-aligned".
 exampleLayoutValid = CABIOk exampleLayout believe_me ()
 
 --------------------------------------------------------------------------------
@@ -176,4 +180,6 @@ fieldOffset layout name =
 ||| Proof that field offset is within struct bounds
 public export
 offsetInBounds : (layout : StructLayout) -> (f : Field) -> So (f.offset + f.size <= layout.totalSize)
+-- DEBT: bounds proof stubbed with believe_me Oh; owner @metadatastician; deadline INDEFINITE (design phase).
+--   See docs/proof-debt.md §(d) entry "offset-in-bounds".
 offsetInBounds layout f = believe_me Oh

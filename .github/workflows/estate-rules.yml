@@ -6,7 +6,9 @@
 # Estate Rules — enforces hyperpolymath estate-wide conventions:
 #   * root shape (allowlist of permitted root entries)
 #   * AsciiDoc-by-default (no .md files under docs/)
-#   * zig is banned (no zig scaffolding or references)
+#   * AsciiDoc content is genuine AsciiDoc, not Markdown-in-.adoc
+#   * AsciiDoc that renders (every tracked .adoc parses with no diagnostics)
+#   * V-lang is banned (no V-language references; Zig is the FFI default)
 #
 # Each rule is enforced by an executable check script under scripts/. Failures
 # are surfaced as workflow errors so the rule can't silently regress.
@@ -18,10 +20,41 @@ on:
     branches: [main]
   pull_request:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 
 jobs:
   estate-rules:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+
+      - name: Root shape allowlist
+        run: bash scripts/check-root-shape.sh .
+
+      - name: AsciiDoc by default (no .md under docs/)
+        run: bash scripts/check-no-md-in-docs.sh .
+
+      # The rule above checks the file EXTENSION only, so a Markdown body
+      # renamed to .adoc passes it. This one checks the file actually is
+      # AsciiDoc.
+      - name: Every .adoc is AsciiDoc, not Markdown
+        run: bash scripts/check-adoc-not-markdown.sh .
+
+      # asciidoctor's --failure-level defaults to FATAL, so a document emitting
+      # WARNING or ERROR still exits 0; the version is pinned because the
+      # verdict rests on a stderr comparison (same pin as rsr-template-repo).
+      - name: Install asciidoctor
+        run: sudo gem install asciidoctor -v 2.0.26 --no-document
+
+      - name: Every tracked .adoc renders clean
+        run: bash scripts/check-docs-render.sh .
+
+      - name: No V-language references
+        run: bash scripts/check-no-vlang.sh .

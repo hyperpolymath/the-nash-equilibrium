@@ -137,7 +137,7 @@ educators. Populate `STATE.a2ml [field-signal]`.
 == 8. Companion Artefacts
 
 * `docs/governance/CRG-CRITERIA.adoc` — grade definitions.
-* `.machine_readable/6a2/STATE.a2ml` — authoritative state with
+* `.machine_readable/descriptiles/STATE.a2ml` — authoritative state with
   `[dogfooding-status]`, `[external-targets]`, `[issues-fed-back]`, `[field-signal]`.
 * `docs/practice/` — practice log and conventions.
 

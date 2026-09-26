@@ -1,22 +1,22 @@
 # This workflow is managed by gh actions-lock.
-# SPDX-License-Identifier: AGPL-3.0-or-later
-# This workflow is managed by gh actions-lock.
+# SPDX-License-Identifier: MPL-2.0
 name: CodeQL Security Analysis
-
 on:
   push:
     branches: [main, master]
   pull_request:
     branches: [main, master]
   schedule:
-    - cron: '0 6 1 * *'   # monthly 1st 06:00 UTC
-
+    - cron: '0 6 1 * *'   # monthly 1st 06:00 UTC (Actions burn cut, standards#288)
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
-
 jobs:
   analyze:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     permissions:
       contents: read
       security-events: write
@@ -24,20 +24,26 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          # Template default: `actions` — the extractor scans workflow files,
+          # which every repo has. Per hypatia rule `codeql_language_matrix_mismatch`.
+          - language: actions
+            build-mode: none
+          # Per-repo override: this repository carries real JavaScript
+          # (mvt/src/**, docs/game-design/prototyping/*.jsx), so the JS/TS
+          # extractor stays in the matrix too (green before the 4.38.1 hold).
           - language: javascript-typescript
             build-mode: none
-
     steps:
       - name: Checkout
         uses: actions/checkout@v7.0.1
-
+        with:
+          persist-credentials: false
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v4.38.1
+        uses: github/codeql-action/init@b96794f015dfd88f77b49b1c93e0fa7110f94c63 # v4.38.0 (4.38.1 blocked estate-wide; nexia-list#100)
         with:
           languages: ${{ matrix.language }}
           build-mode: ${{ matrix.build-mode }}
-
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v4.38.1
+        uses: github/codeql-action/analyze@b96794f015dfd88f77b49b1c93e0fa7110f94c63 # v4.38.0 (4.38.1 blocked estate-wide; nexia-list#100)
         with:
           category: "/language:${{ matrix.language }}"

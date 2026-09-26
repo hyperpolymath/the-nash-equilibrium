@@ -1,0 +1,63 @@
+= Proof debt
+:toc:
+:toc-title: Contents
+
+Schema: https://github.com/hyperpolymath/standards/blob/main/docs/TRUSTED-BASE-REDUCTION-POLICY.adoc[TRUSTED-BASE-REDUCTION-POLICY.adoc]
+(standards#203). Every soundness-relevant escape hatch in this repository is
+either enumerated below or annotated inline with a `TRUSTED:`/`AXIOM:` leading
+comment. Enforced by `hyperpolymath/standards` `scripts/check-trusted-base.sh`
+via the governance reusable workflow (job "Trusted-base reduction policy").
+
+Measured 2026-09-26: 3 escape hatches, all Idris2 `believe_me` in the ABI
+layout proofs. Seeded per the policy's canonical schema (standards#213).
+
+== (a) Discharged in this repo
+
+* (none — entries removed when proof lands)
+
+== (b) Budgeted — tested with refutation budget
+
+* (none)
+
+== (c) Necessary axiom
+
+* (none)
+
+== (d) DEBT — actively to be closed
+
+* `src/interface/abi/Layout.idr:143` — `believe_me` supplies
+  `FieldsAligned layout.fields` inside `checkCABI`
++
+*Owner*: @metadatastician
++
+*Plan*: construct `FieldsAligned` for real from the field offset/size
+invariants (the module already carries `Divides`, `paddingFor` and `alignUp`
+lemmas to build on), so `checkCABI` verifies C ABI rules instead of assuming
+them.
++
+*Deadline*: INDEFINITE: design-phase lifecycle — the game engine
+(implementation phase) has not landed; discharge together with the ABI
+implementation.
+
+* `src/interface/abi/Layout.idr:166` — `believe_me` supplies
+  `FieldsAligned exampleLayout.fields` in `exampleLayoutValid`
++
+*Owner*: @metadatastician
++
+*Plan*: discharge as a corollary of the `checkCABI` proof above, applied to
+`exampleLayout` (x@0, y@8, z@16; total 24, alignment 8).
++
+*Deadline*: INDEFINITE: design-phase lifecycle — same rung as
+`cabi-fields-aligned`.
+
+* `src/interface/abi/Layout.idr:185` — `believe_me Oh` in `offsetInBounds`
+  (`So (f.offset + f.size <= layout.totalSize)`)
++
+*Owner*: @metadatastician
++
+*Plan*: prove the bounds predicate from the layout well-formedness invariant
+once `FieldsAligned` exists; the `So` proof then follows from the same
+arithmetic lemmas used by `paddingFor`.
++
+*Deadline*: INDEFINITE: design-phase lifecycle — discharge together with the
+ABI implementation.

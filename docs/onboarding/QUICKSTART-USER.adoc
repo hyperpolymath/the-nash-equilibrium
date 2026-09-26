@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: CC-BY-SA-4.0
 // Template: QUICKSTART-USER.adoc — 5-minute path to working software
-// Replace rsr-template-repo, Rsr Template Repo — See README.adoc for details., just run, Rsr Template Repo started successfully. with actuals
-= rsr-template-repo — Quick Start for Users
+// Replace rsr-template-repo, The Nash Equilibrium — a 6X strategy board game exploring economic systems, planetary boundaries, and post-scarcity futures. See README.adoc for details., just run, Rsr Template Repo started successfully. with actuals
+= the-nash-equilibrium — Quick Start for Users
 :toc:
 :toclevels: 2
 
-== What is rsr-template-repo?
+== What is the-nash-equilibrium?
 
-Rsr Template Repo — See README.adoc for details.
+The Nash Equilibrium — a 6X strategy board game exploring economic systems, planetary boundaries, and post-scarcity futures. See README.adoc for details.
 
 == Prerequisites
 
@@ -37,31 +37,17 @@ Before you begin, ensure you have:
 [source,bash]
 ----
 # Clone and set up
-git clone https://github.com/hyperpolymath/rsr-template-repo.git
-cd rsr-template-repo
-just setup
+git clone https://github.com/hyperpolymath/the-nash-equilibrium.git
+cd the-nash-equilibrium
+just deps           # fetch dependencies
+just doctor         # self-diagnostic
 ----
 
-The setup script will:
-
-* Detect your platform and shell
-* Install missing dependencies (with your permission)
-* Configure the application
-* Offer install location choices
-* Run a self-diagnostic to verify everything works
-
-=== Option 2: Container (via Stapeln)
+=== Option 2: Container
 
 [source,bash]
 ----
-just stapeln-run
-----
-
-=== Option 3: Portable (no system changes)
-
-[source,bash]
-----
-just install --portable --prefix=./rsr-template-repo-portable
+podman build -f container/Containerfile -t the-nash-equilibrium .
 ----
 
 == First Run
@@ -71,12 +57,9 @@ just install --portable --prefix=./rsr-template-repo-portable
 just run
 ----
 
-Expected output:
-
-[source]
-----
-Rsr Template Repo started successfully.
-----
+This builds the project and launches it. The run recipe is still being
+instantiated from the template — check `just doctor` and the Justfile if
+output is not what you expect.
 
 == Self-Diagnostic
 
@@ -90,19 +73,12 @@ just doctor
 This checks all dependencies, permissions, paths, and connectivity.
 If it finds issues, it will suggest fixes.
 
-To attempt automatic repair:
-
-[source,bash]
-----
-just heal
-----
-
 == Get Help
 
 * **In-app**: `just run --help`
 * **Guided tour**: `just tour`
 * **Report a problem**: `just help-me` (pre-fills diagnostic context)
-* **Wiki**: https://github.com/hyperpolymath/rsr-template-repo/wiki
+* **Repository**: https://github.com/hyperpolymath/the-nash-equilibrium
 
 == Uninstall
 
