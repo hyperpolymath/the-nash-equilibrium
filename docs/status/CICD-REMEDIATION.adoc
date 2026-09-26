@@ -163,7 +163,7 @@ and run rather than skip.
 == Session 2026-09-26: issue #117 + estate alignment (branch `arena/01a0df1b`)
 
 Driven by `the-nash-equilibrium#117` (descriptor cites the deleted
-`launcher-standard.a2ml`, standards#960) plus the standing instruction to align
+launcher-standard A2ML manifest, standards#960) plus the standing instruction to align
 with `rsr-template-repo` and `standards`. Findings below were verified by
 running each gate locally.
 
