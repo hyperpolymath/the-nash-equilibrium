@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: CC-BY-SA-4.0
 // Template: QUICKSTART-DEV.adoc — clone → build → test → PR
 // Replace rsr-template-repo, just build, just test, Idris2 (ABI), Zig (FFI), ReScript (UI) with actuals
-= rsr-template-repo — Quick Start for Developers
+= the-nash-equilibrium — Quick Start for Developers
 :toc:
 :toclevels: 2
 
@@ -11,28 +11,31 @@ Idris2 (ABI), Zig (FFI), ReScript (UI)
 
 == Set Up Development Environment
 
-=== Option A: Guix (preferred)
+=== Option A: mise (preferred)
 
 [source,bash]
 ----
-guix shell
+git clone https://github.com/hyperpolymath/the-nash-equilibrium.git
+cd the-nash-equilibrium
+mise install        # toolchain per mise.toml
 ----
 
-=== Option B: Nix (fallback)
-
-[source,bash]
-----
-nix develop
-----
-
-=== Option C: Manual
+=== Option B: direnv + asdf
 
 [source,bash]
 ----
-git clone https://github.com/hyperpolymath/rsr-template-repo.git
-cd rsr-template-repo
-just setup-dev
+direnv allow        # loads .envrc (asdf/guix hooks, project env)
 ----
+
+=== Option C: Dev container
+
+Open the repository in an editor with devcontainer support
+(`.devcontainer/devcontainer.json`).
+
+=== Option D: Manual
+
+Install the toolchain named in `mise.toml` / `.tool-versions` yourself,
+then run `just doctor` to verify.
 
 == Build
 
@@ -52,16 +55,15 @@ just test
 
 [source]
 ----
-rsr-template-repo/
+the-nash-equilibrium/
 ├── src/                  # Source code
-├── src/abi/              # Idris2 ABI definitions (if applicable)
-├── ffi/zig/              # Zig FFI bridge (if applicable)
+├── src/interface/abi/    # Idris2 ABI definitions
 ├── tests/                # Test suite
 ├── docs/                 # Documentation
 ├── .machine_readable/    # Checkpoint files (STATE, META, ECOSYSTEM)
 ├── Justfile              # Task runner recipes
-├── guix.scm              # Guix environment
-├── flake.nix             # Nix environment (fallback)
+├── mise.toml             # toolchain manifest (mise)
+├── .envrc                # direnv hooks
 └── 0-AI-MANIFEST.a2ml    # AI agent entry point
 ----
 
@@ -70,10 +72,10 @@ rsr-template-repo/
 [source,bash]
 ----
 just build          # Build the project
-just test           # Run tests
+just test           # Test suite recipe
 just doctor         # Self-diagnostic
 just lint           # Lint and format
-just panic-scan     # Security scan via panic-attacker
+just quality        # fmt-check + lint + docs-check + test
 just tour           # Guided tour of the codebase
 ----
 
@@ -82,8 +84,8 @@ just tour           # Guided tour of the codebase
 [source,bash]
 ----
 just lint           # Format and lint
-just test           # All tests pass
-just panic-scan     # No new security issues
+just test           # Test suite passes
+just e2e            # End-to-end pipeline (tests/e2e.sh)
 ----
 
 == Contractile Invariants
@@ -99,7 +101,7 @@ If using an AI assistant, load the warmup context first:
 
 [source,bash]
 ----
-just llm-context    # Outputs role-appropriate context
+just info           # Repository metadata for agents
 ----
 
 Or read `0-AI-MANIFEST.a2ml` and `.claude/CLAUDE.md` directly.
@@ -107,5 +109,5 @@ Or read `0-AI-MANIFEST.a2ml` and `.claude/CLAUDE.md` directly.
 == Get Help
 
 * **Architecture**: link:EXPLAINME.adoc[EXPLAINME.adoc]
-* **Wiki**: https://github.com/hyperpolymath/rsr-template-repo/wiki
+* **Repository**: https://github.com/hyperpolymath/the-nash-equilibrium
 * **Report issue**: `just help-me`

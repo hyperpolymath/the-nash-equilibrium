@@ -37,8 +37,8 @@ recovery.
 ### state-a2ml-template-residue
 - description: STATE.a2ml reverts to rsr-template-repo content after a bad merge
 - class: rollback
-- injection-probe: "grep -q 'project = .rsr-template-repo.' .machine_readable/6a2/STATE.a2ml 2>/dev/null"
-- recovery-probe: "! grep -q 'project = .rsr-template-repo.' .machine_readable/6a2/STATE.a2ml 2>/dev/null"
+- injection-probe: "grep -q 'project = .rsr-template-repo.' .machine_readable/descriptiles/STATE.a2ml 2>/dev/null"
+- recovery-probe: "! grep -q 'project = .rsr-template-repo.' .machine_readable/descriptiles/STATE.a2ml 2>/dev/null"
 - expected-recovery-time-seconds: 120
 - status: declared
 - notes: Recovery — restore from last good commit.
@@ -49,7 +49,7 @@ recovery.
 - description: Idris2 ABI types changed without version bump recorded in META.a2ml
 - class: rollback
 - injection-probe: "git diff HEAD~1 -- src/interface/abi/ 2>/dev/null | grep -q '^-'"
-- recovery-probe: "git diff HEAD~1 -- .machine_readable/6a2/META.a2ml 2>/dev/null | grep -q 'version\\|ADR'"
+- recovery-probe: "git diff HEAD~1 -- .machine_readable/descriptiles/META.a2ml 2>/dev/null | grep -q 'version\\|ADR'"
 - expected-recovery-time-seconds: 300
 - status: declared
 - notes: Recovery — revert ABI change or add ADR entry + version bump in META.a2ml before merging.

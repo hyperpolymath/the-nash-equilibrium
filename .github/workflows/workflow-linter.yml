@@ -1,6 +1,5 @@
 # This workflow is managed by gh actions-lock.
-# SPDX-License-Identifier: AGPL-3.0-or-later
-# This workflow is managed by gh actions-lock.
+# SPDX-License-Identifier: MPL-2.0
 # workflow-linter.yml - Validates GitHub workflows against RSR security standards
 # This workflow can be copied to other repos for consistent enforcement
 name: Workflow Security Linter
@@ -14,12 +13,16 @@ on:
       - '.github/workflows/**'
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 
 jobs:
   lint-workflows:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     permissions:
       contents: read
 
@@ -33,13 +36,15 @@ jobs:
           failed=0
           for file in .github/workflows/*.yml .github/workflows/*.yaml; do
             [ -f "$file" ] || continue
-            if ! head -1 "$file" | grep -q "^# SPDX-License-Identifier:"; then
+            # actions-lock may prepend its own comment. Require the licence
+            # in the leading comment block, before the workflow body.
+            if ! awk '/^# SPDX-License-Identifier:/ { found=1 } /^[^#[:space:]]/ { exit } END { exit !found }' "$file"; then
               echo "ERROR: $file missing SPDX header"
               failed=1
             fi
           done
           if [ $failed -eq 1 ]; then
-            echo "Add '# SPDX-License-Identifier: MPL-2.0' as first line"
+            echo "Add '# SPDX-License-Identifier: MPL-2.0' to the leading comment block"
             exit 1
           fi
           echo "All workflows have SPDX headers"
@@ -56,24 +61,39 @@ jobs:
             fi
           done
           if [ $failed -eq 1 ]; then
-            echo "Add 'permissions:'"
-            echo "  contents: read' at workflow level"
+            echo "Add a top-level 'permissions:' block (e.g. contents: read)"
             exit 1
           fi
           echo "All workflows have permissions declared"
+
+      # Bun is the estate's first-choice runtime (LANGUAGE-POLICY.adoc §1:
+      # Bun > Deno > pnpm > npm) and executes .ts directly (§1.2). Tag form
+      # matches every other ref in this repo and is resolved by actions.lock.
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2.2.0
+        with:
+          bun-version: latest
 
       - name: Check SHA-Pinned Actions
         run: |
           echo "=== Checking Action Pinning ==="
           # Find any uses: lines that don't have @SHA format
           # Pattern: uses: owner/repo@<40-char-hex>
-          unpinned=$(grep -rnE "^[[:space:]]+uses:" .github/workflows/ | \
-            grep -v "@[a-f0-9]\{40\}" | \
-            grep -v "uses: \./\|uses: docker://\|uses: actions/github-script" || true)
+          # Delegated to scripts/check-action-pinning.js. The rule it enforces is
+          # unchanged in spirit — every action ref must resolve to an immutable
+          # commit — but "pinned" now includes refs the workflow lockfile
+          # resolves, which is how this repo pins them. Kept as a script rather
+          # than inline because the inline form needs a heredoc inside a YAML
+          # block scalar, and that is a well-known way to ship a gate that
+          # silently does nothing.
+          if ! bun scripts/check-action-pinning.js; then
+            unpinned="see above"
+          else
+            unpinned=""
+          fi
 
           if [ -n "$unpinned" ]; then
             echo "ERROR: Found unpinned actions:"
-            echo "$unpinned"
             echo ""
             echo "Replace version tags with SHA pins, e.g.:"
             echo "  uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v6.0.1"
@@ -113,7 +133,6 @@ jobs:
           has_rb=$(find . -name "*.rb" -path "*/lib/*" -o -path "*/app/*" 2>/dev/null | head -1)
 
           echo "Detected languages:"
-          [ -n "$has_js" ] && echo "  - javascript-typescript"
           [ -n "$has_py" ] && echo "  - python"
           [ -n "$has_go" ] && echo "  - go"
           [ -n "$has_rs" ] && echo "  - rust (note: CodeQL rust is limited)"

@@ -43,7 +43,7 @@ If you are unsure whether a change is in scope, check docs/game-design/DESIGN-DE
 [[intents]]
 id = "rsr-scaffolding-complete"
 description = "RSR scaffolding complete: all 6 contractile verbs with NCL runners + _base.ncl + INDEX.a2ml, 6A2 files, READINESS.md, EXPLAINME.adoc, AUDIT.adoc, launcher config"
-probe = "test -f .machine_readable/contractiles/INDEX.a2ml && test -f .machine_readable/contractiles/_base.ncl && test -f READINESS.md && test -f .machine_readable/6a2/STATE.a2ml && test -f .machine_readable/launcher/the-nash-equilibrium.launcher.a2ml && ! grep -q 'project = .rsr-template-repo.' .machine_readable/6a2/STATE.a2ml"
+probe = "test -f .machine_readable/contractiles/INDEX.a2ml && test -f .machine_readable/contractiles/_base.ncl && test -f READINESS.md && test -f .machine_readable/descriptiles/STATE.a2ml && test -f .machine_readable/launcher/the-nash-equilibrium.launcher.a2ml && ! grep -q 'project = .rsr-template-repo.' .machine_readable/descriptiles/STATE.a2ml"
 status = "done"
 notes = "Completed 2026-04-24: launcher config, full 6-verb contractile set, READINESS.md, template residue cleared"
 
@@ -57,7 +57,7 @@ notes = "6X-pillars, core-mechanics, player-roles, board-design done; event-card
 [[intents]]
 id = "game-engine-language-decision"
 description = "ADR-002 accepted: implementation language for game engine chosen (Gleam/BEAM or Rust/SPARK)"
-probe = "grep 'status = .accepted.' .machine_readable/6a2/META.a2ml | grep ADR-002"
+probe = "grep 'status = .accepted.' .machine_readable/descriptiles/META.a2ml | grep ADR-002"
 status = "declared"
 
 [[intents]]
@@ -88,7 +88,7 @@ notes = "Grade C requires 4+ weeks of active dogfooding with no home-context fai
 [[intents]]
 id = "abi-validation-complete"
 description = "ABI types in src/interface/abi/ validated against actual game entities once game engine design is settled"
-probe = "grep -q 'ADR-001.*validated\\|ABI.*validated' .machine_readable/6a2/META.a2ml 2>/dev/null"
+probe = "grep -q 'ADR-001.*validated\\|ABI.*validated' .machine_readable/descriptiles/META.a2ml 2>/dev/null"
 status = "declared"
 notes = "Current ABI stubs (Types.idr, Layout.idr, Foreign.idr) are scaffolding only. Must be validated against real game data model."
 

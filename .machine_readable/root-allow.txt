@@ -56,6 +56,10 @@ container/                 # may host Containerfile if not at build/
 .pre-commit-config.yaml    # TODO: relocate to ci/.pre-commit-config.yaml after invocation pattern decided
 .hypatia-ignore
 
+# ─── Repo-specific entries (decision recorded per docs/status/CICD-REMEDIATION.adoc) ──
+mvt/                       # model-validation toolkit: self-contained project tree (README, docs, src, tests); project-specific source tree, like container/
+INSTALL-SECURITY-REPORT.adoc  # dated install-time security report (2026-04-25); root path is linked from docs/onboarding/QUICKSTART-MAINTAINER.adoc; relocation is an owner decision in CICD-REMEDIATION (NEEDS-DECISION)
+
 # ─── Re-synced with the estate's canonical allowlists (owner ruling, 2026-09-18) ──
 .claude/                    # committed Claude Code config (settings.json + hooks/); estate precedent in 5 repos
 ARCHITECTURE.adoc           # design overview; stays at root (owner ruling, 2026-09-18)

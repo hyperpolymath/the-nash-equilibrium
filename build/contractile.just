@@ -42,8 +42,8 @@ must-explainme:
     test -f EXPLAINME.adoc
 
 must-state-not-template:
-    test -f .machine_readable/6a2/STATE.a2ml
-    ! grep -q 'project = "rsr-template-repo"' .machine_readable/6a2/STATE.a2ml
+    test -f .machine_readable/descriptiles/STATE.a2ml
+    ! grep -q 'project = "rsr-template-repo"' .machine_readable/descriptiles/STATE.a2ml
 
 must-contractile-index:
     test -f .machine_readable/contractiles/INDEX.a2ml
@@ -109,7 +109,7 @@ bust-no-pmpl-in-source:
     ! grep -rl 'SPDX-License-Identifier: MPL-2.0' src/ .machine_readable/ 2>/dev/null | head -1 | grep -q .
 
 bust-state-not-template:
-    ! grep -q 'project = "rsr-template-repo"' .machine_readable/6a2/STATE.a2ml 2>/dev/null
+    ! grep -q 'project = "rsr-template-repo"' .machine_readable/descriptiles/STATE.a2ml 2>/dev/null
 
 bust-no-leaked-secrets:
     ! git log --all --oneline -- '*.pem' '*.key' '.env' 'credentials.json' 2>/dev/null | head -1 | grep -q .
@@ -200,8 +200,8 @@ intend-probe-scaffolding:
     test -f .machine_readable/contractiles/INDEX.a2ml
     test -f .machine_readable/contractiles/_base.ncl
     test -f READINESS.md
-    test -f .machine_readable/6a2/STATE.a2ml
+    test -f .machine_readable/descriptiles/STATE.a2ml
     test -f .machine_readable/launcher/the-nash-equilibrium.launcher.a2ml
-    ! grep -q 'project = "rsr-template-repo"' .machine_readable/6a2/STATE.a2ml
+    ! grep -q 'project = "rsr-template-repo"' .machine_readable/descriptiles/STATE.a2ml
     @echo 'rsr-scaffolding-complete probe: PASS'
 

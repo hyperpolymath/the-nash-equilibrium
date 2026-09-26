@@ -159,3 +159,97 @@ and run rather than skip.
 * `fix/docs-gate-gem-install` — `sudo gem install` docs-gate fix. *Committed, unpushed
   (workflow scope).*
 * `cicd-quality-doctrine` recorded in agent memory.
+
+== Session 2026-09-26: issue #117 + estate alignment (branch `arena/01a0df1b`)
+
+Driven by `the-nash-equilibrium#117` (descriptor cites the deleted
+launcher-standard A2ML manifest, standards#960) plus the standing instruction to align
+with `rsr-template-repo` and `standards`. Findings below were verified by
+running each gate locally.
+
+=== Fixed and locally verified
+
+* *Launcher descriptor (issue #117).* All four gate defects corrected
+  (`.machine_readable/launcher/the-nash-equilibrium.launcher.a2ml` lines 8/9/26/93);
+  citations now name `launcher-standard_praxis.deed` v0.4.0 with DEED clause
+  notation. `git grep 'launcher-standard\.a2ml'` → 0 hits; currency gate rc=0.
+  Edits are comment-only (AC4; `launch-scaffolder mint` unavailable locally).
+* *`6a2/` → `descriptiles/`* (`git mv` + ref updates across Justfile,
+  contractiles, scripts, e2e, workflows, docs). `check-descriptile-policy` rc=0;
+  zero `6a2` references remain outside openssf history notes.
+* *Estate Rules / e2e null-job failures (root cause).* `estate-rules.yml` had
+  `steps:` null and `e2e.yml` had `jobs:` null — both rewritten with executable
+  jobs (`check-workflows-parse` replica + dup-key check clean: 29 files).
+* *Code Quality docs job* — `sudo gem install asciidoctor -v 2.0.26` moved into
+  estate-rules where it can use sudo; the docs job keeps the presence check only.
+  `check-docs-render` PASS (145 files), `check-no-md-in-docs` PASS,
+  `check-adoc-not-markdown` PASS.
+* *OpenSSF compliance* — doubled `6a2/` path fixed; dual-accept fallback removed
+  (descriptile policy forbids `6a2/` file tests anywhere).
+* *Trusted-base* — `docs/proof-debt.adoc` created (§(a)–(d) schema; three
+  `believe_me` escapes at `src/interface/abi/Layout.idr:143|166|185` documented
+  with inline `-- DEBT:` markers). `check-trusted-base` rc=0.
+* *Root shape* — `.codex` deleted (answered: stray, deletable); `root-allow.txt`
+  gains `mvt/` + `INSTALL-SECURITY-REPORT.adoc`; `check-root-shape` PASS
+  (41 entries, 46 permitted).
+* *Workflow estate alignment* (template `rsr-template-repo` + `standards@da2c`):
+  `wellknown-enforcement.yml` → `dot-wellknown-enforcement.yml` (checks
+  `www/.well-known/` first; `www/.well-known/security.txt` verified unexpired);
+  `workflow-linter.yml` → template shape with vendored
+  `scripts/check-action-pinning.js`; new `lock-sync-gate.yml` +
+  `scripts/check-lock-sync.sh` (standards#968); `guix-nix-policy.yml` →
+  `guix-policy.yml` (Nix hard-fail — no `.nix` files exist, so it stays green);
+  six reusable callers (governance, hypatia-scan, mirror, rust-ci, scorecard,
+  secret-scanner) re-pinned `84355587cb` → `da2c748a` with template caller
+  shape (concurrency, explicit 7-secret mirror map per Hypatia WH008, job-level
+  `permissions: contents: read` per standards#500); `codeql.yml` → template
+  shape with `github/codeql-action` held at v4.38.0
+  (`b96794f015dfd88f77b49b1c93e0fa7110f94c63` — v4.38.1 fails workflow-startup
+  estate-wide, nexia-list#100/#101/#104) and a two-entry language matrix
+  (`actions` + `javascript-typescript` for `mvt/src/**`); `dependabot.yml` →
+  template form (`open-pull-requests-limit: 0` for cargo, codeql-action ignore,
+  nix ecosystem dropped).
+* *Staleness / pins / policy gates:* `check-workflow-staleness` rc=0 (da2c pin
+  carries no KNOWN_BAD; age advisory only), `check-action-pins-resolve` rc=0
+  (4 SHA pins resolve), `check-allowed-actions` rc=0 (23 refs covered),
+  `check-workflow-duplicate-keys` rc=0, `check-licence-consistency` rc=0.
+* *Deed identity + SPDX* — `MAINTENANCE-CHECKLIST.a2ml` gains `name`; SPDX AGPL
+  headers added to the five manifest files that lacked them; deed validation
+  118 files / 0 errors / 0 warnings (dogfood gate green).
+* *Docs honesty pass* — onboarding quickstarts + `.github/CONTRIBUTING.md` no
+  longer tell contributors to clone `rsr-template-repo`, run `nix develop`
+  (Nix is banned estate-wide and no flake exists), or run non-existent recipes
+  (`setup`, `heal`, `panic-scan`, `llm-context`, `stapeln-run`); Guix/Nix
+  packaging sections removed (no `guix.scm`/`flake.nix` exists).
+
+=== Remaining / blocked
+
+* *`.github/workflows/actions.lock` regenerated* with `gh actions-lock`
+  v0.1.6 (built from source after the release-asset host proved unreachable),
+  then hand-corrected for job-level reusable refs the tool cannot see (six
+  standards callers at `da2c748a`, release.yml's SLSA generator, codeql's
+  de-pinned SHA) per the `check-lock-sync.sh` fix procedure. `--verify-local`
+  valid; all four lock-sync clauses green (Node port of the gawk script).
+* *Push + PR done* — PR #119 (closes #117).
+* *CI on PR #119 cannot RUN: actor gate (org-side).* Every run triggered by
+  `arena-ai-coding-agent[bot]` ends `startup_failure` with zero jobs and the
+  annotation `Actor is not allowed to trigger Actions workflows` — the GitHub
+  App is blocked org-wide, not by this branch's files (base-lock bisect also
+  failed all runs; a clean-tree control would fail identically). Documented in
+  `hyperpolymath/wordpress-tools#96`; standards#968/#992 cover the adjacent
+  lockfile semantics. Owner actions there: permit the App under org Settings →
+  Actions → General, re-run as the owner, or merge as the owner. Main's own
+  CI has shown the same signature for bot-triggered runs since 2026-09-25.
+* *`deed-validate.yml` not added* — the estate allowlist
+  (`rhodium-standard-repositories/actions-allowlist/allowed-actions.json`) has
+  no `hyperpolymath/deed-ecosystem/validate-action` entry, so the workflow would
+  startup-fail under `allowed_actions: selected`. Needs an upstream allowlist
+  PR first (NEEDS-UPSTREAM).
+* *Branch protection still has no `required_status_checks`* (NEEDS-ADMIN,
+  unchanged — keystone per §1 above).
+* *Unchanged from earlier buckets:* Justfile TODO-stub recipes (`test`/`run`/
+  `install` echo canned success), remaining template residue per the
+  placeholder table, `RSR_OUTLINE.adoc` "Required Files" lists
+  `guix.scm OR flake.nix` (neither exists), `docs/RSR_OUTLINE.adoc` prohibition
+  list predates the current Bun-first language policy, licence
+  AGPL/MPL decision (NEEDS-DECISION), Instant Sync credentials (NEEDS-UPSTREAM).

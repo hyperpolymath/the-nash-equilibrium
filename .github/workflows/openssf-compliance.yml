@@ -68,18 +68,22 @@ jobs:
           fi
           echo "README: OK"
 
-      - name: Check .machine_readable directory and .machine_readable/6a2/STATE.a2ml
+      - name: Check .machine_readable directory and STATE.a2ml
         run: |
           if [ ! -d ".machine_readable" ]; then
             echo "::error::.machine_readable/ directory is required"
             exit 1
           fi
 
-          if [ ! -f ".machine_readable/.machine_readable/6a2/STATE.a2ml" ]; then
-            echo "::error::.machine_readable/.machine_readable/6a2/STATE.a2ml is required"
+          # Canonical descriptiles spelling (owner ruling; the deprecated 6a2/
+          # spelling is NOT probed here — descriptile policy forbids executable
+          # file-tests on retired paths; see standards check-descriptile-policy.sh).
+          if [ -f ".machine_readable/descriptiles/STATE.a2ml" ]; then
+            echo ".machine_readable/descriptiles/STATE.a2ml: OK"
+          else
+            echo "::error::.machine_readable/descriptiles/STATE.a2ml is required"
             exit 1
           fi
-          echo ".machine_readable/.machine_readable/6a2/STATE.a2ml: OK"
 
       - name: Check CHANGELOG exists
         run: |
@@ -97,8 +101,8 @@ jobs:
           # Collect all required files that exist
           for f in SECURITY.md SECURITY.adoc .github/SECURITY.md LICENSE LICENSE.txt \
                    CONTRIBUTING.md CONTRIBUTING.adoc README.md README.adoc \
-                   .machine_readable/.machine_readable/6a2/STATE.a2ml .machine_readable/META.a2ml \
-                   .machine_readable/ECOSYSTEM.a2ml CHANGELOG.md CHANGELOG.adoc; do
+                   .machine_readable/descriptiles/STATE.a2ml .machine_readable/descriptiles/META.a2ml \
+                   .machine_readable/descriptiles/ECOSYSTEM.a2ml CHANGELOG.md CHANGELOG.adoc; do
             [ -f "$f" ] && REQUIRED_FILES="$REQUIRED_FILES $f"
           done
 
